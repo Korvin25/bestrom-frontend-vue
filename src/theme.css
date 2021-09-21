@@ -64,6 +64,11 @@ h4 {
     color: #FFFFFF;
 }
 
+.btn:hover {
+    cursor: pointer;
+    background: rgba(47, 193, 255, 0.85);
+}
+
 .flex-column {
     display: flex;
     flex-direction: column;

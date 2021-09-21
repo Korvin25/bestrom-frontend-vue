@@ -29,16 +29,31 @@
         <div class="inventory-item flex-column">
           <h4>ПО ТИПУ МАШИН</h4>
           <img style="margin-bottom: 4rem" src="../assets/inventory-item-1.png" alt="inventory item image">
+          <div class="hidden-item">
+            <div class="hidden-text">
+              <p>ПОДРОБНЕЕ</p>
+            </div>
+          </div>
         </div>
         <!-- /.inventory-item -->
         <div class="inventory-item flex-column">
           <h4>ПО ПРОДУКТУ</h4>
           <img src="../assets/inventory-item-2.png" alt="inventory item image">
+          <div class="hidden-item">
+            <div class="hidden-text">
+              <p>ПОДРОБНЕЕ</p>
+            </div>
+          </div>
         </div>
         <!-- /.inventory-item -->
         <div class="inventory-item flex-column">
           <h4> ПО УПАКОВКЕ</h4>
           <img style="margin-bottom: 4rem" src="../assets/inventory-item-3.png" alt="inventory item image">
+          <div class="hidden-item">
+            <div class="hidden-text">
+              <p>ПОДРОБНЕЕ</p>
+            </div>
+          </div>
         </div>
         <!-- /.inventory-item -->
       </div>
@@ -227,22 +242,42 @@
             <p class="text-about-content">Мы производим высококачественное упаковочное оборудование, которое будет четко и в срок отрабатывать необходимые объёмы. Вас ожидает лучший сервис, гарантийное обслуживание, высококвалифицированные специалисты, консультаты, которые помогут вам, в случае возникновения каких-либо проблем.</p>
           </div>
           <img src="../assets/news-img.png" alt="news image">
+          <div class="hidden-item">
+            <div class="hidden-text">
+              <img src="../assets/eye.png" alt="show eye">
+            </div>
+          </div>
         </div>
         <!-- /.news-item-big -->
         <div class="news-items flex-row">
           <div class="news-small-item flex-column">
             <h4>Новое поколение упаковочных машин</h4>
             <img src="../assets/news-img.png" alt="news image">
+            <div class="hidden-item">
+              <div class="hidden-text">
+                <img src="../assets/eye.png" alt="show eye">
+              </div>
+            </div>
           </div>
           <!-- /.news-small-item -->
           <div class="news-small-item">
             <h4>Работаем на качество!</h4>
             <img src="../assets/content_image.png" alt="news image">
+            <div class="hidden-item">
+              <div class="hidden-text">
+                <img src="../assets/eye.png" alt="show eye">
+              </div>
+            </div>
           </div>
           <!-- /.news-small-item -->
           <div class="news-small-item">
             <h4>Выходим на новую скорость!</h4>
             <img src="../assets/content_image.png" alt="news image">
+            <div class="hidden-item">
+              <div class="hidden-text">
+                <img src="../assets/eye.png" alt="show eye">
+              </div>
+            </div>
           </div>
           <!-- /.news-small-item -->
         </div>
@@ -299,11 +334,15 @@ export default {
     }
     .inventory-item {
       width: 30%;
+      position: relative;
       align-items: center;
       justify-content: space-between;
       background: #FFFFFF;
       box-shadow: 0 1px 4px 1px rgba(0, 0, 0, 0.25);
       border-radius: 6px;
+    }
+    .inventory-item:hover .hidden-item {
+      display: block;
     }
     .partners {
       justify-content: space-evenly;
@@ -315,6 +354,7 @@ export default {
       padding: 1rem;
       margin: 1rem;
       display: flex;
+      position: relative;
       justify-content: center;
       align-items: center;
       background: #FFFFFF;
@@ -324,11 +364,13 @@ export default {
     .hidden-item {
       position: absolute;
       justify-content: center;
-      width: 15rem;
-      height: 6rem;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
       padding: 1rem;
       cursor: pointer;
-      background: rgba(47, 193, 255, 0.92);
+      background: rgba(47, 193, 255, 0.8);
       box-shadow: 0 1px 4px 1px rgba(0, 0, 0, 0.25);
       border-radius: 6px;
       display:none;
@@ -350,8 +392,12 @@ export default {
       max-width: 10rem;
       max-height: 5rem;
     }
+    .news .hidden-item {
+      background: rgba(106, 106, 106, 0.8);
+    }
     .news-item-big {
       width: 100%;
+      position: relative;
       justify-content: space-around;
       background: #FFFFFF;
       box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
@@ -362,12 +408,16 @@ export default {
       max-height: 320px;
       margin: 2rem;
     }
+    .news-item-big:hover .hidden-item {
+      display: block;
+    }
     .news-items {
       margin: 3rem 0;
       justify-content: space-between;
     }
     .news-small-item {
       width: 25%;
+      position: relative;
       padding: 1rem 2rem;
       justify-content: space-between;
       background: #FFFFFF;
@@ -381,6 +431,9 @@ export default {
     .news-small-item img {
       max-width: 398px;
       max-height: 320px;
+    }
+    .news-small-item:hover .hidden-item {
+      display: block;
     }
     @media (max-width : 650px) {
 
