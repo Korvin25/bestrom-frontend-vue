@@ -1,0 +1,81 @@
+body {
+    min-width: 55rem;
+    box-sizing: border-box;
+    margin: 0 100px 0 calc(71px + 162px + 100px);
+    font-family: Montserrat, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 142%;
+    letter-spacing: 0.005em;
+    font-feature-settings: 'tnum' on, 'lnum' on;
+    background: #FFFFFF;
+    color: #6A6A6A;
+}
+
+.section {
+    margin: 2rem 0;
+    width: 100%;
+}
+
+a {
+    color: #6A6A6A;
+    text-decoration: none;
+}
+
+h2 {
+    margin: 3rem 0;
+    align-self: flex-start;
+    font-weight: bold;
+    font-size: 32px;
+    letter-spacing: 0.005em;
+    color: #2FC1FF;
+    text-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+h3 {
+    align-self: flex-start;
+    font-weight: bold;
+    font-size: 22px;
+    letter-spacing: 0.005em;
+    color: #2FC1FF;
+}
+
+h4 {
+    font-weight: bold;
+    font-size: 18px;
+    letter-spacing: 0.005em;
+    color: #2FC1FF;
+}
+
+.btn {
+    width: 186px;
+    height: 46px;
+    background: #2FC1FF;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 6px;
+    font-family: Montserrat, sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 142%;
+    letter-spacing: 0.005em;
+    font-feature-settings: 'tnum' on, 'lnum' on;
+    color: #FFFFFF;
+}
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.flex-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+@media (max-width: 650px) {
+
+}

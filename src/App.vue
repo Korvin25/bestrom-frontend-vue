@@ -1,26 +1,38 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <app-nav-menu></app-nav-menu>
+  <router-view></router-view>
+  <app-footer></app-footer>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import {mapActions, mapGetters} from 'vuex'
+import appNavMenu from "@/components/appNavMenu";
+import appFooter from "@/components/appFooter";
 
 export default {
-  name: 'App',
+  methods: {
+    ...mapActions([
+        "GET_CONTENT"
+    ])
+  },
+
+  mounted() {
+    /*
+    this.GET_CONTENT('1')
+    for (const argument of this.$store.state.content) {
+      console.log(argument.content)
+    }
+    */
+  },
+
+  computed:{
+    ...mapGetters([
+      'CONTENT'
+    ])
+  },
+
   components: {
-    HelloWorld
+    appNavMenu, appFooter
   }
 }
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
