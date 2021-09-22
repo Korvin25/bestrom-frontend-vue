@@ -1,12 +1,18 @@
 <template>
     <nav class="nav flex-row">
         <div class="nav-logo-items flex-column" @mouseenter="showTitleMenu = true">
-            <div class="nav-item img">
+            <router-link
+                    @click="scrollToTop"
+                    class="nav-item img"
+                    to="/">
                 <img src="../assets/bestrom_logo.png" alt="menu-item-img">
-            </div>
-            <div class="nav-item img">
+            </router-link>
+            <router-link
+                    @click="scrollToTop"
+                    class="nav-item img"
+                    to="/about">
                 <img src="../assets/menu-item-2.png" alt="menu-item-img">
-            </div>
+            </router-link>
             <div class="nav-item img">
                 <img src="../assets/menu-item-3.png" alt="menu-item-img">
             </div>
@@ -45,46 +51,52 @@
             </div>
         </div>
         <div class="nav-text-items flex-column" v-if="showTitleMenu" @mouseleave="showTitleMenu = false">
-            <div class="nav-item">
+            <router-link
+                    @click="scrollToTop"
+                    class="nav-item text"
+                    to="/">
                 <p>Главная</p>
-            </div>
-            <div class="nav-item">
+            </router-link>
+            <router-link
+                    @click="scrollToTop"
+                    class="nav-item text"
+                    to="/about">
                 <p>О компании</p>
-            </div>
-            <div class="nav-item">
+            </router-link>
+            <div class="nav-item text">
                 <p>Каталог</p>
             </div>
-            <div class="nav-item">
+            <div class="nav-item text">
                 <p>Раскрой пакета</p>
             </div>
-            <div class="nav-item">
+            <div class="nav-item text">
                 <p>Сервис</p>
             </div>
-            <div class="nav-item">
+            <div class="nav-item text">
                 <p>Новости</p>
             </div>
-            <div class="nav-item">
+            <div class="nav-item text">
                 <p>Партнеры</p>
             </div>
-            <div class="nav-item">
+            <div class="nav-item text">
                 <p>Партнеры</p>
             </div>
-            <div class="nav-item">
+            <div class="nav-item text">
                 <p>Контакты</p>
             </div>
-            <div class="nav-item">
+            <div class="nav-item text">
                 <p>Вакансии</p>
             </div>
-            <div class="nav-item">
+            <div class="nav-item text">
                 <p>Оставить заявку</p>
             </div>
-            <div class="nav-item">
+            <div class="nav-item text">
                 <p>ВКонтакте</p>
             </div>
-            <div class="nav-item">
+            <div class="nav-item text">
                 <p>YouTube</p>
             </div>
-            <div class="nav-item">
+            <div class="nav-item text">
                 <p>Instagram</p>
             </div>
         </div>
@@ -97,6 +109,11 @@
             return {
                 showTitleMenu: false
             }
+        },
+        methods: {
+            scrollToTop() {
+                window.scrollTo(0,0);
+            },
         },
         name: "appNavMenu"
     }
@@ -140,12 +157,26 @@
         box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
         border-radius: 6px;
     }
+    .nav-item.text {
+        text-decoration: none;
+        background: linear-gradient(currentColor, currentColor) no-repeat 0 100%;
+        background-size: 0 2px;
+        transition: background-size .3s ease;
+        border-radius: 0;
+    }
+    .nav-item.text:hover {
+        transform: scale(1.04);
+        background-size: 100% 2px;
+    }
     .nav-item:hover {
         cursor: pointer;
     }
         .nav-item.img {
             width: 37px;
             height: 37px;
+        }
+        .nav-item.img:hover {
+            background: rgba(47, 193, 255, 0.3);
         }
         .nav-item.img.logo {
             background: #6A6A6A;
@@ -154,6 +185,10 @@
         }
         .nav-item.img.logo:hover {
             background: #2FC1FF;
+        }
+        .nav .nav-item.img.logo:hover .nav-item.text {
+            transform: scale(1.04);
+            background-size: 100% 2px;
         }
         .nav-item p {
             font-size: 16px;
