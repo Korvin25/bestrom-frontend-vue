@@ -1,7 +1,7 @@
 body {
     min-width: 55rem;
     box-sizing: border-box;
-    margin: 0 100px 0 calc(71px + 162px + 100px);
+    margin: 0 100px 0 calc(71px + 170px + 100px);
     font-family: Montserrat, sans-serif;
     font-style: normal;
     font-weight: normal;
@@ -23,29 +23,38 @@ a {
     text-decoration: none;
 }
 
+h1 {
+    font-weight: bold;
+    font-size: 36px;
+    color: #2FC1FF;
+}
+
 h2 {
     margin: 3rem 0;
     align-self: flex-start;
     font-weight: bold;
     font-size: 32px;
-    letter-spacing: 0.005em;
     color: #2FC1FF;
     text-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 h3 {
+    margin: 0;
     align-self: flex-start;
     font-weight: bold;
     font-size: 22px;
-    letter-spacing: 0.005em;
     color: #2FC1FF;
 }
 
 h4 {
     font-weight: bold;
     font-size: 18px;
-    letter-spacing: 0.005em;
     color: #2FC1FF;
+}
+
+h5 {
+    font-weight: bold;
+    font-size: 18px;
 }
 
 .btn {
@@ -63,52 +72,107 @@ h4 {
     font-feature-settings: 'tnum' on, 'lnum' on;
     color: #FFFFFF;
 }
-
 .btn:hover {
     cursor: pointer;
     background: rgba(47, 193, 255, 0.85);
 }
 
+/* ---------------------------------------------------- */
+/* Sliders with arrows (example Clients and Partners) */
+.slider-content {
+    padding: 1rem;
+    align-items: center;
+}
+.arrow {
+    min-width: 63px;
+    min-height: 63px;
+    background: #FFFFFF;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 99px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.arrow:hover {
+    cursor: pointer;
+    background: rgba(47, 193, 255, 0.75);
+}
+.arrow img {
+    width: 25px;
+    height: 28px;
+}
+.partners {
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+/* ---------------------------------------------------- */
+
+.content {
+    padding: 1rem;
+    margin-bottom: 0.5rem;
+    align-items: center;
+}
+.logo {
+    margin: 0 0.5rem;
+    width: 2rem;
+    height: 2rem;
+}
+
+/* ----------------------------------------------------- */
+/* Styles for video with transparent background */
+.image-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60%;
+}
+.video {
+    position: relative;
+    align-items: center;
+    width: 33rem;
+    height: 16rem;
+    margin: 0 2rem;
+}
+.video-title {
+    align-items: center;
+}
+.video-play {
+    cursor: pointer;
+    position: absolute;
+    align-items: center;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(106, 106, 106, 0.6);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 6px;
+}
+.video-play img {
+    width: 6rem;
+    height: 6rem;
+}
+/* ----------------------------------------------------- */
+
 .about-content {
     margin: 2rem;
-    width: 40%;
+    width: 45%;
 }
 .text-about-content {
     padding: 26px 0 75px 0;
     border-top: 1px solid #2FC1FF;
 }
 
-.hidden-item {
-    position: absolute;
-    justify-content: center;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    padding: 1rem;
-    cursor: pointer;
-    background: rgba(47, 193, 255, 0.8);
-    box-shadow: 0 1px 4px 1px rgba(0, 0, 0, 0.25);
+.card-shadow {
+    background: #FFFFFF;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
     border-radius: 6px;
-    display:none;
 }
-.hidden-text {
-    font-weight: bold;
-    font-size: 24px;
-    color: #FFFFFF;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-}
-
 .flex-column {
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
-
 .flex-row {
     display: flex;
     flex-direction: row;
