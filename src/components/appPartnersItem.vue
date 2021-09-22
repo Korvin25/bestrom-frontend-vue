@@ -1,15 +1,15 @@
 <template>
     <div class="partners-item">
         <img :src="pathToImage" alt="logo">
-        <div class="hidden-item">
-            <div class="hidden-text">
-                <p>ПОДРОБНЕЕ</p>
-            </div>
-        </div>
+        <app-hidden-item
+                text="ПОДРОБНЕЕ"
+        ></app-hidden-item>
     </div>
 </template>
 
 <script>
+    import appHiddenItem from "@/components/appHiddenItem";
+
     export default {
         props: {
             image: String
@@ -23,13 +23,16 @@
                 return require(`../assets/${fileName}`);
             }
         },
+        components: {
+            appHiddenItem
+        },
         name: "appPartnersItem"
     }
 </script>
 
 <style scoped>
     .partners-item {
-        width: 15rem;
+        width: 11rem;
         height: 6rem;
         padding: 1rem;
         margin: 1rem;

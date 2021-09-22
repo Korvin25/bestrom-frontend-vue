@@ -1,5 +1,5 @@
 <template>
-    <div class="news-small-item flex-column">
+    <div class="news-small-item flex-column card-shadow">
         <h4>{{ title }}</h4>
         <img :src="pathToImage" alt="news image">
         <div class="hidden-item">
@@ -36,9 +36,6 @@
         position: relative;
         padding: 1rem 2rem;
         justify-content: space-between;
-        background: #FFFFFF;
-        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
-        border-radius: 6px;
     }
     .news-small-item h4 {
         border-bottom: 1px solid #2FC1FF;
@@ -50,5 +47,26 @@
     }
     .news-small-item:hover .hidden-item {
         display: block;
+    }
+    .hidden-item {
+        position: absolute;
+        justify-content: center;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        padding: 1rem;
+        cursor: pointer;
+        background: rgba(47, 193, 255, 0.8);
+        box-shadow: 0 1px 4px 1px rgba(0, 0, 0, 0.25);
+        border-radius: 6px;
+        display:none;
+    }
+    .hidden-text {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
     }
 </style>

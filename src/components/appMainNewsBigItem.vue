@@ -1,5 +1,5 @@
 <template>
-    <div class="news-item-big flex-row">
+    <div class="news-item-big flex-row card-shadow">
         <div class="about-content flex-column">
             <h4>{{ title }}</h4>
             <p class="text-about-content">{{ text }}</p>
@@ -38,9 +38,6 @@
         width: 100%;
         position: relative;
         justify-content: space-around;
-        background: #FFFFFF;
-        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
-        border-radius: 6px;
     }
     .news-item-big img {
         max-width: 398px;
@@ -49,5 +46,26 @@
     }
     .news-item-big:hover .hidden-item {
         display: block;
+    }
+    .hidden-item {
+        position: absolute;
+        justify-content: center;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        padding: 1rem;
+        cursor: pointer;
+        background: rgba(47, 193, 255, 0.8);
+        box-shadow: 0 1px 4px 1px rgba(0, 0, 0, 0.25);
+        border-radius: 6px;
+        display:none;
+    }
+    .hidden-text {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
     }
 </style>

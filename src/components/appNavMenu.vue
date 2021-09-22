@@ -140,7 +140,7 @@
     .nav-text-items {
         align-items: flex-start;
         height: 100%;
-        width: 162px;
+        width: 170px;
         background: #FFFFFF;
         box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
     }
