@@ -58,7 +58,7 @@
           <img style="margin-right: 8px" src="../assets/arrow_left.png" alt="arrow_left">
         </div>
         <!-- /.arrow -->
-        <div class="partners flex-row">
+        <div class="flex-row partners">
           <app-partners-item image="logo-vtb.png"></app-partners-item>
           <app-partners-item image="logo-yamato.png"></app-partners-item>
           <app-partners-item image="logo-festo.png"></app-partners-item>
@@ -83,7 +83,7 @@
         <div class="arrow">
           <img style="margin-right: 8px" src="../assets/arrow_left.png" alt="arrow_left">
         </div>
-        <div class="partners flex-row">
+        <div class="flex-row partners">
           <app-partners-item image="logo-babaevskiy.png"></app-partners-item>
           <app-partners-item image="logo-krasny-oktyabr.png"></app-partners-item>
           <app-partners-item image="logo-rot-front.png"></app-partners-item>

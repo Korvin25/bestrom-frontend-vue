@@ -13,6 +13,17 @@ body {
     color: #6A6A6A;
 }
 
+.flex-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.flex-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
 .section {
     margin: 2rem 0;
     width: 100%;
@@ -75,6 +86,9 @@ h5 {
 .btn:hover {
     cursor: pointer;
     background: rgba(47, 193, 255, 0.85);
+}
+.btn:active {
+    box-shadow: inset 1px 1px 1px rgba(0, 0, 0, 0.3);
 }
 
 /* ---------------------------------------------------- */
@@ -167,16 +181,6 @@ h5 {
     background: #FFFFFF;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
     border-radius: 6px;
-}
-.flex-column {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-.flex-row {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
 }
 
 @media (max-width: 650px) {

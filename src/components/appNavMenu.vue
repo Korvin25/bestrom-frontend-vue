@@ -13,7 +13,7 @@
             <router-link
                     @mouseenter="hoverItem = 2"
                     @mouseleave="hoverItem = 0"
-                    :class="hoverItem === 2 || this.$route.path === '/about' ? 'img-hover' : ''"
+                    :class="hoverItem === 2 || this.$route.path === '/about' || this.$route.path === '/history' ? 'img-hover' : ''"
                     @click="scrollToTop"
                     class="nav-item img"
                     to="/about">
@@ -45,10 +45,10 @@
             </router-link>
             <router-link @mouseenter="hoverItem = 6"
                          @mouseleave="hoverItem = 0"
-                         :class="hoverItem === 6 ? 'img-hover' : ''"
+                         :class="hoverItem === 6 || this.$route.path === '/news' ? 'img-hover' : ''"
                          @click="scrollToTop"
                          class="nav-item img"
-                         to="">
+                         to="/news">
                 <img src="../assets/menu-item-6.png" alt="menu-item-img">
             </router-link>
             <router-link @mouseenter="hoverItem = 7"
@@ -129,7 +129,7 @@
             <router-link
                     @mouseenter="hoverItem = 2"
                     @mouseleave="hoverItem = 0"
-                    :class="hoverItem === 2 || this.$route.path === '/about' ? 'text-hover' : ''"
+                    :class="hoverItem === 2 || this.$route.path === '/about' || this.$route.path === '/history' ? 'text-hover' : ''"
                     @click="scrollToTop"
                     class="nav-item text"
                     to="/about">
@@ -161,10 +161,10 @@
             </router-link>
             <router-link @mouseenter="hoverItem = 6"
                          @mouseleave="hoverItem = 0"
-                         :class="hoverItem === 6 ? 'text-hover' : ''"
+                         :class="hoverItem === 6 || this.$route.path === '/news' ? 'text-hover' : ''"
                          @click="scrollToTop"
                          class="nav-item text"
-                         to="">
+                         to="/news">
                 <p>Новости</p>
             </router-link>
             <router-link @mouseenter="hoverItem = 7"
@@ -181,7 +181,7 @@
                          @click="scrollToTop"
                          class="nav-item text"
                          to="">
-                <p>Партнеры</p>
+                <p>Клиенты</p>
             </router-link>
             <router-link @mouseenter="hoverItem = 9"
                          @mouseleave="hoverItem = 0"
