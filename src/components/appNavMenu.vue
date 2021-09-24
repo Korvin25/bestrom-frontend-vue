@@ -1,5 +1,7 @@
 <template>
     <nav class="nav flex-row">
+
+        <!-- Image items in menu -->
         <div class="nav-logo-items flex-column" @mouseenter="showTitleMenu = true">
             <router-link
                     @mouseenter="hoverItem = 1"
@@ -29,10 +31,10 @@
             </router-link>
             <router-link @mouseenter="hoverItem = 4"
                          @mouseleave="hoverItem = 0"
-                         :class="hoverItem === 4 ? 'img-hover' : ''"
+                         :class="hoverItem === 4 || this.$route.path.includes('/cutting') ? 'img-hover' : ''"
                          @click="scrollToTop"
                          class="nav-item img"
-                         to="">
+                         to="/cutting">
                 <img src="../assets/menu-item-4.png" alt="menu-item-img">
             </router-link>
             <router-link @mouseenter="hoverItem = 5"
@@ -116,6 +118,8 @@
                 <img style="width: 30px;" src="../assets/instagram.png" alt="menu-item-img">
             </router-link>
         </div>
+
+        <!-- Text items in menu -->
         <div class="nav-text-items flex-column" v-if="showTitleMenu" @mouseleave="showTitleMenu = false">
             <router-link
                     @mouseenter="hoverItem = 1"
@@ -145,10 +149,10 @@
             </router-link>
             <router-link @mouseenter="hoverItem = 4"
                          @mouseleave="hoverItem = 0"
-                         :class="hoverItem === 4 ? 'text-hover' : ''"
+                         :class="hoverItem === 4 || this.$route.path.includes('/cutting') ? 'text-hover' : ''"
                          @click="scrollToTop"
                          class="nav-item text"
-                         to="">
+                         to="/cutting">
                 <p>Раскрой пакета</p>
             </router-link>
             <router-link @mouseenter="hoverItem = 5"
@@ -318,7 +322,7 @@
             border-radius: 99px;
         }
         .nav-item.img.logo.logo-hover {
-            background: rgba(47, 193, 255, 0.7);
+            background: rgba(47, 193, 255, 0.9);
         }
         .nav-item p {
             font-size: 16px;
