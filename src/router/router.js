@@ -3,6 +3,7 @@ import appPageMain from '../views/appPageMain'
 import appPageAbout from "@/views/appPageAbout";
 import appPageAboutHistory from "@/views/appPageAboutHistory";
 import appPageNews from "@/views/appPageNews";
+import appPageNewsId from "@/views/appPageNewsId";
 
 export default createRouter({
     history: createWebHistory(process.env.BASE_URL),
@@ -18,7 +19,7 @@ export default createRouter({
             component: appPageAbout,
         },
         {
-            path: '/history',
+            path: '/about/history',
             name: 'appPageAboutHistory',
             component: appPageAboutHistory,
         },
@@ -26,6 +27,11 @@ export default createRouter({
             path: '/news',
             name: 'appPageNews',
             component: appPageNews,
+        },
+        {
+            path: '/news/:newsId',
+            name: 'appPageNewsId',
+            component: appPageNewsId,
         }
     ]
 })

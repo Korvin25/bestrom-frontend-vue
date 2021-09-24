@@ -6,42 +6,48 @@
             <div class="title-news flex-row">
 
                 <div class="big-title-news flex-column">
-                    <div class="image-news card-shadow">
+                    <router-link
+                            class="image-news card-shadow"
+                            :to="{ name: 'appPageNewsId', params: { newsId: '321' }, props: true }">
                         <img src="../assets/news-img.png" alt="news image">
                         <div class="hidden-item">
                             <div class="hidden-text">
                                 <img src="../assets/eye.png" alt="show eye">
                             </div>
                         </div>
-                    </div>
+                    </router-link>
                     <h4>Новое поколение упаковочных машин</h4>
                     <p>Новейшие разработки компании Бестром в сфере упаковочного оборудования</p>
                 </div>
                 <!-- /.big-title-news -->
 
                 <div class="small-title-news flex-column">
-                    <div class="image-news card-shadow">
+                    <router-link
+                            class="image-news card-shadow"
+                            :to="{ name: 'appPageNewsId', params: { newsId: '123' } }">
                         <img src="../assets/news-image-2.png" alt="news image">
                         <div class="hidden-item">
                             <div class="hidden-text">
                                 <img src="../assets/eye.png" alt="show eye">
                             </div>
                         </div>
-                    </div>
+                    </router-link>
                     <h4>Новое поколение упаковочных машин</h4>
                     <p>Новейшие разработки компании Бестром в сфере упаковочного оборудования</p>
                 </div>
                 <!-- /.small-title-news -->
 
                 <div class="small-title-news flex-column">
-                    <div class="image-news card-shadow">
+                    <router-link
+                            class="image-news card-shadow"
+                            :to="{ name: 'appPageNewsId', params: { newsId: '231' } }">
                         <img src="../assets/news-image-2.png" alt="news image">
                         <div class="hidden-item">
                             <div class="hidden-text">
                                 <img src="../assets/eye.png" alt="show eye">
                             </div>
                         </div>
-                    </div>
+                    </router-link>
                     <h4>Новое поколение упаковочных машин</h4>
                     <p>Новейшие разработки компании Бестром в сфере упаковочного оборудования</p>
                 </div>
@@ -51,46 +57,55 @@
 
             <div class="other-news flex-row">
                 <app-news-other-item
+                        id="1"
                         title="Новое поколение упаковочных машин"
                         text="Новейшие разработки компании Бестром в сфере упаковочного оборудования"
                         image="news-image-2.png"
                 ></app-news-other-item>
                 <app-news-other-item
+                        id="2"
                         title="Новое поколение упаковочных машин"
                         text="Новейшие разработки компании Бестром в сфере упаковочного оборудования"
                         image="news-image-2.png"
                 ></app-news-other-item>
                 <app-news-other-item
+                        id="3"
                         title="БЕСТРОМ-3600П"
                         text="Рукавная оберточная машина"
                         image="news-image-2.png"
                 ></app-news-other-item>
                 <app-news-other-item
+                        id="4"
                         title="Новое поколение упаковочных машин"
                         text="Новейшие разработки компании Бестром в сфере упаковочного оборудования"
                         image="news-image-2.png"
                 ></app-news-other-item>
                 <app-news-other-item
+                        id="5"
                         title="Новое поколение упаковочных машин"
                         text="Новейшие разработки компании Бестром в сфере упаковочного оборудования"
                         image="news-image-2.png"
                 ></app-news-other-item>
                 <app-news-other-item
+                        id="6"
                         title="БЕСТРОМ-3600П"
                         text="Рукавная оберточная машина"
                         image="news-image-2.png"
                 ></app-news-other-item>
                 <app-news-other-item
+                        id="7"
                         title="Новое поколение упаковочных машин"
                         text="Новейшие разработки компании Бестром в сфере упаковочного оборудования"
                         image="news-image-2.png"
                 ></app-news-other-item>
                 <app-news-other-item
+                        id="8"
                         title="Новое поколение упаковочных машин"
                         text="Новейшие разработки компании Бестром в сфере упаковочного оборудования"
                         image="news-image-2.png"
                 ></app-news-other-item>
                 <app-news-other-item
+                        id="9"
                         title="БЕСТРОМ-3600П"
                         text="Рукавная оберточная машина"
                         image="news-image-2.png"

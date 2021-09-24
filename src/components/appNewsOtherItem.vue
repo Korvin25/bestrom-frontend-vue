@@ -1,13 +1,15 @@
 <template>
     <div class="small-other-news flex-column">
-        <div class="image-news card-shadow">
+        <router-link
+                class="image-news card-shadow"
+                :to="{ name: 'appPageNewsId', params: { newsId: this.id } }">
             <img :src="pathToImage" alt="news image">
             <div class="hidden-item">
                 <div class="hidden-text">
                     <img src="../assets/eye.png" alt="show eye">
                 </div>
             </div>
-        </div>
+        </router-link>
         <h4>{{ title }}</h4>
         <p>{{ text }}</p>
     </div>
@@ -17,6 +19,7 @@
 <script>
     export default {
         props: {
+            id: String,
             title: String,
             text: String,
             image: String

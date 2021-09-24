@@ -13,7 +13,7 @@
             <router-link
                     @mouseenter="hoverItem = 2"
                     @mouseleave="hoverItem = 0"
-                    :class="hoverItem === 2 || this.$route.path === '/about' || this.$route.path === '/history' ? 'img-hover' : ''"
+                    :class="hoverItem === 2 || this.$route.path.includes('/about') ? 'img-hover' : ''"
                     @click="scrollToTop"
                     class="nav-item img"
                     to="/about">
@@ -45,7 +45,7 @@
             </router-link>
             <router-link @mouseenter="hoverItem = 6"
                          @mouseleave="hoverItem = 0"
-                         :class="hoverItem === 6 || this.$route.path === '/news' ? 'img-hover' : ''"
+                         :class="hoverItem === 6 || this.$route.path.includes('/news') ? 'img-hover' : ''"
                          @click="scrollToTop"
                          class="nav-item img"
                          to="/news">
@@ -129,7 +129,7 @@
             <router-link
                     @mouseenter="hoverItem = 2"
                     @mouseleave="hoverItem = 0"
-                    :class="hoverItem === 2 || this.$route.path === '/about' || this.$route.path === '/history' ? 'text-hover' : ''"
+                    :class="hoverItem === 2 || this.$route.path.includes('/about') ? 'text-hover' : ''"
                     @click="scrollToTop"
                     class="nav-item text"
                     to="/about">
@@ -161,7 +161,7 @@
             </router-link>
             <router-link @mouseenter="hoverItem = 6"
                          @mouseleave="hoverItem = 0"
-                         :class="hoverItem === 6 || this.$route.path === '/news' ? 'text-hover' : ''"
+                         :class="hoverItem === 6 || this.$route.path.includes('/news') ? 'text-hover' : ''"
                          @click="scrollToTop"
                          class="nav-item text"
                          to="/news">
