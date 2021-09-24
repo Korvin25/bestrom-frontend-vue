@@ -8,7 +8,7 @@
                 <div class="about-content flex-column">
                     <h3>История Бестром</h3>
                     <p class="text-about-content">В 1989 году Королевская Нидерландская Компания "Бегеманн" и производственное объединение "Стромоборудование" учредили совместное предприятие, которое было названо "Бестром" - по начальным буквам названия компаний.</p>
-                    <button class="btn" @click="this.$router.push('/history')">ПОДРОБНЕЕ</button>
+                    <button class="btn" @click="this.$router.push('/about/history')">ПОДРОБНЕЕ</button>
                 </div>
                 <div class="image-content">
                     <div class="video flex-column card-shadow">
