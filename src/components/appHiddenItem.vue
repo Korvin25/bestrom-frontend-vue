@@ -28,7 +28,8 @@
         background: rgba(47, 193, 255, 0.8);
         box-shadow: 0 1px 4px 1px rgba(0, 0, 0, 0.25);
         border-radius: 6px;
-        display:none;
+        transition: opacity 0.5s;
+        opacity: 0;
     }
     .hidden-text {
         font-weight: bold;

@@ -165,7 +165,11 @@
                 <img src="../assets/packet-size.png" alt="packet-size">
             </div>
         </section>
-        <button class="cutting-btn btn">Подобрать</button>
+        <router-link
+                class="cutting-btn"
+                :to="{ name: 'appPageUniqueCutting', params: { packetId: '1' } }">
+            <button class="cutting-btn btn">Подобрать</button>
+        </router-link>
     </main>
 
     <app-footer></app-footer>

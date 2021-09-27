@@ -5,6 +5,7 @@ import appPageAboutHistory from "@/views/appPageAboutHistory";
 import appPageNews from "@/views/appPageNews";
 import appPageNewsId from "@/views/appPageNewsId";
 import appPageCutting from "@/views/appPageCutting";
+import appPageUniqueCutting from "@/views/appPageUniqueCutting";
 
 export default createRouter({
     history: createWebHistory(process.env.BASE_URL),
@@ -33,12 +34,16 @@ export default createRouter({
             path: '/news/:newsId',
             name: 'appPageNewsId',
             component: appPageNewsId,
-        }
-        ,
+        },
         {
             path: '/cutting',
             name: 'appPageCutting',
             component: appPageCutting,
+        },
+        {
+            path: '/cutting/:packetId',
+            name: 'appPageUniqueCutting',
+            component: appPageUniqueCutting,
         }
     ]
 })

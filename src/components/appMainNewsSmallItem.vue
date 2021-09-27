@@ -1,7 +1,7 @@
 <template>
     <div class="news-small-item flex-column card-shadow">
         <h4>{{ title }}</h4>
-        <img :src="pathToImage" alt="news image">
+        <img class="news-small-item-image" :src="pathToImage" alt="news image">
         <div class="hidden-item">
             <div class="hidden-text">
                 <img src="../assets/eye.png" alt="show eye">
@@ -45,9 +45,15 @@
         max-width: 398px;
         max-height: 320px;
     }
-    .news-small-item:hover .hidden-item {
-        display: block;
-    }
+        .news-small-item:hover .hidden-item {
+            opacity: 1;
+        }
+        .news-small-item:hover h4,
+        .news-small-item:hover .news-small-item-image {
+            -webkit-filter: blur(4px);
+            -ms-filter: blur(4px);
+            filter: blur(4px);
+        }
     .hidden-item {
         position: absolute;
         justify-content: center;
@@ -59,7 +65,8 @@
         cursor: pointer;
         box-shadow: 0 1px 4px 1px rgba(0, 0, 0, 0.25);
         border-radius: 6px;
-        display:none;
+        transition: opacity 0.4s;
+        opacity: 0;
     }
     .hidden-text {
         display: flex;

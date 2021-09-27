@@ -119,123 +119,125 @@
             </router-link>
         </div>
 
-        <!-- Text items in menu -->
-        <div class="nav-text-items flex-column" v-if="showTitleMenu" @mouseleave="showTitleMenu = false">
-            <router-link
-                    @mouseenter="hoverItem = 1"
-                    @mouseleave="hoverItem = 0"
-                    :class="hoverItem === 1 || this.$route.path === '/' ? 'text-hover' : ''"
-                    @click="scrollToTop"
-                    class="nav-item text"
-                    to="/">
-                <p>Главная</p>
-            </router-link>
-            <router-link
-                    @mouseenter="hoverItem = 2"
-                    @mouseleave="hoverItem = 0"
-                    :class="hoverItem === 2 || this.$route.path.includes('/about') ? 'text-hover' : ''"
-                    @click="scrollToTop"
-                    class="nav-item text"
-                    to="/about">
-                <p>О компании</p>
-            </router-link>
-            <router-link @mouseenter="hoverItem = 3"
-                         @mouseleave="hoverItem = 0"
-                         :class="hoverItem === 3 ? 'text-hover' : ''"
-                         @click="scrollToTop"
-                         class="nav-item text"
-                         to="">
-                <p>Каталог</p>
-            </router-link>
-            <router-link @mouseenter="hoverItem = 4"
-                         @mouseleave="hoverItem = 0"
-                         :class="hoverItem === 4 || this.$route.path.includes('/cutting') ? 'text-hover' : ''"
-                         @click="scrollToTop"
-                         class="nav-item text"
-                         to="/cutting">
-                <p>Раскрой пакета</p>
-            </router-link>
-            <router-link @mouseenter="hoverItem = 5"
-                         @mouseleave="hoverItem = 0"
-                         :class="hoverItem === 5 ? 'text-hover' : ''"
-                         @click="scrollToTop"
-                         class="nav-item text"
-                         to="">
-                <p>Сервис</p>
-            </router-link>
-            <router-link @mouseenter="hoverItem = 6"
-                         @mouseleave="hoverItem = 0"
-                         :class="hoverItem === 6 || this.$route.path.includes('/news') ? 'text-hover' : ''"
-                         @click="scrollToTop"
-                         class="nav-item text"
-                         to="/news">
-                <p>Новости</p>
-            </router-link>
-            <router-link @mouseenter="hoverItem = 7"
-                         @mouseleave="hoverItem = 0"
-                         :class="hoverItem === 7 ? 'text-hover' : ''"
-                         @click="scrollToTop"
-                         class="nav-item text"
-                         to="">
-                <p>Партнеры</p>
-            </router-link>
-            <router-link @mouseenter="hoverItem = 8"
-                         @mouseleave="hoverItem = 0"
-                         :class="hoverItem === 8 ? 'text-hover' : ''"
-                         @click="scrollToTop"
-                         class="nav-item text"
-                         to="">
-                <p>Клиенты</p>
-            </router-link>
-            <router-link @mouseenter="hoverItem = 9"
-                         @mouseleave="hoverItem = 0"
-                         :class="hoverItem === 9 ? 'text-hover' : ''"
-                         @click="scrollToTop"
-                         class="nav-item text"
-                         to="">
-                <p>Контакты</p>
-            </router-link>
-            <router-link @mouseenter="hoverItem = 10"
-                         @mouseleave="hoverItem = 0"
-                         :class="hoverItem === 10 ? 'text-hover' : ''"
-                         @click="scrollToTop"
-                         class="nav-item text"
-                         to="">
-                <p>Вакансии</p>
-            </router-link>
-            <router-link @mouseenter="hoverItem = 11"
-                         @mouseleave="hoverItem = 0"
-                         :class="hoverItem === 11 ? 'text-hover' : ''"
-                         @click="scrollToTop"
-                         class="nav-item text"
-                         to="">
-                <p>Оставить заявку</p>
-            </router-link>
-            <router-link @mouseenter="hoverItem = 12"
-                         @mouseleave="hoverItem = 0"
-                         :class="hoverItem === 12 ? 'text-hover' : ''"
-                         @click="scrollToTop"
-                         class="nav-item text"
-                         to="">
-                <p>ВКонтакте</p>
-            </router-link>
-            <router-link @mouseenter="hoverItem = 13"
-                         @mouseleave="hoverItem = 0"
-                         :class="hoverItem === 13 ? 'text-hover' : ''"
-                         @click="scrollToTop"
-                         class="nav-item text"
-                         to="">
-                <p>YouTube</p>
-            </router-link>
-            <router-link @mouseenter="hoverItem = 14"
-                         @mouseleave="hoverItem = 0"
-                         :class="hoverItem === 14 ? 'text-hover' : ''"
-                         @click="scrollToTop"
-                         class="nav-item text"
-                         to="">
-                <p>Instagram</p>
-            </router-link>
-        </div>
+        <!-- Text items in menu  !!  !! -->
+        <transition name="fade">
+            <div class="nav-text-items flex-column" >
+                <router-link
+                        @mouseenter="hoverItem = 1"
+                        @mouseleave="hoverItem = 0"
+                        :class="hoverItem === 1 || this.$route.path === '/' ? 'text-hover' : ''"
+                        @click="scrollToTop"
+                        class="nav-item text"
+                        to="/">
+                    <p>Главная</p>
+                </router-link>
+                <router-link
+                        @mouseenter="hoverItem = 2"
+                        @mouseleave="hoverItem = 0"
+                        :class="hoverItem === 2 || this.$route.path.includes('/about') ? 'text-hover' : ''"
+                        @click="scrollToTop"
+                        class="nav-item text"
+                        to="/about">
+                    <p>О компании</p>
+                </router-link>
+                <router-link @mouseenter="hoverItem = 3"
+                             @mouseleave="hoverItem = 0"
+                             :class="hoverItem === 3 ? 'text-hover' : ''"
+                             @click="scrollToTop"
+                             class="nav-item text"
+                             to="">
+                    <p>Каталог</p>
+                </router-link>
+                <router-link @mouseenter="hoverItem = 4"
+                             @mouseleave="hoverItem = 0"
+                             :class="hoverItem === 4 || this.$route.path.includes('/cutting') ? 'text-hover' : ''"
+                             @click="scrollToTop"
+                             class="nav-item text"
+                             to="/cutting">
+                    <p>Раскрой пакета</p>
+                </router-link>
+                <router-link @mouseenter="hoverItem = 5"
+                             @mouseleave="hoverItem = 0"
+                             :class="hoverItem === 5 ? 'text-hover' : ''"
+                             @click="scrollToTop"
+                             class="nav-item text"
+                             to="">
+                    <p>Сервис</p>
+                </router-link>
+                <router-link @mouseenter="hoverItem = 6"
+                             @mouseleave="hoverItem = 0"
+                             :class="hoverItem === 6 || this.$route.path.includes('/news') ? 'text-hover' : ''"
+                             @click="scrollToTop"
+                             class="nav-item text"
+                             to="/news">
+                    <p>Новости</p>
+                </router-link>
+                <router-link @mouseenter="hoverItem = 7"
+                             @mouseleave="hoverItem = 0"
+                             :class="hoverItem === 7 ? 'text-hover' : ''"
+                             @click="scrollToTop"
+                             class="nav-item text"
+                             to="">
+                    <p>Партнеры</p>
+                </router-link>
+                <router-link @mouseenter="hoverItem = 8"
+                             @mouseleave="hoverItem = 0"
+                             :class="hoverItem === 8 ? 'text-hover' : ''"
+                             @click="scrollToTop"
+                             class="nav-item text"
+                             to="">
+                    <p>Клиенты</p>
+                </router-link>
+                <router-link @mouseenter="hoverItem = 9"
+                             @mouseleave="hoverItem = 0"
+                             :class="hoverItem === 9 ? 'text-hover' : ''"
+                             @click="scrollToTop"
+                             class="nav-item text"
+                             to="">
+                    <p>Контакты</p>
+                </router-link>
+                <router-link @mouseenter="hoverItem = 10"
+                             @mouseleave="hoverItem = 0"
+                             :class="hoverItem === 10 ? 'text-hover' : ''"
+                             @click="scrollToTop"
+                             class="nav-item text"
+                             to="">
+                    <p>Вакансии</p>
+                </router-link>
+                <router-link @mouseenter="hoverItem = 11"
+                             @mouseleave="hoverItem = 0"
+                             :class="hoverItem === 11 ? 'text-hover' : ''"
+                             @click="scrollToTop"
+                             class="nav-item text"
+                             to="">
+                    <p>Оставить заявку</p>
+                </router-link>
+                <router-link @mouseenter="hoverItem = 12"
+                             @mouseleave="hoverItem = 0"
+                             :class="hoverItem === 12 ? 'text-hover' : ''"
+                             @click="scrollToTop"
+                             class="nav-item text"
+                             to="">
+                    <p>ВКонтакте</p>
+                </router-link>
+                <router-link @mouseenter="hoverItem = 13"
+                             @mouseleave="hoverItem = 0"
+                             :class="hoverItem === 13 ? 'text-hover' : ''"
+                             @click="scrollToTop"
+                             class="nav-item text"
+                             to="">
+                    <p>YouTube</p>
+                </router-link>
+                <router-link @mouseenter="hoverItem = 14"
+                             @mouseleave="hoverItem = 0"
+                             :class="hoverItem === 14 ? 'text-hover' : ''"
+                             @click="scrollToTop"
+                             class="nav-item text"
+                             to="">
+                    <p>Instagram</p>
+                </router-link>
+            </div>
+        </transition>
     </nav>
 </template>
 
@@ -257,6 +259,8 @@
 </script>
 
 <style scoped>
+
+
     .nav {
         position: fixed;
         left: 0;
@@ -265,24 +269,40 @@
         align-items: center;
         min-height: 600px;
         background: #FFFFFF;
-        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
     }
     .nav-logo-items {
         justify-content: space-around;
         align-items: center;
         height: 100%;
-        width: 71px;
+        padding: 0 0.5rem;
         background: #FFFFFF;
         box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
     }
+        .nav-logo-items:hover + .nav-text-items {
+            -webkit-transform: scaleX(1);
+            -ms-transform: scaleX(1);
+            transform: scaleX(1);
+        }
     .nav-text-items {
         align-items: flex-start;
         justify-content: space-around;
+        padding: 0 2rem 0 0;
         height: 100%;
-        width: 170px;
         background: #FFFFFF;
         box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+        transition: all 0.3s;
+        -webkit-transform: scaleX(0);
+        -ms-transform: scaleX(0);
+        transform: scaleX(0);
+        -webkit-transform-origin: 0 0;
+        -ms-transform-origin: 0 0;
+        transform-origin: 0 0;
     }
+        .nav-text-items:hover {
+            -webkit-transform: scaleX(1);
+            -ms-transform: scaleX(1);
+            transform: scaleX(1);
+        }
         .nav-text-items .nav-item {
             box-shadow: none;
         }
@@ -314,6 +334,7 @@
             height: 2.5rem;
         }
         .nav-item.img.img-hover {
+            transition: all 0.5s;
             background: rgba(47, 193, 255, 0.3);
         }
         .nav-item.img.logo {

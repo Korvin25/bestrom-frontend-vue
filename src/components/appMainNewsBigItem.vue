@@ -4,7 +4,7 @@
             <h4>{{ title }}</h4>
             <p class="text-about-content">{{ text }}</p>
         </div>
-        <img :src="pathToImage" alt="news image">
+        <img class="news-item-big-image" :src="pathToImage" alt="news image">
         <div class="hidden-item">
             <div class="hidden-text">
                 <img src="../assets/eye.png" alt="show eye">
@@ -44,9 +44,15 @@
         max-height: 320px;
         margin: 2rem;
     }
-    .news-item-big:hover .hidden-item {
-        display: block;
-    }
+        .news-item-big:hover .hidden-item {
+            opacity: 1;
+        }
+        .news-item-big:hover .about-content,
+        .news-item-big:hover .news-item-big-image {
+            -webkit-filter: blur(4px);
+            -ms-filter: blur(4px);
+            filter: blur(4px);
+         }
     .hidden-item {
         position: absolute;
         justify-content: center;
@@ -58,7 +64,8 @@
         cursor: pointer;
         box-shadow: 0 1px 4px 1px rgba(0, 0, 0, 0.25);
         border-radius: 6px;
-        display:none;
+        transition: opacity 0.4s;
+        opacity: 0;
     }
     .hidden-text {
         display: flex;

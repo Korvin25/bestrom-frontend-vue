@@ -160,9 +160,15 @@ export default {
       align-items: center;
       justify-content: space-between;
     }
-    .inventory-item:hover .hidden-item {
-      display: block;
-    }
+        .inventory-item:hover .hidden-item {
+            opacity: 1;
+        }
+        .inventory-item:hover h4,
+        .inventory-item:hover img {
+          -webkit-filter: blur(4px);
+          -ms-filter: blur(4px);
+          filter: blur(4px);
+        }
     .news .hidden-item {
       background: rgba(106, 106, 106, 0.8);
     }

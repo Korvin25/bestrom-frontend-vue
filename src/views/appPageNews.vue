@@ -159,9 +159,14 @@
             width: 100%;
             height: 100%;
         }
-    .image-news:hover .hidden-item {
-        display: block;
-    }
+        .image-news:hover .hidden-item {
+            opacity: 1;
+        }
+        .image-news:hover > img {
+            -webkit-filter: blur(4px);
+            -ms-filter: blur(4px);
+            filter: blur(4px);
+        }
     .other-news {
         justify-content: space-between;
         flex-wrap: wrap;
@@ -178,7 +183,8 @@
         background: rgba(106, 106, 106, 0.8);
         box-shadow: 0 1px 4px 1px rgba(0, 0, 0, 0.25);
         border-radius: 6px;
-        display:none;
+        transition: opacity 0.5s;
+        opacity: 0;
     }
         .hidden-item img {
             width: auto;

@@ -1,5 +1,6 @@
 <template>
-    <div class="partners-item">
+    <div class="machine-item flex-column">
+        <h3>{{ title }}</h3>
         <img :src="pathToImage" alt="logo">
         <app-hidden-item
                 text="ПОДРОБНЕЕ"
@@ -12,6 +13,7 @@
 
     export default {
         props: {
+            title: String,
             image: String
         },
         computed: {
@@ -26,34 +28,33 @@
         components: {
             appHiddenItem
         },
-        name: "appPartnersItem"
+        name: "appMachinesItem"
     }
 </script>
 
 <style scoped>
-    .partners-item {
-        width: 11rem;
-        height: 6rem;
+    .machine-item {
+        width: 24%;
+        height: 15rem;
         padding: 1rem;
         margin: 1rem;
         display: flex;
         position: relative;
-        justify-content: center;
+        justify-content: space-around;
         align-items: center;
         background: #FFFFFF;
         box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
         border-radius: 6px;
     }
-    .partners-item:hover .hidden-item {
-        opacity: 1;
+        .machine-item h3 {
+            align-self: auto;
+        }
+    .machine-item:hover .hidden-item {
+        display: block;
     }
-    .partners-item:hover img {
-        -webkit-filter: blur(3px);
-        -ms-filter: blur(3px);
-        filter: blur(3px);
-    }
-    .partners-item img {
-        max-width: 10rem;
-        max-height: 5rem;
+    .machine-item img {
+        margin-top: 1rem;
+        max-width: 20rem;
+        max-height: 10rem;
     }
 </style>
