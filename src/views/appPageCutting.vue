@@ -168,7 +168,7 @@
         <router-link
                 class="cutting-btn"
                 :to="{ name: 'appPageUniqueCutting', params: { packetId: '1' } }">
-            <button class="cutting-btn btn">Подобрать</button>
+            <button class="cutting-btn btn" @click="scrollToTop">Подобрать</button>
         </router-link>
     </main>
 
@@ -186,6 +186,11 @@
                 checkOptions: 0,
                 checkSeam: 0
             }
+        },
+        methods: {
+            scrollToTop() {
+                window.scrollTo(0,0);
+            },
         },
         components: {
             appHeader, appFooter
