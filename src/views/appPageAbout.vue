@@ -239,7 +239,12 @@
             width: 90%;
         }
         .item-reason:hover .hidden-item {
-            display: block;
+            opacity: 1;
+        }
+        .item-reason:hover > img {
+            -webkit-filter: blur(4px);
+            -ms-filter: blur(4px);
+            filter: blur(4px);
         }
     .director-item {
         width: 30%;
