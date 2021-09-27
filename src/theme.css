@@ -138,7 +138,7 @@ h5 {
     height: 28px;
 }
 .partners {
-    justify-content: space-around;
+    justify-content: space-between;
     flex-wrap: wrap;
 }
 /* ---------------------------------------------------- */

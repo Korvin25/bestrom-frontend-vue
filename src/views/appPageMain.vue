@@ -59,12 +59,12 @@
         </div>
         <!-- /.arrow -->
         <div class="flex-row partners">
-          <app-partners-item image="logo-vtb.png"></app-partners-item>
-          <app-partners-item image="logo-yamato.png"></app-partners-item>
-          <app-partners-item image="logo-festo.png"></app-partners-item>
-          <app-partners-item image="logo-siemens.png"></app-partners-item>
-          <app-partners-item image="logo-interroll.png"></app-partners-item>
-          <app-partners-item image="logo-rexroth.png"></app-partners-item>
+          <app-partners-item link="https://yandex.ru" image="logo-vtb.png"></app-partners-item>
+          <app-partners-item link="https://yandex.ru" image="logo-yamato.png"></app-partners-item>
+          <app-partners-item link="https://yandex.ru" image="logo-festo.png"></app-partners-item>
+          <app-partners-item link="https://yandex.ru" image="logo-siemens.png"></app-partners-item>
+          <app-partners-item link="https://yandex.ru" image="logo-interroll.png"></app-partners-item>
+          <app-partners-item link="https://yandex.ru" image="logo-rexroth.png"></app-partners-item>
         </div>
         <!-- /.partners -->
         <div class="arrow">
@@ -84,15 +84,15 @@
           <img style="margin-right: 8px" src="../assets/arrow_left.png" alt="arrow_left">
         </div>
         <div class="flex-row partners">
-          <app-partners-item image="logo-babaevskiy.png"></app-partners-item>
-          <app-partners-item image="logo-krasny-oktyabr.png"></app-partners-item>
-          <app-partners-item image="logo-rot-front.png"></app-partners-item>
-          <app-partners-item image="logo-jacobs.png"></app-partners-item>
-          <app-partners-item image="logo-faberlic.png"></app-partners-item>
-          <app-partners-item image="logo-baisad.png"></app-partners-item>
-          <app-partners-item image="logo-jacobs.png"></app-partners-item>
-          <app-partners-item image="logo-faberlic.png"></app-partners-item>
-          <app-partners-item image="logo-baisad.png"></app-partners-item>
+          <app-partners-item link="https://yandex.ru" image="logo-babaevskiy.png"></app-partners-item>
+          <app-partners-item link="https://yandex.ru" image="logo-krasny-oktyabr.png"></app-partners-item>
+          <app-partners-item link="https://yandex.ru" image="logo-rot-front.png"></app-partners-item>
+          <app-partners-item link="https://yandex.ru" image="logo-jacobs.png"></app-partners-item>
+          <app-partners-item link="https://yandex.ru" image="logo-faberlic.png"></app-partners-item>
+          <app-partners-item link="https://yandex.ru" image="logo-baisad.png"></app-partners-item>
+          <app-partners-item link="https://yandex.ru" image="logo-jacobs.png"></app-partners-item>
+          <app-partners-item link="https://yandex.ru" image="logo-faberlic.png"></app-partners-item>
+          <app-partners-item link="https://yandex.ru" image="logo-baisad.png"></app-partners-item>
         </div>
         <div class="arrow">
           <img style="margin-left: 8px" src="../assets/arrow_right.png" alt="arrow_right">
@@ -112,7 +112,6 @@
         ></app-main-news-big-item>
 
         <div class="news-items flex-row">
-
           <app-main-news-small-item
                   title="Новое поколение упаковочных машин"
                   image="news-img.png"
@@ -125,7 +124,6 @@
                   title="Выходим на новую скорость!"
                   image="content_image.png"
           ></app-main-news-small-item>
-
         </div>
         <!-- /.news-item-small -->
       </div>

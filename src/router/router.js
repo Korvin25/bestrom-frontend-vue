@@ -8,6 +8,8 @@ import appPageCutting from "@/views/appPageCutting";
 import appPageUniqueCutting from "@/views/appPageUniqueCutting";
 import appPageJobs from "@/views/appPageJobs";
 import appPageJobId from "@/views/appPageJobId";
+import appPagePartners from "@/views/appPagePartners";
+import appPageClients from "@/views/appPageClients";
 
 export default createRouter({
     history: createWebHistory(process.env.BASE_URL),
@@ -22,40 +24,50 @@ export default createRouter({
             name: 'appPageAbout',
             component: appPageAbout,
         },
-        {
-            path: '/about/history',
-            name: 'appPageAboutHistory',
-            component: appPageAboutHistory,
-        },
+            {
+                path: '/about/history',
+                name: 'appPageAboutHistory',
+                component: appPageAboutHistory,
+            },
         {
             path: '/news',
             name: 'appPageNews',
             component: appPageNews,
         },
-        {
-            path: '/news/:newsId',
-            name: 'appPageNewsId',
-            component: appPageNewsId,
-        },
+            {
+                path: '/news/:newsId',
+                name: 'appPageNewsId',
+                component: appPageNewsId,
+            },
         {
             path: '/cutting',
             name: 'appPageCutting',
             component: appPageCutting,
         },
-        {
-            path: '/cutting/:packetId',
-            name: 'appPageUniqueCutting',
-            component: appPageUniqueCutting,
-        },
+            {
+                path: '/cutting/:packetId',
+                name: 'appPageUniqueCutting',
+                component: appPageUniqueCutting,
+            },
         {
             path: '/jobs',
             name: 'appPageJobs',
             component: appPageJobs,
         },
+            {
+                path: '/jobs/:jobId',
+                name: 'appPageJobId',
+                component: appPageJobId,
+            },
         {
-            path: '/jobs/:jobId',
-            name: 'appPageJobId',
-            component: appPageJobId,
+            path: '/partners',
+            name: 'appPagePartners',
+            component: appPagePartners,
+        },
+        {
+            path: '/clients',
+            name: 'appPageClients',
+            component: appPageClients,
         }
     ]
 })

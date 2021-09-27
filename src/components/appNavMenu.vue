@@ -55,18 +55,18 @@
             </router-link>
             <router-link @mouseenter="hoverItem = 7"
                          @mouseleave="hoverItem = 0"
-                         :class="hoverItem === 7 ? 'img-hover' : ''"
+                         :class="hoverItem === 7 || this.$route.path.includes('/partners') ? 'img-hover' : ''"
                          @click="scrollToTop"
                          class="nav-item img"
-                         to="">
+                         to="/partners">
                 <img src="../assets/menu-item-7.png" alt="menu-item-img">
             </router-link>
             <router-link @mouseenter="hoverItem = 8"
                          @mouseleave="hoverItem = 0"
-                         :class="hoverItem === 8 ? 'img-hover' : ''"
+                         :class="hoverItem === 8 || this.$route.path.includes('/clients') ? 'img-hover' : ''"
                          @click="scrollToTop"
                          class="nav-item img"
-                         to="">
+                         to="/clients">
                 <img src="../assets/menu-item-5,8.png" alt="menu-item-img">
             </router-link>
             <router-link @mouseenter="hoverItem = 9"
@@ -174,18 +174,18 @@
                 </router-link>
                 <router-link @mouseenter="hoverItem = 7"
                              @mouseleave="hoverItem = 0"
-                             :class="hoverItem === 7 ? 'text-hover' : ''"
+                             :class="hoverItem === 7 || this.$route.path.includes('/partners') ? 'text-hover' : ''"
                              @click="scrollToTop"
                              class="nav-item text"
-                             to="">
+                             to="/partners">
                     <p>Партнеры</p>
                 </router-link>
                 <router-link @mouseenter="hoverItem = 8"
                              @mouseleave="hoverItem = 0"
-                             :class="hoverItem === 8 ? 'text-hover' : ''"
+                             :class="hoverItem === 8 || this.$route.path.includes('/clients') ? 'text-hover' : ''"
                              @click="scrollToTop"
                              class="nav-item text"
-                             to="">
+                             to="/clients">
                     <p>Клиенты</p>
                 </router-link>
                 <router-link @mouseenter="hoverItem = 9"

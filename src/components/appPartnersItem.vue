@@ -1,9 +1,10 @@
 <template>
     <div class="partners-item">
         <img :src="pathToImage" alt="logo">
+        <a :href="this.link">
         <app-hidden-item
                 text="ПОДРОБНЕЕ"
-        ></app-hidden-item>
+        ></app-hidden-item></a>
     </div>
 </template>
 
@@ -12,6 +13,7 @@
 
     export default {
         props: {
+            link: String,
             image: String
         },
         computed: {
@@ -32,8 +34,8 @@
 
 <style scoped>
     .partners-item {
-        width: 11rem;
-        height: 6rem;
+        width: 25%;
+        height: 8rem;
         padding: 1rem;
         margin: 1rem;
         display: flex;
