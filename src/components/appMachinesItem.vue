@@ -49,12 +49,19 @@
         .machine-item h3 {
             align-self: auto;
         }
-    .machine-item:hover .hidden-item {
-        display: block;
-    }
-    .machine-item img {
-        margin-top: 1rem;
-        max-width: 20rem;
-        max-height: 10rem;
-    }
+        .machine-item:hover .hidden-item {
+            opacity: 1;
+        }
+        .machine-item:hover > h3,
+        .machine-item:hover > img{
+            transition: all 0.4s;
+            -webkit-filter: blur(4px);
+            -ms-filter: blur(4px);
+            filter: blur(4px);
+        }
+        .machine-item img {
+            margin-top: 1rem;
+            max-width: 20rem;
+            max-height: 10rem;
+        }
 </style>
