@@ -9,9 +9,9 @@
                 <div @click="checkType = 1"
                      :class="checkType === 1 ? 'check-item' : ''"
                      class="packet-type-item flex-column card-shadow">
-                    <div class="hidden-item"></div>
                     <h3>Подушка</h3>
                     <img src="../assets/packet-type-1.png" alt="packet-type">
+                    <div class="hidden-item"></div>
                 </div>
                 <div @click="checkType = 2"
                      :class="checkType === 2 ? 'check-item' : ''"
@@ -204,7 +204,7 @@
         padding: 1rem;
     }
     .packet-type-item:hover .hidden-item {
-        display: block;
+        opacity: 1;
     }
         .packet-type-item h3 {
             margin-bottom: 1rem;
@@ -224,7 +224,7 @@
         padding: 1rem;
     }
     .packet-options-item:hover .hidden-item {
-        display: block;
+        opacity: 1;
     }
         .packet-options-item p,
         .packets-seam-item p {
@@ -250,7 +250,7 @@
         padding: 1rem;
     }
     .packets-seam-item:hover .hidden-item {
-        display: block;
+        opacity: 1;
     }
     .packet-size {
         padding: 2rem;
@@ -288,6 +288,7 @@
         margin-bottom: 3rem;
     }
     .check-item {
+        transition: all 0.5s;
         background: #FFFFFF;
         box-shadow: 0 1px 8px 8px rgba(47, 193, 255, 0.7);
         border-radius: 6px;
@@ -304,7 +305,9 @@
         background: rgba(106, 106, 106, 0.5);
         box-shadow: 0 1px 4px 1px rgba(0, 0, 0, 0.25);
         border-radius: 6px;
-        display:none;
+        transition: opacity 0.5s;
+        opacity: 0;
+        z-index: 999;
      }
 
 </style>
