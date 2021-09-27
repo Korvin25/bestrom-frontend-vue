@@ -79,10 +79,10 @@
             </router-link>
             <router-link @mouseenter="hoverItem = 10"
                          @mouseleave="hoverItem = 0"
-                         :class="hoverItem === 10 ? 'img-hover' : ''"
+                         :class="hoverItem === 10 || this.$route.path.includes('/jobs') ? 'img-hover' : ''"
                          @click="scrollToTop"
                          class="nav-item img"
-                         to="">
+                         to="/jobs">
                 <img src="../assets/menu-item-10.png" alt="menu-item-img">
             </router-link>
             <router-link @mouseenter="hoverItem = 11"
@@ -198,10 +198,10 @@
                 </router-link>
                 <router-link @mouseenter="hoverItem = 10"
                              @mouseleave="hoverItem = 0"
-                             :class="hoverItem === 10 ? 'text-hover' : ''"
+                             :class="hoverItem === 10 || this.$route.path.includes('/jobs')  ? 'text-hover' : ''"
                              @click="scrollToTop"
                              class="nav-item text"
-                             to="">
+                             to="/jobs">
                     <p>Вакансии</p>
                 </router-link>
                 <router-link @mouseenter="hoverItem = 11"
