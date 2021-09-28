@@ -83,7 +83,7 @@
     .job-item-pay p {
         margin-top: 8rem;
         text-align: center;
-        font-size: 3rem;
+        font-size: 2.5rem;
     }
     .flex-buttons {
         margin-top: 3rem;
