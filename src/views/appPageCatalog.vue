@@ -179,6 +179,7 @@
     }
     /* создание в label псевдоэлемента  before со следующими стилями */
     .custom-radio+label::before {
+        transition: all .5s;
         content: '';
         display: inline-block;
         width: 1em;
@@ -194,25 +195,30 @@
     }
     /* стили при наведении курсора на радио */
     .custom-radio:not(:disabled):not(:checked)+label:hover::before {
+        transition: all .5s;
         cursor: pointer;
         border-color: #b3d7ff;
     }
     /* стили для активной радиокнопки (при нажатии на неё) */
     .custom-radio:not(:disabled):active+label::before {
+        transition: all .5s;
         background-color: #b3d7ff;
         border-color: #b3d7ff;
     }
     /* стили для радиокнопки, находящейся в состоянии checked */
     .custom-radio:checked+label::before {
+        transition: all .5s;
         border-color: #2FC1FF;
         background-color: #2FC1FF;
         background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff'/%3e%3c/svg%3e");
     }
     .custom-radio:checked+label {
+        transition: all .5s;
         color: #6A6A6A;
     }
     /* стили для радиокнопки, находящейся в состоянии disabled */
     .custom-radio:disabled+label::before {
+        transition: all .5s;
         background-color: #e9ecef;
     }
     .type-select {

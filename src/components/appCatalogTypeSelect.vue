@@ -33,7 +33,6 @@
         background: #2FC1FF;
         border: 1px solid #2FC1FF;
         box-sizing: border-box;
-        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
         border-radius: 20px;
     }
 </style>
