@@ -10,6 +10,8 @@ import appPageJobs from "@/views/appPageJobs";
 import appPageJobId from "@/views/appPageJobId";
 import appPagePartners from "@/views/appPagePartners";
 import appPageClients from "@/views/appPageClients";
+import appPageCatalog from "@/views/appPageCatalog";
+import appPageCatalogId from "@/views/appPageCatalogId";
 
 export default createRouter({
     history: createWebHistory(process.env.BASE_URL),
@@ -68,6 +70,16 @@ export default createRouter({
             path: '/clients',
             name: 'appPageClients',
             component: appPageClients,
+        },
+        {
+            path: '/catalog',
+            name: 'appPageCatalog',
+            component: appPageCatalog,
+        },
+        {
+            path: '/catalog/:catalogId',
+            name: 'appPageCatalogId',
+            component: appPageCatalogId,
         }
     ]
 })

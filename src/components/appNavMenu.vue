@@ -23,10 +23,10 @@
             </router-link>
             <router-link @mouseenter="hoverItem = 3"
                          @mouseleave="hoverItem = 0"
-                         :class="hoverItem === 3 ? 'img-hover' : ''"
+                         :class="hoverItem === 3 || this.$route.path.includes('/catalog') ? 'img-hover' : ''"
                          @click="scrollToTop"
                          class="nav-item img"
-                         to="">
+                         to="/catalog">
                 <img src="../assets/menu-item-3.png" alt="menu-item-img">
             </router-link>
             <router-link @mouseenter="hoverItem = 4"
@@ -142,10 +142,10 @@
                 </router-link>
                 <router-link @mouseenter="hoverItem = 3"
                              @mouseleave="hoverItem = 0"
-                             :class="hoverItem === 3 ? 'text-hover' : ''"
+                             :class="hoverItem === 3 || this.$route.path.includes('/catalog') ? 'text-hover' : ''"
                              @click="scrollToTop"
                              class="nav-item text"
-                             to="">
+                             to="/catalog">
                     <p>Каталог</p>
                 </router-link>
                 <router-link @mouseenter="hoverItem = 4"
