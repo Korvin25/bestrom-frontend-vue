@@ -136,7 +136,7 @@
     export default {
         data() {
           return {
-              typeSelect: 0
+              typeSelect: 1
           }
         },
         components: {
