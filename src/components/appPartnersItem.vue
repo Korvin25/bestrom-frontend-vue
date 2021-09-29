@@ -34,6 +34,7 @@
 
 <style scoped>
     .partners-item {
+        flex-grow: 1;
         width: 25%;
         height: 8rem;
         padding: 1rem;

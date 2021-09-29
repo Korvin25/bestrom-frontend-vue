@@ -13,7 +13,6 @@
                 </div>
             </div>
             <!-- ./catalog-item-card -->
-
             <div class="details flex-column card-shadow">
                 <div class="details-select flex-row">
                     <div @click="isSelected = 1" :class="isSelected === 1 ? 'details-select-item-choice' : ''" class="details-select-item flex-column card-shadow">
@@ -43,13 +42,27 @@
                     </div>
                 </div>
                 <!-- /.details-select -->
-                <div class="details-select-settings flex-column">
-
-                </div>
-
+                <app-details-select-settings v-if="isSelected === 1"></app-details-select-settings>
+                <app-details-select-products v-if="isSelected === 2"></app-details-select-products>
+                <app-details-select-inventory v-if="isSelected === 3"></app-details-select-inventory>
+                <app-details-select-packet v-if="isSelected === 4"></app-details-select-packet>
+                <app-details-select-solution v-if="isSelected === 5"></app-details-select-solution>
 
             </div>
             <!-- /.details -->
+
+            <div class="catalog-ig-buttons flex-row">
+                <button class="btn">ЗАКАЗАТЬ ЗВОНОК</button>
+                <button class="btn">ОТПРАВИТЬ ЗАЯВКУ</button>
+            </div>
+        </section>
+        <section class="section">
+            <h2>Бренды купившие эту машину</h2>
+            <div class="flex-row">
+                <app-partners-item link="https://yandex.ru" image="logo-faberlic.png"></app-partners-item>
+                <app-partners-item link="https://yandex.ru" image="logo-jacobs.png"></app-partners-item>
+                <app-partners-item link="https://yandex.ru" image="logo-babaevskiy.png"></app-partners-item>
+            </div>
         </section>
     </main>
     <app-footer></app-footer>
@@ -58,6 +71,12 @@
 <script>
     import appHeader from "@/components/appHeader";
     import appFooter from "@/components/appFooter";
+    import appDetailsSelectSettings from "@/components/appDetailsSelectSettings";
+    import appDetailsSelectProducts from "@/components/appDetailsSelectProducts";
+    import appDetailsSelectInventory from "@/components/appDetailsSelectInventory";
+    import appDetailsSelectPacket from "@/components/appDetailsSelectPacket";
+    import appDetailsSelectSolution from "@/components/appDetailsSelectSolution";
+    import appPartnersItem from "@/components/appPartnersItem";
 
     export default {
         data() {
@@ -66,7 +85,9 @@
           }
         },
         components: {
-            appHeader, appFooter
+            appHeader, appFooter, appDetailsSelectSettings, appDetailsSelectProducts,
+            appDetailsSelectInventory, appDetailsSelectPacket, appDetailsSelectSolution,
+            appPartnersItem
         },
         name: "appPageCatalogId"
     }
@@ -82,7 +103,9 @@
             height: 25rem;
         }
     .details {
+        transition: all .5s;
         margin: 2rem 0;
+        height: 100%;
         padding: 2rem 1rem;
     }
     .details-select {
@@ -109,5 +132,12 @@
     }
     .details-select-item-choice:hover {
         background: #2FC1FF;
+    }
+    .catalog-ig-buttons {
+        margin: 0 -1rem;
+    }
+    .catalog-ig-buttons .btn {
+        flex-grow: 1;
+        margin: 0 1rem;
     }
 </style>
