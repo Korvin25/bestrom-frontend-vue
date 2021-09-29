@@ -11,6 +11,7 @@
         </div>
 
         <app-block-content
+                id="1"
                 title="БЕСТРОМ СЕГОДНЯ"
                 text="Мы производим высококачественное упаковочное оборудование, которое будет четко и в срок отрабатывать необходимые объёмы. Вас ожидает лучший сервис, гарантийное обслуживание, высококвалифицированные специалисты, консультаты, которые помогут вам, в случае возникновения каких-либо проблем"
                 image="content_image.png"
@@ -27,19 +28,19 @@
     <section class="section">
       <h2>Подбор оборудования</h2>
       <div class="flex-row">
-        <div class="inventory-item flex-column card-shadow">
+        <div @click="pushToCatalog(1)" class="inventory-item flex-column card-shadow">
           <h4>ПО ТИПУ МАШИН</h4>
           <img style="margin-bottom: 4rem" src="../assets/inventory-item-1.png" alt="inventory item image">
           <app-hidden-item text="ПОДРОБНЕЕ"></app-hidden-item>
         </div>
         <!-- /.inventory-item -->
-        <div class="inventory-item flex-column card-shadow">
+        <div @click="pushToCatalog(2)" class="inventory-item flex-column card-shadow">
           <h4>ПО ПРОДУКТУ</h4>
           <img src="../assets/inventory-item-2.png" alt="inventory item image">
           <app-hidden-item text="ПОДРОБНЕЕ"></app-hidden-item>
         </div>
         <!-- /.inventory-item -->
-        <div class="inventory-item flex-column card-shadow">
+        <div @click="pushToCatalog(3)" class="inventory-item flex-column card-shadow">
           <h4> ПО УПАКОВКЕ</h4>
           <img style="margin-bottom: 4rem" src="../assets/inventory-item-3.png" alt="inventory item image">
           <app-hidden-item text="ПОДРОБНЕЕ"></app-hidden-item>
@@ -144,6 +145,13 @@ import appMainNewsSmallItem from "@/components/appMainNewsSmallItem";
 import appHiddenItem from "@/components/appHiddenItem";
 
 export default {
+  methods: {
+    pushToCatalog(radioId) {
+      this.$store.state.radioCatalogSelect = radioId
+      this.$router.push(`/catalog`)
+      window.scrollTo(0,0);
+    },
+  },
   components: {
     appHeader, appFooter, appPartnersItem, appBlockContent, appMainNewsBigItem,
     appMainNewsSmallItem, appHiddenItem

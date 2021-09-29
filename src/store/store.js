@@ -4,6 +4,7 @@ import axios from 'axios'
 export default createStore({
     state() {
         return {
+            radioCatalogSelect: 1,
             content: [
                 {
                     id: 1,

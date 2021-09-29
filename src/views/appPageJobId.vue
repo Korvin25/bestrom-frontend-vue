@@ -25,22 +25,35 @@
                     </div>
                 </div>
                 <div class="flex-row flex-buttons">
-                    <button class="btn">Позвонить</button>
-                    <button class="btn">Откликнуться</button>
+                    <a href="tel:+78005557457">
+                        <button class="btn">Позвонить</button>
+                    </a>
+                    <button @click="showModalRespond = true" class="btn">Откликнуться</button>
                 </div>
             </div>
         </section>
     </main>
+
+    <transition-group name="modal">
+        <app-modal-job-respond v-if="showModalRespond" @close="showModalRespond = false"></app-modal-job-respond>
+    </transition-group>
+
     <app-footer></app-footer>
 </template>
 
 <script>
     import appHeader from "@/components/appHeader";
     import appFooter from "@/components/appFooter";
+    import appModalJobRespond from "@/components/appModalJobRespond";
 
     export default {
+        data() {
+            return {
+                showModalRespond: false
+            }
+        },
         components: {
-            appHeader, appFooter
+            appHeader, appFooter, appModalJobRespond
         },
         name: "appPageJobId"
     }
@@ -90,6 +103,11 @@
         justify-content: space-around;
     }
     .flex-buttons .btn {
-        width: 40%;
+        width: 100%;
+        margin: 0 1rem;
+    }
+    .flex-buttons a {
+        margin-right: 2rem;
+        width: 100%;
     }
 </style>

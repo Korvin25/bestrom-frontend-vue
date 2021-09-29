@@ -13,7 +13,9 @@
             </div>
             <div class="flex-row buttons">
                 <button class="cutting-btn btn">Напечатать</button>
-                <button class="cutting-btn btn">Сохранить</button>
+                <a href="../assets/unique-packet-preview.png" download>
+                    <button class="cutting-btn btn">Сохранить</button>
+                </a>
             </div>
         </section>
         <section class="section">

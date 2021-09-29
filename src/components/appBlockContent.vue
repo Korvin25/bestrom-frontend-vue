@@ -3,7 +3,7 @@
         <div class="about-content flex-column">
             <h3>{{ title }}</h3>
             <p class="text-about-content">{{ text }}</p>
-            <button class="btn">ПОДРОБНЕЕ</button>
+            <button @click="scrollToTop" class="btn">ПОДРОБНЕЕ</button>
         </div>
         <img class="content-image" :src="pathToImage" alt="content image">
     </div>
@@ -12,9 +12,16 @@
 <script>
     export default {
         props: {
+            id: String,
             title: String,
             text: String,
             image: String
+        },
+        methods: {
+            scrollToTop() {
+                this.$router.push(`/catalog/${this.id}`)
+                window.scrollTo(0,0);
+            },
         },
         computed: {
             pathToImage() {

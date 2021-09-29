@@ -8,13 +8,38 @@
                         <img style="margin-right: 8px" src="../assets/arrow_left.png" alt="arrow_left">
                     </div>
                     <div class="radio-type flex-row">
-                        <input class="custom-radio" name="radio-choice" id="radio-choice-1" type="radio" checked>
+                        <input class="custom-radio"
+                               name="radio-choice"
+                               id="radio-choice-1"
+                               type="radio"
+                               v-model="this.$store.state.radioCatalogSelect"
+                               :value="1"
+                               :checked="this.$store.state.radioCatalogSelect === 1">
                         <label for="radio-choice-1">ПОДБОР ПО ТИПУ МАШИНЫ</label>
-                        <input class="custom-radio" name="radio-choice" id="radio-choice-2" type="radio">
+                        <input class="custom-radio"
+                               name="radio-choice"
+                               id="radio-choice-2"
+                               type="radio"
+                               v-model="this.$store.state.radioCatalogSelect"
+                               :value="2"
+                               :checked="this.$store.state.radioCatalogSelect === 2">
                         <label for="radio-choice-2">ПОДБОР ПО ТИПУ ПРОДУКТА</label>
-                        <input class="custom-radio" name="radio-choice" id="radio-choice-3" type="radio">
+                        <input class="custom-radio"
+                               name="radio-choice"
+                               id="radio-choice-3"
+                               type="radio"
+                               v-model="this.$store.state.radioCatalogSelect"
+                               :value="3"
+                               :checked="this.$store.state.radioCatalogSelect === 3">
                         <label for="radio-choice-3">ПОДБОР ПО ТИПУ УПАКОВКИ</label>
-                        <input class="custom-radio" style="margin-right: 0;" name="radio-choice" id="radio-choice-4" type="radio">
+                        <input class="custom-radio"
+                               style="margin-right: 0;"
+                               name="radio-choice"
+                               id="radio-choice-4"
+                               type="radio"
+                               v-model="this.$store.state.radioCatalogSelect"
+                               :value="4"
+                               :checked="this.$store.state.radioCatalogSelect === 4">
                         <label for="radio-choice-4">ГОТОВЫЕ РЕШЕНИЯ</label>
                     </div>
                     <div class="arrow">

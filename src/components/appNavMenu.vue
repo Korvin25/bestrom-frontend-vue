@@ -268,7 +268,7 @@
         bottom: 0;
         align-items: center;
         min-height: 600px;
-        background: #FFFFFF;
+        background: transparent;
     }
     .nav-logo-items {
         justify-content: space-around;
@@ -340,7 +340,7 @@
         .nav-item.img.logo {
             background: #6A6A6A;
             box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
-            border-radius: 99px;
+            border-radius: 50%;
         }
         .nav-item.img.logo.logo-hover {
             background: rgba(47, 193, 255, 0.9);

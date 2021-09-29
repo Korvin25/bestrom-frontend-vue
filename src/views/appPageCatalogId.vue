@@ -13,6 +13,7 @@
                 </div>
             </div>
             <!-- ./catalog-item-card -->
+
             <div class="details flex-column card-shadow">
                 <div class="details-select flex-row">
                     <div @click="isSelected = 1" :class="isSelected === 1 ? 'details-select-item-choice' : ''" class="details-select-item flex-column card-shadow">
@@ -42,6 +43,7 @@
                     </div>
                 </div>
                 <!-- /.details-select -->
+
                 <app-details-select-settings v-if="isSelected === 1"></app-details-select-settings>
                 <app-details-select-products v-if="isSelected === 2"></app-details-select-products>
                 <app-details-select-inventory v-if="isSelected === 3"></app-details-select-inventory>
@@ -52,10 +54,11 @@
             <!-- /.details -->
 
             <div class="catalog-ig-buttons flex-row">
-                <button class="btn">ЗАКАЗАТЬ ЗВОНОК</button>
-                <button class="btn">ОТПРАВИТЬ ЗАЯВКУ</button>
+                <button @click="showModalCall = true" class="btn">ЗАКАЗАТЬ ЗВОНОК</button>
+                <button @click="showModalApplication = true" class="btn">ОТПРАВИТЬ ЗАЯВКУ</button>
             </div>
         </section>
+
         <section class="section">
             <h2>Бренды купившие эту машину</h2>
             <div class="flex-row">
@@ -65,6 +68,12 @@
             </div>
         </section>
     </main>
+
+    <transition-group name="modal">
+        <app-modal-catalog-call v-if="showModalCall" @close="showModalCall = false"></app-modal-catalog-call>
+        <app-modal-catalog-application v-if="showModalApplication" @close="showModalApplication = false"></app-modal-catalog-application>
+    </transition-group>
+
     <app-footer></app-footer>
 </template>
 
@@ -77,17 +86,21 @@
     import appDetailsSelectPacket from "@/components/appDetailsSelectPacket";
     import appDetailsSelectSolution from "@/components/appDetailsSelectSolution";
     import appPartnersItem from "@/components/appPartnersItem";
+    import appModalCatalogCall from "@/components/appModalCatalogCall";
+    import appModalCatalogApplication from "@/components/appModalCatalogApplication";
 
     export default {
         data() {
           return {
-              isSelected: 1
+              isSelected: 1,
+              showModalCall: false,
+              showModalApplication: false
           }
         },
         components: {
             appHeader, appFooter, appDetailsSelectSettings, appDetailsSelectProducts,
             appDetailsSelectInventory, appDetailsSelectPacket, appDetailsSelectSolution,
-            appPartnersItem
+            appPartnersItem, appModalCatalogCall, appModalCatalogApplication
         },
         name: "appPageCatalogId"
     }
@@ -103,7 +116,6 @@
             height: 25rem;
         }
     .details {
-        transition: all .5s;
         margin: 2rem 0;
         height: 100%;
         padding: 2rem 1rem;
@@ -124,7 +136,6 @@
             background: rgba(0, 0, 0, 0.1);
         }
     .details-select-item-choice {
-        transition: all .5s;
         color: #FFFFFF;
         background: #2FC1FF;
         box-shadow: inset 0 1px 10px 1px rgba(0, 0, 0, 0.25);
@@ -140,4 +151,5 @@
         flex-grow: 1;
         margin: 0 1rem;
     }
+
 </style>
