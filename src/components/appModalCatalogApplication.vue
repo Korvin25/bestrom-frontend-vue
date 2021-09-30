@@ -44,7 +44,7 @@
         margin: 0.5rem 0;
     }
     .call {
-        margin-top: 1rem;
+        margin: 1rem 0;
         flex-grow: 1;
         width: 100%;
     }
