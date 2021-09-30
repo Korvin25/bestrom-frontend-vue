@@ -200,9 +200,13 @@
 </script>
 
 <style scoped>
+    .packet-type {
+        margin: 0 -1rem;
+    }
     .packet-type-item {
         position: relative;
-        width: 19%;
+        width: 100%;
+        margin: 0 1rem;
         text-align: center;
         justify-content: space-between;
         align-items: center;
@@ -217,12 +221,13 @@
         }
     .packet-options {
         flex-wrap: wrap;
-        padding: 0 3rem;
+        padding: 1rem;
     }
     .packet-options-item {
         position: relative;
-        margin: 2rem 0;
+        margin: 1rem;
         width: 25%;
+        flex-grow: 1;
         text-align: center;
         justify-content: space-between;
         align-items: center;
@@ -242,13 +247,12 @@
             width: 6rem;
         }
     .packets-seam {
-        flex-wrap: wrap;
-        padding: 0 3rem;
+        padding: 0 1rem;
     }
     .packets-seam-item {
         position: relative;
-        margin: 2rem 0;
-        width: 18%;
+        margin: 2rem 1rem;
+        width: 100%;
         text-align: center;
         justify-content: space-between;
         align-items: center;
