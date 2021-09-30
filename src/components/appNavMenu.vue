@@ -37,14 +37,13 @@
                          to="/cutting">
                 <img src="../assets/menu-item-4.png" alt="menu-item-img">
             </router-link>
-            <router-link @mouseenter="hoverItem = 5"
-                         @mouseleave="hoverItem = 0"
-                         :class="hoverItem === 5 ? 'img-hover' : ''"
-                         @click="scrollToTop"
-                         class="nav-item img"
-                         to="">
+            <a @mouseenter="hoverItem = 5"
+               @mouseleave="hoverItem = 0"
+               :class="hoverItem === 5 ? 'img-hover' : ''"
+               @click="showModalMenuService = true"
+               class="nav-item img">
                 <img src="../assets/menu-item-5,8.png" alt="menu-item-img">
-            </router-link>
+            </a>
             <router-link @mouseenter="hoverItem = 6"
                          @mouseleave="hoverItem = 0"
                          :class="hoverItem === 6 || this.$route.path.includes('/news') ? 'img-hover' : ''"
@@ -85,38 +84,34 @@
                          to="/jobs">
                 <img src="../assets/menu-item-10.png" alt="menu-item-img">
             </router-link>
-            <router-link @mouseenter="hoverItem = 11"
-                         @mouseleave="hoverItem = 0"
-                         :class="hoverItem === 11 ? 'logo-hover' : ''"
-                         @click="scrollToTop"
-                         class="nav-item img logo"
-                         to="">
+            <a @mouseenter="hoverItem = 11"
+               @mouseleave="hoverItem = 0"
+               :class="hoverItem === 11 || showModalMenuApplication ? 'logo-hover' : ''"
+               @click="showModalMenuApplication = true"
+               class="nav-item img logo">
                 <img src="../assets/mobile.png" alt="menu-item-img">
-            </router-link>
-            <router-link @mouseenter="hoverItem = 12"
-                         @mouseleave="hoverItem = 0"
-                         :class="hoverItem === 12 ? 'logo-hover' : ''"
-                         @click="scrollToTop"
-                         class="nav-item img logo"
-                         to="">
+            </a>
+            <a @mouseenter="hoverItem = 12"
+               @mouseleave="hoverItem = 0"
+               href="https://vk.com"
+               :class="hoverItem === 12 ? 'logo-hover' : ''"
+               class="nav-item img logo">
                 <img style="width: 33px;" src="../assets/vk.png" alt="menu-item-img">
-            </router-link>
-            <router-link @mouseenter="hoverItem = 13"
-                         @mouseleave="hoverItem = 0"
-                         :class="hoverItem === 13 ? 'logo-hover' : ''"
-                         @click="scrollToTop"
-                         class="nav-item img logo"
-                         to="">
+            </a>
+            <a @mouseenter="hoverItem = 13"
+               @mouseleave="hoverItem = 0"
+               href="https://youtube.com"
+               :class="hoverItem === 13 ? 'logo-hover' : ''"
+               class="nav-item img logo">
                 <img style="width: 25px;" src="../assets/youtube.png" alt="menu-item-img">
-            </router-link>
-            <router-link @mouseenter="hoverItem = 14"
-                         @mouseleave="hoverItem = 0"
-                         :class="hoverItem === 14 ? 'logo-hover' : ''"
-                         @click="scrollToTop"
-                         class="nav-item img logo"
-                         to="">
+            </a>
+            <a @mouseenter="hoverItem = 14"
+               @mouseleave="hoverItem = 0"
+               href="https://instagram.com"
+               :class="hoverItem === 14 ? 'logo-hover' : ''"
+               class="nav-item img logo">
                 <img style="width: 30px;" src="../assets/instagram.png" alt="menu-item-img">
-            </router-link>
+            </a>
         </div>
 
         <!-- Text items in menu  !!  !! -->
@@ -156,14 +151,13 @@
                              to="/cutting">
                     <p>Раскрой пакета</p>
                 </router-link>
-                <router-link @mouseenter="hoverItem = 5"
-                             @mouseleave="hoverItem = 0"
-                             :class="hoverItem === 5 ? 'text-hover' : ''"
-                             @click="scrollToTop"
-                             class="nav-item text"
-                             to="">
+                <a @mouseenter="hoverItem = 5"
+                   @mouseleave="hoverItem = 0"
+                   :class="hoverItem === 5 ? 'text-hover' : ''"
+                   @click="showModalMenuService = true"
+                   class="nav-item text">
                     <p>Сервис</p>
-                </router-link>
+                </a>
                 <router-link @mouseenter="hoverItem = 6"
                              @mouseleave="hoverItem = 0"
                              :class="hoverItem === 6 || this.$route.path.includes('/news') ? 'text-hover' : ''"
@@ -204,55 +198,65 @@
                              to="/jobs">
                     <p>Вакансии</p>
                 </router-link>
-                <router-link @mouseenter="hoverItem = 11"
-                             @mouseleave="hoverItem = 0"
-                             :class="hoverItem === 11 ? 'text-hover' : ''"
-                             @click="scrollToTop"
-                             class="nav-item text"
-                             to="">
+                <a @mouseenter="hoverItem = 11"
+                   @mouseleave="hoverItem = 0"
+                   :class="hoverItem === 11 || showModalMenuApplication ?  'text-hover' : ''"
+                   @click="showModalMenuApplication = true"
+                   class="nav-item text">
                     <p>Оставить заявку</p>
-                </router-link>
-                <router-link @mouseenter="hoverItem = 12"
-                             @mouseleave="hoverItem = 0"
-                             :class="hoverItem === 12 ? 'text-hover' : ''"
-                             @click="scrollToTop"
-                             class="nav-item text"
-                             to="">
+                </a>
+                <a @mouseenter="hoverItem = 12"
+                   @mouseleave="hoverItem = 0"
+                   href="https://vk.com"
+                   :class="hoverItem === 12 ? 'text-hover' : ''"
+                   class="nav-item text">
                     <p>ВКонтакте</p>
-                </router-link>
-                <router-link @mouseenter="hoverItem = 13"
-                             @mouseleave="hoverItem = 0"
-                             :class="hoverItem === 13 ? 'text-hover' : ''"
-                             @click="scrollToTop"
-                             class="nav-item text"
-                             to="">
+                </a>
+                <a @mouseenter="hoverItem = 13"
+                   @mouseleave="hoverItem = 0"
+                   href="https://youtube.com"
+                   :class="hoverItem === 13 ? 'text-hover' : ''"
+                   class="nav-item text">
                     <p>YouTube</p>
-                </router-link>
-                <router-link @mouseenter="hoverItem = 14"
-                             @mouseleave="hoverItem = 0"
-                             :class="hoverItem === 14 ? 'text-hover' : ''"
-                             @click="scrollToTop"
-                             class="nav-item text"
-                             to="">
+                </a>
+                <a @mouseenter="hoverItem = 14"
+                   @mouseleave="hoverItem = 0"
+                   href="https://instagram.com"
+                   :class="hoverItem === 14 ? 'text-hover' : ''"
+                   class="nav-item text">
                     <p>Instagram</p>
-                </router-link>
+                </a>
             </div>
         </transition>
     </nav>
+
+    <transition-group name="modal">
+        <app-modal-menu-application v-if="showModalMenuApplication" @close="showModalMenuApplication = false"></app-modal-menu-application>
+        <app-modal-menu-service v-if="showModalMenuService" @close="showModalMenuService = false"></app-modal-menu-service>
+    </transition-group>
+
 </template>
 
 <script>
+    import appModalMenuApplication from "@/components/appModalMenuApplication";
+    import appModalMenuService from "@/components/appModalMenuService";
+
     export default {
         data() {
             return {
                 hoverItem: 0,
-                showTitleMenu: false
+                showTitleMenu: false,
+                showModalMenuApplication: false,
+                showModalMenuService: false,
             }
         },
         methods: {
             scrollToTop() {
                 window.scrollTo(0,0);
             },
+        },
+        components: {
+            appModalMenuApplication, appModalMenuService
         },
         name: "appNavMenu"
     }

@@ -24,8 +24,8 @@
                 <input id="speed" type="text" class="input" placeholder="60 п/м">
                 <label for="comment">Комментарий</label>
                 <textarea id="comment" rows="5" class="textarea"/>
+                <button class="call btn">ЗАКАЗАТЬ ЗВОНОК</button>
             </form>
-            <button class="call btn">ЗАКАЗАТЬ ЗВОНОК</button>
         </div>
     </div>
 </template>

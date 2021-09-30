@@ -183,69 +183,6 @@
         width: 100%;
         margin: 0 1rem;
     }
-    /* для элемента input c type="radio" */
-    .custom-radio {
-        position: absolute;
-        z-index: -1;
-        opacity: 0;
-    }
-    /* для элемента label связанного с .custom-radio */
-    .custom-radio+label {
-        display: inline-flex;
-        align-items: center;
-        user-select: none;
-        font-weight: bold;
-        font-size: 16px;
-        color: #B8B8B8;
-        margin-right: 1rem;
-    }
-    label:hover {
-        cursor: pointer;
-    }
-    /* создание в label псевдоэлемента  before со следующими стилями */
-    .custom-radio+label::before {
-        transition: all .5s;
-        content: '';
-        display: inline-block;
-        width: 1em;
-        height: 1em;
-        flex-shrink: 0;
-        flex-grow: 0;
-        border: 1px solid #adb5bd;
-        border-radius: 50%;
-        margin-right: 0.5em;
-        background-repeat: no-repeat;
-        background-position: center center;
-        background-size: 50% 50%;
-    }
-    /* стили при наведении курсора на радио */
-    .custom-radio:not(:disabled):not(:checked)+label:hover::before {
-        transition: all .5s;
-        cursor: pointer;
-        border-color: #b3d7ff;
-    }
-    /* стили для активной радиокнопки (при нажатии на неё) */
-    .custom-radio:not(:disabled):active+label::before {
-        transition: all .5s;
-        background-color: #b3d7ff;
-        border-color: #b3d7ff;
-    }
-    /* стили для радиокнопки, находящейся в состоянии checked */
-    .custom-radio:checked+label::before {
-        transition: all .5s;
-        border-color: #2FC1FF;
-        background-color: #2FC1FF;
-        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff'/%3e%3c/svg%3e");
-    }
-    .custom-radio:checked+label {
-        transition: all .5s;
-        color: #6A6A6A;
-    }
-    /* стили для радиокнопки, находящейся в состоянии disabled */
-    .custom-radio:disabled+label::before {
-        transition: all .5s;
-        background-color: #e9ecef;
-    }
     .type-select {
         margin: 1.5rem 0 1rem 0;
         width: 80%;

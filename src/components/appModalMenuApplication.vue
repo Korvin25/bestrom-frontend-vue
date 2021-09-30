@@ -6,6 +6,14 @@
                 <img src="../assets/close-image.png" alt="close">
             </div>
             <h2>Отправьте нам вашу заявку</h2>
+            <div class="tel-buttons flex-row">
+                <a href="tel:+78005557457">
+                    <button class="btn">Позвонить</button>
+                </a>
+                <a href="tel:+78005557457">
+                    <h3>8-800-555-74-57</h3>
+                </a>
+            </div>
             <form class="form-call flex-column" action="">
                 <label for="company">Компания</label>
                 <input id="company" type="text" class="input" placeholder="БЕСТРОМ">
@@ -15,6 +23,12 @@
                 <input id="telephone" type="text" class="input" placeholder="89199966203">
                 <label for="email">E-mail</label>
                 <input id="email" type="text" class="input" placeholder="partner@thedimension.com">
+                <label for="product">Продукт</label>
+                <input id="product" type="text" class="input" placeholder="Фисташки">
+                <label for="weight">Дозировка</label>
+                <input id="weight" type="text" class="input" placeholder="100г">
+                <label for="speed">Требуемая производительность</label>
+                <input id="speed" type="text" class="input" placeholder="60 п/м">
                 <p>Удобный способ связи</p>
                 <div class="call-method flex-row">
                     <div class="logo">
@@ -30,9 +44,7 @@
                         <img src="../assets/email.png" alt="email">
                     </div>
                 </div>
-                <p>Прикрепить резюме</p>
-                <input type="file" name="file">
-                <button class="call btn">ЗАКАЗАТЬ ЗВОНОК</button>
+                <button class="call btn">ОТПРАВИТЬ ЗАЯВКУ</button>
             </form>
         </div>
     </div>
@@ -40,11 +52,30 @@
 
 <script>
     export default {
-        name: "appModalJobRespond"
+        name: "appModalMenuApplication"
     }
 </script>
 
 <style scoped>
+    .tel-buttons {
+        flex-wrap: wrap;
+    }
+        .tel-buttons a {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .tel-buttons a h3 {
+            margin-top: 1rem;
+            align-self: center;
+            font-weight: normal;
+        }
+        .tel-buttons a .btn {
+            margin-top: 1rem;
+            width: 100%;
+            flex-grow: 1;
+        }
     .form-call {
         margin-top: 1rem;
     }
@@ -73,7 +104,7 @@
         border-radius: 100%;
         background: transparent;
     }
-        .logo:hover {
-            filter: drop-shadow(0 0 12px #2FC1FF);
-        }
+    .logo:hover {
+        filter: drop-shadow(0 0 12px #2FC1FF);
+    }
 </style>

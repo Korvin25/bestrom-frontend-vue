@@ -107,6 +107,7 @@
       <div class="news flex-column">
 
         <app-main-news-big-item
+                id="1"
                 title="Новое поколение упаковочных машин"
                 text="Мы производим высококачественное упаковочное оборудование, которое будет четко и в срок отрабатывать необходимые объёмы. Вас ожидает лучший сервис, гарантийное обслуживание, высококвалифицированные специалисты, консультаты, которые помогут вам, в случае возникновения каких-либо проблем."
                 image="news-img.png"
@@ -114,14 +115,17 @@
 
         <div class="news-items flex-row">
           <app-main-news-small-item
+                  id="2"
                   title="Новое поколение упаковочных машин"
                   image="news-img.png"
           ></app-main-news-small-item>
           <app-main-news-small-item
+                  id="3"
                   title="Работаем на качество!"
                   image="content_image.png"
           ></app-main-news-small-item>
           <app-main-news-small-item
+                  id="4"
                   title="Выходим на новую скорость!"
                   image="content_image.png"
           ></app-main-news-small-item>

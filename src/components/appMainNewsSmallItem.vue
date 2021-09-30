@@ -1,5 +1,5 @@
 <template>
-    <div class="news-small-item flex-column card-shadow">
+    <div @click="routerPush" class="news-small-item flex-column card-shadow">
         <h4>{{ title }}</h4>
         <img class="news-small-item-image" :src="pathToImage" alt="news image">
         <div class="hidden-item">
@@ -14,8 +14,15 @@
 <script>
     export default {
         props: {
+            id: String,
             title: String,
             image: String
+        },
+        methods: {
+            routerPush() {
+                this.$router.push(`/news/${this.id}`)
+                window.scrollTo(0,0);
+            },
         },
         computed: {
             pathToImage() {

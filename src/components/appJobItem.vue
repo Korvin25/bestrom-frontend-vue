@@ -12,7 +12,7 @@
             <h4>Заработная плата</h4>
             <p>{{ pay }}</p>
             <router-link :to="{ name: 'appPageJobId', params: { jobId: this.id } }">
-                <button class="btn">Подробнее</button>
+                <button @click="scrollToTop" class="btn">Подробнее</button>
             </router-link>
         </div>
     </div>
@@ -27,6 +27,11 @@
             skills: String,
             pay: String,
             image: String
+        },
+        methods: {
+            scrollToTop() {
+                window.scrollTo(0,0);
+            },
         },
         computed: {
             pathToImage() {
