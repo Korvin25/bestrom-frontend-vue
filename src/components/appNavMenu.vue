@@ -71,7 +71,7 @@
             <router-link @mouseenter="hoverItem = 9"
                          @mouseleave="hoverItem = 0"
                          :class="hoverItem === 9 ? 'img-hover' : ''"
-                         @click="scrollToTop"
+                         @click="showModalMenuContacts = true"
                          class="nav-item img"
                          to="">
                 <img src="../assets/menu-item-9.png" alt="menu-item-img">
@@ -185,7 +185,7 @@
                 <router-link @mouseenter="hoverItem = 9"
                              @mouseleave="hoverItem = 0"
                              :class="hoverItem === 9 ? 'text-hover' : ''"
-                             @click="scrollToTop"
+                             @click="showModalMenuContacts = true"
                              class="nav-item text"
                              to="">
                     <p>Контакты</p>
@@ -233,6 +233,13 @@
     <transition-group name="modal">
         <app-modal-menu-application v-if="showModalMenuApplication" @close="showModalMenuApplication = false"></app-modal-menu-application>
         <app-modal-menu-service v-if="showModalMenuService" @close="showModalMenuService = false"></app-modal-menu-service>
+        <app-modal-menu-contacts v-if="showModalMenuContacts"
+                                 @close="showModalMenuContacts = false"
+                                 @call="showModalMenuContactsCallFunc"
+                                 @question="showModalMenuContactsQuestionFunc"
+        ></app-modal-menu-contacts>
+        <app-modal-menu-contacts-call v-if="showModalMenuContactsCall" @close="showModalMenuContactsCallFunc"></app-modal-menu-contacts-call>
+        <app-modal-menu-contacts-question v-if="showModalMenuContactsQuestion" @close="showModalMenuContactsQuestionFunc"></app-modal-menu-contacts-question>
     </transition-group>
 
 </template>
@@ -240,6 +247,9 @@
 <script>
     import appModalMenuApplication from "@/components/appModalMenuApplication";
     import appModalMenuService from "@/components/appModalMenuService";
+    import appModalMenuContacts from "@/components/appModalMenuContacts";
+    import appModalMenuContactsCall from "@/components/appModalMenuContactsCall";
+    import appModalMenuContactsQuestion from "@/components/appModalMenuContactsQuestion";
 
     export default {
         data() {
@@ -248,15 +258,27 @@
                 showTitleMenu: false,
                 showModalMenuApplication: false,
                 showModalMenuService: false,
+                showModalMenuContacts: false,
+                showModalMenuContactsCall: false,
+                showModalMenuContactsQuestion: false
             }
         },
         methods: {
             scrollToTop() {
                 window.scrollTo(0,0);
             },
+            showModalMenuContactsCallFunc() {
+                this.showModalMenuContactsCall = !this.showModalMenuContactsCall
+                this.showModalMenuContacts = !this.showModalMenuContacts
+            },
+            showModalMenuContactsQuestionFunc() {
+                this.showModalMenuContactsQuestion = !this.showModalMenuContactsQuestion
+                this.showModalMenuContacts = !this.showModalMenuContacts
+            }
         },
         components: {
-            appModalMenuApplication, appModalMenuService
+            appModalMenuApplication, appModalMenuService, appModalMenuContacts,
+            appModalMenuContactsCall, appModalMenuContactsQuestion
         },
         name: "appNavMenu"
     }
