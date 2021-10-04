@@ -48,7 +48,26 @@
         width: 0.8rem;
     }
     .language {
-        letter-spacing: 0.005em;
         margin: 0 1rem;
+    }
+    @media (max-width: 1248px) {
+        .header {
+            box-shadow: 0 -1px 9px rgba(0, 0, 0, 0.25);
+            border-radius: 0 0 40px 40px;
+        }
+        .light-bulb {
+           display: none;
+        }
+        .language {
+            color: #2FC1FF;
+            font-weight: bold;
+            margin: 0 2rem;
+        }
+    }
+    @media (max-width: 480px) {
+        .header-title {
+            justify-content: flex-start;
+            padding-left: 3rem;
+        }
     }
 </style>

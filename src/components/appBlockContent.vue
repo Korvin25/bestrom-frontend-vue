@@ -1,5 +1,5 @@
 <template>
-    <div class="flex-row">
+    <div class="block-content flex-row">
         <div class="about-content flex-column">
             <h3>{{ title }}</h3>
             <p class="text-about-content">{{ text }}</p>
@@ -37,8 +37,24 @@
 </script>
 
 <style scoped>
+    .block-content {
+        align-items: center;
+    }
     .content-image {
         width: 355px;
         height: 434px;
+    }
+    
+    @media (max-width: 1248px) {
+        .block-content button, .content-image {
+            display: none;
+        }
+        .block-content p {
+            padding: 0.5rem;
+        }
+        .about-content {
+            margin: 1rem;
+            width: 100%;
+        }
     }
 </style>

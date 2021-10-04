@@ -1,5 +1,4 @@
 body {
-    min-width: 55rem;
     box-sizing: border-box;
     margin: 0 100px 0 calc(71px + 170px + 100px);
     font-family: Montserrat, sans-serif;
@@ -135,7 +134,7 @@ h5 {
 }
 .modal-background {
     position: fixed;
-    z-index: 9998;
+    z-index: 9999;
     top: 0;
     left: 0;
     width: 100%;
@@ -172,7 +171,6 @@ h5 {
     padding: 1rem 2rem;
     justify-content: flex-start;
     width: 50%;
-    min-width: 30rem;
     max-height: 90%;
     overflow: auto;
 }
@@ -337,6 +335,28 @@ label:hover {
     border-radius: 6px;
 }
 
-@media (max-width: 650px) {
-
+@media (max-width: 980px) {
+    body {
+        margin: 0;
+    }
+    main {
+        margin: 0 1rem;
+    }
+    .arrow {
+        display: none;
+    }
+    .section {
+        margin: 0;
+        width: 100%;
+    }
+    h1 {
+        font-size: 20px;
+    }
+    h2 {
+        font-size: 18px;
+        margin: 0.5rem 0 1rem 0;
+    }
+    h3 {
+        font-size: 16px;
+    }
 }

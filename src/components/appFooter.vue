@@ -20,4 +20,16 @@
     .footer p {
         margin-right: 4rem;
     }
+    @media (max-width: 980px) {
+        .footer {
+            flex-direction: column;
+            justify-content: space-around;
+            text-align: center;
+            align-items: center;
+            margin: 1rem 0 5rem 0;
+        }
+        .footer p {
+            margin: 0 0 1rem 0;
+        }
+    }
 </style>

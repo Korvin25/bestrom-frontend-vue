@@ -27,22 +27,28 @@
 
     <section class="section">
       <h2>Подбор оборудования</h2>
-      <div class="flex-row">
+      <div class="flex-row inventory-mobile">
         <div @click="pushToCatalog(1)" class="inventory-item flex-column card-shadow">
           <h4>ПО ТИПУ МАШИН</h4>
-          <img style="margin-bottom: 4rem" src="../assets/inventory-item-1.png" alt="inventory item image">
+          <div class="inventory-item-img">
+            <img  src="../assets/inventory-item-1.png" alt="inventory item image">
+          </div>
           <app-hidden-item text="ПОДРОБНЕЕ"></app-hidden-item>
         </div>
         <!-- /.inventory-item -->
         <div @click="pushToCatalog(2)" class="inventory-item flex-column card-shadow">
           <h4>ПО ПРОДУКТУ</h4>
-          <img src="../assets/inventory-item-2.png" alt="inventory item image">
+          <div class="inventory-item-img">
+            <img src="../assets/inventory-item-2.png" alt="inventory item image">
+          </div>
           <app-hidden-item text="ПОДРОБНЕЕ"></app-hidden-item>
         </div>
         <!-- /.inventory-item -->
         <div @click="pushToCatalog(3)" class="inventory-item flex-column card-shadow">
           <h4> ПО УПАКОВКЕ</h4>
-          <img style="margin-bottom: 4rem" src="../assets/inventory-item-3.png" alt="inventory item image">
+          <div class="inventory-item-img">
+            <img src="../assets/inventory-item-3.png" alt="inventory item image">
+          </div>
           <app-hidden-item text="ПОДРОБНЕЕ"></app-hidden-item>
         </div>
         <!-- /.inventory-item -->
@@ -54,7 +60,13 @@
     <section class="section">
       <h2>Партнеры</h2>
 
-      <div class="slider-content flex-row card-shadow">
+      <carousel class="carousel" :settings='settings'>
+        <slide v-for="slide in 10" :key="slide">
+          <app-partners-item link="https://yandex.ru" image="logo-vtb.png"></app-partners-item>
+        </slide>
+      </carousel>
+
+      <div class="slider-content flex-row card-shadow partners-slider-content">
         <div class="arrow">
           <img style="margin-right: 8px" src="../assets/arrow_left.png" alt="arrow_left">
         </div>
@@ -80,7 +92,14 @@
 
     <section class="section">
       <h2>Клиенты</h2>
-      <div class="slider-content flex-row card-shadow">
+
+      <carousel class="carousel" :settings='settings'>
+        <slide v-for="slide in 10" :key="slide">
+          <app-partners-item link="https://yandex.ru" image="logo-babaevskiy.png"></app-partners-item>
+        </slide>
+      </carousel>
+
+      <div class="slider-content flex-row card-shadow partners-slider-content">
         <div class="arrow">
           <img style="margin-right: 8px" src="../assets/arrow_left.png" alt="arrow_left">
         </div>
@@ -104,8 +123,18 @@
     <!-- /.section -->
     <section class="section">
       <h2>Новости</h2>
-      <div class="news flex-column">
 
+      <carousel class="carousel" :settings='settings'>
+        <slide v-for="slide in 3" :key="slide">
+          <app-main-news-mobile
+                  id="2"
+                  title="Новое поколение упаковочных машин"
+                  image="news-img.png"
+          ></app-main-news-mobile>
+        </slide>
+      </carousel>
+
+      <div class="news flex-column">
         <app-main-news-big-item
                 id="1"
                 title="Новое поколение упаковочных машин"
@@ -147,8 +176,20 @@ import appBlockContent from "@/components/appBlockContent";
 import appMainNewsBigItem from "@/components/appMainNewsBigItem";
 import appMainNewsSmallItem from "@/components/appMainNewsSmallItem";
 import appHiddenItem from "@/components/appHiddenItem";
+import appMainNewsMobile from "@/components/appMainNewsMobile";
+import 'vue3-carousel/dist/carousel.css';
+import { Carousel, Slide } from 'vue3-carousel';
 
 export default {
+  data() {
+    return {
+      settings: {
+        itemsToShow: 1.5,
+        snapAlign: 'center',
+        transition: 100
+      },
+    }
+  },
   methods: {
     pushToCatalog(radioId) {
       this.$store.state.radioCatalogSelect = radioId
@@ -158,7 +199,7 @@ export default {
   },
   components: {
     appHeader, appFooter, appPartnersItem, appBlockContent, appMainNewsBigItem,
-    appMainNewsSmallItem, appHiddenItem
+    appMainNewsSmallItem, appHiddenItem, Carousel, Slide, appMainNewsMobile
   }
 }
 </script>
@@ -169,6 +210,15 @@ export default {
       position: relative;
       align-items: center;
       justify-content: space-between;
+    }
+    .inventory-item-img {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .inventory-item-img img {
+      width: 100%;
     }
         .inventory-item:hover .hidden-item {
             opacity: 1;
@@ -186,7 +236,25 @@ export default {
       margin: 3rem 0;
       justify-content: space-between;
     }
-    @media (max-width : 650px) {
-
+    .carousel {
+      display: none;
+    }
+    @media (max-width: 1248px) {
+      .carousel {
+        display: block;
+      }
+      .inventory-mobile {
+        height: 44rem;
+        flex-direction: column;
+      }
+      .inventory-item {
+        flex-grow: 1;
+        height: 30%;
+        width: 100%;
+        margin-bottom: 1rem;
+      }
+      .partners-slider-content, .news {
+        display: none;
+      }
     }
 </style>
