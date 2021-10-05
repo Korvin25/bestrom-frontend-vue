@@ -3,7 +3,8 @@
         <div @click="$emit('close')" class="close-background"></div>
         <div class="modal-window card-shadow flex-column">
             <div @click="$emit('close')" class="close">
-                <img src="../assets/close-image.png" alt="close">
+                <img class="close-desktop" src="../assets/close-image.png" alt="close">
+                <img class="close-mobile" src="../assets/close-mobile-menu.png" alt="close">
             </div>
             <h2>Отправьте нам вашу заявку</h2>
             <form class="form-call flex-column" action="">
@@ -76,4 +77,11 @@
         .logo:hover {
             filter: drop-shadow(0 0 12px #2FC1FF);
         }
+    @media (max-width: 980px) {
+        h2 {
+            align-self: center;
+            text-align: center;
+            color: #6A6A6A;
+        }
+    }
 </style>

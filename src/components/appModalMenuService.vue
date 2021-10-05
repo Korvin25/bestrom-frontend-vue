@@ -3,7 +3,8 @@
         <div @click="$emit('close')" class="close-background"></div>
         <div class="modal-window card-shadow flex-column">
             <div @click="$emit('close')" class="close">
-                <img src="../assets/close-image.png" alt="close">
+                <img class="close-desktop" src="../assets/close-image.png" alt="close">
+                <img class="close-mobile" src="../assets/close-mobile-menu.png" alt="close">
             </div>
             <h2 v-if="switchContent">Сервисное обслуживание</h2>
             <h2 v-if="!switchContent">Заказ запчастей</h2>
@@ -203,9 +204,6 @@
         transition: all .3s;
         background: rgba(47, 193, 255, 0.5);
     }
-    .form-call {
-
-    }
     .form-call p {
         margin: 0;
     }
@@ -349,4 +347,27 @@
         color: #ffffff;
     }
 
+    @media (max-width: 980px) {
+        h2 {
+            align-self: center;
+            text-align: center;
+            color: #6A6A6A;
+        }
+        .service-buttons {
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 0 0 1rem 0;
+        }
+           .service-buttons .btn {
+            font-size: 16px;
+            margin: 0.5rem 1rem;
+            min-height: 3.5rem;
+        }
+        .btn-disabled {
+            font-size: 16px;
+            min-height: 3.5rem;
+            margin: 0.5rem 1rem;
+        }
+    }
 </style>

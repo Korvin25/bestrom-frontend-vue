@@ -1,9 +1,9 @@
 <template>
     <header class="header flex-row">
-        <div class="header-title">
+        <router-link class="header-title" to="/">
             <img class="logo-img" src="../assets/bestrom_logo.png" alt="bestrom logo">
             <h1>БЕСТРОМ</h1>
-        </div>
+        </router-link>
         <img class="light-bulb" src="../assets/light.png" alt="light bulb">
         <p class="language">EN</p>
     </header>

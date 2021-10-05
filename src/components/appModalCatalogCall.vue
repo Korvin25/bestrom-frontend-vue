@@ -3,10 +3,11 @@
         <div @click="$emit('close')" class="close-background"></div>
         <div class="modal-window card-shadow flex-column">
             <div @click="$emit('close')" class="close">
-                <img src="../assets/close-image.png" alt="close">
+                <img class="close-desktop" src="../assets/close-image.png" alt="close">
+                <img class="close-mobile" src="../assets/close-mobile-menu.png" alt="close">
             </div>
             <h2>Заказать звонок</h2>
-            <h2>БЕСТРОМ - 420С</h2>
+            <h2 class="catalog-name-item">БЕСТРОМ - 420С</h2>
             <form class="form-call flex-column" action="">
                 <label for="company">Компания</label>
                 <input id="company" type="text" class="input" placeholder="БЕСТРОМ">
@@ -47,5 +48,15 @@
         margin: 1rem 0;
         flex-grow: 1;
         width: 100%;
+    }
+    @media (max-width: 980px) {
+        h2 {
+            margin: 0;
+            color: #6A6A6A;
+        }
+        .catalog-name-item {
+            font-size: 22px;
+            color: #2FC1FF;
+        }
     }
 </style>

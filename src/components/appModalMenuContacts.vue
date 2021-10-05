@@ -3,7 +3,8 @@
         <div @click="$emit('close')" class="close-background"></div>
         <div class="modal-window contacts card-shadow flex-column">
             <div @click="$emit('close')" class="close">
-                <img src="../assets/close-image.png" alt="close">
+                <img class="close-desktop" src="../assets/close-image.png" alt="close">
+                <img class="close-mobile" src="../assets/close-mobile-menu.png" alt="close">
             </div>
 
             <div class="header-title">
@@ -204,4 +205,39 @@
             margin: 0 1rem;
             flex-grow: 1;
         }
+    
+    @media (max-width: 980px) {
+        .main-contacts {
+            flex-direction: column;
+            border-bottom: 2px solid #2FC1FF;
+        }
+        .main-contacts-card {
+            margin: 0 1rem;
+            width: 100%;
+        }
+        .dilers {
+            flex-direction: column;
+            border-bottom: 2px solid #2FC1FF;
+            padding-bottom: 0;
+            margin-bottom: 1rem;
+        }
+        .dilers-card {
+            margin: 0 1rem 1rem 1rem;
+            width: 100%;
+        }
+        .social {
+            border-bottom: none;
+            margin: 0.5rem -1rem 0 -1rem;
+        }
+        .call-buttons {
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+             margin: 0 -1rem;
+        }
+            .call-buttons .btn {
+                margin: 0 1rem 1rem 1rem;
+                width: 100%;
+            }
+    }
 </style>

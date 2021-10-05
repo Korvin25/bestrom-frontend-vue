@@ -3,7 +3,8 @@
         <div @click="$emit('close')" class="close-background"></div>
         <div class="modal-window card-shadow flex-column">
             <div @click="$emit('close')" class="close">
-                <img src="../assets/close-image.png" alt="close">
+                <img class="close-desktop" src="../assets/close-image.png" alt="close">
+                <img class="close-mobile" src="../assets/close-mobile-menu.png" alt="close">
             </div>
             <h2>Задать вопрос</h2>
             <form class="form-call flex-column" action="">
@@ -46,5 +47,12 @@
         margin: 1rem 0;
         flex-grow: 1;
         width: 100%;
+    }
+    @media (max-width: 980px) {
+        h2 {
+            align-self: center;
+            text-align: center;
+            color: #6A6A6A;
+        }
     }
 </style>

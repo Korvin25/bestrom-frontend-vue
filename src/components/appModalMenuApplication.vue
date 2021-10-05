@@ -3,7 +3,8 @@
         <div @click="$emit('close')" class="close-background"></div>
         <div class="modal-window card-shadow flex-column">
             <div @click="$emit('close')" class="close">
-                <img src="../assets/close-image.png" alt="close">
+                <img class="close-desktop" src="../assets/close-image.png" alt="close">
+                <img class="close-mobile" src="../assets/close-mobile-menu.png" alt="close">
             </div>
             <h2>Отправьте нам вашу заявку</h2>
             <div class="tel-buttons flex-row">
@@ -43,6 +44,9 @@
                     <div class="logo">
                         <img src="../assets/email.png" alt="email">
                     </div>
+                    <a href="tel:+78005557457" class="logo-mobile">
+                        <img src="../assets/mobile.png" alt="menu-item-img">
+                    </a>
                 </div>
                 <button class="call btn">ОТПРАВИТЬ ЗАЯВКУ</button>
             </form>
@@ -104,7 +108,43 @@
         border-radius: 100%;
         background: transparent;
     }
+    .logo.mobile {
+        display: none;
+    }
     .logo:hover {
         filter: drop-shadow(0 0 12px #2FC1FF);
+    }
+    @media (max-width: 980px) {
+        h2 {
+            align-self: center;
+            text-align: center;
+            color: #6A6A6A;
+        }
+        .tel-buttons {
+            display: none;
+        }
+        .call-method {
+        justify-content: flex-start;
+        margin: 0 -0.5rem;
+    }
+        .logo {
+            margin: 0 0.5rem;
+        }
+        .logo-mobile {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+             margin: 0 0.5rem;
+            width: 3rem;
+            height: 3rem;
+            background: #6A6A6A;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+            border-radius: 100%;
+        }
+        .logo-mobile:hover {
+            transition: all .4s;
+            cursor: pointer;
+            background: rgba(47, 193, 255, 0.9);
+        }
     }
 </style>

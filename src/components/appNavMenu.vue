@@ -255,7 +255,7 @@
                     </a>
                 </div>
 
-                <div class="mobile-menu-nav-items flex-column">
+                <div @click="showMobileMenu = false" class="mobile-menu-nav-items flex-column">
                     <router-link @click="scrollToTop"
                             class="nav-mobile-item flex-row"
                             to="/">
