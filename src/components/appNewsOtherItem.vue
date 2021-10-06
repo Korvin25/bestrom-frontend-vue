@@ -88,4 +88,15 @@
         align-items: center;
         height: 100%;
     }
+    @media (max-width: 980px) {
+        .small-other-news {
+            width: 100%;
+        }
+            .small-other-news h4 {
+                margin: 1rem 0;
+            }
+            .small-other-news p {
+                margin: 0;
+            }
+    }
 </style>

@@ -21,6 +21,10 @@
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci aliquam animi assumenda, aut beatae dolor dolorum eaque, et iusto molestias necessitatibus nisi nostrum optio quam quo reprehenderit repudiandae sint velit?
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus consectetur distinctio dolor facere in iure laudantium neque officiis, perferendis possimus quis reiciendis saepe sint tenetur voluptas? Fuga iste sequi voluptates?
                     </p>
+                    <div class="date-publication flex-row">
+                        <img src="../assets/calendar.png" alt="calendar">
+                        <p>10.04.2021</p>
+                    </div>
                 </div>
                 <div class="last-news flex-column card-shadow">
                     <h3>Недавние новости</h3>
@@ -28,7 +32,6 @@
                     <img class="card-shadow" src="../assets/last-news-1.png" alt="last-news">
                     <img class="card-shadow" src="../assets/last-news-2.png" alt="last-news">
                 </div>
-
             </div>
         </section>
     </main>
@@ -71,4 +74,24 @@
             width: 100%;
             margin: 1rem 0;
         }
+    .date-publication {
+        justify-content: flex-start;
+        align-items: center;
+        text-align: center;
+    }
+        .date-publication img {
+            margin-right: 0.5rem;
+        }
+    @media (max-width: 980px) {
+        .id-news {
+            flex-direction: column;
+        }
+        .last-news {
+            margin: 0;
+            max-width: 100%;
+        }
+        .current-news[data-v-60b3ed14] {
+            width: 100%;
+        }
+    }
 </style>

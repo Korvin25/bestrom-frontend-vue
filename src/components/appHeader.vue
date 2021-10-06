@@ -4,8 +4,13 @@
             <img class="logo-img" src="../assets/bestrom_logo.png" alt="bestrom logo">
             <h1>БЕСТРОМ</h1>
         </router-link>
-        <img class="light-bulb" src="../assets/light.png" alt="light bulb">
-        <p class="language">EN</p>
+        <img class="desktop-language light-bulb" src="../assets/light.png" alt="light bulb">
+        <p class="desktop-language language">EN</p>
+        <div class="mobile-language flex-row">
+            <img src="../assets/language-world.png" alt="language-world">
+            <p class="language">Rus</p>
+            <img src="../assets/language-arrow.png" alt="language-arrow">
+        </div>
     </header>
 </template>
 
@@ -41,6 +46,12 @@
             font-feature-settings: 'tnum' on, 'lnum' on;
             color: #2FC1FF;
         }
+    .desktop-language {
+        display: block;
+    }
+    .mobile-language {
+        display: none;
+    }
     .logo-img {
         margin-right: 0.3rem;
     }
@@ -51,23 +62,28 @@
         margin: 0 1rem;
     }
     @media (max-width: 1248px) {
+        .header-title {
+            width: auto;
+            justify-content: space-between;
+            margin-left: 1rem;
+        }
+        .desktop-language {
+            display: none;
+        }
+        .mobile-language {
+            display: flex;
+            align-items: center;
+            margin-right: 2rem;
+        }
         .header {
+            justify-content: space-between;
             box-shadow: 0 -1px 9px rgba(0, 0, 0, 0.25);
             border-radius: 0 0 40px 40px;
-        }
-        .light-bulb {
-           display: none;
         }
         .language {
             color: #2FC1FF;
             font-weight: bold;
-            margin: 0 2rem;
-        }
-    }
-    @media (max-width: 480px) {
-        .header-title {
-            justify-content: flex-start;
-            padding-left: 3rem;
+            margin: 0 0.4rem;
         }
     }
 </style>

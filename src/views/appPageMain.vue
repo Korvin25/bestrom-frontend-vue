@@ -60,9 +60,12 @@
     <section class="section">
       <h2>Партнеры</h2>
 
-      <carousel class="carousel" :settings='settings'>
+      <carousel class="carousel" :autoplay="3000" :settings='settings'>
         <slide v-for="slide in 10" :key="slide">
-          <app-partners-item link="https://yandex.ru" image="logo-vtb.png"></app-partners-item>
+          <div class="partners-block carousel__item flex-column">
+            <app-partners-item link="https://yandex.ru" image="logo-vtb.png"></app-partners-item>
+            <app-partners-item link="https://yandex.ru" image="logo-yamato.png"></app-partners-item>
+          </div>
         </slide>
       </carousel>
 
@@ -93,9 +96,12 @@
     <section class="section">
       <h2>Клиенты</h2>
 
-      <carousel class="carousel" :settings='settings'>
+      <carousel class="carousel" :autoplay="3000" :settings='settings'>
         <slide v-for="slide in 10" :key="slide">
-          <app-partners-item link="https://yandex.ru" image="logo-babaevskiy.png"></app-partners-item>
+          <div class="partners-block carousel__item flex-column">
+            <app-partners-item link="https://yandex.ru" image="logo-babaevskiy.png"></app-partners-item>
+            <app-partners-item link="https://yandex.ru" image="logo-jacobs.png"></app-partners-item>
+          </div>
         </slide>
       </carousel>
 
@@ -124,9 +130,10 @@
     <section class="section">
       <h2>Новости</h2>
 
-      <carousel class="carousel" :settings='settings'>
+      <carousel class="carousel" :items-to-show="1.3">
         <slide v-for="slide in 3" :key="slide">
           <app-main-news-mobile
+                  class="carousel__item"
                   id="2"
                   title="Новое поколение упаковочных машин"
                   image="news-img.png"
@@ -185,8 +192,8 @@ export default {
     return {
       settings: {
         itemsToShow: 1.5,
-        snapAlign: 'center',
-        transition: 100
+        wrapAround: true,
+        snapAlign: 'center'
       },
     }
   },
@@ -252,6 +259,10 @@ export default {
         height: 30%;
         width: 100%;
         margin-bottom: 1rem;
+      }
+      .partners-block {
+        flex-grow: 1;
+        width: 100%;
       }
       .partners-slider-content, .news {
         display: none;

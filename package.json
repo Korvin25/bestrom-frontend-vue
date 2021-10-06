@@ -13,6 +13,7 @@
     "swiper": "^7.0.8",
     "vue": "^3.0.0",
     "vue-awesome-swiper": "^4.1.1",
+    "vue-carousel": "^0.18.0",
     "vue-router": "^4.0.11",
     "vue-yandex-maps": "^0.10.12",
     "vue3-carousel": "^0.1.27",

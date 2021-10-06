@@ -1,6 +1,6 @@
 <template>
     <div @click="routerPush" class="news-small-item flex-column card-shadow">
-        <img class="news-small-item-image" :src="pathToImage" alt="news image">
+        <img class="news-small-item-image" :src="require(`../assets/${image}`)" alt="news image">
         <h4>{{ title }}</h4>
         <div class="hidden-item">
             <div class="hidden-text">
@@ -23,15 +23,6 @@
                 this.$router.push(`/news/${this.id}`)
                 window.scrollTo(0,0);
             },
-        },
-        computed: {
-            pathToImage() {
-                if (!this.image) {
-                    return
-                }
-                const fileName = this.image.toLowerCase();
-                return require(`../assets/${fileName}`);
-            }
         },
         name: "appMainNewsSmallItem"
     }
@@ -68,6 +59,7 @@
         bottom: 0;
         padding: 1rem;
         cursor: pointer;
+        background: rgba(106, 106, 106, 0.8);
         box-shadow: 0 1px 4px 1px rgba(0, 0, 0, 0.25);
         border-radius: 6px;
         transition: opacity 0.4s;

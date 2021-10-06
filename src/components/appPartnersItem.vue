@@ -59,4 +59,10 @@
         max-width: 10rem;
         max-height: 5rem;
     }
+    @media (max-width: 980px) {
+        .partners-item {
+            width: 100%;
+            height: 7rem;
+        }
+    }
 </style>

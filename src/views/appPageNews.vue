@@ -197,4 +197,13 @@
         align-items: center;
         height: 100%;
     }
+    
+    @media (max-width: 980px) {
+        .title-news {
+            display: none;
+        }
+        .other-news {
+            flex-direction: column;
+        }
+    }
 </style>

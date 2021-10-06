@@ -5,13 +5,13 @@
         <section class="section">
             <h2>О компании</h2>
             <div class="content flex-row card-shadow">
-                <div class="about-content flex-column">
+                <div @click="this.$router.push('/about/history')" class="about-content flex-column">
                     <h3>История Бестром</h3>
                     <p class="text-about-content">В 1989 году Королевская Нидерландская Компания "Бегеманн" и производственное объединение "Стромоборудование" учредили совместное предприятие, которое было названо "Бестром" - по начальным буквам названия компаний.</p>
-                    <button class="btn" @click="this.$router.push('/about/history')">ПОДРОБНЕЕ</button>
+                    <button class="content-btn btn" @click="this.$router.push('/about/history')">ПОДРОБНЕЕ</button>
                 </div>
                 <div class="image-content">
-                    <div class="video flex-column card-shadow">
+                    <a href="http://youtube.com" class="video flex-column card-shadow">
                         <div class="video-title flex-row">
                             <img class="logo" src="../assets/bestrom_logo.png" alt="bestrom logo">
                             <h1>БЕСТРОМ</h1>
@@ -19,8 +19,28 @@
                         <div class="video-play flex-column">
                             <img src="../assets/video-play.png" alt="video play button">
                         </div>
-                    </div>
+                    </a>
                 </div>
+            </div>
+        </section>
+        <!-- /.section -->
+
+        <section class="history-development-mobile section">
+            <h2>История развития</h2>
+            <div class="card-shadow">
+                <carousel :autoplay="3000" :items-to-show="1.5" :wrap-around="true">
+                    <slide v-for="year in years" :key="year">
+                        <div class="carousel__item history-development flex-row">
+                            <div class="history-years flex-column">
+                                <p>{{ year }}</p>
+                            </div>
+                            <div class="history-description">
+                                <img src="../assets/bestrom_logo_big.png" alt="bestrom_logo_big">
+                                <h3>БЕСТРОМ</h3>
+                            </div>
+                        </div>
+                    </slide>
+                </carousel>
             </div>
         </section>
         <!-- /.section -->
@@ -32,14 +52,14 @@
                 <div class="about-content flex-column">
                     <h3>Высококачественные комплектующие мировых брендов</h3>
                     <p style="padding: 1rem 0" class="text-about-content">Мы производим высококачественное упаковочное оборудование, которое будет четко и в срок отрабатывать необходимые объёмы. Вас ожидает лучший сервис, гарантийное обслуживание, высококвалифицированные специалисты, консультаты, которые помогут вам, в случае возникновения каких-либо проблем.</p>
-                    <button class="btn">ПОДРОБНЕЕ</button>
+                    <button class="content-btn btn">ПОДРОБНЕЕ</button>
                 </div>
                 <div class="image-content">
-                    <img src="../assets/logo-world.png" alt="logo world">
+                    <img class="image-world" src="../assets/logo-world.png" alt="logo world">
                 </div>
             </div>
 
-            <div class="flex-column">
+            <div class="our-choice flex-column">
                 <div class="reasons flex-row">
                     <div class="item-reason card-shadow">
                         <img src="../assets/psychology.png" alt="psychology">
@@ -88,7 +108,7 @@
         </section>
         <!-- /.section -->
 
-        <section class="section">
+        <section class="directors-desktop section">
             <h2>Руководство БЕСТРОМ</h2>
             <div class="directors flex-row">
                 <div class="director-item flex-column">
@@ -113,7 +133,15 @@
         <section class="section">
             <h2>Мы производим и реализуем</h2>
 
-            <div class="flex-column">
+            <carousel :autoplay="3000" :items-to-show="1.3" :wrap-around="true" class="our-choice-mobile">
+                <slide v-for="slide in reasons" :key="slide">
+                    <div class="carousel__item reason-mobile item-reason card-shadow">
+                        <h5>{{slide}}</h5>
+                    </div>
+                </slide>
+            </carousel>
+
+            <div class="our-choice flex-column">
                 <div class="reasons flex-row">
                     <div class="item-reason card-shadow">
                         <h5>УПАКОВОЧНЫЕ МАШИНЫ ВЕРТИКАЛЬНОГО ТИПА</h5>
@@ -128,7 +156,7 @@
 
                 <div class="reasons flex-row">
                     <div class="item-reason card-shadow">
-                        <h5>Машины для формирования пакетов с плоским верхом и плоским дном </h5>
+                        <h5>Машины для формирования пакетов с плоским верхом и плоским дном</h5>
                     </div>
                     <div class="item-reason card-shadow">
                         <h5>ДОЗАТОРЫ</h5>
@@ -141,7 +169,21 @@
         </section>
         <!-- /.section -->
 
-        <section class="section">
+        <section class="directors-mobile section">
+            <h2>Руководство БЕСТРОМ</h2>
+
+            <carousel :autoplay="4000" :items-to-show="1.3" :wrap-around="true" class="our-choice-mobile">
+                <slide v-for="slide in directors" :key="slide">
+                    <div class="carousel__item director-item flex-column">
+                        <img :src="require(`../assets/${slide.img}`)" :alt="slide.name">
+                        <h5>{{ slide.name }}</h5>
+                        <p>{{ slide.place }}</p>
+                    </div>
+                </slide>
+            </carousel>
+        </section>
+
+        <section class="history-development-desktop section">
             <h2>История развития</h2>
 
             <div class="history-development flex-row card-shadow">
@@ -162,7 +204,7 @@
         </section>
         <!-- /.section -->
 
-        <section class="section">
+        <section class="clients-desktop section">
             <h2>Клиенты</h2>
 
             <div class="slider-content flex-row card-shadow">
@@ -188,7 +230,7 @@
         </section>
         <!-- /.section -->
 
-        <section class="section">
+        <section class="purpose-desktop section">
             <h2>Цель компании</h2>
             <div class="purpose card-shadow flex-column">
                 <h5>Lorem ipsum dolor sit amet, consectetur adipisicing elit. At commodi consequuntur culpa eaque enim modi omnis optio quam, quisquam repellendus repudiandae sed tenetur vel. Eligendi ipsum maxime officia ullam ut.</h5>
@@ -196,7 +238,7 @@
         </section>
         <!-- /.section -->
 
-        <section class="section">
+        <section class="mission-desktop section">
             <h2>Миссия компании</h2>
             <div class="mission card-shadow flex-column">
                 <h5>Lorem ipsum dolor sit amet, consectetur adipisicing elit. At commodi consequuntur culpa eaque enim modi omnis optio quam, quisquam repellendus repudiandae sed tenetur vel. Eligendi ipsum maxime officia ullam ut.</h5>
@@ -212,16 +254,51 @@
     import appHeader from "@/components/appHeader";
     import appHiddenItem from "@/components/appHiddenItem";
     import appPartnersItem from "@/components/appPartnersItem";
+    import { Carousel, Slide } from 'vue3-carousel';
 
     export default {
+        data() {
+            return {
+                years: [
+                    '1989', '1993','1997','2000','2004','2007', '2009'
+                ],
+                reasons: [
+                    'УПАКОВОЧНЫЕ МАШИНЫ ВЕРТИКАЛЬНОГО ТИПА',
+                    'УПАКОВОЧНЫЕ МАШИНЫ ГОРИЗОНТАЛЬНОГО ТИПА',
+                    'КОМПЛЕКСЫ ГРУППОВОЙ УПАКОВКИ',
+                    'Машины для формирования пакетов с плоским верхом и плоским дном',
+                    'ДОЗАТОРЫ',
+                    'ДОПОЛНИТЕЛЬНОЕ ОБОРУДОВАНИЕ',
+                ],
+                directors: [
+                    {
+                       name: 'Богданов Олег Анатольевич',
+                       place: 'Генеральный директор',
+                       img: `photo-bogdanov.jpg`
+                    },
+                    {
+                        name: 'Кривопалов Александр Васильевич',
+                        place: 'Главный инженер',
+                        img: `photo-krivopalov.jpg`
+                    },
+                    {
+                        name: 'Пузиков Александр Михайлович',
+                        place: 'Коммерческий директор',
+                        img: `photo-puzikov.jpg`
+                    }
+                ]
+            }
+        },
         components: {
-            appHeader, appFooter, appHiddenItem, appPartnersItem
+            appHeader, appFooter, appHiddenItem, appPartnersItem, Carousel, Slide
         },
         name: "appPageAbout"
     }
 </script>
 
 <style scoped>
+
+
     .reasons {
         margin: 1rem 0;
     }
@@ -290,5 +367,63 @@
     .mission {
         padding: 1rem 2rem;
         height: 20rem;
+    }
+    .directors-mobile,
+    .history-development-mobile,
+    .our-choice-mobile {
+        display: none;
+    }
+    @media (max-width: 980px) {
+        .about-content {
+            margin: 0 1rem;
+            width: 100%;
+        }
+        .text-about-content {
+            padding: 1rem 0;
+        }
+        .image-content {
+            width: 100%;
+        }
+        .directors-mobile,
+        .history-development-mobile,
+        .our-choice-mobile {
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        .history-development {
+            flex-direction: column;
+            justify-content: space-around;
+            height: 15rem;
+            padding: 0;
+        }
+        .history-years {
+            flex-direction: row;
+            width: 90%;
+        }
+            .history-years p {
+                margin: 0 0.2rem;
+            }
+            .history-description img {
+                width: 3rem;
+                height: 3rem;
+            }
+            .history-description h3 {
+                font-size: 16px;
+            }
+        .content-btn, .our-choice,
+        .directors-desktop,
+        .history-development-desktop,
+        .clients-desktop, .purpose-desktop,
+        .mission-desktop, .image-world {
+            display: none;
+        }
+        .reason-mobile {
+            width: 100%;
+            margin: 1rem 1rem 1rem 0.1rem;
+        }
+        .director-item {
+            margin: 0 1rem;
+            width: 95%;
+        }
     }
 </style>

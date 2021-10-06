@@ -505,7 +505,7 @@
             display: block;
         }
         .mobile-nav-buttons {
-            z-index: 999;
+            z-index: 9998;
             position: fixed;
             bottom: 1rem;
             left: 0;
