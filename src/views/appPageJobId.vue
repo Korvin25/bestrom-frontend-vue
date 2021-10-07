@@ -1,7 +1,8 @@
 <template>
     <app-header></app-header>
     <main class="main-content flex-column">
-        <section class="section flex-column">
+
+        <section class="desktop-section section flex-column">
             <h2>Вакансии</h2>
             <div class="job-item flex-column card-shadow">
                 <div class="flex-row">
@@ -32,6 +33,31 @@
                 </div>
             </div>
         </section>
+        <!-- ./desktop-section -->
+
+        <section class="mobile-section section flex-column">
+            <div class="vacation card-shadow">
+                <h2>ГРУЗЧИК</h2>
+            </div>
+            <div class="flex-column job-item card-shadow">
+                <img src="../assets/job-image.png" alt="job image">
+                <h4>Заработная плата</h4>
+                <p>45 000 руб</p>
+                <h4>Основные требования</h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium assumenda consequuntur dolores doloribus exercitationem hic id in maxime molestiae mollitia, nemo obcaecati, perferendis provident quas quia quisquam quod reprehenderit, veniam!</p>
+                <h4>Основные навыки</h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad adipisci commodi cum cupiditate dolores, doloribus eum excepturi ipsa iste maxime molestiae nulla odio perferendis porro quae quasi vel veniam, voluptates.</p>
+                <h4>Вас ждёт</h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad adipisci commodi cum cupiditate dolores, doloribus eum excepturi ipsa iste maxime molestiae nulla odio perferendis porro quae quasi vel veniam, voluptates.</p>
+                <div class="flex-row flex-buttons">
+                    <a href="tel:+78005557457">
+                        <button class="btn">Позвонить</button>
+                    </a>
+                    <button @click="showModalRespond = true" class="btn">Откликнуться</button>
+                </div>
+            </div>
+        </section>
+        <!-- ./mobile-section -->
     </main>
 
     <transition-group name="modal">
@@ -109,5 +135,62 @@
     .flex-buttons a {
         margin-right: 2rem;
         width: 100%;
+    }
+    .desktop-section {
+        display: flex;
+    }
+    .mobile-section {
+        display: none;
+    }
+
+    @media (max-width: 980px) {
+        .desktop-section {
+            display: none;
+        }
+
+        .mobile-section {
+            margin-top: 1rem;
+            display: flex;
+        }
+        .vacation {
+            margin: 0 0.5rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .vacation h2 {
+            margin: 1rem 0;
+        }
+        .job-item {
+            margin: 1rem 0.5rem;
+            padding: 1rem;
+        }
+            .job-item img {
+                margin: 0;
+                align-self: center;
+                max-width: 14rem;
+                max-height: 14rem;
+                width: auto;
+                height: auto;
+            }
+            .job-item h4 {
+                margin: 2rem 0 0 0;
+                font-weight: 600;
+                font-size: 16px;
+            }
+            .job-item p {
+                font-weight: 600;
+                font-size: 16px;
+                margin: 1rem 0;
+            }
+            .flex-buttons a {
+                margin-right: 1rem;
+            }
+            .flex-buttons .btn {
+                margin: 0;
+                width: 100%;
+                font-weight: bold;
+                font-size: 14px;
+            }
     }
 </style>

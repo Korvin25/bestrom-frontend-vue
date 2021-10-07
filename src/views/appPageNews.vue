@@ -199,6 +199,9 @@
     }
     
     @media (max-width: 980px) {
+        .all-news h2 {
+            margin: 1rem 0 0 0;
+        }
         .title-news {
             display: none;
         }

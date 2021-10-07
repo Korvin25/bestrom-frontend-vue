@@ -369,5 +369,8 @@
             min-height: 3.5rem;
             margin: 0.5rem 1rem;
         }
+        .__select__title {
+            align-items: normal;
+        }
     }
 </style>

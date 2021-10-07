@@ -184,7 +184,6 @@ import appMainNewsBigItem from "@/components/appMainNewsBigItem";
 import appMainNewsSmallItem from "@/components/appMainNewsSmallItem";
 import appHiddenItem from "@/components/appHiddenItem";
 import appMainNewsMobile from "@/components/appMainNewsMobile";
-import 'vue3-carousel/dist/carousel.css';
 import { Carousel, Slide } from 'vue3-carousel';
 
 export default {

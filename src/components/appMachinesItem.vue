@@ -64,4 +64,12 @@
             max-width: 20rem;
             max-height: 10rem;
         }
+
+    @media (max-width: 980px) {
+        .machine-item {
+            width: 100%;
+            height: 15rem;
+            margin: 0.5rem;
+        }
+    }
 </style>

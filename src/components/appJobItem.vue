@@ -1,6 +1,6 @@
 <template>
-    <div class="job-item flex-row card-shadow">
-        <img :src="pathToImage" alt="job image">
+    <div class="desktop-section job-item flex-row card-shadow">
+        <img :src="require(`../assets/${image}`)" alt="job image">
         <div class="flex-column job-item-description">
             <h4>{{ title }}</h4>
             <h5>Основные требования:</h5>
@@ -16,6 +16,7 @@
             </router-link>
         </div>
     </div>
+    <!-- ./desktop-section -->
 </template>
 
 <script>
@@ -32,15 +33,6 @@
             scrollToTop() {
                 window.scrollTo(0,0);
             },
-        },
-        computed: {
-            pathToImage() {
-                if (!this.image) {
-                    return
-                }
-                const fileName = this.image.toLowerCase();
-                return require(`../assets/${fileName}`);
-            }
         },
         name: "appJobItem"
     }
@@ -84,4 +76,21 @@
             text-align: center;
             font-size: 2.5rem;
         }
+    .desktop-section {
+        display: flex;
+    }
+    .mobile-section {
+        display: none;
+    }
+
+    @media (max-width: 980px) {
+        .desktop-section {
+            display: none;
+        }
+
+        .mobile-section {
+            margin-top: 1rem;
+            display: flex;
+        }
+    }
 </style>

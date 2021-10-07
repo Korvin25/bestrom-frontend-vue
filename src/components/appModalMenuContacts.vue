@@ -223,7 +223,7 @@
         }
         .dilers-card {
             margin: 0 1rem 1rem 1rem;
-            width: 100%;
+            width: 90%;
         }
         .social {
             border-bottom: none;
