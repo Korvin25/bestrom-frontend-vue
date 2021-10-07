@@ -35,4 +35,10 @@
         box-sizing: border-box;
         border-radius: 20px;
     }
+
+    @media (max-width: 980px) {
+        .catalog-type-select {
+            font-size: 13px;
+        }
+    }
 </style>

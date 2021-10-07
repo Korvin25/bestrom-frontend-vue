@@ -1,7 +1,7 @@
 <template>
     <app-header></app-header>
     <main class="main-content flex-column">
-        <section class="section">
+        <section class="desktop-section section">
             <div class="catalog-select-card card-shadow flex-column">
                 <div class="flex-row">
                     <div class="arrow">
@@ -13,24 +13,24 @@
                                id="radio-choice-1"
                                type="radio"
                                v-model="this.$store.state.radioCatalogSelect"
-                               :value="1"
-                               :checked="this.$store.state.radioCatalogSelect === 1">
+                               :value="'ПОДБОР ПО ТИПУ МАШИНЫ'"
+                               :checked="this.$store.state.radioCatalogSelect === 'ПОДБОР ПО ТИПУ МАШИНЫ'">
                         <label for="radio-choice-1">ПОДБОР ПО ТИПУ МАШИНЫ</label>
                         <input class="custom-radio"
                                name="radio-choice"
                                id="radio-choice-2"
                                type="radio"
                                v-model="this.$store.state.radioCatalogSelect"
-                               :value="2"
-                               :checked="this.$store.state.radioCatalogSelect === 2">
+                               :value="'ПОДБОР ПО ТИПУ ПРОДУКТА'"
+                               :checked="this.$store.state.radioCatalogSelect === 'ПОДБОР ПО ТИПУ ПРОДУКТА'">
                         <label for="radio-choice-2">ПОДБОР ПО ТИПУ ПРОДУКТА</label>
                         <input class="custom-radio"
                                name="radio-choice"
                                id="radio-choice-3"
                                type="radio"
                                v-model="this.$store.state.radioCatalogSelect"
-                               :value="3"
-                               :checked="this.$store.state.radioCatalogSelect === 3">
+                               :value="'ПОДБОР ПО ТИПУ УПАКОВКИ'"
+                               :checked="this.$store.state.radioCatalogSelect === 'ПОДБОР ПО ТИПУ УПАКОВКИ'">
                         <label for="radio-choice-3">ПОДБОР ПО ТИПУ УПАКОВКИ</label>
                         <input class="custom-radio"
                                style="margin-right: 0;"
@@ -38,8 +38,8 @@
                                id="radio-choice-4"
                                type="radio"
                                v-model="this.$store.state.radioCatalogSelect"
-                               :value="4"
-                               :checked="this.$store.state.radioCatalogSelect === 4">
+                               :value="'ГОТОВЫЕ РЕШЕНИЯ'"
+                               :checked="this.$store.state.radioCatalogSelect === 'ГОТОВЫЕ РЕШЕНИЯ'">
                         <label for="radio-choice-4">ГОТОВЫЕ РЕШЕНИЯ</label>
                     </div>
                     <div class="arrow">
@@ -148,6 +148,51 @@
             </div>
             <!-- /.catalog-item -->
         </section>
+        <!-- ./desktop-section -->
+
+        <section class="mobile-section section">
+            <div @click="showMobileFilter = true" class="mobile-filter card-shadow flex-column">
+                <h2>{{ this.$store.state.radioCatalogSelect }}</h2>
+            </div>
+
+            <transition name="modal">
+                <app-catalog-mobile-filter v-if="showMobileFilter" @close="showMobileFilter = false"></app-catalog-mobile-filter>
+            </transition>
+
+            <!-- /.catalog-select-card -->
+            <div class="catalog-item flex-row">
+                <app-catalog-item
+                        id="1"
+                        title="БЕСТРОМ-420C"
+                        sub-title="Упаковочная машина вертикального типа"
+                        text="Предназначена для упаковки сыпучих, гранулированных и мелкоштучных продуктов в пакеты из термосвариваемых пленок, подаваемых с рулона в виде полотна."
+                        image="content_image.png"
+                ></app-catalog-item>
+                <app-catalog-item
+                        id="2"
+                        title="БЕСТРОМ-420C"
+                        sub-title="Упаковочная машина вертикального типа"
+                        text="Предназначена для упаковки сыпучих, гранулированных и мелкоштучных продуктов в пакеты из термосвариваемых пленок, подаваемых с рулона в виде полотна."
+                        image="content_image.png"
+                ></app-catalog-item>
+                <app-catalog-item
+                        id="3"
+                        title="БЕСТРОМ-420C"
+                        sub-title="Упаковочная машина вертикального типа"
+                        text="Предназначена для упаковки сыпучих, гранулированных и мелкоштучных продуктов в пакеты из термосвариваемых пленок, подаваемых с рулона в виде полотна."
+                        image="content_image.png"
+                ></app-catalog-item>
+                <app-catalog-item
+                        id="4"
+                        title="БЕСТРОМ-420C"
+                        sub-title="Упаковочная машина вертикального типа"
+                        text="Предназначена для упаковки сыпучих, гранулированных и мелкоштучных продуктов в пакеты из термосвариваемых пленок, подаваемых с рулона в виде полотна."
+                        image="content_image.png"
+                ></app-catalog-item>
+            </div>
+            <!-- /.catalog-item -->
+        </section>
+        <!-- ./desktop-section -->
     </main>
     <app-footer></app-footer>
 </template>
@@ -157,15 +202,17 @@
     import appFooter from "@/components/appFooter";
     import appCatalogTypeSelect from "@/components/appCatalogTypeSelect";
     import appCatalogItem from "@/components/appCatalogItem";
+    import appCatalogMobileFilter from "@/components/appCatalogMobileFilter";
 
     export default {
         data() {
           return {
+              showMobileFilter: false,
               typeSelect: 1
           }
         },
         components: {
-            appHeader, appFooter, appCatalogTypeSelect, appCatalogItem
+            appHeader, appFooter, appCatalogTypeSelect, appCatalogItem, appCatalogMobileFilter
         },
         name: "appPageCatalog"
     }
@@ -201,5 +248,26 @@
         margin: 1rem -1rem;
         flex-wrap: wrap;
         justify-content: space-between;
+    }
+    .desktop-section {
+        display: block;
+    }
+    .mobile-section {
+        display: none;
+    }
+
+    @media (max-width: 980px) {
+        .desktop-section {
+            display: none;
+        }
+        .mobile-section {
+            display: block;
+            margin-top: 1.5rem;
+        }
+            .mobile-section h2 {
+                align-self: center;
+                margin: 1rem;
+                font-size: 16px;
+            }
     }
 </style>

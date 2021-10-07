@@ -344,9 +344,10 @@
                     </div>
                 </div>
             </nav>
+            <!-- ./mobile-nav-elements -->
         </transition-group>
     </div>
-
+    <!-- ./mobile-menu -->
 
     <transition-group name="modal">
         <app-modal-menu-application v-if="showModalMenuApplication" @close="showModalMenuApplication = false"></app-modal-menu-application>
