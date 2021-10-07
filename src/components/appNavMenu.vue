@@ -229,7 +229,7 @@
     <!-- Mobile navigation menu -->
     <div class="mobile-nav">
         <div class="mobile-nav-buttons">
-            <div class="mobile-nav-buttons-item" @click="showMobileMenu = true">
+            <div class="mobile-nav-buttons-item" @click="this.showMobileMenu = true">
                 <img src="../assets/menu-burger.png" alt="menu-burger">
                 <p>Меню</p>
             </div>
@@ -239,8 +239,8 @@
         </div>
 
         <transition-group name="modal">
-            <nav v-if="showMobileMenu" class="mobile-nav-elements flex-column">
-                <img @click="showMobileMenu = false" class="close-mobile-menu" src="../assets/close-mobile-menu.png" alt="close-mobile-menu">
+            <nav v-if="this.showMobileMenu" class="mobile-nav-elements flex-column">
+                <img @click="this.showMobileMenu = false" class="close-mobile-menu" src="../assets/close-mobile-menu.png" alt="close-mobile-menu">
                 <p class="mobile-menu-title">Меню</p>
 
                 <div class="mobile-menu-logo flex-row">
@@ -395,6 +395,50 @@
                 this.showModalMenuContacts = false
             }
         },
+        watch: {
+            showMobileMenu() {
+                if (this.showMobileMenu) {
+                    document.body.classList.add('modal-open') 
+                } else {
+                    document.body.classList.remove('modal-open') 
+                }
+            },
+            showModalMenuApplication() {
+                if (this.showModalMenuApplication) {
+                    document.body.classList.add('modal-open') 
+                } else {
+                    document.body.classList.remove('modal-open') 
+                }
+            },
+            showModalMenuService() {
+                if (this.showModalMenuService) {
+                    document.body.classList.add('modal-open') 
+                } else {
+                    document.body.classList.remove('modal-open') 
+                }
+            },
+            showModalMenuContacts() {
+                if (this.showModalMenuContacts) {
+                    document.body.classList.add('modal-open') 
+                } else {
+                    document.body.classList.remove('modal-open') 
+                }
+            },
+            showModalMenuContactsCall() {
+                if (this.showModalMenuContactsCall) {
+                    document.body.classList.add('modal-open') 
+                } else {
+                    document.body.classList.remove('modal-open') 
+                }
+            },
+            showModalMenuContactsQuestion() {
+                if (this.showModalMenuContactsQuestion) {
+                    document.body.classList.add('modal-open') 
+                } else {
+                    document.body.classList.remove('modal-open') 
+                }
+            }
+        },
         components: {
             appModalMenuApplication, appModalMenuService, appModalMenuContacts,
             appModalMenuContactsCall, appModalMenuContactsQuestion
@@ -497,6 +541,9 @@
         }
 
     @media (max-width: 980px) {
+        body.modal-open {
+            overflow: hidden;
+        }
         .nav {
             display: none;
         }
@@ -539,11 +586,12 @@
             text-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
         }
         .mobile-nav-elements {
+            overflow: hidden;
             position: fixed;
             top: 0;
             left: 0;
-            bottom: 0;
             right: 0;
+            bottom: 0;
             z-index: 9999;
             justify-content: flex-start;
             background-color: #FFFFFF;

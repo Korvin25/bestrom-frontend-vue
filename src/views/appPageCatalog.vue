@@ -211,6 +211,15 @@
               typeSelect: 1
           }
         },
+        watch: {
+            showMobileFilter() {
+                if (this.showMobileFilter) {
+                    document.body.classList.add('modal-open') 
+                } else {
+                    document.body.classList.remove('modal-open') 
+                }
+            }
+        },
         components: {
             appHeader, appFooter, appCatalogTypeSelect, appCatalogItem, appCatalogMobileFilter
         },

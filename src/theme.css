@@ -360,6 +360,9 @@ label:hover {
 .carousel__slide--active > .carousel__item {
     transform: scale(1);
 }
+body.modal-open {
+    overflow: hidden;
+}
 
 @media (max-width: 980px) {
     body {
