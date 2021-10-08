@@ -4,7 +4,8 @@
   <main class="main-content flex-column">
 
     <section class="section">
-      <h2>Деятельность компании БЕСТРОМ</h2>
+      <h2 class="desktop-section">Деятельность компании БЕСТРОМ</h2>
+      <h2 class="mobile-section">Деятельность компании</h2>
       <div class="slider-content flex-row card-shadow">
         <div class="arrow">
           <img style="margin-right: 8px" src="../assets/arrow_left.png" alt="arrow_left">
@@ -60,7 +61,7 @@
     <section class="section">
       <h2>Партнеры</h2>
 
-      <carousel class="carousel" :autoplay="3000" :settings='settings'>
+      <carousel class="mobile-section" :autoplay="3000" :settings='settings'>
         <slide v-for="slide in 10" :key="slide">
           <div class="partners-block carousel__item flex-column">
             <app-partners-item link="https://yandex.ru" image="logo-vtb.png"></app-partners-item>
@@ -96,7 +97,7 @@
     <section class="section">
       <h2>Клиенты</h2>
 
-      <carousel class="carousel" :autoplay="3000" :settings='settings'>
+      <carousel class="mobile-section" :autoplay="3000" :settings='settings'>
         <slide v-for="slide in 10" :key="slide">
           <div class="partners-block carousel__item flex-column">
             <app-partners-item link="https://yandex.ru" image="logo-babaevskiy.png"></app-partners-item>
@@ -130,7 +131,7 @@
     <section class="section">
       <h2>Новости</h2>
 
-      <carousel class="carousel" :items-to-show="1.3">
+      <carousel class="mobile-section" :items-to-show="1.3">
         <slide v-for="slide in 3" :key="slide">
           <app-main-news-mobile
                   class="carousel__item"
@@ -242,11 +243,17 @@ export default {
       margin: 3rem 0;
       justify-content: space-between;
     }
-    .carousel {
+    .desktop-section {
+      display: block;
+    }
+    .mobile-section {
       display: none;
     }
     @media (max-width: 1248px) {
-      .carousel {
+      .desktop-section {
+        display: none;
+      }
+      .mobile-section {
         display: block;
       }
       .inventory-mobile {

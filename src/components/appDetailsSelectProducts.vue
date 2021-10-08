@@ -101,4 +101,20 @@
         font-weight: normal;
         margin-top: 0;
     }
+    @media (max-width: 635px) {
+        .details-select-products {
+            flex-direction: column;
+            height: auto;
+            margin: 0;
+            width: 100%;
+        }
+        .details-select-products-item {
+            margin: 0.5rem 0;
+            width: auto;
+        }
+        .details-select-products-item h4 {
+            font-weight: 600;
+            font-size: 12px;
+         }
+    }
 </style>

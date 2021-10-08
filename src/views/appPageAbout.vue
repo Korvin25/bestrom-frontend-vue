@@ -297,8 +297,6 @@
 </script>
 
 <style scoped>
-
-
     .reasons {
         margin: 1rem 0;
     }
@@ -324,13 +322,14 @@
             filter: blur(4px);
         }
     .director-item {
+        justify-content: space-between;
         width: 30%;
     }
         .director-item h5 {
             margin: 0.5rem 0;
-            height: 1.5rem;
         }
         .director-item p {
+            margin: 0;
             padding-top: 0.5rem;
             border-top: 1px solid #2FC1FF;
         }
@@ -424,6 +423,10 @@
         .director-item {
             margin: 0 1rem;
             width: 95%;
+        }
+        .director-item img {
+            width: 100%;
+            align-self: center;
         }
     }
 </style>

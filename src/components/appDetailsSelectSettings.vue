@@ -64,4 +64,23 @@
     .details-select-settings-item h4 {
         margin: 1rem 0;
     }
+    @media (max-width: 980px) {
+        .details-select-settings {
+            flex-direction: column;
+            margin: 1rem 0.5rem;
+            height: auto;
+            width: 100%;
+        }
+        .details-select-settings-item {
+            width: 100%;
+        }
+        .details-select-settings-item h4 {
+            font-weight: 600;
+            font-size: 12px;
+            margin: 0.5rem 0;
+         }
+        .details-select-settings-item p {
+            margin: 0.5rem 0;
+        }
+    }
 </style>

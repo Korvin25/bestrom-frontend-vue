@@ -255,7 +255,7 @@
                     </a>
                 </div>
 
-                <div @click="showMobileMenu = false" class="mobile-menu-nav-items flex-column">
+                <div class="mobile-menu-nav-items flex-column">
                     <router-link @click="scrollToTop"
                             class="nav-mobile-item flex-row"
                             to="/">
@@ -288,7 +288,7 @@
                         </div>
                         <p :class="hoverItem === 4 || this.$route.path.includes('/cutting') ? 'text-hover' : ''">Раскрой пакета</p>
                     </router-link>
-                    <a @click="showModalMenuService = true"
+                    <a @click="showModalMenuServiceClick"
                        class="nav-mobile-item flex-row">
                         <div :class="hoverItem === 5 ? 'img-hover' : ''" class="nav-mobile-item-img card-shadow">
                             <img src="../assets/menu-item-5,8.png" alt="menu-item-img">
@@ -329,15 +329,15 @@
                     </router-link>
 
                     <div class="mobile-menu-nav-bottom flex-row">
-                        <div @click="showModalMenuApplication = true" class="mobile-menu-nav-bottom-item card-shadow flex-column">
+                        <div @click="showModalMenuApplicationClick" class="mobile-menu-nav-bottom-item card-shadow flex-column">
                             <img src="../assets/menu-mobile-call.png" alt="menu-mobile-call">
                             <p>Заявка</p>
                         </div>
-                        <div @click="showModalMenuContactsQuestion = true" class="mobile-menu-nav-bottom-item card-shadow flex-column">
+                        <div @click="showModalMenuContactsQuestionClick" class="mobile-menu-nav-bottom-item card-shadow flex-column">
                             <img src="../assets/menu-mobile-message.png" alt="menu-mobile-message">
                             <p>Написать</p>
                         </div>
-                        <div @click="showModalMenuContacts = true" class="mobile-menu-nav-bottom-item card-shadow flex-column">
+                        <div @click="showModalMenuContactsClick" class="mobile-menu-nav-bottom-item card-shadow flex-column">
                             <img src="../assets/menu-mobile-contacts.png" alt="menu-mobile-contacts">
                             <p>Контакты</p>
                         </div>
@@ -384,6 +384,7 @@
         },
         methods: {
             scrollToTop() {
+                this.showMobileMenu = false
                 window.scrollTo(0,0);
             },
             showModalMenuContactsCallFunc() {
@@ -393,6 +394,22 @@
             showModalMenuContactsQuestionFunc() {
                 this.showModalMenuContactsQuestion = true
                 this.showModalMenuContacts = false
+            },
+            showModalMenuServiceClick() {
+                this.showMobileMenu = false
+                this.showModalMenuService = true
+            },
+            showModalMenuApplicationClick() {
+                this.showMobileMenu = false
+                this.showModalMenuApplication = true
+            },
+            showModalMenuContactsQuestionClick() {
+                this.showMobileMenu = false
+                this.showModalMenuContactsQuestion = true
+            },
+            showModalMenuContactsClick() {
+                this.showMobileMenu = false
+                this.showModalMenuContacts = true
             }
         },
         watch: {
@@ -412,14 +429,14 @@
             },
             showModalMenuService() {
                 if (this.showModalMenuService) {
-                    document.body.classList.add('modal-open') 
+                    document.body.classList.add('modal-open')
                 } else {
                     document.body.classList.remove('modal-open') 
                 }
             },
             showModalMenuContacts() {
                 if (this.showModalMenuContacts) {
-                    document.body.classList.add('modal-open') 
+                    document.body.classList.add('modal-open')
                 } else {
                     document.body.classList.remove('modal-open') 
                 }

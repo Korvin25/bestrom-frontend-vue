@@ -104,7 +104,6 @@
         .desktop-section {
             display: none;
         }
-
         .mobile-section {
             display: block;
         }

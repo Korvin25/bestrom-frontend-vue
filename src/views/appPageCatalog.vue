@@ -192,7 +192,7 @@
             </div>
             <!-- /.catalog-item -->
         </section>
-        <!-- ./desktop-section -->
+        <!-- ./mobile-section -->
     </main>
     <app-footer></app-footer>
 </template>

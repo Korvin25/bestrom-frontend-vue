@@ -57,4 +57,32 @@
     .details-select-solution-item h4 {
         margin-top: 0;
     }
+    @media (max-width: 980px) {
+        .details-select-solution {
+            margin: 0 -0.5rem;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+        }
+        .details-select-solution-item {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 1rem;
+            text-align: center;
+            width: 25%;
+            flex-grow: 1;
+            margin: 0.5rem;
+        }
+        .details-select-solution-item h4 {
+            font-weight: 600;
+            font-size: 12px;
+        }
+        .details-select-solution-item img {
+            align-self: center;
+            max-width: 15rem;
+            width: 100%;
+        }
+    }
 </style>

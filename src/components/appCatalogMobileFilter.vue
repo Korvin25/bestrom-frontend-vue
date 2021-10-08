@@ -120,6 +120,7 @@
         z-index: 9999;
         justify-content: flex-start;
         background-color: #FFFFFF;
+        overflow: auto;
     }
     .close-mobile-menu {
         position: absolute;
@@ -150,7 +151,7 @@
         color: #2FC1FF;
     }
     .type-select {
-        margin: 0.5rem;
+        margin: 1rem 0.5rem 2rem 0.5rem;
         width: auto;
         flex-wrap: wrap;
         justify-content: flex-start;

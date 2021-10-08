@@ -25,6 +25,13 @@
                     text="ПОДРОБНЕЕ"
             ></app-hidden-item>
         </div>
+        <div class="details-select-inventory-item flex-column card-shadow">
+            <h4>ДОЗАТОР MULTIPOND</h4>
+            <img src="../assets/details-inventory.png" alt="details-inventory">
+            <app-hidden-item
+                    text="ПОДРОБНЕЕ"
+            ></app-hidden-item>
+        </div>
 
         <div class="arrow">
             <img style="margin-left: 8px" src="../assets/arrow_right.png" alt="arrow_right">
@@ -73,5 +80,29 @@
     }
     .details-select-inventory-item img {
         width: 100%;
+    }
+    @media (max-width: 980px) {
+        .details-select-inventory {
+            margin: 0 -0.5rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .details-select-inventory-item {
+            position: relative;
+            flex-grow: 1;
+            width: 25%;
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+            margin: 0.5rem;
+            padding: 1rem 2rem;
+        }
+            .details-select-inventory-item img {
+                align-self: center;
+            }
+            .details-select-inventory-item h4 {
+                font-weight: 600;
+                font-size: 12px;
+             }
     }
 </style>
