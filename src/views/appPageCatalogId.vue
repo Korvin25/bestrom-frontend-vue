@@ -97,6 +97,22 @@
               showModalApplication: false
           }
         },
+        watch: {
+            showModalCall() {
+                if (this.showModalCall) {
+                    document.body.classList.add('modal-open') 
+                } else {
+                    document.body.classList.remove('modal-open') 
+                }
+            },
+            showModalApplication() {
+                if (this.showModalApplication) {
+                    document.body.classList.add('modal-open') 
+                } else {
+                    document.body.classList.remove('modal-open') 
+                }
+            }
+        },
         components: {
             appHeader, appFooter, appDetailsSelectSettings, appDetailsSelectProducts,
             appDetailsSelectInventory, appDetailsSelectPacket, appDetailsSelectSolution,

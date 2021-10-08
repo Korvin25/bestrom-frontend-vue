@@ -78,6 +78,15 @@
                 showModalRespond: false
             }
         },
+        watch: {
+            showModalRespond() {
+                if (this.showModalRespond) {
+                    document.body.classList.add('modal-open') 
+                } else {
+                    document.body.classList.remove('modal-open') 
+                }
+            }
+        },
         components: {
             appHeader, appFooter, appModalJobRespond
         },

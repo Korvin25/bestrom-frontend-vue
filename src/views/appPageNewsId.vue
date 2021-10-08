@@ -85,6 +85,7 @@
     @media (max-width: 980px) {
         .id-news {
             flex-direction: column;
+            width: 100%;
         }
         .last-news {
             margin: 0;

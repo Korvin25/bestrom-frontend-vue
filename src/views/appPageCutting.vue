@@ -459,6 +459,15 @@
         .packets-seam-item p {
             font-size: 14px;
         }
+        .packet-type-item:hover .hidden-item {
+            opacity: 0;
+        }
+        .packet-options-item:hover .hidden-item {
+            opacity: 0;
+        }
+        .packets-seam-item:hover .hidden-item {
+            opacity: 0;
+        }
     }
 
     @media (max-width: 675px) {

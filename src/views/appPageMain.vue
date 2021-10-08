@@ -28,7 +28,7 @@
     <section class="section">
       <h2>Подбор оборудования</h2>
       <div class="flex-row inventory-mobile">
-        <div @click="pushToCatalog(1)" class="inventory-item flex-column card-shadow">
+        <div @click="pushToCatalog('ПОДБОР ПО ТИПУ МАШИНЫ')" class="inventory-item flex-column card-shadow">
           <h4>ПО ТИПУ МАШИН</h4>
           <div class="inventory-item-img">
             <img  src="../assets/inventory-item-1.png" alt="inventory item image">
@@ -36,7 +36,7 @@
           <app-hidden-item text="ПОДРОБНЕЕ"></app-hidden-item>
         </div>
         <!-- /.inventory-item -->
-        <div @click="pushToCatalog(2)" class="inventory-item flex-column card-shadow">
+        <div @click="pushToCatalog('ПОДБОР ПО ТИПУ ПРОДУКТА')" class="inventory-item flex-column card-shadow">
           <h4>ПО ПРОДУКТУ</h4>
           <div class="inventory-item-img">
             <img src="../assets/inventory-item-2.png" alt="inventory item image">
@@ -44,7 +44,7 @@
           <app-hidden-item text="ПОДРОБНЕЕ"></app-hidden-item>
         </div>
         <!-- /.inventory-item -->
-        <div @click="pushToCatalog(3)" class="inventory-item flex-column card-shadow">
+        <div @click="pushToCatalog('ПОДБОР ПО ТИПУ УПАКОВКИ')" class="inventory-item flex-column card-shadow">
           <h4> ПО УПАКОВКЕ</h4>
           <div class="inventory-item-img">
             <img src="../assets/inventory-item-3.png" alt="inventory item image">
@@ -197,8 +197,8 @@ export default {
     }
   },
   methods: {
-    pushToCatalog(radioId) {
-      this.$store.state.radioCatalogSelect = radioId
+    pushToCatalog(radioitem) {
+      this.$store.state.radioCatalogSelect = radioitem
       this.$router.push(`/catalog`)
       window.scrollTo(0,0);
     },
