@@ -83,8 +83,22 @@
     import appHeader from "@/components/appHeader";
     import appFooter from "@/components/appFooter";
     import appPartnersItem from "@/components/appPartnersItem";
+    import { mapGetters, mapActions } from "vuex"
 
     export default {
+        computed: {
+            ...mapGetters({
+                CLIENTS:'clients/CLIENTS'
+            })
+        },
+        methods: {
+            ...mapActions({
+                GET_CLIENTS:'clients/GET_CLIENTS'
+            })
+        },
+        mounted() {
+            this.GET_CLIENTS()
+        },
         components: {
             appHeader, appFooter, appPartnersItem
         },
