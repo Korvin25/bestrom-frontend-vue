@@ -97,7 +97,9 @@
             })
         },
         mounted() {
-            this.GET_CLIENTS()
+            this.GET_CLIENTS().then(() => {
+                console.log(this.CLIENTS)
+            })
         },
         components: {
             appHeader, appFooter, appPartnersItem

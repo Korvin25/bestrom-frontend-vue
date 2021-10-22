@@ -22,29 +22,20 @@ export default {
     },
 
     actions: {
-        async GET_CLIENTS({ commit }) {
+        GET_CLIENTS({commit}) {
             return axios({
-                method: "GET",
-                url: `http://bexram.online:8001/client/`
+                method: 'GET',
+                url: 'http://bexram.online:8001/client/'
             })
                 .then((response) => {
-                    commit("SET_CLIENTS", response.data)
+                    console.log(response.data)
+                    commit('SET_CLIENTS', response.data)
                     return response
                 })
                 .catch((error) => {
                     console.log(error)
                     return error
                 })
-            // try {
-            //     commit('SET_CLIENTS', await axios({
-            //         method: 'GET',
-            //         url: `http://bexram.online:8001/client/`
-            //     }))
-            // }
-            // catch (error) {
-            //     console.log(error)
-            //     commit('SET_CLIENTS', 'Error')
-            // }
         }
     }
 }
