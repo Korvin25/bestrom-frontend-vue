@@ -4,7 +4,6 @@
             <img class="logo-img" src="../assets/bestrom_logo.png" alt="bestrom logo">
             <h1>БЕСТРОМ</h1>
         </router-link>
-        <img class="desktop-language light-bulb" src="../assets/light.png" alt="light bulb">
         <p class="desktop-language language">EN</p>
         <div class="mobile-language flex-row">
             <img src="../assets/language-world.png" alt="language-world">
@@ -22,11 +21,16 @@
 
 <style scoped>
     .header {
-        width: 100%;
         justify-content: center;
         align-items: center;
+        background-color: white;
         box-shadow: 0 0 9px rgba(0, 0, 0, 0.25);
         border-radius: 20px;
+        position: fixed;
+        z-index: 9999;
+        top: 0;
+        right: 100px;
+        left: calc(71px + 170px + 100px);
     }
     .header-title {
         width: 100%;
@@ -55,13 +59,14 @@
     .logo-img {
         margin-right: 0.3rem;
     }
-    .light-bulb {
-        width: 0.8rem;
-    }
     .language {
         margin: 0 1rem;
     }
     @media (max-width: 1248px) {
+        .header {
+            right: 0;
+            left: 0;
+        }
         .header-title {
             width: auto;
             justify-content: space-between;
