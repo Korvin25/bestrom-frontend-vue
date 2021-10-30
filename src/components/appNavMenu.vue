@@ -238,7 +238,7 @@
             </a>
         </div>
 
-        <transition-group name="modal">
+        <transition-group name="mobile-menu-modal">
             <nav v-if="this.showMobileMenu" class="mobile-nav-elements flex-column">
                 <img @click="this.showMobileMenu = false" class="close-mobile-menu" src="../assets/close-mobile-menu.png" alt="close-mobile-menu">
                 <p class="mobile-menu-title">Меню</p>
@@ -685,5 +685,19 @@
             .mobile-menu-nav-bottom-item p {
                 margin: 0;
             }
+        .mobile-menu-modal-enter-active {
+            animation: mobile-menu-modal-in .4s;
+        }
+        .mobile-menu-modal-leave-active {
+            animation: mobile-menu-modal-in .4s reverse;
+        }
+        @keyframes mobile-menu-modal-in {
+            0% {
+                transform: translateY(100%);
+            }
+            100% {
+                transform: translateY(0%);
+            }
+        }
     }
 </style>

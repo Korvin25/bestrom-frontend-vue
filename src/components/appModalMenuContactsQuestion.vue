@@ -39,6 +39,7 @@
 <style scoped>
     .form-call {
         margin-top: 1rem;
+        padding: 0rem 1rem;
     }
     .form-call .input, .form-call .textarea {
         margin: 0.5rem 0;
@@ -48,6 +49,9 @@
         flex-grow: 1;
         width: 100%;
     }
+        .call.btn {
+            margin: 0;
+        }
     @media (max-width: 980px) {
         h2 {
             align-self: center;

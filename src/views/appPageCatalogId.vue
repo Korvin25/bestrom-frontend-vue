@@ -14,7 +14,7 @@
             </div>
             <!-- ./catalog-item-card -->
 
-            <div class="mobile-section catalog-ig-buttons flex-row">
+            <div class="buttons-section catalog-ig-buttons flex-row">
                 <button @click="showModalCall = true" class="btn">ЗАКАЗАТЬ ЗВОНОК</button>
                 <button @click="showModalApplication = true" class="btn">ОТПРАВИТЬ ЗАЯВКУ</button>
             </div>
@@ -55,15 +55,10 @@
                 <app-details-select-solution v-if="isSelected === 4"></app-details-select-solution>
             </div>
             <!-- /.details -->
-
-            <div class="desktop-section catalog-ig-buttons flex-row">
-                <button @click="showModalCall = true" class="btn">ЗАКАЗАТЬ ЗВОНОК</button>
-                <button @click="showModalApplication = true" class="btn">ОТПРАВИТЬ ЗАЯВКУ</button>
-            </div>
         </section>
 
         <section class="section">
-            <h2>Бренды купившие эту машину</h2>
+            <h2 class="title-brand">Бренды купившие эту машину</h2>
             <div class="desktop-section brands flex-row">
                 <app-partners-item link="https://yandex.ru" image="logo-faberlic.png"></app-partners-item>
                 <app-partners-item link="https://yandex.ru" image="logo-jacobs.png"></app-partners-item>
@@ -171,7 +166,7 @@
             height: 25rem;
         }
     .details {
-        margin: 2rem 0;
+        margin: 1rem 0;
         height: 100%;
         padding: 2rem 1rem;
     }
@@ -206,13 +201,21 @@
         flex-grow: 1;
         margin: 0 1rem;
     }
+    .buttons-section.catalog-ig-buttons {
+        margin: 1rem -1rem;
+    }
+    .desktop-section.brands {
+        margin: 0 -1rem;
+    }
+    .title-brand {
+        margin: 1rem 0;
+    }
     .desktop-section {
         display: flex;
     }
     .mobile-section {
         display: none;
     }
-
     @media (max-width: 980px) {
         .desktop-section {
             display: none;
@@ -234,10 +237,10 @@
             height: auto;
             align-self: center;
         }
-        .mobile-section.catalog-ig-buttons {
-            margin: 2rem -0.5rem;
+        .buttons-section.catalog-ig-buttons {
+            margin: 1rem -0.5rem;
         }
-            .mobile-section.catalog-ig-buttons .btn {
+            .buttons-section.catalog-ig-buttons .btn {
                 padding: 0;
                 margin: 0 0.5rem;
                 font-weight: bold;
@@ -252,6 +255,9 @@
             width: 100%;
             margin: 0.5rem 0.5rem;
          }
+         .title-brand {
+            margin: 0;
+        }
         .mobile-section.brands {
             display: block;
             margin: 0 0.5rem;

@@ -346,6 +346,7 @@
         margin-bottom: 3rem;
     }
     .router-button {
+        margin: 1rem 0;
         align-self: center;
     }
     .check-item {

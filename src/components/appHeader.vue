@@ -27,7 +27,7 @@
         box-shadow: 0 0 9px rgba(0, 0, 0, 0.25);
         border-radius: 20px;
         position: fixed;
-        z-index: 9999;
+        z-index: 9997;
         top: 0;
         right: 100px;
         left: calc(71px + 170px + 100px);
@@ -62,7 +62,7 @@
     .language {
         margin: 0 1rem;
     }
-    @media (max-width: 1248px) {
+    @media (max-width: 980px) {
         .header {
             right: 0;
             left: 0;

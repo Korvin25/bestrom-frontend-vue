@@ -15,6 +15,41 @@
 
             <!-- Call to specialist -->
             <form v-if="switchContent" class="form-call flex-column" action="">
+                <label for="company">Компания</label>
+                <input id="company" type="text" class="input" placeholder="БЕСТРОМ">
+                <label for="fio">Ф.И.О</label>
+                <input id="fio" type="text" class="input" placeholder="Иван Иванович">
+                <label for="telephone">Телефон</label>
+                <input id="telephone" type="text" class="input" placeholder="89199966203">
+                <label for="email">E-mail</label>
+                <input id="email" type="text" class="input" placeholder="partner@thedimension.com">
+                <label for="model">Модель оборудования</label>
+                <input id="model" type="text" class="input" placeholder="БЕСТРОМ - 420С">
+
+                <p>Вид обслуживания</p>
+                <div @click="active = !active" class="__select" :data-state="active ? 'active' : ''">
+                    <div :class="active ? 'active' : ''" class="__select__title">{{ this.selectItem }}</div>
+                    <div class="__select__content">
+                        <input id="singleSelect" class="__select__input" type="radio" name="singleSelect" />
+                        <label for="singleSelect" class="__select__label"></label>
+                        <input id="singleSelect0" class="__select__input" type="radio" name="singleSelect" checked/>
+                        <label @click="selectOption('Пуско-наладочные работы')" for="singleSelect0" class="__select__label">Пуско-наладочные работы</label>
+                        <input id="singleSelect1" class="__select__input" type="radio" name="singleSelect" />
+                        <label @click="selectOption('Гарантийное обслуживание')" for="singleSelect1" class="__select__label">Гарантийное обслуживание</label>
+                        <input id="singleSelect2" class="__select__input" type="radio" name="singleSelect" />
+                        <label @click="selectOption('Сервисное обслуживание')" for="singleSelect2" class="__select__label">Сервисное обслуживание</label>
+                        <input id="singleSelect3" class="__select__input" type="radio" name="singleSelect" />
+                        <label @click="selectOption('Другое')" for="singleSelect3" class="__select__label">Другое</label>
+                    </div>
+                </div>
+
+                <label for="date">Желаемая дата прибытия специалиста</label>
+                <input id="date" type="text" class="input" placeholder="Сегодня">
+                <button class="call btn">ОТПРАВИТЬ</button>
+            </form>
+
+            <!-- Ordering spare parts -->
+            <form v-if="!switchContent" class="form-call flex-column" action="">
                 <label for="company-call">Компания</label>
                 <input id="company-call" type="text" class="input" placeholder="БЕСТРОМ">
                 <label for="fio-call">Ф.И.О</label>
@@ -71,41 +106,6 @@
                 <input id="address" type="text" class="input" placeholder="г. Красногорск, Ильинское шоссе, д.15,">
                 <label for="comment">Комментарий</label>
                 <textarea id="comment" rows="5" class="textarea"/>
-                <button class="call btn">ОТПРАВИТЬ</button>
-            </form>
-
-            <!-- Ordering spare parts -->
-            <form v-if="!switchContent" class="form-call flex-column" action="">
-                <label for="company">Компания</label>
-                <input id="company" type="text" class="input" placeholder="БЕСТРОМ">
-                <label for="fio">Ф.И.О</label>
-                <input id="fio" type="text" class="input" placeholder="Иван Иванович">
-                <label for="telephone">Телефон</label>
-                <input id="telephone" type="text" class="input" placeholder="89199966203">
-                <label for="email">E-mail</label>
-                <input id="email" type="text" class="input" placeholder="partner@thedimension.com">
-                <label for="model">Модель оборудования</label>
-                <input id="model" type="text" class="input" placeholder="БЕСТРОМ - 420С">
-
-                <p>Вид обслуживания</p>
-                <div @click="active = !active" class="__select" :data-state="active ? 'active' : ''">
-                    <div :class="active ? 'active' : ''" class="__select__title">{{ this.selectItem }}</div>
-                    <div class="__select__content">
-                        <input id="singleSelect" class="__select__input" type="radio" name="singleSelect" />
-                        <label for="singleSelect" class="__select__label"></label>
-                        <input id="singleSelect0" class="__select__input" type="radio" name="singleSelect" checked/>
-                        <label @click="selectOption('Пуско-наладочные работы')" for="singleSelect0" class="__select__label">Пуско-наладочные работы</label>
-                        <input id="singleSelect1" class="__select__input" type="radio" name="singleSelect" />
-                        <label @click="selectOption('Гарантийное обслуживание')" for="singleSelect1" class="__select__label">Гарантийное обслуживание</label>
-                        <input id="singleSelect2" class="__select__input" type="radio" name="singleSelect" />
-                        <label @click="selectOption('Сервисное обслуживание')" for="singleSelect2" class="__select__label">Сервисное обслуживание</label>
-                        <input id="singleSelect3" class="__select__input" type="radio" name="singleSelect" />
-                        <label @click="selectOption('Другое')" for="singleSelect3" class="__select__label">Другое</label>
-                    </div>
-                </div>
-
-                <label for="date">Желаемая дата прибытия специалиста</label>
-                <input id="date" type="text" class="input" placeholder="Сегодня">
                 <button class="call btn">ОТПРАВИТЬ</button>
             </form>
 
