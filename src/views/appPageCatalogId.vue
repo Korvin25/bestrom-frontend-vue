@@ -60,15 +60,35 @@
         <section class="section">
             <h2 class="title-brand">Бренды купившие эту машину</h2>
             <div class="desktop-section brands flex-row">
-                <app-partners-item link="https://yandex.ru" image="logo-faberlic.png"></app-partners-item>
-                <app-partners-item link="https://yandex.ru" image="logo-jacobs.png"></app-partners-item>
-                <app-partners-item link="https://yandex.ru" image="logo-babaevskiy.png"></app-partners-item>
+                <app-partners-item
+                        image="logo-faberlic.png"
+                        title="«Красный Октябрь»"
+                        text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur atque illum impedit ipsa iure iusto laboriosam laudantium maiores officiis pariatur praesentium quam quod repudiandae sequi sint tempora unde, voluptatum. Odio?"
+                        :machines="true"
+                ></app-partners-item>
+                <app-partners-item
+                        image="logo-jacobs.png"
+                        title="«Красный Октябрь»"
+                        text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur atque illum impedit ipsa iure iusto laboriosam laudantium maiores officiis pariatur praesentium quam quod repudiandae sequi sint tempora unde, voluptatum. Odio?"
+                        :machines="true"
+                ></app-partners-item>
+                <app-partners-item
+                        image="logo-babaevskiy.png"
+                        title="«Красный Октябрь»"
+                        text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur atque illum impedit ipsa iure iusto laboriosam laudantium maiores officiis pariatur praesentium quam quod repudiandae sequi sint tempora unde, voluptatum. Odio?"
+                        :machines="true"
+                ></app-partners-item>
             </div>
 
             <div class="mobile-section brands">
-                <carousel :items-to-show="1.4" :autoplay="3000" :wrap-around="true">
+                <carousel :items-to-show="1.4">
                     <slide v-for="item in 3" :key="item">
-                        <app-partners-item class="carousel__item" link="https://yandex.ru" image="logo-babaevskiy.png"></app-partners-item>
+                        <app-partners-item
+                                image="logo-babaevskiy.png"
+                                title="«Красный Октябрь»"
+                                text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur atque illum impedit ipsa iure iusto laboriosam laudantium maiores officiis pariatur praesentium quam quod repudiandae sequi sint tempora unde, voluptatum. Odio?"
+                                :machines="true"
+                        ></app-partners-item>
                     </slide>
                 </carousel>
             </div>

@@ -57,6 +57,7 @@
         display: none;
     }
     .logo-img {
+        max-width: 2rem;
         margin-right: 0.3rem;
     }
     .language {

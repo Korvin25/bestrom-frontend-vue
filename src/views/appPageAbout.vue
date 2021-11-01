@@ -35,7 +35,7 @@
                                 <p>{{ year }}</p>
                             </div>
                             <div class="history-description">
-                                <img src="../assets/bestrom_logo_big.png" alt="bestrom_logo_big">
+                                <img src="../assets/bestrom_logo.png" alt="bestrom_logo">
                                 <h3>БЕСТРОМ</h3>
                             </div>
                         </div>
@@ -197,7 +197,7 @@
                     <p style="font-size: 14px;">2009</p>
                 </div>
                 <div class="history-description">
-                    <img src="../assets/bestrom_logo_big.png" alt="bestrom_logo_big">
+                    <img src="../assets/bestrom_logo.png" alt="bestrom_logo">
                     <h3>БЕСТРОМ</h3>
                 </div>
             </div>
@@ -212,15 +212,60 @@
                     <img style="margin-right: 8px" src="../assets/arrow_left.png" alt="arrow_left">
                 </div>
                 <div class="partners flex-row">
-                    <app-partners-item image="logo-babaevskiy.png"></app-partners-item>
-                    <app-partners-item image="logo-krasny-oktyabr.png"></app-partners-item>
-                    <app-partners-item image="logo-rot-front.png"></app-partners-item>
-                    <app-partners-item image="logo-jacobs.png"></app-partners-item>
-                    <app-partners-item image="logo-faberlic.png"></app-partners-item>
-                    <app-partners-item image="logo-baisad.png"></app-partners-item>
-                    <app-partners-item image="logo-jacobs.png"></app-partners-item>
-                    <app-partners-item image="logo-faberlic.png"></app-partners-item>
-                    <app-partners-item image="logo-baisad.png"></app-partners-item>
+                    <app-partners-item
+                            image="logo-babaevskiy.png"
+                            title="«Красный Октябрь»"
+                            text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur atque illum impedit ipsa iure iusto laboriosam laudantium maiores officiis pariatur praesentium quam quod repudiandae sequi sint tempora unde, voluptatum. Odio?"
+                            :machines="true"
+                    ></app-partners-item>
+                    <app-partners-item
+                            image="logo-krasny-oktyabr.png"
+                            title="«Красный Октябрь»"
+                            text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur atque illum impedit ipsa iure iusto laboriosam laudantium maiores officiis pariatur praesentium quam quod repudiandae sequi sint tempora unde, voluptatum. Odio?"
+                            :machines="true"
+                    ></app-partners-item>
+                    <app-partners-item
+                            image="logo-rot-front.png"
+                            title="«Красный Октябрь»"
+                            text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur atque illum impedit ipsa iure iusto laboriosam laudantium maiores officiis pariatur praesentium quam quod repudiandae sequi sint tempora unde, voluptatum. Odio?"
+                            :machines="true"
+                    ></app-partners-item>
+                    <app-partners-item
+                            image="logo-jacobs.png"
+                            title="«Красный Октябрь»"
+                            text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur atque illum impedit ipsa iure iusto laboriosam laudantium maiores officiis pariatur praesentium quam quod repudiandae sequi sint tempora unde, voluptatum. Odio?"
+                            :machines="true"
+                    ></app-partners-item>
+                    <app-partners-item
+                            image="logo-faberlic.png"
+                            title="«Красный Октябрь»"
+                            text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur atque illum impedit ipsa iure iusto laboriosam laudantium maiores officiis pariatur praesentium quam quod repudiandae sequi sint tempora unde, voluptatum. Odio?"
+                            :machines="true"
+                    ></app-partners-item>
+                    <app-partners-item
+                            image="logo-baisad.png"
+                            title="«Красный Октябрь»"
+                            text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur atque illum impedit ipsa iure iusto laboriosam laudantium maiores officiis pariatur praesentium quam quod repudiandae sequi sint tempora unde, voluptatum. Odio?"
+                            :machines="true"
+                    ></app-partners-item>
+                    <app-partners-item
+                            image="logo-jacobs.png"
+                            title="«Красный Октябрь»"
+                            text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur atque illum impedit ipsa iure iusto laboriosam laudantium maiores officiis pariatur praesentium quam quod repudiandae sequi sint tempora unde, voluptatum. Odio?"
+                            :machines="true"
+                    ></app-partners-item>
+                    <app-partners-item
+                            image="logo-faberlic.png"
+                            title="«Красный Октябрь»"
+                            text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur atque illum impedit ipsa iure iusto laboriosam laudantium maiores officiis pariatur praesentium quam quod repudiandae sequi sint tempora unde, voluptatum. Odio?"
+                            :machines="true"
+                    ></app-partners-item>
+                    <app-partners-item
+                            image="logo-baisad.png"
+                            title="«Красный Октябрь»"
+                            text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur atque illum impedit ipsa iure iusto laboriosam laudantium maiores officiis pariatur praesentium quam quod repudiandae sequi sint tempora unde, voluptatum. Odio?"
+                            :machines="true"
+                    ></app-partners-item>
                 </div>
                 <div class="arrow">
                     <img style="margin-left: 8px" src="../assets/arrow_right.png" alt="arrow_right">

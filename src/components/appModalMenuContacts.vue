@@ -146,6 +146,10 @@
         .header-title h1 {
             margin: 1rem 0;
         }
+    .logo-img {
+        max-width: 2rem;
+        margin-right: 0.5rem;
+    }
     .location-pin {
         align-self: center;
         margin-right: 0.5rem;

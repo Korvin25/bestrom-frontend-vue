@@ -1,32 +1,38 @@
 <template>
-    <div class="partners-item">
-        <img :src="pathToImage" alt="logo">
-        <a :href="this.link">
+    <div @click="showModalPartnersItem = true" class="partners-item">
+        <img :src="require(`../assets/${image}`)" alt="logo">
         <app-hidden-item
                 text="ПОДРОБНЕЕ"
-        ></app-hidden-item></a>
+        ></app-hidden-item>
     </div>
+
+    <app-modal-partners-item v-if="showModalPartnersItem"
+                             @close="showModalPartnersItem = false"
+                             :image="image"
+                             :title="title"
+                             :text="text"
+                             :machines="machines"
+    ></app-modal-partners-item>
 </template>
 
 <script>
     import appHiddenItem from "@/components/appHiddenItem";
+    import appModalPartnersItem from "@/components/appModalPartnersItem";
 
     export default {
-        props: {
-            link: String,
-            image: String
-        },
-        computed: {
-            pathToImage() {
-                if (!this.image) {
-                    return
-                }
-                const fileName = this.image.toLowerCase();
-                return require(`../assets/${fileName}`);
+        data() {
+            return {
+                showModalPartnersItem: false
             }
         },
+        props: {
+            title: String,
+            text: String,
+            image: String,
+            machines: Boolean
+        },
         components: {
-            appHiddenItem
+            appHiddenItem, appModalPartnersItem
         },
         name: "appPartnersItem"
     }
@@ -61,7 +67,7 @@
     }
     @media (max-width: 980px) {
         .partners-item {
-            width: 100%;
+            width: auto;
             height: 7rem;
         }
     }

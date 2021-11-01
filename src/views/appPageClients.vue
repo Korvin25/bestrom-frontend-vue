@@ -4,21 +4,42 @@
         <section class="desktop-section section">
             <h2>Клиенты</h2>
             <div class="flex-row partners">
-                <app-partners-item link="https://yandex.ru" image="logo-babaevskiy.png"></app-partners-item>
-                <app-partners-item link="https://yandex.ru" image="logo-krasny-oktyabr.png"></app-partners-item>
-                <app-partners-item link="https://yandex.ru" image="logo-rot-front.png"></app-partners-item>
-                <app-partners-item link="https://yandex.ru" image="logo-jacobs.png"></app-partners-item>
-                <app-partners-item link="https://yandex.ru" image="logo-faberlic.png"></app-partners-item>
-                <app-partners-item link="https://yandex.ru" image="logo-baisad.png"></app-partners-item>
-                <app-partners-item link="https://yandex.ru" image="logo-jacobs.png"></app-partners-item>
-                <app-partners-item link="https://yandex.ru" image="logo-faberlic.png"></app-partners-item>
-                <app-partners-item link="https://yandex.ru" image="logo-baisad.png"></app-partners-item>
-                <app-partners-item link="https://yandex.ru" image="logo-jacobs.png"></app-partners-item>
-                <app-partners-item link="https://yandex.ru" image="logo-faberlic.png"></app-partners-item>
-                <app-partners-item link="https://yandex.ru" image="logo-baisad.png"></app-partners-item>
-                <app-partners-item link="https://yandex.ru" image="logo-jacobs.png"></app-partners-item>
-                <app-partners-item link="https://yandex.ru" image="logo-faberlic.png"></app-partners-item>
-                <app-partners-item link="https://yandex.ru" image="logo-baisad.png"></app-partners-item>
+                <app-partners-item
+                        image="logo-babaevskiy.png"
+                        title="«Красный Октябрь»"
+                        text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur atque illum impedit ipsa iure iusto laboriosam laudantium maiores officiis pariatur praesentium quam quod repudiandae sequi sint tempora unde, voluptatum. Odio?"
+                        :machines="true"
+                ></app-partners-item>
+                <app-partners-item
+                        image="logo-krasny-oktyabr.png"
+                        title="«Красный Октябрь»"
+                        text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur atque illum impedit ipsa iure iusto laboriosam laudantium maiores officiis pariatur praesentium quam quod repudiandae sequi sint tempora unde, voluptatum. Odio?"
+                        :machines="true"
+                ></app-partners-item>
+                <app-partners-item
+                        image="logo-rot-front.png"
+                        title="«Красный Октябрь»"
+                        text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur atque illum impedit ipsa iure iusto laboriosam laudantium maiores officiis pariatur praesentium quam quod repudiandae sequi sint tempora unde, voluptatum. Odio?"
+                        :machines="true"
+                ></app-partners-item>
+                <app-partners-item
+                        image="logo-jacobs.png"
+                        title="«Красный Октябрь»"
+                        text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur atque illum impedit ipsa iure iusto laboriosam laudantium maiores officiis pariatur praesentium quam quod repudiandae sequi sint tempora unde, voluptatum. Odio?"
+                        :machines="true"
+                ></app-partners-item>
+                <app-partners-item
+                        image="logo-faberlic.png"
+                        title="«Красный Октябрь»"
+                        text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur atque illum impedit ipsa iure iusto laboriosam laudantium maiores officiis pariatur praesentium quam quod repudiandae sequi sint tempora unde, voluptatum. Odio?"
+                        :machines="true"
+                ></app-partners-item>
+                <app-partners-item
+                        image="logo-baisad.png"
+                        title="«Красный Октябрь»"
+                        text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur atque illum impedit ipsa iure iusto laboriosam laudantium maiores officiis pariatur praesentium quam quod repudiandae sequi sint tempora unde, voluptatum. Odio?"
+                        :machines="true"
+                ></app-partners-item>
             </div>
         </section>
 
@@ -26,51 +47,39 @@
             <h2>Партнеры</h2>
             <div class="flex-row partners">
                 <div class="mobile-partners-item">
-                    <app-partners-item class="mobile-partners-item-logo" link="https://yandex.ru" image="logo-babaevskiy.png"></app-partners-item>
+                    <app-partners-item
+                            image="logo-babaevskiy.png"
+                            title="«Красный Октябрь»"
+                            text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur atque illum impedit ipsa iure iusto laboriosam laudantium maiores officiis pariatur praesentium quam quod repudiandae sequi sint tempora unde, voluptatum. Odio?"
+                            :machines="true"
+                    ></app-partners-item>
                     <p>«Красный Октябрь»</p>
                 </div>
                 <div class="mobile-partners-item">
-                    <app-partners-item class="mobile-partners-item-logo" link="https://yandex.ru" image="logo-krasny-oktyabr.png"></app-partners-item>
+                    <app-partners-item
+                            image="logo-krasny-oktyabr.png"
+                            title="«Красный Октябрь»"
+                            text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur atque illum impedit ipsa iure iusto laboriosam laudantium maiores officiis pariatur praesentium quam quod repudiandae sequi sint tempora unde, voluptatum. Odio?"
+                            :machines="true"
+                    ></app-partners-item>
                     <p>«Красный Октябрь»</p>
                 </div>
                 <div class="mobile-partners-item">
-                    <app-partners-item class="mobile-partners-item-logo" link="https://yandex.ru" image="logo-rot-front.png"></app-partners-item>
+                    <app-partners-item
+                            image="logo-rot-front.png"
+                            title="«Красный Октябрь»"
+                            text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur atque illum impedit ipsa iure iusto laboriosam laudantium maiores officiis pariatur praesentium quam quod repudiandae sequi sint tempora unde, voluptatum. Odio?"
+                            :machines="true"
+                    ></app-partners-item>
                     <p>«Красный Октябрь»</p>
                 </div>
                 <div class="mobile-partners-item">
-                    <app-partners-item class="mobile-partners-item-logo" link="https://yandex.ru" image="logo-jacobs.png"></app-partners-item>
-                    <p>«Красный Октябрь»</p>
-                </div>
-                <div class="mobile-partners-item">
-                    <app-partners-item class="mobile-partners-item-logo" link="https://yandex.ru" image="logo-faberlic.png"></app-partners-item>
-                    <p>«Красный Октябрь»</p>
-                </div>
-                <div class="mobile-partners-item">
-                    <app-partners-item class="mobile-partners-item-logo" link="https://yandex.ru" image="logo-baisad.png"></app-partners-item>
-                    <p>«Красный Октябрь»</p>
-                </div>
-                <div class="mobile-partners-item">
-                    <app-partners-item class="mobile-partners-item-logo" link="https://yandex.ru" image="logo-jacobs.png"></app-partners-item>
-                    <p>«Красный Октябрь»</p>
-                </div>
-                <div class="mobile-partners-item">
-                    <app-partners-item class="mobile-partners-item-logo" link="https://yandex.ru" image="logo-faberlic.png"></app-partners-item>
-                    <p>«Красный Октябрь»</p>
-                </div>
-                <div class="mobile-partners-item">
-                    <app-partners-item class="mobile-partners-item-logo" link="https://yandex.ru" image="logo-baisad.png"></app-partners-item>
-                    <p>«Красный Октябрь»</p>
-                </div>
-                <div class="mobile-partners-item">
-                    <app-partners-item class="mobile-partners-item-logo" link="https://yandex.ru" image="logo-jacobs.png"></app-partners-item>
-                    <p>«Красный Октябрь»</p>
-                </div>
-                <div class="mobile-partners-item">
-                    <app-partners-item class="mobile-partners-item-logo" link="https://yandex.ru" image="logo-faberlic.png"></app-partners-item>
-                    <p>«Красный Октябрь»</p>
-                </div>
-                <div class="mobile-partners-item">
-                    <app-partners-item class="mobile-partners-item-logo" link="https://yandex.ru" image="logo-baisad.png"></app-partners-item>
+                    <app-partners-item
+                            image="logo-jacobs.png"
+                            title="«Красный Октябрь»"
+                            text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur atque illum impedit ipsa iure iusto laboriosam laudantium maiores officiis pariatur praesentium quam quod repudiandae sequi sint tempora unde, voluptatum. Odio?"
+                            :machines="true"
+                    ></app-partners-item>
                     <p>«Красный Октябрь»</p>
                 </div>
             </div>
@@ -136,9 +145,6 @@
             margin: 0 1rem;
             padding: 0 0 0.5rem 0;
             border-bottom: 1px solid #2FC1FF;
-        }
-        .mobile-partners-item-logo {
-            width: auto;
         }
     }
 </style>

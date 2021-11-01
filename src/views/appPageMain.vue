@@ -64,8 +64,18 @@
       <carousel class="mobile-section" :autoplay="3000" :settings='settings'>
         <slide v-for="slide in 10" :key="slide">
           <div class="partners-block carousel__item flex-column">
-            <app-partners-item link="https://yandex.ru" image="logo-vtb.png"></app-partners-item>
-            <app-partners-item link="https://yandex.ru" image="logo-yamato.png"></app-partners-item>
+            <app-partners-item
+                    image="logo-vtb.png"
+                    title="«Красный Октябрь»"
+                    text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur atque illum impedit ipsa iure iusto laboriosam laudantium maiores officiis pariatur praesentium quam quod repudiandae sequi sint tempora unde, voluptatum. Odio?"
+                    :machines="false"
+            ></app-partners-item>
+            <app-partners-item
+                    image="logo-yamato.png"
+                    title="«Красный Октябрь»"
+                    text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur atque illum impedit ipsa iure iusto laboriosam laudantium maiores officiis pariatur praesentium quam quod repudiandae sequi sint tempora unde, voluptatum. Odio?"
+                    :machines="false"
+            ></app-partners-item>
           </div>
         </slide>
       </carousel>
@@ -76,12 +86,42 @@
         </div>
         <!-- /.arrow -->
         <div class="flex-row partners">
-          <app-partners-item link="https://yandex.ru" image="logo-vtb.png"></app-partners-item>
-          <app-partners-item link="https://yandex.ru" image="logo-yamato.png"></app-partners-item>
-          <app-partners-item link="https://yandex.ru" image="logo-festo.png"></app-partners-item>
-          <app-partners-item link="https://yandex.ru" image="logo-siemens.png"></app-partners-item>
-          <app-partners-item link="https://yandex.ru" image="logo-interroll.png"></app-partners-item>
-          <app-partners-item link="https://yandex.ru" image="logo-rexroth.png"></app-partners-item>
+          <app-partners-item
+                  image="logo-vtb.png"
+                  title="«Красный Октябрь»"
+                  text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur atque illum impedit ipsa iure iusto laboriosam laudantium maiores officiis pariatur praesentium quam quod repudiandae sequi sint tempora unde, voluptatum. Odio?"
+                  :machines="false"
+          ></app-partners-item>
+          <app-partners-item
+                  image="logo-yamato.png"
+                  title="«Красный Октябрь»"
+                  text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur atque illum impedit ipsa iure iusto laboriosam laudantium maiores officiis pariatur praesentium quam quod repudiandae sequi sint tempora unde, voluptatum. Odio?"
+                  :machines="false"
+          ></app-partners-item>
+          <app-partners-item
+                  image="logo-festo.png"
+                  title="«Красный Октябрь»"
+                  text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur atque illum impedit ipsa iure iusto laboriosam laudantium maiores officiis pariatur praesentium quam quod repudiandae sequi sint tempora unde, voluptatum. Odio?"
+                  :machines="false"
+          ></app-partners-item>
+          <app-partners-item
+                  image="logo-siemens.png"
+                  title="«Красный Октябрь»"
+                  text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur atque illum impedit ipsa iure iusto laboriosam laudantium maiores officiis pariatur praesentium quam quod repudiandae sequi sint tempora unde, voluptatum. Odio?"
+                  :machines="false"
+          ></app-partners-item>
+          <app-partners-item
+                  image="logo-interroll.png"
+                  title="«Красный Октябрь»"
+                  text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur atque illum impedit ipsa iure iusto laboriosam laudantium maiores officiis pariatur praesentium quam quod repudiandae sequi sint tempora unde, voluptatum. Odio?"
+                  :machines="false"
+          ></app-partners-item>
+          <app-partners-item
+                  image="logo-rexroth.png"
+                  title="«Красный Октябрь»"
+                  text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur atque illum impedit ipsa iure iusto laboriosam laudantium maiores officiis pariatur praesentium quam quod repudiandae sequi sint tempora unde, voluptatum. Odio?"
+                  :machines="false"
+          ></app-partners-item>
         </div>
         <!-- /.partners -->
         <div class="arrow">
@@ -100,8 +140,18 @@
       <carousel class="mobile-section" :autoplay="3000" :settings='settings'>
         <slide v-for="slide in 10" :key="slide">
           <div class="partners-block carousel__item flex-column">
-            <app-partners-item link="https://yandex.ru" image="logo-babaevskiy.png"></app-partners-item>
-            <app-partners-item link="https://yandex.ru" image="logo-jacobs.png"></app-partners-item>
+            <app-partners-item
+                    image="logo-babaevskiy.png"
+                    title="«Красный Октябрь»"
+                    text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur atque illum impedit ipsa iure iusto laboriosam laudantium maiores officiis pariatur praesentium quam quod repudiandae sequi sint tempora unde, voluptatum. Odio?"
+                    :machines="true"
+            ></app-partners-item>
+            <app-partners-item
+                    image="logo-jacobs.png"
+                    title="«Красный Октябрь»"
+                    text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur atque illum impedit ipsa iure iusto laboriosam laudantium maiores officiis pariatur praesentium quam quod repudiandae sequi sint tempora unde, voluptatum. Odio?"
+                    :machines="true"
+            ></app-partners-item>
           </div>
         </slide>
       </carousel>
@@ -111,15 +161,42 @@
           <img style="margin-right: 8px" src="../assets/arrow_left.png" alt="arrow_left">
         </div>
         <div class="flex-row partners">
-          <app-partners-item link="https://yandex.ru" image="logo-babaevskiy.png"></app-partners-item>
-          <app-partners-item link="https://yandex.ru" image="logo-krasny-oktyabr.png"></app-partners-item>
-          <app-partners-item link="https://yandex.ru" image="logo-rot-front.png"></app-partners-item>
-          <app-partners-item link="https://yandex.ru" image="logo-jacobs.png"></app-partners-item>
-          <app-partners-item link="https://yandex.ru" image="logo-faberlic.png"></app-partners-item>
-          <app-partners-item link="https://yandex.ru" image="logo-baisad.png"></app-partners-item>
-          <app-partners-item link="https://yandex.ru" image="logo-jacobs.png"></app-partners-item>
-          <app-partners-item link="https://yandex.ru" image="logo-faberlic.png"></app-partners-item>
-          <app-partners-item link="https://yandex.ru" image="logo-baisad.png"></app-partners-item>
+          <app-partners-item
+                  image="logo-babaevskiy.png"
+                  title="«Красный Октябрь»"
+                  text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur atque illum impedit ipsa iure iusto laboriosam laudantium maiores officiis pariatur praesentium quam quod repudiandae sequi sint tempora unde, voluptatum. Odio?"
+                  :machines="true"
+          ></app-partners-item>
+          <app-partners-item
+                  image="logo-krasny-oktyabr.png"
+                  title="«Красный Октябрь»"
+                  text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur atque illum impedit ipsa iure iusto laboriosam laudantium maiores officiis pariatur praesentium quam quod repudiandae sequi sint tempora unde, voluptatum. Odio?"
+                  :machines="true"
+          ></app-partners-item>
+          <app-partners-item
+                  image="logo-rot-front.png"
+                  title="«Красный Октябрь»"
+                  text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur atque illum impedit ipsa iure iusto laboriosam laudantium maiores officiis pariatur praesentium quam quod repudiandae sequi sint tempora unde, voluptatum. Odio?"
+                  :machines="true"
+          ></app-partners-item>
+          <app-partners-item
+                  image="logo-jacobs.png"
+                  title="«Красный Октябрь»"
+                  text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur atque illum impedit ipsa iure iusto laboriosam laudantium maiores officiis pariatur praesentium quam quod repudiandae sequi sint tempora unde, voluptatum. Odio?"
+                  :machines="true"
+          ></app-partners-item>
+          <app-partners-item
+                  image="logo-faberlic.png"
+                  title="«Красный Октябрь»"
+                  text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur atque illum impedit ipsa iure iusto laboriosam laudantium maiores officiis pariatur praesentium quam quod repudiandae sequi sint tempora unde, voluptatum. Odio?"
+                  :machines="true"
+          ></app-partners-item>
+          <app-partners-item
+                  image="logo-baisad.png"
+                  title="«Красный Октябрь»"
+                  text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur atque illum impedit ipsa iure iusto laboriosam laudantium maiores officiis pariatur praesentium quam quod repudiandae sequi sint tempora unde, voluptatum. Odio?"
+                  :machines="true"
+          ></app-partners-item>
         </div>
         <div class="arrow">
           <img style="margin-left: 8px" src="../assets/arrow_right.png" alt="arrow_right">

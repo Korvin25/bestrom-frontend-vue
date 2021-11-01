@@ -10,7 +10,7 @@
                     @click="scrollToTop"
                     class="nav-item img"
                     to="/">
-                <img src="../assets/bestrom_logo.png" alt="menu-item-img">
+                <img class="logo-bestrom" src="../assets/bestrom_logo.png" alt="menu-item-img">
             </router-link>
             <router-link
                     @mouseenter="hoverItem = 2"
@@ -260,7 +260,7 @@
                             class="nav-mobile-item flex-row"
                             to="/">
                         <div :class="hoverItem === 1 || this.$route.path === '/' ? 'img-hover' : ''" class="nav-mobile-item-img card-shadow">
-                            <img src="../assets/bestrom_logo.png" alt="menu-item-img">
+                            <img class="logo-bestrom" src="../assets/bestrom_logo.png" alt="menu-item-img">
                         </div>
                         <p :class="hoverItem === 1 || this.$route.path === '/' ? 'text-hover' : ''">Главная</p>
                     </router-link>
@@ -465,6 +465,10 @@
 </script>
 
 <style scoped>
+    .logo-bestrom {
+        max-width: 2rem;
+        width: 100%;
+    }
     .mobile-nav {
         display: none;
     }
