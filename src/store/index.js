@@ -1,9 +1,10 @@
 import { createStore } from 'vuex'
-import clients from "@/store/modules/clients";
+import clients from "@/store/modules/clients"
+import partners from "@/store/modules/partners"
 
 export default createStore({
     modules: {
-        clients
+        clients, partners
     },
     state() {
         return {

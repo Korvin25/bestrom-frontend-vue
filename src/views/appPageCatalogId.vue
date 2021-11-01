@@ -61,32 +61,24 @@
             <h2 class="title-brand">Бренды купившие эту машину</h2>
             <div class="desktop-section brands flex-row">
                 <app-partners-item
-                        image="logo-faberlic.png"
-                        title="«Красный Октябрь»"
-                        text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur atque illum impedit ipsa iure iusto laboriosam laudantium maiores officiis pariatur praesentium quam quod repudiandae sequi sint tempora unde, voluptatum. Odio?"
-                        :machines="true"
-                ></app-partners-item>
-                <app-partners-item
-                        image="logo-jacobs.png"
-                        title="«Красный Октябрь»"
-                        text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur atque illum impedit ipsa iure iusto laboriosam laudantium maiores officiis pariatur praesentium quam quod repudiandae sequi sint tempora unde, voluptatum. Odio?"
-                        :machines="true"
-                ></app-partners-item>
-                <app-partners-item
-                        image="logo-babaevskiy.png"
-                        title="«Красный Октябрь»"
-                        text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur atque illum impedit ipsa iure iusto laboriosam laudantium maiores officiis pariatur praesentium quam quod repudiandae sequi sint tempora unde, voluptatum. Odio?"
+                        v-for="client in CLIENTS"
+                        :key="client.id"
+                        :image="client.logo"
+                        :alt="client.alt"
+                        :title="client.name"
+                        :text="client.description"
                         :machines="true"
                 ></app-partners-item>
             </div>
 
             <div class="mobile-section brands">
-                <carousel :items-to-show="1.4">
-                    <slide v-for="item in 3" :key="item">
+                <carousel :items-to-show="1.4" :settings="settings">
+                    <slide style="pointer-events: none;" v-for="client in CLIENTS" :key="client.id">
                         <app-partners-item
-                                image="logo-babaevskiy.png"
-                                title="«Красный Октябрь»"
-                                text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur atque illum impedit ipsa iure iusto laboriosam laudantium maiores officiis pariatur praesentium quam quod repudiandae sequi sint tempora unde, voluptatum. Odio?"
+                                :image="client.logo"
+                                :alt="client.alt"
+                                :title="client.name"
+                                :text="client.description"
                                 :machines="true"
                         ></app-partners-item>
                     </slide>
@@ -115,10 +107,17 @@
     import appModalCatalogCall from "@/components/appModalCatalogCall";
     import appModalCatalogApplication from "@/components/appModalCatalogApplication";
     import { Carousel, Slide } from 'vue3-carousel';
+    import {mapActions, mapGetters} from "vuex";
 
     export default {
         data() {
           return {
+              settings: {
+                  itemsToShow: 1.5,
+                  autoplay: 3500,
+                  wrapAround: true,
+                  snapAlign: 'center'
+              },
               aboutItem: [
                   {
                       disableImage: 'catalog-details-settings.png',
@@ -150,6 +149,19 @@
               showModalCall: false,
               showModalApplication: false
           }
+        },
+        computed: {
+            ...mapGetters({
+                CLIENTS:'clients/CLIENTS'
+            })
+        },
+        methods: {
+            ...mapActions({
+                GET_CLIENTS:'clients/GET_CLIENTS'
+            })
+        },
+        mounted() {
+            this.GET_CLIENTS()
         },
         watch: {
             showModalCall() {
@@ -226,6 +238,7 @@
     }
     .desktop-section.brands {
         margin: 0 -1rem;
+        flex-wrap: wrap;
     }
     .title-brand {
         margin: 1rem 0;

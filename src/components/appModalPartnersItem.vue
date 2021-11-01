@@ -8,7 +8,7 @@
             </div>
             <h2 class="title">{{ title }}</h2>
             <div class="flex-row about-partner">
-                <img class="partner-logo" :src="require(`../assets/${image}`)" alt="logo">
+                <img class="partner-logo" :src="image" :alt="alt">
                 <p>{{ text }}</p>
             </div>
 
@@ -71,6 +71,7 @@
             title: String,
             text: String,
             image: String,
+            alt: String,
             machines: Boolean
         },
         components: {
@@ -94,9 +95,8 @@
     }
     .partner-logo {
         align-self: center;
-        max-width: 20rem;
-        margin:0 1rem 0 0;
-        width: 100%;
+        max-width: 10rem;
+        margin:0 2rem 0 0;
     }
     .desktop {
         display: block;
@@ -122,9 +122,7 @@
             flex-direction: column;
         }
         .partner-logo {
-            align-self: center;
-            max-width: 15rem;
-            margin-bottom: 1rem;
+            margin: 0 0 1rem 0;
         }
     }
 </style>

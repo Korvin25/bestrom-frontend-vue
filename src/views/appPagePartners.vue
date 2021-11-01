@@ -5,21 +5,12 @@
             <h2>Партнеры</h2>
             <div class="flex-row partners">
                 <app-partners-item
-                        title="«Красный Октябрь»"
-                        text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur atque illum impedit ipsa iure iusto laboriosam laudantium maiores officiis pariatur praesentium quam quod repudiandae sequi sint tempora unde, voluptatum. Odio?"
-                        image="logo-vtb.png"
-                        :machines="false"
-                ></app-partners-item>
-                <app-partners-item
-                        title="«Красный Октябрь»"
-                        image="logo-yamato.png"
-                        text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur atque illum impedit ipsa iure iusto laboriosam laudantium maiores officiis pariatur praesentium quam quod repudiandae sequi sint tempora unde, voluptatum. Odio?"
-                        :machines="false"
-                ></app-partners-item>
-                <app-partners-item
-                        title="«Красный Октябрь»"
-                        image="logo-festo.png"
-                        text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur atque illum impedit ipsa iure iusto laboriosam laudantium maiores officiis pariatur praesentium quam quod repudiandae sequi sint tempora unde, voluptatum. Odio?"
+                        v-for="partner in PARTNERS"
+                        :key="partner.id"
+                        :image="partner.logo"
+                        :alt="partner.alt"
+                        :title="partner.name"
+                        :text="partner.description"
                         :machines="false"
                 ></app-partners-item>
             </div>
@@ -28,25 +19,15 @@
         <section class="mobile-section section">
             <h2>Партнеры</h2>
             <div class="flex-row partners">
-                <div class="mobile-partners-item">
-                    <app-partners-item title="«Красный Октябрь»"
-                                       image="logo-rexroth.png"
-                                       text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur atque illum impedit ipsa iure iusto laboriosam laudantium maiores officiis pariatur praesentium quam quod repudiandae sequi sint tempora unde, voluptatum. Odio?"
-                                       :machines="false"
+                <div class="mobile-partners-item" v-for="partner in PARTNERS" :key="partner.id">
+                    <app-partners-item
+                            :image="partner.logo"
+                            :alt="partner.alt"
+                            :title="partner.name"
+                            :text="partner.description"
+                            :machines="false"
                     ></app-partners-item>
-                    <p>«Красный Октябрь»</p>
-                    <app-partners-item title="«Красный Октябрь»"
-                                       image="logo-rexroth.png"
-                                       text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur atque illum impedit ipsa iure iusto laboriosam laudantium maiores officiis pariatur praesentium quam quod repudiandae sequi sint tempora unde, voluptatum. Odio?"
-                                       :machines="false"
-                    ></app-partners-item>
-                    <p>«Красный Октябрь»</p>
-                    <app-partners-item title="«Красный Октябрь»"
-                                       image="logo-rexroth.png"
-                                       text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur atque illum impedit ipsa iure iusto laboriosam laudantium maiores officiis pariatur praesentium quam quod repudiandae sequi sint tempora unde, voluptatum. Odio?"
-                                       :machines="false"
-                    ></app-partners-item>
-                    <p>«Красный Октябрь»</p>
+                    <p>{{ partner.name }}</p>
                 </div>
             </div>
         </section>
@@ -58,8 +39,22 @@
     import appHeader from "@/components/appHeader";
     import appFooter from "@/components/appFooter";
     import appPartnersItem from "@/components/appPartnersItem";
+    import { mapGetters, mapActions } from "vuex"
 
     export default {
+        computed: {
+            ...mapGetters({
+                PARTNERS:'partners/PARTNERS'
+            })
+        },
+        methods: {
+            ...mapActions({
+                GET_PARTNERS:'partners/GET_PARTNERS'
+            })
+        },
+        mounted() {
+            this.GET_PARTNERS()
+        },
         components: {
             appHeader, appFooter, appPartnersItem
         },
@@ -74,7 +69,6 @@
     .mobile-section {
         display: none;
     }
-
     @media (max-width: 980px) {
         .desktop-section {
             display: none;

@@ -26,6 +26,7 @@
             justify-content: space-around;
             text-align: center;
             align-items: center;
+            padding: 0 1rem;
             margin: 1rem 0 5rem 0;
         }
         .footer p {

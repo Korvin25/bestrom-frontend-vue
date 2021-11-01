@@ -5,30 +5,30 @@ export default {
 
     state() {
         return {
-            clients: [],
+            partners: [],
         }
     },
 
     getters: {
-        CLIENTS(state) {
-            return state.clients
+        PARTNERS(state) {
+            return state.partners
         }
     },
 
     mutations: {
-        SET_CLIENTS(state, content) {
-            state.clients = content
+        SET_PARTNERS(state, content) {
+            state.partners = content
         }
     },
 
     actions: {
-        GET_CLIENTS({commit}) {
+        GET_PARTNERS({commit}) {
             return axios({
                 method: 'GET',
-                url: 'http://bexram.online:8001/client/'
+                url: 'http://bexram.online:8001/partner/'
             })
                 .then((response) => {
-                    commit('SET_CLIENTS', response.data)
+                    commit('SET_PARTNERS', response.data)
                     return response
                 })
                 .catch((error) => {

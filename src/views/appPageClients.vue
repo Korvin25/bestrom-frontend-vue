@@ -5,82 +5,29 @@
             <h2>Клиенты</h2>
             <div class="flex-row partners">
                 <app-partners-item
-                        image="logo-babaevskiy.png"
-                        title="«Красный Октябрь»"
-                        text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur atque illum impedit ipsa iure iusto laboriosam laudantium maiores officiis pariatur praesentium quam quod repudiandae sequi sint tempora unde, voluptatum. Odio?"
-                        :machines="true"
-                ></app-partners-item>
-                <app-partners-item
-                        image="logo-krasny-oktyabr.png"
-                        title="«Красный Октябрь»"
-                        text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur atque illum impedit ipsa iure iusto laboriosam laudantium maiores officiis pariatur praesentium quam quod repudiandae sequi sint tempora unde, voluptatum. Odio?"
-                        :machines="true"
-                ></app-partners-item>
-                <app-partners-item
-                        image="logo-rot-front.png"
-                        title="«Красный Октябрь»"
-                        text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur atque illum impedit ipsa iure iusto laboriosam laudantium maiores officiis pariatur praesentium quam quod repudiandae sequi sint tempora unde, voluptatum. Odio?"
-                        :machines="true"
-                ></app-partners-item>
-                <app-partners-item
-                        image="logo-jacobs.png"
-                        title="«Красный Октябрь»"
-                        text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur atque illum impedit ipsa iure iusto laboriosam laudantium maiores officiis pariatur praesentium quam quod repudiandae sequi sint tempora unde, voluptatum. Odio?"
-                        :machines="true"
-                ></app-partners-item>
-                <app-partners-item
-                        image="logo-faberlic.png"
-                        title="«Красный Октябрь»"
-                        text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur atque illum impedit ipsa iure iusto laboriosam laudantium maiores officiis pariatur praesentium quam quod repudiandae sequi sint tempora unde, voluptatum. Odio?"
-                        :machines="true"
-                ></app-partners-item>
-                <app-partners-item
-                        image="logo-baisad.png"
-                        title="«Красный Октябрь»"
-                        text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur atque illum impedit ipsa iure iusto laboriosam laudantium maiores officiis pariatur praesentium quam quod repudiandae sequi sint tempora unde, voluptatum. Odio?"
+                        v-for="client in CLIENTS"
+                        :key="client.id"
+                        :image="client.logo"
+                        :alt="client.alt"
+                        :title="client.name"
+                        :text="client.description"
                         :machines="true"
                 ></app-partners-item>
             </div>
         </section>
 
         <section class="mobile-section section">
-            <h2>Партнеры</h2>
+            <h2>Клиенты</h2>
             <div class="flex-row partners">
-                <div class="mobile-partners-item">
+                <div class="mobile-partners-item" v-for="client in CLIENTS" :key="client.id">
                     <app-partners-item
-                            image="logo-babaevskiy.png"
-                            title="«Красный Октябрь»"
-                            text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur atque illum impedit ipsa iure iusto laboriosam laudantium maiores officiis pariatur praesentium quam quod repudiandae sequi sint tempora unde, voluptatum. Odio?"
+                            :image="client.logo"
+                            :alt="client.alt"
+                            :title="client.name"
+                            :text="client.description"
                             :machines="true"
                     ></app-partners-item>
-                    <p>«Красный Октябрь»</p>
-                </div>
-                <div class="mobile-partners-item">
-                    <app-partners-item
-                            image="logo-krasny-oktyabr.png"
-                            title="«Красный Октябрь»"
-                            text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur atque illum impedit ipsa iure iusto laboriosam laudantium maiores officiis pariatur praesentium quam quod repudiandae sequi sint tempora unde, voluptatum. Odio?"
-                            :machines="true"
-                    ></app-partners-item>
-                    <p>«Красный Октябрь»</p>
-                </div>
-                <div class="mobile-partners-item">
-                    <app-partners-item
-                            image="logo-rot-front.png"
-                            title="«Красный Октябрь»"
-                            text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur atque illum impedit ipsa iure iusto laboriosam laudantium maiores officiis pariatur praesentium quam quod repudiandae sequi sint tempora unde, voluptatum. Odio?"
-                            :machines="true"
-                    ></app-partners-item>
-                    <p>«Красный Октябрь»</p>
-                </div>
-                <div class="mobile-partners-item">
-                    <app-partners-item
-                            image="logo-jacobs.png"
-                            title="«Красный Октябрь»"
-                            text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur atque illum impedit ipsa iure iusto laboriosam laudantium maiores officiis pariatur praesentium quam quod repudiandae sequi sint tempora unde, voluptatum. Odio?"
-                            :machines="true"
-                    ></app-partners-item>
-                    <p>«Красный Октябрь»</p>
+                    <p>{{ client.name }}</p>
                 </div>
             </div>
         </section>
@@ -106,9 +53,7 @@
             })
         },
         mounted() {
-            this.GET_CLIENTS().then(() => {
-                console.log(this.CLIENTS)
-            })
+            this.GET_CLIENTS()
         },
         components: {
             appHeader, appFooter, appPartnersItem

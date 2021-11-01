@@ -1,6 +1,6 @@
 <template>
     <div @click="showModalPartnersItem = true" class="partners-item">
-        <img :src="require(`../assets/${image}`)" alt="logo">
+        <img :src="image" :alt="alt">
         <app-hidden-item
                 text="ПОДРОБНЕЕ"
         ></app-hidden-item>
@@ -9,6 +9,7 @@
     <app-modal-partners-item v-if="showModalPartnersItem"
                              @close="showModalPartnersItem = false"
                              :image="image"
+                             :alt="alt"
                              :title="title"
                              :text="text"
                              :machines="machines"
@@ -29,6 +30,7 @@
             title: String,
             text: String,
             image: String,
+            alt: String,
             machines: Boolean
         },
         components: {

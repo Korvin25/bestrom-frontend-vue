@@ -61,154 +61,88 @@
     <section class="section">
       <h2>Партнеры</h2>
 
-      <carousel class="mobile-section" :autoplay="3000" :settings='settings'>
-        <slide v-for="slide in 10" :key="slide">
+      <!-- Desktop -->
+      <div class="slider-content flex-row card-shadow partners-slider-content">
+        <div class="arrow">
+          <img style="margin-right: 8px" src="../assets/arrow_left.png" alt="arrow_left">
+        </div>
+        <div class="flex-row partners">
+          <app-partners-item
+                  v-for="partner in PARTNERS"
+                  :key="partner.id"
+                  :image="partner.logo"
+                  :alt="partner.alt"
+                  :title="partner.name"
+                  :text="partner.description"
+                  :machines="false"
+          ></app-partners-item>
+        </div>
+        <div class="arrow">
+          <img style="margin-left: 8px" src="../assets/arrow_right.png" alt="arrow_right">
+        </div>
+        <!-- точки перехода для слайдера -->
+      </div>
+
+      <!-- Mobile -->
+      <carousel class="mobile-section" :settings='settings'>
+        <slide v-for="partner in PARTNERS"  :key="partner.id">
           <div class="partners-block carousel__item flex-column">
             <app-partners-item
-                    image="logo-vtb.png"
-                    title="«Красный Октябрь»"
-                    text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur atque illum impedit ipsa iure iusto laboriosam laudantium maiores officiis pariatur praesentium quam quod repudiandae sequi sint tempora unde, voluptatum. Odio?"
-                    :machines="false"
-            ></app-partners-item>
-            <app-partners-item
-                    image="logo-yamato.png"
-                    title="«Красный Октябрь»"
-                    text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur atque illum impedit ipsa iure iusto laboriosam laudantium maiores officiis pariatur praesentium quam quod repudiandae sequi sint tempora unde, voluptatum. Odio?"
+                    :image="partner.logo"
+                    :alt="partner.alt"
+                    :title="partner.name"
+                    :text="partner.description"
                     :machines="false"
             ></app-partners-item>
           </div>
         </slide>
       </carousel>
-
-      <div class="slider-content flex-row card-shadow partners-slider-content">
-        <div class="arrow">
-          <img style="margin-right: 8px" src="../assets/arrow_left.png" alt="arrow_left">
-        </div>
-        <!-- /.arrow -->
-        <div class="flex-row partners">
-          <app-partners-item
-                  image="logo-vtb.png"
-                  title="«Красный Октябрь»"
-                  text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur atque illum impedit ipsa iure iusto laboriosam laudantium maiores officiis pariatur praesentium quam quod repudiandae sequi sint tempora unde, voluptatum. Odio?"
-                  :machines="false"
-          ></app-partners-item>
-          <app-partners-item
-                  image="logo-yamato.png"
-                  title="«Красный Октябрь»"
-                  text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur atque illum impedit ipsa iure iusto laboriosam laudantium maiores officiis pariatur praesentium quam quod repudiandae sequi sint tempora unde, voluptatum. Odio?"
-                  :machines="false"
-          ></app-partners-item>
-          <app-partners-item
-                  image="logo-festo.png"
-                  title="«Красный Октябрь»"
-                  text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur atque illum impedit ipsa iure iusto laboriosam laudantium maiores officiis pariatur praesentium quam quod repudiandae sequi sint tempora unde, voluptatum. Odio?"
-                  :machines="false"
-          ></app-partners-item>
-          <app-partners-item
-                  image="logo-siemens.png"
-                  title="«Красный Октябрь»"
-                  text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur atque illum impedit ipsa iure iusto laboriosam laudantium maiores officiis pariatur praesentium quam quod repudiandae sequi sint tempora unde, voluptatum. Odio?"
-                  :machines="false"
-          ></app-partners-item>
-          <app-partners-item
-                  image="logo-interroll.png"
-                  title="«Красный Октябрь»"
-                  text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur atque illum impedit ipsa iure iusto laboriosam laudantium maiores officiis pariatur praesentium quam quod repudiandae sequi sint tempora unde, voluptatum. Odio?"
-                  :machines="false"
-          ></app-partners-item>
-          <app-partners-item
-                  image="logo-rexroth.png"
-                  title="«Красный Октябрь»"
-                  text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur atque illum impedit ipsa iure iusto laboriosam laudantium maiores officiis pariatur praesentium quam quod repudiandae sequi sint tempora unde, voluptatum. Odio?"
-                  :machines="false"
-          ></app-partners-item>
-        </div>
-        <!-- /.partners -->
-        <div class="arrow">
-          <img style="margin-left: 8px" src="../assets/arrow_right.png" alt="arrow_right">
-        </div>
-        <!-- /.arrow -->
-        <!-- точки перехода для слайдера -->
-      </div>
-      <!-- /.slider-content -->
     </section>
-    <!-- /.section -->
 
     <section class="section">
       <h2>Клиенты</h2>
 
-      <carousel class="mobile-section" :autoplay="3000" :settings='settings'>
-        <slide v-for="slide in 10" :key="slide">
-          <div class="partners-block carousel__item flex-column">
-            <app-partners-item
-                    image="logo-babaevskiy.png"
-                    title="«Красный Октябрь»"
-                    text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur atque illum impedit ipsa iure iusto laboriosam laudantium maiores officiis pariatur praesentium quam quod repudiandae sequi sint tempora unde, voluptatum. Odio?"
-                    :machines="true"
-            ></app-partners-item>
-            <app-partners-item
-                    image="logo-jacobs.png"
-                    title="«Красный Октябрь»"
-                    text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur atque illum impedit ipsa iure iusto laboriosam laudantium maiores officiis pariatur praesentium quam quod repudiandae sequi sint tempora unde, voluptatum. Odio?"
-                    :machines="true"
-            ></app-partners-item>
-          </div>
-        </slide>
-      </carousel>
-
+      <!-- Desktop -->
       <div class="slider-content flex-row card-shadow partners-slider-content">
         <div class="arrow">
           <img style="margin-right: 8px" src="../assets/arrow_left.png" alt="arrow_left">
         </div>
         <div class="flex-row partners">
           <app-partners-item
-                  image="logo-babaevskiy.png"
-                  title="«Красный Октябрь»"
-                  text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur atque illum impedit ipsa iure iusto laboriosam laudantium maiores officiis pariatur praesentium quam quod repudiandae sequi sint tempora unde, voluptatum. Odio?"
-                  :machines="true"
-          ></app-partners-item>
-          <app-partners-item
-                  image="logo-krasny-oktyabr.png"
-                  title="«Красный Октябрь»"
-                  text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur atque illum impedit ipsa iure iusto laboriosam laudantium maiores officiis pariatur praesentium quam quod repudiandae sequi sint tempora unde, voluptatum. Odio?"
-                  :machines="true"
-          ></app-partners-item>
-          <app-partners-item
-                  image="logo-rot-front.png"
-                  title="«Красный Октябрь»"
-                  text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur atque illum impedit ipsa iure iusto laboriosam laudantium maiores officiis pariatur praesentium quam quod repudiandae sequi sint tempora unde, voluptatum. Odio?"
-                  :machines="true"
-          ></app-partners-item>
-          <app-partners-item
-                  image="logo-jacobs.png"
-                  title="«Красный Октябрь»"
-                  text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur atque illum impedit ipsa iure iusto laboriosam laudantium maiores officiis pariatur praesentium quam quod repudiandae sequi sint tempora unde, voluptatum. Odio?"
-                  :machines="true"
-          ></app-partners-item>
-          <app-partners-item
-                  image="logo-faberlic.png"
-                  title="«Красный Октябрь»"
-                  text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur atque illum impedit ipsa iure iusto laboriosam laudantium maiores officiis pariatur praesentium quam quod repudiandae sequi sint tempora unde, voluptatum. Odio?"
-                  :machines="true"
-          ></app-partners-item>
-          <app-partners-item
-                  image="logo-baisad.png"
-                  title="«Красный Октябрь»"
-                  text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur atque illum impedit ipsa iure iusto laboriosam laudantium maiores officiis pariatur praesentium quam quod repudiandae sequi sint tempora unde, voluptatum. Odio?"
+                  v-for="client in CLIENTS"
+                  :key="client.id"
+                  :image="client.logo"
+                  :alt="client.alt"
+                  :title="client.name"
+                  :text="client.description"
                   :machines="true"
           ></app-partners-item>
         </div>
         <div class="arrow">
           <img style="margin-left: 8px" src="../assets/arrow_right.png" alt="arrow_right">
         </div>
-        <!-- точки перехода для слайдера -->
       </div>
+
+      <!-- Mobile -->
+      <carousel class="mobile-section" :settings='settings'>
+        <slide v-for="client in CLIENTS" :key="client.id">
+          <div class="partners-block carousel__item flex-column">
+            <app-partners-item
+                    :image="client.logo"
+                    :alt="client.alt"
+                    :title="client.name"
+                    :text="client.description"
+                    :machines="true"
+            ></app-partners-item>
+          </div>
+        </slide>
+      </carousel>
     </section>
-    <!-- /.section -->
+
     <section class="section">
       <h2>Новости</h2>
 
-      <carousel class="mobile-section" :items-to-show="1.3">
+      <carousel class="mobile-section" :settings="settings">
         <slide v-for="slide in 3" :key="slide">
           <app-main-news-mobile
                   class="carousel__item"
@@ -263,23 +197,39 @@ import appMainNewsSmallItem from "@/components/appMainNewsSmallItem";
 import appHiddenItem from "@/components/appHiddenItem";
 import appMainNewsMobile from "@/components/appMainNewsMobile";
 import { Carousel, Slide } from 'vue3-carousel';
+import {mapActions, mapGetters} from "vuex";
 
 export default {
   data() {
     return {
       settings: {
         itemsToShow: 1.5,
+        autoplay: 3500,
         wrapAround: true,
         snapAlign: 'center'
       },
     }
   },
+  computed: {
+    ...mapGetters({
+      PARTNERS:'partners/PARTNERS',
+      CLIENTS:'clients/CLIENTS'
+    })
+  },
   methods: {
+    ...mapActions({
+      GET_PARTNERS:'partners/GET_PARTNERS',
+      GET_CLIENTS:'clients/GET_CLIENTS'
+    }),
     pushToCatalog(radioitem) {
       this.$store.state.radioCatalogSelect = radioitem
       this.$router.push(`/catalog`)
       window.scrollTo(0,0);
     },
+  },
+  mounted() {
+    this.GET_PARTNERS()
+    this.GET_CLIENTS()
   },
   components: {
     appHeader, appFooter, appPartnersItem, appBlockContent, appMainNewsBigItem,
@@ -346,6 +296,7 @@ export default {
       .partners-block {
         flex-grow: 1;
         width: 100%;
+        pointer-events: none;
       }
       .partners-slider-content, .news {
         display: none;
