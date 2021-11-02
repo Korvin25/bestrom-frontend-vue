@@ -1,19 +1,11 @@
 <template>
     <div class="details-select-solution flex-row">
-        <div class="arrow">
-            <img style="margin-right: 8px" src="../assets/arrow_left.png" alt="arrow_left">
-        </div>
-
         <div class="details-select-solution-item flex-column card-shadow">
             <h4>КОМПЛЕКСНАЯ ЛИНИЯ ДЛЯ УПАКОВКИ КОФЕ В ГОТОВУЮ ТАРУ</h4>
             <img src="../assets/details-solution.png" alt="details-solution">
             <app-hidden-item
                     text="ПОДРОБНЕЕ"
             ></app-hidden-item>
-        </div>
-
-        <div class="arrow">
-            <img style="margin-left: 8px" src="../assets/arrow_right.png" alt="arrow_right">
         </div>
     </div>
     <!-- /.details-select-inventory -->

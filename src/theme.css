@@ -262,28 +262,9 @@ label:hover {
 }
 
 /* ---------------------------------------------------- */
-/* Sliders with arrows (example Clients and Partners) */
 .slider-content {
     padding: 1rem 4rem;
     align-items: center;
-}
-.arrow {
-    min-width: 63px;
-    min-height: 63px;
-    background: #FFFFFF;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.arrow:hover {
-    cursor: pointer;
-    background: rgba(47, 193, 255, 0.75);
-}
-.arrow img {
-    width: 25px;
-    height: 28px;
 }
 .partners {
     justify-content: space-between;
@@ -389,9 +370,6 @@ body.modal-open {
     }
     .main-content {
         margin: 4.5rem 1rem 0 1rem;
-    }
-    .arrow {
-        display: none;
     }
     .section {
         margin: 0;

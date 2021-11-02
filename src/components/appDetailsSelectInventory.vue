@@ -1,9 +1,5 @@
 <template>
     <div class="details-select-inventory flex-row">
-        <div class="arrow">
-            <img style="margin-right: 8px" src="../assets/arrow_left.png" alt="arrow_left">
-        </div>
-
         <div class="details-select-inventory-item flex-column card-shadow">
             <h4>ДОЗАТОР MULTIPOND</h4>
             <img src="../assets/details-inventory.png" alt="details-inventory">
@@ -31,10 +27,6 @@
             <app-hidden-item
                     text="ПОДРОБНЕЕ"
             ></app-hidden-item>
-        </div>
-
-        <div class="arrow">
-            <img style="margin-left: 8px" src="../assets/arrow_right.png" alt="arrow_right">
         </div>
     </div>
     <!-- /.details-select-inventory -->

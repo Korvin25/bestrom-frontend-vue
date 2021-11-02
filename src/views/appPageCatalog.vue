@@ -4,9 +4,6 @@
         <section class="desktop-section section">
             <div class="catalog-select-card card-shadow flex-column">
                 <div class="flex-row">
-                    <div class="arrow">
-                        <img style="margin-right: 8px" src="../assets/arrow_left.png" alt="arrow_left">
-                    </div>
                     <div class="radio-type flex-row">
                         <input class="custom-radio"
                                name="radio-choice"
@@ -41,9 +38,6 @@
                                :value="'ГОТОВЫЕ РЕШЕНИЯ'"
                                :checked="this.$store.state.radioCatalogSelect === 'ГОТОВЫЕ РЕШЕНИЯ'">
                         <label for="radio-choice-4">ГОТОВЫЕ РЕШЕНИЯ</label>
-                    </div>
-                    <div class="arrow">
-                        <img style="margin-left: 8px" src="../assets/arrow_right.png" alt="arrow_right">
                     </div>
                 </div>
 
