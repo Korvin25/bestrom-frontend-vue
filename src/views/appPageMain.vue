@@ -60,77 +60,46 @@
 
     <section class="section">
       <h2>Партнеры</h2>
-
-      <!-- Desktop -->
-      <div class="slider-content flex-row card-shadow partners-slider-content">
-        <div class="arrow">
-          <img style="margin-right: 8px" src="../assets/arrow_left.png" alt="arrow_left">
-        </div>
-        <div class="flex-row partners">
-          <app-partners-item
-                  v-for="partner in PARTNERS"
-                  :key="partner.id"
-                  :image="partner.logo"
-                  @click="showPartner(partner.alt)"
-          ></app-partners-item>
-        </div>
-        <div class="arrow">
-          <img style="margin-left: 8px" src="../assets/arrow_right.png" alt="arrow_right">
-        </div>
-        <!-- точки перехода для слайдера -->
-      </div>
-
-      <!-- Mobile -->
-      <carousel class="mobile-section" :settings='settings'>
-        <slide v-for="partner in PARTNERS"  :key="partner.id">
-          <div @click="showPartner(partner.alt)" class="partners-block carousel__item flex-column">
+      <div class="slider-content card-shadow">
+        <carousel :breakpoints='breakpoints'>
+          <slide v-for="partner in PARTNERS"  :key="partner.id">
             <app-partners-item
+                    @click="showPartner(partner.alt)"
                     :image="partner.logo"
                     :alt="partner.alt"
             ></app-partners-item>
-          </div>
-        </slide>
-      </carousel>
+          </slide>
+          <template #addons="{ slidesCount }">
+            <navigation v-if="slidesCount > 3" />
+            <pagination v-if="slidesCount > 3" />
+          </template>
+        </carousel>
+      </div>
     </section>
 
     <section class="section">
       <h2>Клиенты</h2>
-
-      <!-- Desktop -->
-      <div class="slider-content flex-row card-shadow partners-slider-content">
-        <div class="arrow">
-          <img style="margin-right: 8px" src="../assets/arrow_left.png" alt="arrow_left">
-        </div>
-        <div class="flex-row partners">
-          <app-partners-item
-                  v-for="client in CLIENTS"
-                  :key="client.id"
-                  :image="client.logo"
-                  @click="showClient(client.alt)"
-          ></app-partners-item>
-        </div>
-        <div class="arrow">
-          <img style="margin-left: 8px" src="../assets/arrow_right.png" alt="arrow_right">
-        </div>
-      </div>
-
-      <!-- Mobile -->
-      <carousel class="mobile-section" :settings='settings'>
-        <slide v-for="client in CLIENTS" :key="client.id">
-          <div @click="showClient(client.alt)" class="partners-block carousel__item flex-column">
+      <div class="slider-content card-shadow">
+        <carousel :breakpoints='breakpoints'>
+          <slide v-for="client in CLIENTS"  :key="client.id">
             <app-partners-item
+                    @click="showClient(client.alt)"
                     :image="client.logo"
                     :alt="client.alt"
             ></app-partners-item>
-          </div>
-        </slide>
-      </carousel>
+          </slide>
+          <template #addons="{ slidesCount }">
+            <navigation v-if="slidesCount > 3" />
+            <pagination v-if="slidesCount > 3" />
+          </template>
+        </carousel>
+      </div>
     </section>
 
     <section class="section">
       <h2>Новости</h2>
 
-      <carousel class="mobile-section" :settings="settings">
+      <carousel class="mobile-section" :breakpoints='breakpoints'>
         <slide v-for="slide in 3" :key="slide">
           <app-main-news-mobile
                   class="carousel__item"
@@ -177,7 +146,7 @@
                                @close="customers.showModal = false"
                                :image="customers.logo"
                                :alt="customers.alt"
-                               :title="customers.title"
+                               :title="customers.name"
                                :text="customers.description"
                                :machines="customers.machines"
       ></app-modal-partners-item>
@@ -197,7 +166,7 @@ import appMainNewsSmallItem from "@/components/appMainNewsSmallItem";
 import appHiddenItem from "@/components/appHiddenItem";
 import appMainNewsMobile from "@/components/appMainNewsMobile";
 import appModalPartnersItem from "@/components/appModalPartnersItem";
-import { Carousel, Slide } from 'vue3-carousel';
+import { Carousel, Slide, Navigation, Pagination } from 'vue3-carousel';
 import {mapActions, mapGetters} from "vuex";
 
 export default {
@@ -206,10 +175,18 @@ export default {
       customers: {
         showModal: false,
       },
-      settings: {
-        itemsToShow: 1.5,
-        wrapAround: true,
-        snapAlign: 'center'
+      breakpoints: {
+        0: {
+          itemsToShow: 1.5,
+          snapAlign: 'center',
+          wrapAround: true
+        },
+        1248: {
+          itemsToShow: 2.95,
+          snapAlign: 'center',
+          mouseDrag: false,
+          touchDrag: false
+        },
       },
     }
   },
@@ -258,8 +235,8 @@ export default {
   },
   components: {
     appHeader, appFooter, appPartnersItem, appBlockContent, appMainNewsBigItem,
-    appMainNewsSmallItem, appHiddenItem, Carousel, Slide, appMainNewsMobile,
-    appModalPartnersItem
+    appMainNewsSmallItem, appHiddenItem, Carousel, Slide, Navigation, Pagination,
+    appMainNewsMobile, appModalPartnersItem
   }
 }
 </script>
@@ -323,7 +300,7 @@ export default {
         flex-grow: 1;
         width: 100%;
       }
-      .partners-slider-content, .news {
+      .news {
         display: none;
       }
     }

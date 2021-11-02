@@ -12,61 +12,49 @@
                 <p>{{ text }}</p>
             </div>
 
-            <div v-if="machines">
-
-                <section class="desktop">
-                    <h2>Машины приобретенные данным клиентом</h2>
-                    <div class="slider-content flex-row card-shadow">
-                        <div class="arrow">
-                            <img style="margin-right: 8px" src="../assets/arrow_left.png" alt="arrow_left">
-                        </div>
-                        <!-- /.arrow -->
-                        <div class="flex-row machines">
-                            <app-machines-item
-                                    title="Б-420"
-                                    image="content_image.png"
-                            ></app-machines-item>
-                            <app-machines-item
-                                    title="Б-420"
-                                    image="content_image.png"
-                            ></app-machines-item>
-                            <app-machines-item
-                                    title="Б-420"
-                                    image="content_image.png"
-                            ></app-machines-item>
-                        </div>
-                        <!-- /.partners -->
-                        <div class="arrow">
-                            <img style="margin-left: 8px" src="../assets/arrow_right.png" alt="arrow_right">
-                        </div>
-                        <!-- /.arrow -->
-                        <!-- точки перехода для слайдера -->
-                    </div>
-                </section>
-
-                <section class="mobile">
-                    <h2>Машины приобретенные данным клиентом</h2>
-                    <carousel :items-to-show="1.3">
+            <section v-if="machines">
+                <h2>Машины приобретенные данным клиентом</h2>
+                <div class="slider-content card-shadow">
+                    <carousel :breakpoints='breakpoints'>
                         <slide v-for="slide in 3" :key="slide">
                             <app-machines-item
-                                    class="carousel__item"
                                     title="Б-420"
                                     image="content_image.png"
                             ></app-machines-item>
                         </slide>
+                        <template #addons="{ slidesCount }">
+                            <navigation v-if="slidesCount > 2" />
+                            <pagination v-if="slidesCount > 2" />
+                        </template>
                     </carousel>
-                </section>
-
-            </div>
+                </div>
+            </section>
         </div>
     </div>
 </template>
 
 <script>
     import appMachinesItem from "@/components/appMachinesItem";
-    import { Carousel, Slide } from 'vue3-carousel';
+    import { Carousel, Slide, Navigation, Pagination } from 'vue3-carousel';
 
     export default {
+        data() {
+            return {
+                breakpoints: {
+                    0: {
+                        itemsToShow: 1.5,
+                        snapAlign: 'center',
+                        wrapAround: true
+                    },
+                    1248: {
+                        itemsToShow: 1.5,
+                        snapAlign: 'center',
+                        mouseDrag: false,
+                        touchDrag: false
+                    },
+                },
+            }
+        },
         props: {
             title: String,
             text: String,
@@ -75,7 +63,7 @@
             machines: Boolean
         },
         components: {
-            appMachinesItem, Carousel, Slide
+            appMachinesItem, Carousel, Slide, Navigation, Pagination
         },
         name: "appModalPartnersItem"
     }
@@ -98,12 +86,6 @@
         max-width: 10rem;
         margin:0 2rem 0 0;
     }
-    .desktop {
-        display: block;
-    }
-    .mobile {
-        display: none;
-    }
     @media (max-width: 980px) {
         .modal-window {
             max-height: 90%;
@@ -111,12 +93,6 @@
         }
         h2 {
             text-shadow: none;
-        }
-        .desktop {
-            display: none;
-        }
-        .mobile {
-            display: block;
         }
         .about-partner {
             flex-direction: column;

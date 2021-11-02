@@ -33,7 +33,7 @@
                                      @close="customers.showModal = false"
                                      :image="customers.logo"
                                      :alt="customers.alt"
-                                     :title="customers.title"
+                                     :title="customers.name"
                                      :text="customers.description"
                                      :machines="customers.machines"
             ></app-modal-partners-item>

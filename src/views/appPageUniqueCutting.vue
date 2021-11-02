@@ -5,7 +5,7 @@
         <div class="desktop-section section">
             <h2 style="margin-bottom: 2rem">Рекомендуемый формат F150</h2>
             <h2 style="margin: 0">Пакет плоское дно.</h2>
-            <h2 style="margin: 5rem 0 0 0">ОСНОВНАЯ ИНФОРМАЦИЯ</h2>
+            <h2 style="margin: 3rem 0 0 0">ОСНОВНАЯ ИНФОРМАЦИЯ</h2>
         </div>
         <section class="desktop-section section flex-column">
             <div class="unique-packet flex-row">
@@ -19,37 +19,6 @@
                 </a>
             </div>
         </section>
-        <section class="desktop-section section">
-            <h2>Машины работающие с данным форматом</h2>
-
-            <div class="slider-content flex-row card-shadow">
-                <div class="arrow">
-                    <img style="margin-right: 8px" src="../assets/arrow_left.png" alt="arrow_left">
-                </div>
-                <!-- /.arrow -->
-                <div class="flex-row machines">
-                    <app-machines-item
-                            title="Б-420"
-                            image="content_image.png"
-                    ></app-machines-item>
-                    <app-machines-item
-                            title="Б-420"
-                            image="content_image.png"
-                    ></app-machines-item>
-                    <app-machines-item
-                            title="Б-420"
-                            image="content_image.png"
-                    ></app-machines-item>
-                </div>
-                <!-- /.partners -->
-                <div class="arrow">
-                    <img style="margin-left: 8px" src="../assets/arrow_right.png" alt="arrow_right">
-                </div>
-                <!-- /.arrow -->
-                <!-- точки перехода для слайдера -->
-            </div>
-        </section>
-        <!-- ./desktop-section -->
 
         <section class="mobile-section section flex-column">
             <div class="mobile-preview flex-row">
@@ -71,17 +40,23 @@
                 </a>
             </div>
         </section>
-        <section class="mobile-section-block section">
+
+        <section class="section">
             <h2>Машины работающие с данным форматом</h2>
-            <carousel :items-to-show="1.3">
-                <slide v-for="slide in 3" :key="slide">
-                    <app-machines-item
-                            class="carousel__item"
-                            title="Б-420"
-                            image="content_image.png"
-                    ></app-machines-item>
-                </slide>
-            </carousel>
+            <div class="slider-content card-shadow">
+                <carousel :breakpoints='breakpoints'>
+                    <slide v-for="slide in 3" :key="slide">
+                        <app-machines-item
+                                title="Б-420"
+                                image="content_image.png"
+                        ></app-machines-item>
+                    </slide>
+                    <template #addons="{ slidesCount }">
+                        <navigation v-if="slidesCount > 2" />
+                        <pagination v-if="slidesCount > 2" />
+                    </template>
+                </carousel>
+            </div>
         </section>
         <!-- ./mobile-section -->
 
@@ -94,11 +69,28 @@
     import appHeader from "@/components/appHeader";
     import appFooter from "@/components/appFooter";
     import appMachinesItem from "@/components/appMachinesItem";
-    import { Carousel, Slide } from 'vue3-carousel';
+    import { Carousel, Slide, Navigation, Pagination } from 'vue3-carousel';
 
     export default {
+        data() {
+            return {
+                breakpoints: {
+                    0: {
+                        itemsToShow: 1.5,
+                        snapAlign: 'center',
+                        wrapAround: true
+                    },
+                    1248: {
+                        itemsToShow: 1.55,
+                        snapAlign: 'center',
+                        mouseDrag: false,
+                        touchDrag: false
+                    },
+                },
+            }
+        },
         components: {
-            appHeader, appFooter, appMachinesItem, Carousel, Slide
+            appHeader, appFooter, appMachinesItem, Carousel, Slide, Navigation, Pagination
         },
         name: "appPageUniqueCutting"
     }
@@ -112,6 +104,7 @@
         display: none;
     }
     .unique-packet {
+        margin-top: 2rem;
         justify-content: space-around;
         align-items: center;
     }
@@ -133,7 +126,7 @@
         height: auto;
         padding: 0.5rem 2rem;
         font-size: 2rem;
-        margin: 6rem 3rem 0 3rem;
+        margin: 2rem 3rem 0 3rem;
     }
     .machines {
         width: 100%;

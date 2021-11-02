@@ -34,7 +34,7 @@
 
 <style scoped>
     .machine-item {
-        width: 24%;
+        flex-grow: 1;
         height: 15rem;
         padding: 1rem;
         margin: 1rem;

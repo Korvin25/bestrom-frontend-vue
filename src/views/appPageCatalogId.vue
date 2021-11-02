@@ -59,25 +59,19 @@
 
         <section class="section">
             <h2 class="title-brand">Бренды купившие эту машину</h2>
-            <div class="desktop-section brands flex-row">
-                <app-partners-item
-                        v-for="client in CLIENTS"
-                        :key="client.id"
-                        :image="client.logo"
-                        :alt="client.alt"
-                        @click="showClient(client.alt)"
-                ></app-partners-item>
-            </div>
-
-            <div class="mobile-section brands">
-                <carousel :items-to-show="1.4" :settings="settings">
-                    <slide v-for="client in CLIENTS" :key="client.id">
+            <div class="slider-content card-shadow">
+                <carousel :breakpoints='breakpoints'>
+                    <slide v-for="client in CLIENTS"  :key="client.id">
                         <app-partners-item
+                                @click="showClient(client.alt)"
                                 :image="client.logo"
                                 :alt="client.alt"
-                                @click="showClient(client.alt)"
                         ></app-partners-item>
                     </slide>
+                    <template #addons="{ slidesCount }">
+                        <navigation v-if="slidesCount > 3" />
+                        <pagination v-if="slidesCount > 3" />
+                    </template>
                 </carousel>
             </div>
         </section>
@@ -90,7 +84,7 @@
                                  @close="customers.showModal = false"
                                  :image="customers.logo"
                                  :alt="customers.alt"
-                                 :title="customers.title"
+                                 :title="customers.name"
                                  :text="customers.description"
                                  :machines="customers.machines"
         ></app-modal-partners-item>
@@ -111,7 +105,7 @@
     import appModalCatalogCall from "@/components/appModalCatalogCall";
     import appModalCatalogApplication from "@/components/appModalCatalogApplication";
     import appModalPartnersItem from "@/components/appModalPartnersItem";
-    import { Carousel, Slide } from 'vue3-carousel';
+    import { Carousel, Slide, Navigation, Pagination } from 'vue3-carousel';
     import {mapActions, mapGetters} from "vuex";
 
     export default {
@@ -120,10 +114,18 @@
               customers: {
                   showModal: false,
               },
-              settings: {
-                  itemsToShow: 1.5,
-                  wrapAround: true,
-                  snapAlign: 'center'
+              breakpoints: {
+                  0: {
+                      itemsToShow: 1.5,
+                      snapAlign: 'center',
+                      wrapAround: true
+                  },
+                  1248: {
+                      itemsToShow: 2.95,
+                      snapAlign: 'center',
+                      mouseDrag: false,
+                      touchDrag: false
+                  },
               },
               aboutItem: [
                   {
@@ -205,7 +207,7 @@
             appHeader, appFooter, appDetailsSelectSettings, appDetailsSelectProducts,
             appDetailsSelectInventory, appDetailsSelectPacket, appDetailsSelectSolution,
             appPartnersItem, appModalCatalogCall, appModalCatalogApplication, Carousel, Slide,
-            appModalPartnersItem
+            Navigation, Pagination, appModalPartnersItem
         },
         name: "appPageCatalogId"
     }
@@ -259,18 +261,14 @@
     .buttons-section.catalog-ig-buttons {
         margin: 1rem -1rem;
     }
-    .desktop-section.brands {
-        margin: 0 -1rem;
-        flex-wrap: wrap;
-    }
-    .title-brand {
-        margin: 1rem 0;
-    }
     .desktop-section {
         display: flex;
     }
     .mobile-section {
         display: none;
+    }
+    .slider-content {
+        margin: 2rem 0 1rem 0;
     }
     @media (max-width: 980px) {
         .desktop-section {
@@ -313,10 +311,6 @@
          }
          .title-brand {
             margin: 0;
-        }
-        .mobile-section.brands {
-            display: block;
-            margin: 0 0.5rem;
         }
     }
 </style>
