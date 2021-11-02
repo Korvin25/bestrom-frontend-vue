@@ -206,71 +206,20 @@
 
         <section class="clients-desktop section">
             <h2>Клиенты</h2>
-
-            <div class="slider-content flex-row card-shadow">
-                <div class="arrow">
-                    <img style="margin-right: 8px" src="../assets/arrow_left.png" alt="arrow_left">
-                </div>
-                <div class="partners flex-row">
+            <div class="slider-content card-shadow">
+                <carousel :breakpoints='breakpoints'>
+                <slide v-for="client in CLIENTS"  :key="client.id">
                     <app-partners-item
-                            image="logo-babaevskiy.png"
-                            title="«Красный Октябрь»"
-                            text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur atque illum impedit ipsa iure iusto laboriosam laudantium maiores officiis pariatur praesentium quam quod repudiandae sequi sint tempora unde, voluptatum. Odio?"
-                            :machines="true"
+                            @click="showClient(client.alt)"
+                            :image="client.logo"
+                            :alt="client.alt"
                     ></app-partners-item>
-                    <app-partners-item
-                            image="logo-krasny-oktyabr.png"
-                            title="«Красный Октябрь»"
-                            text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur atque illum impedit ipsa iure iusto laboriosam laudantium maiores officiis pariatur praesentium quam quod repudiandae sequi sint tempora unde, voluptatum. Odio?"
-                            :machines="true"
-                    ></app-partners-item>
-                    <app-partners-item
-                            image="logo-rot-front.png"
-                            title="«Красный Октябрь»"
-                            text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur atque illum impedit ipsa iure iusto laboriosam laudantium maiores officiis pariatur praesentium quam quod repudiandae sequi sint tempora unde, voluptatum. Odio?"
-                            :machines="true"
-                    ></app-partners-item>
-                    <app-partners-item
-                            image="logo-jacobs.png"
-                            title="«Красный Октябрь»"
-                            text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur atque illum impedit ipsa iure iusto laboriosam laudantium maiores officiis pariatur praesentium quam quod repudiandae sequi sint tempora unde, voluptatum. Odio?"
-                            :machines="true"
-                    ></app-partners-item>
-                    <app-partners-item
-                            image="logo-faberlic.png"
-                            title="«Красный Октябрь»"
-                            text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur atque illum impedit ipsa iure iusto laboriosam laudantium maiores officiis pariatur praesentium quam quod repudiandae sequi sint tempora unde, voluptatum. Odio?"
-                            :machines="true"
-                    ></app-partners-item>
-                    <app-partners-item
-                            image="logo-baisad.png"
-                            title="«Красный Октябрь»"
-                            text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur atque illum impedit ipsa iure iusto laboriosam laudantium maiores officiis pariatur praesentium quam quod repudiandae sequi sint tempora unde, voluptatum. Odio?"
-                            :machines="true"
-                    ></app-partners-item>
-                    <app-partners-item
-                            image="logo-jacobs.png"
-                            title="«Красный Октябрь»"
-                            text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur atque illum impedit ipsa iure iusto laboriosam laudantium maiores officiis pariatur praesentium quam quod repudiandae sequi sint tempora unde, voluptatum. Odio?"
-                            :machines="true"
-                    ></app-partners-item>
-                    <app-partners-item
-                            image="logo-faberlic.png"
-                            title="«Красный Октябрь»"
-                            text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur atque illum impedit ipsa iure iusto laboriosam laudantium maiores officiis pariatur praesentium quam quod repudiandae sequi sint tempora unde, voluptatum. Odio?"
-                            :machines="true"
-                    ></app-partners-item>
-                    <app-partners-item
-                            image="logo-baisad.png"
-                            title="«Красный Октябрь»"
-                            text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur atque illum impedit ipsa iure iusto laboriosam laudantium maiores officiis pariatur praesentium quam quod repudiandae sequi sint tempora unde, voluptatum. Odio?"
-                            :machines="true"
-                    ></app-partners-item>
-                </div>
-                <div class="arrow">
-                    <img style="margin-left: 8px" src="../assets/arrow_right.png" alt="arrow_right">
-                </div>
-                <!-- точки перехода для слайдера -->
+                </slide>
+                <template #addons="{ slidesCount }">
+                    <navigation v-if="slidesCount > 3" />
+                    <pagination v-if="slidesCount > 3" />
+                </template>
+                </carousel>
             </div>
         </section>
         <!-- /.section -->
@@ -290,6 +239,17 @@
             </div>
         </section>
         <!-- /.section -->
+
+        <transition name="modal">
+            <app-modal-partners-item v-if="customers.showModal"
+                                    @close="customers.showModal = false"
+                                    :image="customers.logo"
+                                    :alt="customers.alt"
+                                    :title="customers.name"
+                                    :text="customers.description"
+                                    :machines="customers.machines"
+            ></app-modal-partners-item>
+        </transition>
     </main>
     <app-footer></app-footer>
 </template>
@@ -299,11 +259,30 @@
     import appHeader from "@/components/appHeader";
     import appHiddenItem from "@/components/appHiddenItem";
     import appPartnersItem from "@/components/appPartnersItem";
-    import { Carousel, Slide } from 'vue3-carousel';
+    import appModalPartnersItem from "@/components/appModalPartnersItem";
+    import { Carousel, Slide, Navigation, Pagination } from 'vue3-carousel';
+    import {mapActions, mapGetters} from "vuex";
 
     export default {
         data() {
             return {
+                customers: {
+                    showModal: false,
+                },
+                breakpoints: {
+                    0: {
+                    itemsToShow: 1.5,
+                    snapAlign: 'center',
+                    wrapAround: true
+                    },
+                    1248: {
+                    itemsToShow: 3,
+                    snapAlign: 'center',
+                    mouseDrag: false,
+                    touchDrag: false,
+                    wrapAround: true
+                    },
+                },
                 years: [
                     '1989', '1993','1997','2000','2004','2007', '2009'
                 ],
@@ -334,8 +313,39 @@
                 ]
             }
         },
+        computed: {
+            ...mapGetters({
+                CLIENTS:'clients/CLIENTS'
+            })
+        },
+        methods: {
+            ...mapActions({
+            GET_CLIENTS:'clients/GET_CLIENTS'
+            }),
+            showClient(client) {
+                this.customers = this.CLIENTS.find(e => e.alt === client)
+                this.customers.machines = true
+                this.customers.showModal = true
+            }
+        },
+        watch: {
+            customers: {
+                handler() {
+                    if (this.customers.showModal) {
+                        document.body.classList.add('modal-open')
+                    } else {
+                        document.body.classList.remove('modal-open')
+                    }
+                },
+                deep: true
+            },
+        },
+        mounted() {
+            this.GET_CLIENTS()
+        },
         components: {
-            appHeader, appFooter, appHiddenItem, appPartnersItem, Carousel, Slide
+            appHeader, appFooter, appHiddenItem, appPartnersItem, 
+            appModalPartnersItem, Carousel, Slide, Navigation, Pagination
         },
         name: "appPageAbout"
     }
@@ -404,13 +414,8 @@
             margin: 0 0.5rem;
             align-self: auto;
         }
-    .purpose {
+    .purpose, .mission {
         padding: 1rem 2rem;
-        height: 20rem;
-    }
-    .mission {
-        padding: 1rem 2rem;
-        height: 20rem;
     }
     .directors-mobile,
     .history-development-mobile,

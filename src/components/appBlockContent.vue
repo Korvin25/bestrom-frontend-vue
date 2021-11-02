@@ -44,15 +44,16 @@
         width: 355px;
         height: 434px;
     }
-    
+    .text-about-content {
+        padding: 1rem 0;
+        text-align: left;
+    }
     @media (max-width: 1248px) {
         .block-content button, .content-image {
             display: none;
         }
-        .block-content p {
-            padding: 0.5rem;
-        }
         .about-content {
+            text-align: left;
             margin: 1rem;
             width: 100%;
         }

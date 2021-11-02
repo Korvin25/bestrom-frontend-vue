@@ -123,7 +123,7 @@
                       wrapAround: true
                   },
                   1248: {
-                      itemsToShow: 2.95,
+                      itemsToShow: 3,
                       snapAlign: 'center',
                       mouseDrag: false,
                       touchDrag: false,

@@ -7,7 +7,7 @@
       <h2 class="desktop-section">Деятельность компании БЕСТРОМ</h2>
       <h2 class="mobile-section">Деятельность компании</h2>
 
-      <div class="slider-content card-shadow">
+      <div class="main-slider-content card-shadow">
         <carousel :itemsToShow=1 :snapAlign="'start'" :wrapAround=true>
           <slide v-for="index in 3"  :key="index">
             <app-block-content
@@ -183,7 +183,7 @@ export default {
         },
         1248: {
           itemsToShow: 3,
-          snapAlign: 'start',
+          snapAlign: 'center',
           mouseDrag: false,
           touchDrag: false,
           wrapAround: true
@@ -243,6 +243,10 @@ export default {
 </script>
 
 <style>
+    .main-slider-content {
+    padding: 1rem 4rem;
+    align-items: center;
+    }
     .inventory-item {
       width: 30%;
       position: relative;
@@ -281,6 +285,9 @@ export default {
       display: none;
     }
     @media (max-width: 1248px) {
+      .main-slider-content {
+      padding: 1rem 2rem;
+      }
       .desktop-section {
         display: none;
       }
