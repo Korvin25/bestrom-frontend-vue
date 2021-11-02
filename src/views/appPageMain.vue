@@ -6,22 +6,22 @@
     <section class="section">
       <h2 class="desktop-section">Деятельность компании БЕСТРОМ</h2>
       <h2 class="mobile-section">Деятельность компании</h2>
-      <div class="slider-content flex-row card-shadow">
-        <div class="arrow">
-          <img style="margin-right: 8px" src="../assets/arrow_left.png" alt="arrow_left">
-        </div>
 
-        <app-block-content
-                id="1"
-                title="БЕСТРОМ СЕГОДНЯ"
-                text="Мы производим высококачественное упаковочное оборудование, которое будет четко и в срок отрабатывать необходимые объёмы. Вас ожидает лучший сервис, гарантийное обслуживание, высококвалифицированные специалисты, консультаты, которые помогут вам, в случае возникновения каких-либо проблем"
-                image="content_image.png"
-        ></app-block-content>
-
-        <div class="arrow">
-          <img style="margin-left: 8px" src="../assets/arrow_right.png" alt="arrow_right">
-        </div>
-        <!-- точки перехода для слайдера -->
+      <div class="slider-content card-shadow">
+        <carousel :itemsToShow=1 :snapAlign="'start'" :wrapAround=true>
+          <slide v-for="index in 3"  :key="index">
+            <app-block-content
+                    id="1"
+                    title="БЕСТРОМ СЕГОДНЯ"
+                    text="Мы производим высококачественное упаковочное оборудование, которое будет четко и в срок отрабатывать необходимые объёмы. Вас ожидает лучший сервис, гарантийное обслуживание, высококвалифицированные специалисты, консультаты, которые помогут вам, в случае возникновения каких-либо проблем"
+                    image="content_image.png"
+            ></app-block-content>
+          </slide>
+          <template #addons="{ slidesCount }">
+            <navigation v-if="slidesCount > 1" />
+            <pagination v-if="slidesCount > 1" />
+          </template>
+        </carousel>
       </div>
     </section>
     <!-- /.section -->
@@ -182,10 +182,11 @@ export default {
           wrapAround: true
         },
         1248: {
-          itemsToShow: 2.95,
-          snapAlign: 'center',
+          itemsToShow: 3,
+          snapAlign: 'start',
           mouseDrag: false,
-          touchDrag: false
+          touchDrag: false,
+          wrapAround: true
         },
       },
     }

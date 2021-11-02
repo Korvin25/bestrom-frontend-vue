@@ -50,7 +50,8 @@
                         itemsToShow: 1.5,
                         snapAlign: 'center',
                         mouseDrag: false,
-                        touchDrag: false
+                        touchDrag: false,
+                        wrapAround: true
                     },
                 },
             }

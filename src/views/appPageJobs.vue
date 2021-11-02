@@ -68,7 +68,6 @@
     .mobile-section {
         display: none;
     }
-
     @media (max-width: 980px) {
         .desktop-section {
             display: none;

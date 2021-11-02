@@ -3,16 +3,18 @@
     <main class="main-content flex-column">
         <section class="section">
             <h2>БЕСТРОМ - 420С</h2>
-            <div class="catalog-item-card flex-row card-shadow">
-                <div class="arrow">
-                    <img style="margin-right: 8px" src="../assets/arrow_left.png" alt="arrow_left">
-                </div>
-                <img class="catalog-item-card-image" src="../assets/content_image.png" alt="content_image">
-                <div class="arrow">
-                    <img style="margin-left: 8px" src="../assets/arrow_right.png" alt="arrow_right">
-                </div>
+
+            <div class="slider-content card-shadow">
+                <carousel :itemsToShow=1 :snapAlign="'start'" :wrapAround=true>
+                    <slide v-for="index in 3"  :key="index">
+                        <img class="catalog-item-card-image" src="../assets/content_image.png" alt="content_image">
+                    </slide>
+                    <template #addons="{ slidesCount }">
+                        <navigation v-if="slidesCount > 1" />
+                        <pagination v-if="slidesCount > 1" />
+                    </template>
+                </carousel>
             </div>
-            <!-- ./catalog-item-card -->
 
             <div class="buttons-section catalog-ig-buttons flex-row">
                 <button @click="showModalCall = true" class="btn">ЗАКАЗАТЬ ЗВОНОК</button>
@@ -124,7 +126,8 @@
                       itemsToShow: 2.95,
                       snapAlign: 'center',
                       mouseDrag: false,
-                      touchDrag: false
+                      touchDrag: false,
+                      wrapAround: true
                   },
               },
               aboutItem: [
@@ -214,14 +217,10 @@
 </script>
 
 <style scoped>
-    .catalog-item-card {
-        padding: 1rem;
-        align-items: center;
+    .catalog-item-card-image {
+        width: 20rem;
+        height: 25rem;
     }
-        .catalog-item-card-image {
-            width: 20rem;
-            height: 25rem;
-        }
     .details {
         margin: 1rem 0;
         height: 100%;
@@ -281,11 +280,7 @@
             padding: 1rem;
             margin: 0 0 1rem 0;
         }
-        .catalog-item-card {
-            justify-content: center;
-            padding: 3rem;
-        }
-        .catalog-item-card img {
+        .catalog-item-card-image {
             max-width: 30rem;
             width: 100%;
             height: auto;

@@ -81,10 +81,11 @@
                         wrapAround: true
                     },
                     1248: {
-                        itemsToShow: 1.55,
+                        itemsToShow: 1.5,
                         snapAlign: 'center',
                         mouseDrag: false,
-                        touchDrag: false
+                        touchDrag: false,
+                        wrapAround: true
                     },
                 },
             }

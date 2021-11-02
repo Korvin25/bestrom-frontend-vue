@@ -74,6 +74,7 @@
         }
         .job-item-pay p {
             text-align: center;
+            line-height: normal;
             font-size: 2.5rem;
         }
     .desktop-section {

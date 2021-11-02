@@ -122,6 +122,7 @@
     .job-item-pay {
         max-width: 30rem;
         width: 100%;
+        line-height: normal;
         align-items: center;
         justify-content: flex-start;
     }

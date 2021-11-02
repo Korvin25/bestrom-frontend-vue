@@ -264,7 +264,7 @@ label:hover {
 /* ---------------------------------------------------- */
 /* Sliders with arrows (example Clients and Partners) */
 .slider-content {
-    padding: 1rem;
+    padding: 1rem 4rem;
     align-items: center;
 }
 .arrow {

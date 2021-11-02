@@ -16,7 +16,6 @@
 }
 
 .carousel__viewport {
-  margin: 0 4rem;
   overflow: hidden;
 }
 :root {
@@ -34,8 +33,8 @@
   --vc-nav-background-color: white;
 
   /* Pagination */
-  --vc-pgn-width: 10px;
-  --vc-pgn-height: 5px;
+  --vc-pgn-width: 0.5rem;
+  --vc-pgn-height: 0.5rem;
   --vc-pgn-margin: 5px;
   --vc-pgn-border-radius: 0;
   --vc-pgn-background-color: var(--vc-clr-secondary);
@@ -61,6 +60,7 @@
   justify-content: center;
   list-style: none;
   padding: 0;
+  margin: 0;
 }
 .carousel__pagination-button {
   margin: var(--vc-pgn-margin);
@@ -105,23 +105,19 @@
 
 .carousel__prev {
   top: calc(50% - 1rem);
-  left: 2%;
+  left: -2rem;
   transform: translate(-50%, -50%);
 }
 
 .carousel__next {
   top: calc(50% - 1rem);
-  right: 2%;
+  right: -2rem;
   transform: translate(50%, -50%);
 }
 
 @media (max-width: 1248px) {
-  .carousel__viewport {
-    margin: 0;
-  }
   .carousel__next,
-  .carousel__prev,
-  .carousel__pagination {
+  .carousel__prev {
     display: none;
   }
 }
