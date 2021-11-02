@@ -9,9 +9,7 @@
                         :key="client.id"
                         :image="client.logo"
                         :alt="client.alt"
-                        :title="client.name"
-                        :text="client.description"
-                        :machines="true"
+                        @click="showClient(client.alt)"
                 ></app-partners-item>
             </div>
         </section>
@@ -23,14 +21,24 @@
                     <app-partners-item
                             :image="client.logo"
                             :alt="client.alt"
-                            :title="client.name"
-                            :text="client.description"
-                            :machines="true"
+                            @click="showClient(client.alt)"
                     ></app-partners-item>
                     <p>{{ client.name }}</p>
                 </div>
             </div>
         </section>
+
+        <transition name="modal">
+            <app-modal-partners-item v-if="customers.showModal"
+                                     @close="customers.showModal = false"
+                                     :image="customers.logo"
+                                     :alt="customers.alt"
+                                     :title="customers.title"
+                                     :text="customers.description"
+                                     :machines="customers.machines"
+            ></app-modal-partners-item>
+        </transition>
+
     </main>
     <app-footer></app-footer>
 </template>
@@ -39,9 +47,17 @@
     import appHeader from "@/components/appHeader";
     import appFooter from "@/components/appFooter";
     import appPartnersItem from "@/components/appPartnersItem";
+    import appModalPartnersItem from "@/components/appModalPartnersItem";
     import { mapGetters, mapActions } from "vuex"
 
     export default {
+        data() {
+            return {
+                customers: {
+                    showModal: false,
+                },
+            }
+        },
         computed: {
             ...mapGetters({
                 CLIENTS:'clients/CLIENTS'
@@ -50,13 +66,30 @@
         methods: {
             ...mapActions({
                 GET_CLIENTS:'clients/GET_CLIENTS'
-            })
+            }),
+            showClient(client) {
+                this.customers = this.CLIENTS.find(e => e.alt === client)
+                this.customers.machines = true
+                this.customers.showModal = true
+            },
+        },
+        watch: {
+            customers: {
+                handler() {
+                    if (this.customers.showModal) {
+                        document.body.classList.add('modal-open')
+                    } else {
+                        document.body.classList.remove('modal-open')
+                    }
+                },
+                deep: true
+            },
         },
         mounted() {
             this.GET_CLIENTS()
         },
         components: {
-            appHeader, appFooter, appPartnersItem
+            appHeader, appFooter, appPartnersItem, appModalPartnersItem
         },
         name: "appPageClients"
     }

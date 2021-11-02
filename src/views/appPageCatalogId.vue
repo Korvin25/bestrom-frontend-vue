@@ -65,21 +65,17 @@
                         :key="client.id"
                         :image="client.logo"
                         :alt="client.alt"
-                        :title="client.name"
-                        :text="client.description"
-                        :machines="true"
+                        @click="showClient(client.alt)"
                 ></app-partners-item>
             </div>
 
             <div class="mobile-section brands">
                 <carousel :items-to-show="1.4" :settings="settings">
-                    <slide style="pointer-events: none;" v-for="client in CLIENTS" :key="client.id">
+                    <slide v-for="client in CLIENTS" :key="client.id">
                         <app-partners-item
                                 :image="client.logo"
                                 :alt="client.alt"
-                                :title="client.name"
-                                :text="client.description"
-                                :machines="true"
+                                @click="showClient(client.alt)"
                         ></app-partners-item>
                     </slide>
                 </carousel>
@@ -90,6 +86,14 @@
     <transition-group name="modal">
         <app-modal-catalog-call v-if="showModalCall" @close="showModalCall = false"></app-modal-catalog-call>
         <app-modal-catalog-application v-if="showModalApplication" @close="showModalApplication = false"></app-modal-catalog-application>
+        <app-modal-partners-item v-if="customers.showModal"
+                                 @close="customers.showModal = false"
+                                 :image="customers.logo"
+                                 :alt="customers.alt"
+                                 :title="customers.title"
+                                 :text="customers.description"
+                                 :machines="customers.machines"
+        ></app-modal-partners-item>
     </transition-group>
 
     <app-footer></app-footer>
@@ -106,15 +110,18 @@
     import appPartnersItem from "@/components/appPartnersItem";
     import appModalCatalogCall from "@/components/appModalCatalogCall";
     import appModalCatalogApplication from "@/components/appModalCatalogApplication";
+    import appModalPartnersItem from "@/components/appModalPartnersItem";
     import { Carousel, Slide } from 'vue3-carousel';
     import {mapActions, mapGetters} from "vuex";
 
     export default {
         data() {
           return {
+              customers: {
+                  showModal: false,
+              },
               settings: {
                   itemsToShow: 1.5,
-                  autoplay: 3500,
                   wrapAround: true,
                   snapAlign: 'center'
               },
@@ -158,12 +165,27 @@
         methods: {
             ...mapActions({
                 GET_CLIENTS:'clients/GET_CLIENTS'
-            })
+            }),
+            showClient(client) {
+                this.customers = this.CLIENTS.find(e => e.alt === client)
+                this.customers.machines = true
+                this.customers.showModal = true
+            },
         },
         mounted() {
             this.GET_CLIENTS()
         },
         watch: {
+            customers: {
+                handler() {
+                    if (this.customers.showModal) {
+                        document.body.classList.add('modal-open')
+                    } else {
+                        document.body.classList.remove('modal-open')
+                    }
+                },
+                deep: true
+            },
             showModalCall() {
                 if (this.showModalCall) {
                     document.body.classList.add('modal-open') 
@@ -182,7 +204,8 @@
         components: {
             appHeader, appFooter, appDetailsSelectSettings, appDetailsSelectProducts,
             appDetailsSelectInventory, appDetailsSelectPacket, appDetailsSelectSolution,
-            appPartnersItem, appModalCatalogCall, appModalCatalogApplication, Carousel, Slide
+            appPartnersItem, appModalCatalogCall, appModalCatalogApplication, Carousel, Slide,
+            appModalPartnersItem
         },
         name: "appPageCatalogId"
     }

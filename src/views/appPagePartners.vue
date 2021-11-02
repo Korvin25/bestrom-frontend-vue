@@ -8,10 +8,7 @@
                         v-for="partner in PARTNERS"
                         :key="partner.id"
                         :image="partner.logo"
-                        :alt="partner.alt"
-                        :title="partner.name"
-                        :text="partner.description"
-                        :machines="false"
+                        @click="showPartner(partner.alt)"
                 ></app-partners-item>
             </div>
         </section>
@@ -21,16 +18,26 @@
             <div class="flex-row partners">
                 <div class="mobile-partners-item" v-for="partner in PARTNERS" :key="partner.id">
                     <app-partners-item
+                            @click="showPartner(partner.alt)"
                             :image="partner.logo"
                             :alt="partner.alt"
-                            :title="partner.name"
-                            :text="partner.description"
-                            :machines="false"
                     ></app-partners-item>
                     <p>{{ partner.name }}</p>
                 </div>
             </div>
         </section>
+
+        <transition name="modal">
+            <app-modal-partners-item v-if="customers.showModal"
+                                     @close="customers.showModal = false"
+                                     :image="customers.logo"
+                                     :alt="customers.alt"
+                                     :title="customers.title"
+                                     :text="customers.description"
+                                     :machines="customers.machines"
+            ></app-modal-partners-item>
+        </transition>
+
     </main>
     <app-footer></app-footer>
 </template>
@@ -39,9 +46,17 @@
     import appHeader from "@/components/appHeader";
     import appFooter from "@/components/appFooter";
     import appPartnersItem from "@/components/appPartnersItem";
+    import appModalPartnersItem from "@/components/appModalPartnersItem";
     import { mapGetters, mapActions } from "vuex"
 
     export default {
+        data() {
+            return {
+                customers: {
+                    showModal: false,
+                },
+            }
+        },
         computed: {
             ...mapGetters({
                 PARTNERS:'partners/PARTNERS'
@@ -50,13 +65,30 @@
         methods: {
             ...mapActions({
                 GET_PARTNERS:'partners/GET_PARTNERS'
-            })
+            }),
+            showPartner(partner) {
+                this.customers = this.PARTNERS.find(e => e.alt === partner)
+                this.customers.machines = false
+                this.customers.showModal = true
+            }
+        },
+        watch: {
+            customers: {
+                handler() {
+                    if (this.customers.showModal) {
+                        document.body.classList.add('modal-open')
+                    } else {
+                        document.body.classList.remove('modal-open')
+                    }
+                },
+                deep: true
+            },
         },
         mounted() {
             this.GET_PARTNERS()
         },
         components: {
-            appHeader, appFooter, appPartnersItem
+            appHeader, appFooter, appPartnersItem, appModalPartnersItem
         },
         name: "appPagePartners"
     }

@@ -71,10 +71,7 @@
                   v-for="partner in PARTNERS"
                   :key="partner.id"
                   :image="partner.logo"
-                  :alt="partner.alt"
-                  :title="partner.name"
-                  :text="partner.description"
-                  :machines="false"
+                  @click="showPartner(partner.alt)"
           ></app-partners-item>
         </div>
         <div class="arrow">
@@ -86,13 +83,10 @@
       <!-- Mobile -->
       <carousel class="mobile-section" :settings='settings'>
         <slide v-for="partner in PARTNERS"  :key="partner.id">
-          <div class="partners-block carousel__item flex-column">
+          <div @click="showPartner(partner.alt)" class="partners-block carousel__item flex-column">
             <app-partners-item
                     :image="partner.logo"
                     :alt="partner.alt"
-                    :title="partner.name"
-                    :text="partner.description"
-                    :machines="false"
             ></app-partners-item>
           </div>
         </slide>
@@ -112,10 +106,7 @@
                   v-for="client in CLIENTS"
                   :key="client.id"
                   :image="client.logo"
-                  :alt="client.alt"
-                  :title="client.name"
-                  :text="client.description"
-                  :machines="true"
+                  @click="showClient(client.alt)"
           ></app-partners-item>
         </div>
         <div class="arrow">
@@ -126,13 +117,10 @@
       <!-- Mobile -->
       <carousel class="mobile-section" :settings='settings'>
         <slide v-for="client in CLIENTS" :key="client.id">
-          <div class="partners-block carousel__item flex-column">
+          <div @click="showClient(client.alt)" class="partners-block carousel__item flex-column">
             <app-partners-item
                     :image="client.logo"
                     :alt="client.alt"
-                    :title="client.name"
-                    :text="client.description"
-                    :machines="true"
             ></app-partners-item>
           </div>
         </slide>
@@ -183,6 +171,18 @@
       <!-- /.news flex-column -->
     </section>
     <!-- /.section -->
+
+    <transition name="modal">
+      <app-modal-partners-item v-if="customers.showModal"
+                               @close="customers.showModal = false"
+                               :image="customers.logo"
+                               :alt="customers.alt"
+                               :title="customers.title"
+                               :text="customers.description"
+                               :machines="customers.machines"
+      ></app-modal-partners-item>
+    </transition>
+
   </main>
   <app-footer></app-footer>
 </template>
@@ -196,15 +196,18 @@ import appMainNewsBigItem from "@/components/appMainNewsBigItem";
 import appMainNewsSmallItem from "@/components/appMainNewsSmallItem";
 import appHiddenItem from "@/components/appHiddenItem";
 import appMainNewsMobile from "@/components/appMainNewsMobile";
+import appModalPartnersItem from "@/components/appModalPartnersItem";
 import { Carousel, Slide } from 'vue3-carousel';
 import {mapActions, mapGetters} from "vuex";
 
 export default {
   data() {
     return {
+      customers: {
+        showModal: false,
+      },
       settings: {
         itemsToShow: 1.5,
-        autoplay: 3500,
         wrapAround: true,
         snapAlign: 'center'
       },
@@ -226,6 +229,28 @@ export default {
       this.$router.push(`/catalog`)
       window.scrollTo(0,0);
     },
+    showClient(client) {
+      this.customers = this.CLIENTS.find(e => e.alt === client)
+      this.customers.machines = true
+      this.customers.showModal = true
+    },
+    showPartner(partner) {
+      this.customers = this.PARTNERS.find(e => e.alt === partner)
+      this.customers.machines = false
+      this.customers.showModal = true
+    }
+  },
+  watch: {
+    customers: {
+      handler() {
+        if (this.customers.showModal) {
+          document.body.classList.add('modal-open')
+        } else {
+          document.body.classList.remove('modal-open')
+        }
+      },
+      deep: true
+    },
   },
   mounted() {
     this.GET_PARTNERS()
@@ -233,7 +258,8 @@ export default {
   },
   components: {
     appHeader, appFooter, appPartnersItem, appBlockContent, appMainNewsBigItem,
-    appMainNewsSmallItem, appHiddenItem, Carousel, Slide, appMainNewsMobile
+    appMainNewsSmallItem, appHiddenItem, Carousel, Slide, appMainNewsMobile,
+    appModalPartnersItem
   }
 }
 </script>
@@ -296,7 +322,6 @@ export default {
       .partners-block {
         flex-grow: 1;
         width: 100%;
-        pointer-events: none;
       }
       .partners-slider-content, .news {
         display: none;

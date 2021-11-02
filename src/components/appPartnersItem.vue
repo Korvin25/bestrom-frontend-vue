@@ -1,40 +1,23 @@
 <template>
-    <div @click="showModalPartnersItem = true" class="partners-item">
+    <div class="partners-item">
         <img :src="image" :alt="alt">
         <app-hidden-item
                 text="ПОДРОБНЕЕ"
         ></app-hidden-item>
     </div>
-
-    <app-modal-partners-item v-if="showModalPartnersItem"
-                             @close="showModalPartnersItem = false"
-                             :image="image"
-                             :alt="alt"
-                             :title="title"
-                             :text="text"
-                             :machines="machines"
-    ></app-modal-partners-item>
 </template>
 
 <script>
     import appHiddenItem from "@/components/appHiddenItem";
-    import appModalPartnersItem from "@/components/appModalPartnersItem";
+
 
     export default {
-        data() {
-            return {
-                showModalPartnersItem: false
-            }
-        },
         props: {
-            title: String,
-            text: String,
             image: String,
             alt: String,
-            machines: Boolean
         },
         components: {
-            appHiddenItem, appModalPartnersItem
+            appHiddenItem
         },
         name: "appPartnersItem"
     }
