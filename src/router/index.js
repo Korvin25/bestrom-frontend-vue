@@ -14,6 +14,7 @@ import appPageCatalog from "@/views/appPageCatalog";
 import appPageCatalogId from "@/views/appPageCatalogId";
 
 export default createRouter({
+    mode: 'history',
     history: createWebHistory(process.env.BASE_URL),
     routes: [
         {
