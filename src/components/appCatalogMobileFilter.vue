@@ -9,7 +9,7 @@
                 <div class="catalog-select-shadow">
                     <carousel :snap-align="'center'" :items-to-show="1.6">
                         <slide v-for="(item, index) in catalogSelect" :key="index">
-                            <p class="carousel__item mobile-select-filter"
+                            <p class="mobile-select-filter"
                                @click="this.$store.state.radioCatalogSelect = item"
                                :class="this.$store.state.radioCatalogSelect === item ? 'choice' : ''"
                             >{{ item }}</p>

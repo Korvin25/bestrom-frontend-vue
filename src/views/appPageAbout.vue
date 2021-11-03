@@ -28,18 +28,16 @@
         <section class="history-development-mobile section">
             <h2>История развития</h2>
             <div class="card-shadow">
-                <carousel :autoplay="3000" :items-to-show="1.5" :wrap-around="true">
-                    <slide v-for="year in years" :key="year">
-                        <div class="carousel__item history-development flex-row">
-                            <div class="history-years flex-column">
-                                <p>{{ year }}</p>
-                            </div>
-                            <div class="history-description">
-                                <img src="../assets/bestrom_logo.png" alt="bestrom_logo">
-                                <h3>БЕСТРОМ</h3>
-                            </div>
-                        </div>
+                <carousel :autoplay="4000" :items-to-show="4.5" :wrap-around="true">
+                    <slide v-for="item in history" :key="item.id">
+                            <p class="carousel__item">{{ item.year }}</p>
                     </slide>
+                    <template #addons="{ currentSlide }">
+                        <div class="history-description">
+                            <img src="../assets/bestrom_logo.png" alt="bestrom_logo">
+                            <h3>{{ findHistory(currentSlide + 1).year }}</h3>
+                        </div>
+                    </template>
                 </carousel>
             </div>
         </section>
@@ -135,7 +133,7 @@
 
             <carousel :autoplay="4000" :items-to-show="1.5" :wrap-around="true" class="our-choice-mobile">
                 <slide v-for="slide in reasons" :key="slide">
-                    <div class="carousel__item reason-mobile item-reason card-shadow">
+                    <div class="reason-mobile item-reason card-shadow">
                         <h5>{{slide}}</h5>
                     </div>
                 </slide>
@@ -171,7 +169,7 @@
 
         <section class="directors-mobile section">
             <h2>Руководство БЕСТРОМ</h2>
-            <carousel :autoplay="4000" :items-to-show="1.3" :wrap-around="true" class="our-choice-mobile">
+            <carousel :autoplay="4500" :items-to-show="1.3" :wrap-around="true" class="our-choice-mobile">
                 <slide v-for="slide in directors" :key="slide">
                     <div class="director-item flex-column">
                         <img :src="require(`../assets/${slide.img}`)" :alt="slide.name">
@@ -185,20 +183,18 @@
         <section class="history-development-desktop section">
             <h2>История развития</h2>
 
-            <div class="history-development flex-row card-shadow">
-                <div class="history-years flex-column">
-                    <p style="font-size: 14px;">1989</p>
-                    <p style="font-size: 16px;">1993</p>
-                    <p style="font-size: 18px;">1997</p>
-                    <p style="font-weight: bold">2000</p>
-                    <p style="font-size: 18px;">2004</p>
-                    <p style="font-size: 16px;">2007</p>
-                    <p style="font-size: 14px;">2009</p>
-                </div>
-                <div class="history-description">
-                    <img src="../assets/bestrom_logo.png" alt="bestrom_logo">
-                    <h3>БЕСТРОМ</h3>
-                </div>
+            <div class="history-development card-shadow">
+                <carousel :autoplay="4500" :items-to-show="4.5" :wrap-around="true">
+                    <slide v-for="item in history" :key="item.id">
+                        <p class="carousel__item">{{ item.year }}</p>
+                    </slide>
+                    <template #addons="{ currentSlide }">
+                        <div class="history-description">
+                            <img src="../assets/bestrom_logo.png" alt="bestrom_logo">
+                            <h3>{{ findHistory(currentSlide + 1).year }}</h3>
+                        </div>
+                    </template>
+                </carousel>
             </div>
         </section>
         <!-- /.section -->
@@ -265,6 +261,7 @@
     export default {
         data() {
             return {
+                checkSlide: 0,
                 customers: {
                     showModal: false,
                 },
@@ -282,8 +279,29 @@
                     wrapAround: true
                     },
                 },
-                years: [
-                    '1989', '1993','1997','2000','2004','2007', '2009'
+                history: [
+                    {
+                        id: 1,
+                        year: '1989'
+                    }, {
+                        id: 2,
+                        year: '1993'
+                    }, {
+                        id: 3,
+                        year: '1997'
+                    }, {
+                        id: 4,
+                        year: '2000'
+                    }, {
+                        id: 5,
+                        year: '2004'
+                    }, {
+                        id: 6,
+                        year: '2007'
+                    }, {
+                        id: 7,
+                        year: '2009'
+                    }
                 ],
                 reasons: [
                     'УПАКОВОЧНЫЕ МАШИНЫ ВЕРТИКАЛЬНОГО ТИПА',
@@ -325,6 +343,9 @@
                 this.customers = this.CLIENTS.find(e => e.alt === client)
                 this.customers.machines = true
                 this.customers.showModal = true
+            },
+            findHistory(current) {
+                return this.history.find(e => e.id === current)
             }
         },
         watch: {
@@ -394,18 +415,16 @@
             font-size: 18px;
             color: #2FC1FF;
         }
-    .history-years {
-        align-items: center;
-    }
     .history-description {
         display: flex;
         justify-content: center;
         align-items: center;
         width: 100%;
+        height: 15rem;
     }
         .history-description img {
-            width: 6rem;
-            height: 6rem;
+            max-width: 6rem;
+            max-height: 6rem;
         }
         .history-description h3 {
             font-weight: bold;
@@ -438,22 +457,20 @@
             display: block;
             margin-bottom: 0.5rem;
         }
+        .history-development-mobile p {
+            color: #2FC1FF;
+        }
         .history-development {
-            flex-direction: column;
-            justify-content: space-around;
             height: 15rem;
             padding: 0;
         }
-        .history-years {
-            flex-direction: row;
-            width: 90%;
+        .history-description {
+            height: 10rem;
         }
-            .history-years p {
-                margin: 0 0.2rem;
-            }
             .history-description img {
-                width: 3rem;
-                height: 3rem;
+                max-width: 3rem;
+                max-height: 3rem;
+                align-self: center;
             }
             .history-description h3 {
                 font-size: 16px;

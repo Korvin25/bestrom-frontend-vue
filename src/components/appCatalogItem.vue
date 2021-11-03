@@ -15,13 +15,16 @@
             <h3>{{ title }}</h3>
             <img class="content-image" :src="require(`../assets/${image}`)" alt="content image">
 
-            <carousel class="carousel" :autoplay="2000" :items-to-show="1.5" :wrap-around="true">
+            <carousel class="carousel" :autoplay="4000" :items-to-show="1" :wrap-around="true">
                 <slide v-for="slide in 3" :key="slide">
-                    <div class="carousel__item flex-column">
+                    <div class="flex-column">
                         <h4>Размер пакета</h4>
                         <p>длина  – 250-450 мм<br>ширина  – 150-350 мм<br>макс. масса - 10 кг</p>
                     </div>
                 </slide>
+                <template #addons>
+                    <Pagination />
+                </template>
             </carousel>
 
             <button  class="btn" @click="scrollToTop">ПОДРОБНЕЕ</button>
@@ -31,7 +34,7 @@
 </template>
 
 <script>
-    import { Carousel, Slide } from 'vue3-carousel';
+    import { Carousel, Slide, Pagination } from 'vue3-carousel';
 
     export default {
         props: {
@@ -48,7 +51,7 @@
             },
         },
         components: {
-            Carousel, Slide
+            Carousel, Slide, Pagination
         },
         name: "appCatalogItem"
     }
