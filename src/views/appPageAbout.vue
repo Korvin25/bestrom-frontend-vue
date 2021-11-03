@@ -133,7 +133,7 @@
         <section class="section">
             <h2>Мы производим и реализуем</h2>
 
-            <carousel :autoplay="3000" :items-to-show="1.3" :wrap-around="true" class="our-choice-mobile">
+            <carousel :autoplay="4000" :items-to-show="1.5" :wrap-around="true" class="our-choice-mobile">
                 <slide v-for="slide in reasons" :key="slide">
                     <div class="carousel__item reason-mobile item-reason card-shadow">
                         <h5>{{slide}}</h5>
@@ -171,10 +171,9 @@
 
         <section class="directors-mobile section">
             <h2>Руководство БЕСТРОМ</h2>
-
             <carousel :autoplay="4000" :items-to-show="1.3" :wrap-around="true" class="our-choice-mobile">
                 <slide v-for="slide in directors" :key="slide">
-                    <div class="carousel__item director-item flex-column">
+                    <div class="director-item flex-column">
                         <img :src="require(`../assets/${slide.img}`)" :alt="slide.name">
                         <h5>{{ slide.name }}</h5>
                         <p>{{ slide.place }}</p>
@@ -471,8 +470,8 @@
             margin: 1rem 1rem 1rem 0.1rem;
         }
         .director-item {
-            margin: 0 1rem;
-            width: 95%;
+            margin: 0 0.5rem;
+            flex-grow: 1;
         }
         .director-item img {
             width: 100%;

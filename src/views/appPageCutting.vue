@@ -11,12 +11,15 @@
                     <slide v-for="packet in packetType" :key="packet">
                         <div @click="checkType = packet.id"
                              :class="checkType === packet.id ? 'check-item' : ''"
-                             class="carousel__item packet-type-item flex-column card-shadow">
+                             class="packet-type-item flex-column card-shadow">
                             <div class="hidden-item"></div>
                             <img :src="require(`../assets/${packet.img}`)" :alt="packet.name">
                             <p>{{ packet.name }}</p>
                         </div>
                     </slide>
+                    <template #addons>
+                        <pagination />
+                    </template>
                 </carousel>
             </div>
 
@@ -60,12 +63,15 @@
                     <slide v-for="packet in packetOptions" :key="packet">
                         <div @click="checkOptions = packet.id"
                              :class="checkOptions === packet.id ? 'check-item' : ''"
-                             class="carousel__item packet-options-item flex-column card-shadow">
+                             class="packet-options-item flex-column card-shadow">
                             <div class="hidden-item"></div>
                             <img :src="require(`../assets/${packet.img}`)" :alt="packet.name">
                             <p>{{ packet.name }}</p>
                         </div>
                     </slide>
+                    <template #addons>
+                        <pagination />
+                    </template>
                 </carousel>
             </div>
 
@@ -154,14 +160,14 @@
 <script>
     import appHeader from "@/components/appHeader";
     import appFooter from "@/components/appFooter";
-    import { Carousel, Slide } from 'vue3-carousel';
+    import { Carousel, Slide, Pagination } from 'vue3-carousel';
 
     export default {
         data() {
             return {
-                checkType: 0,
-                checkOptions: 0,
-                checkSeam: 0,
+                checkType: 1,
+                checkOptions: 1,
+                checkSeam: 1,
                 packetOptions: [
                     {
                       id: 1,
@@ -239,7 +245,7 @@
             },
         },
         components: {
-            appHeader, appFooter, Carousel, Slide
+            appHeader, appFooter, Carousel, Slide, Pagination
         },
         name: "appPageCutting"
     }
@@ -422,6 +428,7 @@
             flex-wrap: wrap;
         }
         .packet-type-item {
+            align-self: stretch;
             margin: 1rem;
         }
         .packet-options {
@@ -430,6 +437,7 @@
         }
         .packet-options-item {
             margin: 1rem;
+            align-self: stretch;
         }
         .packets-seam {
 

@@ -29,7 +29,7 @@
 
             <carousel :items-to-show="1.3">
                 <slide v-for="(slide, index) in 3" :key="index">
-                    <div class="carousel__item flex-column job-item card-shadow">
+                    <div class="flex-column job-item card-shadow">
                         <h4>Грузчик</h4>
                         <img src="../assets/job-image.png" alt="job image">
                         <h4>Заработная плата</h4>
@@ -39,6 +39,9 @@
                         </router-link>
                     </div>
                 </slide>
+                <template #addons>
+                    <pagination />
+                </template>
             </carousel>
 
         </section>
@@ -51,11 +54,11 @@
     import appHeader from "@/components/appHeader";
     import appFooter from "@/components/appFooter";
     import appJobItem from "@/components/appJobItem";
-    import { Carousel, Slide } from 'vue3-carousel';
+    import { Carousel, Slide, Pagination } from 'vue3-carousel';
 
     export default {
         components: {
-            appHeader, appFooter, appJobItem, Carousel, Slide
+            appHeader, appFooter, appJobItem, Carousel, Slide, Pagination
         },
         name: "appPageJobs"
     }
@@ -86,7 +89,8 @@
                 margin: 1rem 0;
             }
         .job-item {
-            width: 100%;
+            flex-grow: 1;
+            align-self: stretch;
             margin: 1rem 0.5rem;
             padding: 2rem 0 1rem 0;
         }

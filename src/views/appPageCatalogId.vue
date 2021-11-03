@@ -40,12 +40,15 @@
                         <slide v-for="(item, index) in aboutItem" :key="index">
                             <div @click="isSelected = index"
                                  :class="isSelected === index ? 'details-select-item-choice' : ''"
-                                 class="details-select-item carousel__item flex-column card-shadow">
+                                 class="details-select-item flex-column card-shadow">
                                 <img v-if="isSelected !== index" :src="require(`../assets/${item.disableImage}`)" alt="catalog-details">
                                 <img v-if="isSelected === index" :src="require(`../assets/${item.activeImage}`)" alt="catalog-details">
                                 <p>{{ item.title }}</p>
                             </div>
                         </slide>
+                        <template #addons>
+                            <pagination />
+                        </template>
                     </carousel>
                 </div>
                 <!-- /.details-select mobile-section -->
@@ -297,12 +300,12 @@
             }
         .mobile-section.details-select{
             display: block;
-            padding: 0 0.5rem;
             margin: 0;
         }
         .mobile-section .details-select-item {
             width: 100%;
-            margin: 0.5rem 0.5rem;
+            align-self: stretch;
+            margin: 1rem;
          }
          .title-brand {
             margin: 0;
