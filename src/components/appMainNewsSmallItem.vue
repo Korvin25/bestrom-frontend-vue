@@ -43,12 +43,17 @@
         position: relative;
         padding: 1rem 2rem;
         justify-content: space-between;
+        align-items: center;
     }
     .news-small-item h4 {
         border-bottom: 1px solid #2FC1FF;
         height: 3rem;
     }
-    .news-small-item img {
+    .news-small-item-image {
+        width: 100%;
+        max-width: 15rem;
+    }
+    .hidden-item img {
         max-width: 398px;
         max-height: 320px;
     }

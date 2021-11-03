@@ -52,7 +52,7 @@
     }
     .image-news img {
         width: 100%;
-        height: 100%;
+        max-width: 15rem;
     }
         .image-news:hover .hidden-item {
             opacity: 1;

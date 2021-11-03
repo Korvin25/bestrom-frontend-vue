@@ -45,8 +45,13 @@
         width: 100%;
         position: relative;
         justify-content: space-around;
+        align-items: center;
     }
-    .news-item-big img {
+    .news-item-big-image {
+        width: 100%;
+        max-width: 15rem;
+    }
+    .hidden-item img {
         max-width: 398px;
         max-height: 320px;
         margin: 2rem;

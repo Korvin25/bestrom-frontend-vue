@@ -41,8 +41,8 @@
         align-items: center;
     }
     .content-image {
-        width: 355px;
-        height: 434px;
+        width: 100%;
+        max-width: 20rem;
     }
     .text-about-content {
         padding: 1rem 0;

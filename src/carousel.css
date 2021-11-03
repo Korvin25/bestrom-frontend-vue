@@ -97,7 +97,10 @@
 .carousel__next:hover {
   background-color: var(--vc-clr-primary);
 }
-
+.carousel__prev:active,
+.carousel__next:active {
+  box-shadow: inset 1px 1px 1px rgba(0, 0, 0, 0.3);
+}
 .carousel__prev:hover > .carousel__icon,
 .carousel__next:hover > .carousel__icon {
   fill: white;

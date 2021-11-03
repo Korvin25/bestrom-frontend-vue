@@ -102,7 +102,6 @@
       <carousel class="mobile-section" :breakpoints='breakpoints'>
         <slide v-for="slide in 3" :key="slide">
           <app-main-news-mobile
-                  class="carousel__item"
                   id="2"
                   title="Новое поколение упаковочных машин"
                   image="news-img.png"
