@@ -6,50 +6,30 @@
             <div class="title-news flex-row">
 
                 <div class="big-title-news flex-column">
-                    <router-link
-                            class="image-news card-shadow"
-                            :to="{ name: 'appPageNewsId', params: { newsId: '321' }, props: true }">
-                        <img src="../assets/news-img.png" alt="news image">
+                    <div class="image-news card-shadow" @click="routerPush(TITLE_NEWS.alt)">
+                        <img :src="TITLE_NEWS.img" :alt="TITLE_NEWS.alt">
                         <div class="hidden-item">
                             <div class="hidden-text">
                                 <img src="../assets/eye.png" alt="show eye">
                             </div>
                         </div>
-                    </router-link>
-                    <h4>Новое поколение упаковочных машин</h4>
-                    <p>Новейшие разработки компании Бестром в сфере упаковочного оборудования</p>
+                    </div>
+                    <h4>{{ TITLE_NEWS.name }}</h4>
+                    <p>{{ TITLE_NEWS.mini_description }}</p>
                 </div>
                 <!-- /.big-title-news -->
 
-                <div class="small-title-news flex-column">
-                    <router-link
-                            class="image-news card-shadow"
-                            :to="{ name: 'appPageNewsId', params: { newsId: '123' } }">
-                        <img src="../assets/news-image-2.png" alt="news image">
+                <div v-for="second_news in SECOND_NEWS" :key="second_news.id" class="small-title-news flex-column">
+                    <div class="image-news card-shadow" @click="routerPush(second_news.alt)">
+                         <img :src="second_news.img" :alt="second_news.alt">
                         <div class="hidden-item">
                             <div class="hidden-text">
                                 <img src="../assets/eye.png" alt="show eye">
                             </div>
                         </div>
-                    </router-link>
-                    <h4>Новое поколение упаковочных машин</h4>
-                    <p>Новейшие разработки компании Бестром в сфере упаковочного оборудования</p>
-                </div>
-                <!-- /.small-title-news -->
-
-                <div class="small-title-news flex-column">
-                    <router-link
-                            class="image-news card-shadow"
-                            :to="{ name: 'appPageNewsId', params: { newsId: '231' } }">
-                        <img src="../assets/news-image-2.png" alt="news image">
-                        <div class="hidden-item">
-                            <div class="hidden-text">
-                                <img src="../assets/eye.png" alt="show eye">
-                            </div>
-                        </div>
-                    </router-link>
-                    <h4>Новое поколение упаковочных машин</h4>
-                    <p>Новейшие разработки компании Бестром в сфере упаковочного оборудования</p>
+                    </div>
+                    <h4>{{ second_news.name }}</h4>
+                    <p>{{ second_news.mini_description }}</p>
                 </div>
                 <!-- /.small-title-news -->
             </div>
@@ -57,58 +37,12 @@
 
             <div class="other-news flex-row">
                 <app-news-other-item
-                        id="1"
-                        title="Новое поколение упаковочных машин"
-                        text="Новейшие разработки компании Бестром в сфере упаковочного оборудования"
-                        image="news-image-2.png"
-                ></app-news-other-item>
-                <app-news-other-item
-                        id="2"
-                        title="Новое поколение упаковочных машин"
-                        text="Новейшие разработки компании Бестром в сфере упаковочного оборудования"
-                        image="news-image-2.png"
-                ></app-news-other-item>
-                <app-news-other-item
-                        id="3"
-                        title="БЕСТРОМ-3600П"
-                        text="Рукавная оберточная машина"
-                        image="news-image-2.png"
-                ></app-news-other-item>
-                <app-news-other-item
-                        id="4"
-                        title="Новое поколение упаковочных машин"
-                        text="Новейшие разработки компании Бестром в сфере упаковочного оборудования"
-                        image="news-image-2.png"
-                ></app-news-other-item>
-                <app-news-other-item
-                        id="5"
-                        title="Новое поколение упаковочных машин"
-                        text="Новейшие разработки компании Бестром в сфере упаковочного оборудования"
-                        image="news-image-2.png"
-                ></app-news-other-item>
-                <app-news-other-item
-                        id="6"
-                        title="БЕСТРОМ-3600П"
-                        text="Рукавная оберточная машина"
-                        image="news-image-2.png"
-                ></app-news-other-item>
-                <app-news-other-item
-                        id="7"
-                        title="Новое поколение упаковочных машин"
-                        text="Новейшие разработки компании Бестром в сфере упаковочного оборудования"
-                        image="news-image-2.png"
-                ></app-news-other-item>
-                <app-news-other-item
-                        id="8"
-                        title="Новое поколение упаковочных машин"
-                        text="Новейшие разработки компании Бестром в сфере упаковочного оборудования"
-                        image="news-image-2.png"
-                ></app-news-other-item>
-                <app-news-other-item
-                        id="9"
-                        title="БЕСТРОМ-3600П"
-                        text="Рукавная оберточная машина"
-                        image="news-image-2.png"
+                        v-for="other_news in OTHER_NEWS"
+                        :key="other_news.id"
+                        :id="other_news.alt"
+                        :title="other_news.name"
+                        :text="other_news.mini_description"
+                        :image="other_news.img"
                 ></app-news-other-item>
             </div>
             <!-- /.other-news flex-row -->
@@ -122,8 +56,28 @@
     import appHeader from "@/components/appHeader";
     import appFooter from "@/components/appFooter";
     import appNewsOtherItem from "@/components/appNewsOtherItem";
+    import { mapGetters, mapActions } from "vuex"
 
     export default {
+        computed: {
+            ...mapGetters({
+                TITLE_NEWS:'news/TITLE_NEWS',
+                SECOND_NEWS:'news/SECOND_NEWS',
+                OTHER_NEWS:'news/OTHER_NEWS'
+            })
+        },
+        methods: {
+            ...mapActions({
+                GET_NEWS:'news/GET_NEWS'
+            }),
+            routerPush(path) {
+                window.scrollTo(0, 0);
+                this.$router.push(`/news/${path}`)
+            }
+        },
+        mounted() {
+            this.GET_NEWS()
+        },
         components: {
             appHeader, appFooter, appNewsOtherItem
         },
@@ -203,10 +157,11 @@
         .all-news h2 {
             margin: 1rem 0 0 0;
         }
-        .title-news {
-            display: none;
+        .small-title-news {
+            margin: 0;
+            width: 100%;
         }
-        .other-news {
+        .other-news, .title-news {
             flex-direction: column;
         }
     }

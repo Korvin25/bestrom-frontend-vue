@@ -1,15 +1,14 @@
 <template>
     <div class="small-other-news flex-column">
-        <router-link
-                class="image-news card-shadow"
-                :to="{ name: 'appPageNewsId', params: { newsId: this.id } }">
-            <img :src="pathToImage" alt="news image">
+        <div class="image-news card-shadow"
+                @click="routerPush(this.id)">
+            <img :src="image" :alt="this.id">
             <div class="hidden-item">
                 <div class="hidden-text">
                     <img src="../assets/eye.png" alt="show eye">
                 </div>
             </div>
-        </router-link>
+        </div>
         <h4>{{ title }}</h4>
         <p>{{ text }}</p>
     </div>
@@ -24,13 +23,10 @@
             text: String,
             image: String
         },
-        computed: {
-            pathToImage() {
-                if (!this.image) {
-                    return
-                }
-                const fileName = this.image.toLowerCase();
-                return require(`../assets/${fileName}`);
+        methods: {
+            routerPush(path) {
+                window.scrollTo(0, 0);
+                this.$router.push(`/news/${path}`)
             }
         },
         name: "appNewsOtherItem"
@@ -48,6 +44,7 @@
         justify-content: center;
         align-items: center;
         padding: 2rem;
+        height: 15rem;
         position: relative;
     }
     .image-news img {
