@@ -29,13 +29,13 @@
             <h2>История развития</h2>
             <div class="card-shadow">
                 <carousel :autoplay="4000" :items-to-show="4.5" :wrap-around="true">
-                    <slide v-for="item in history" :key="item.id">
+                    <slide v-for="item in HISTORY" :key="item.year">
                             <p class="carousel__item">{{ item.year }}</p>
                     </slide>
                     <template #addons="{ currentSlide }">
                         <div class="history-description">
-                            <img src="../assets/bestrom_logo.png" alt="bestrom_logo">
-                            <h3>{{ findHistory(currentSlide + 1).year }}</h3>
+                            <img :src="findHistory(currentSlide + 1).img" :alt="findHistory(currentSlide + 1).description">
+                            <h3>{{ findHistory(currentSlide + 1).description }}</h3>
                         </div>
                     </template>
                 </carousel>
@@ -185,13 +185,13 @@
 
             <div class="history-development card-shadow">
                 <carousel :autoplay="4500" :items-to-show="4.5" :wrap-around="true">
-                    <slide v-for="item in history" :key="item.id">
+                    <slide v-for="item in HISTORY" :key="item.id">
                         <p class="carousel__item">{{ item.year }}</p>
                     </slide>
                     <template #addons="{ currentSlide }">
                         <div class="history-description">
-                            <img src="../assets/bestrom_logo.png" alt="bestrom_logo">
-                            <h3>{{ findHistory(currentSlide + 1).year }}</h3>
+                            <img :src="findHistory(currentSlide + 1).img" :alt="findHistory(currentSlide + 1).description">
+                            <h3>{{ findHistory(currentSlide + 1).description }}</h3>
                         </div>
                     </template>
                 </carousel>
@@ -279,30 +279,6 @@
                     wrapAround: true
                     },
                 },
-                history: [
-                    {
-                        id: 1,
-                        year: '1989'
-                    }, {
-                        id: 2,
-                        year: '1993'
-                    }, {
-                        id: 3,
-                        year: '1997'
-                    }, {
-                        id: 4,
-                        year: '2000'
-                    }, {
-                        id: 5,
-                        year: '2004'
-                    }, {
-                        id: 6,
-                        year: '2007'
-                    }, {
-                        id: 7,
-                        year: '2009'
-                    }
-                ],
                 reasons: [
                     'УПАКОВОЧНЫЕ МАШИНЫ ВЕРТИКАЛЬНОГО ТИПА',
                     'УПАКОВОЧНЫЕ МАШИНЫ ГОРИЗОНТАЛЬНОГО ТИПА',
@@ -332,12 +308,14 @@
         },
         computed: {
             ...mapGetters({
-                CLIENTS:'clients/CLIENTS'
+                CLIENTS:'clients/CLIENTS',
+                HISTORY:'history/HISTORY'
             })
         },
         methods: {
             ...mapActions({
-            GET_CLIENTS:'clients/GET_CLIENTS'
+                GET_CLIENTS:'clients/GET_CLIENTS',
+                GET_HISTORY:'history/GET_HISTORY'
             }),
             showClient(client) {
                 this.customers = this.CLIENTS.find(e => e.alt === client)
@@ -345,7 +323,12 @@
                 this.customers.showModal = true
             },
             findHistory(current) {
-                return this.history.find(e => e.id === current)
+                if (this.HISTORY.length > 0) {
+                    return this.HISTORY.find(e => e.id === current)
+                }
+                else {
+                    return { year: '', description: '', img: '' }
+                }
             }
         },
         watch: {
@@ -362,6 +345,7 @@
         },
         mounted() {
             this.GET_CLIENTS()
+            this.GET_HISTORY()
         },
         components: {
             appHeader, appFooter, appHiddenItem, appPartnersItem, 
