@@ -12,6 +12,7 @@ import appPagePartners from "@/views/appPagePartners";
 import appPageClients from "@/views/appPageClients";
 import appPageCatalog from "@/views/appPageCatalog";
 import appPageCatalogId from "@/views/appPageCatalogId";
+import appPage404 from "@/views/appPage404";
 
 export default createRouter({
     mode: 'history',
@@ -81,6 +82,15 @@ export default createRouter({
                 path: '/catalog/:catalogId',
                 name: 'appPageCatalogId',
                 component: appPageCatalogId,
-            }
+            },
+        {
+            path: '/404',
+            name: '404',
+            component: appPage404,
+        },
+        {
+            path: '/:pathMatch(.*)*',
+            redirect: '/404'
+        }
     ]
 })
