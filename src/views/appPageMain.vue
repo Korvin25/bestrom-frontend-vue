@@ -97,7 +97,8 @@
     </section>
 
     <section class="section">
-      <h2>Новости</h2>
+      <h2 v-if="TITLE_NEWS.length !== 0">Новости</h2>
+      <h2 v-else>Новостей нет</h2>
 
       <carousel class="mobile-section" :breakpoints='breakpoints'>
         <slide v-for="item in mobileNews" :key="item.id">
@@ -112,7 +113,7 @@
         </template>
       </carousel>
 
-      <div class="news-items flex-row">
+      <div v-if="TITLE_NEWS.length !== 0" class="news-items flex-row">
         <app-main-news-big-item
                 :alt="TITLE_NEWS.alt"
                 :title="TITLE_NEWS.name"

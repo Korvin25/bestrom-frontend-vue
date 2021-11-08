@@ -2,7 +2,8 @@
     <app-header></app-header>
     <main class="main-content flex-column">
         <section class="desktop-section section flex-column">
-            <h2>Вакансии</h2>
+            <h2 v-if="VACANCY.length !== 0">Вакансии</h2>
+            <h2 v-else>Вакансий нет</h2>
             <app-job-item
                     v-for="job in VACANCY"
                     :key="job.id"
