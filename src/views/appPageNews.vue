@@ -2,10 +2,11 @@
     <app-header></app-header>
     <main class="main-content flex-column">
         <section class="all-news section">
-            <h2>Последние новости</h2>
+            <h2 v-if="TITLE_NEWS.length !== 0">Последние новости</h2>
+            <h2 v-else>Новостей нет</h2>
             <div class="title-news flex-row">
 
-                <div class="big-title-news flex-column">
+                <div v-if="TITLE_NEWS.length !== 0" class="big-title-news flex-column">
                     <div class="image-news card-shadow" @click="routerPush(TITLE_NEWS.alt)">
                         <img :src="TITLE_NEWS.img" :alt="TITLE_NEWS.alt">
                         <div class="hidden-item">
@@ -18,7 +19,6 @@
                     <p>{{ TITLE_NEWS.mini_description }}</p>
                 </div>
                 <!-- /.big-title-news -->
-
                 <div v-for="second_news in SECOND_NEWS" :key="second_news.id" class="small-title-news flex-column">
                     <div class="image-news card-shadow" @click="routerPush(second_news.alt)">
                          <img :src="second_news.img" :alt="second_news.alt">
