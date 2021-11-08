@@ -1,6 +1,6 @@
 <template>
     <div class="desktop-section job-item flex-row card-shadow">
-        <img :src="require(`../assets/${image}`)" alt="job image">
+        <img :src="image" alt="job image">
         <div class="flex-column job-item-description">
             <h4>{{ title }}</h4>
             <h5>Основные требования:</h5>
@@ -11,9 +11,7 @@
         <div class="flex-column job-item-pay">
             <h4>Заработная плата</h4>
             <p>{{ pay }}</p>
-            <router-link :to="{ name: 'appPageJobId', params: { jobId: this.id } }">
-                <button @click="scrollToTop" class="btn">Подробнее</button>
-            </router-link>
+            <button @click="routerPush(this.alt)" class="btn">Подробнее</button>
         </div>
     </div>
     <!-- ./desktop-section -->
@@ -22,7 +20,7 @@
 <script>
     export default {
         props: {
-            id: String,
+            alt: String,
             title: String,
             requirements: String,
             skills: String,
@@ -30,9 +28,10 @@
             image: String
         },
         methods: {
-            scrollToTop() {
-                window.scrollTo(0,0);
-            },
+            routerPush(path) {
+                window.scrollTo(0, 0);
+                this.$router.push(`/jobs/${path}`)
+            }
         },
         name: "appJobItem"
     }
@@ -45,8 +44,8 @@
     }
         .job-item img {
             align-self: center;
-            width: 12rem;
-            height: 12rem;
+            width: 100%;
+            max-width: 11rem;
         }
     .job-item-description {
         width: 100%;

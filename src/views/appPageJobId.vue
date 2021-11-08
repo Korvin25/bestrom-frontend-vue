@@ -6,23 +6,23 @@
             <h2>Вакансии</h2>
             <div class="job-item flex-column card-shadow">
                 <div class="flex-row">
-                    <img src="../assets/job-image.png" alt="job image">
+                    <img :src="currentJob.img" :alt="currentJob.alt">
                     <div class="flex-column job-item-description">
-                        <h4>Грузчик</h4>
+                        <h4>{{ currentJob.name }}</h4>
                         <h5>Основные требования:</h5>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium assumenda consequuntur dolores doloribus exercitationem hic id in maxime molestiae mollitia, nemo obcaecati, perferendis provident quas quia quisquam quod reprehenderit, veniam!</p>
+                        <p>{{ currentJob.requirements }}</p>
                         <h5>Основные навыки:</h5>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad adipisci commodi cum cupiditate dolores, doloribus eum excepturi ipsa iste maxime molestiae nulla odio perferendis porro quae quasi vel veniam, voluptates.</p>
+                        <p>{{ currentJob.skills }}</p>
                         <h5>Образование:</h5>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad adipisci commodi cum cupiditate dolores, doloribus eum excepturi ipsa iste maxime molestiae nulla odio perferendis porro quae quasi vel veniam, voluptates.</p>
+                        <p>{{ currentJob.education }}</p>
                         <h5>Опыт работы:</h5>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad adipisci commodi cum cupiditate dolores, doloribus eum excepturi ipsa iste maxime molestiae nulla odio perferendis porro quae quasi vel veniam, voluptates.</p>
+                        <p>{{ currentJob.experience }}</p>
                         <h5>Вы получаете:</h5>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad adipisci commodi cum cupiditate dolores, doloribus eum excepturi ipsa iste maxime molestiae nulla odio perferendis porro quae quasi vel veniam, voluptates.</p>
+                        <p>{{ currentJob.youget }}</p>
                     </div>
                     <div class="flex-column job-item-pay">
                         <h4>Заработная плата</h4>
-                        <p>45 000 руб.</p>
+                        <p>{{ currentJob.salary }}</p>
                     </div>
                 </div>
                 <div class="flex-row flex-buttons">
@@ -37,18 +37,18 @@
 
         <section class="mobile-section section flex-column">
             <div class="vacation card-shadow">
-                <h2>ГРУЗЧИК</h2>
+                <h2>{{ currentJob.name }}</h2>
             </div>
             <div class="flex-column job-item card-shadow">
                 <img src="../assets/job-image.png" alt="job image">
                 <h4>Заработная плата</h4>
-                <p>45 000 руб</p>
+                <p>{{ currentJob.salary }}</p>
                 <h4>Основные требования</h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium assumenda consequuntur dolores doloribus exercitationem hic id in maxime molestiae mollitia, nemo obcaecati, perferendis provident quas quia quisquam quod reprehenderit, veniam!</p>
+                <p>{{ currentJob.requirements }}</p>
                 <h4>Основные навыки</h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad adipisci commodi cum cupiditate dolores, doloribus eum excepturi ipsa iste maxime molestiae nulla odio perferendis porro quae quasi vel veniam, voluptates.</p>
+                <p>{{ currentJob.skills }}</p>
                 <h4>Вас ждёт</h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad adipisci commodi cum cupiditate dolores, doloribus eum excepturi ipsa iste maxime molestiae nulla odio perferendis porro quae quasi vel veniam, voluptates.</p>
+                <p>{{ currentJob.youget }}</p>
                 <div class="flex-row flex-buttons">
                     <a href="tel:+78005557457">
                         <button class="btn">Позвонить</button>
@@ -71,12 +71,29 @@
     import appHeader from "@/components/appHeader";
     import appFooter from "@/components/appFooter";
     import appModalJobRespond from "@/components/appModalJobRespond";
+    import {mapActions, mapGetters} from "vuex";
 
     export default {
         data() {
             return {
+                currentJob: {},
                 showModalRespond: false
             }
+        },
+        computed: {
+            ...mapGetters({
+                VACANCY:'vacancy/VACANCY'
+            })
+        },
+        methods: {
+            ...mapActions({
+                GET_VACANCY: 'vacancy/GET_VACANCY'
+            })
+        },
+        mounted() {
+            this.GET_VACANCY().then(() => {
+                this.currentJob = this.VACANCY.find(e => e.alt === this.$route.params.jobId)
+            })
         },
         watch: {
             showModalRespond() {
@@ -101,8 +118,8 @@
     }
     .job-item img {
         align-self: center;
-        width: 12rem;
-        height: 12rem;
+        max-width: 11rem;
+        width: 100%;
     }
     .job-item-description {
         width: 100%;

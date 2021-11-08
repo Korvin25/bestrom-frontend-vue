@@ -4,20 +4,14 @@
         <section class="desktop-section section flex-column">
             <h2>Вакансии</h2>
             <app-job-item
-                    id="1"
-                    image="job-image.png"
-                    title="Грузчик"
-                    requirements="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores earum eius enim eveniet excepturi, facere facilis ipsa libero minus nisi nostrum odit quaerat recusandae rem sint tempore tenetur velit voluptate."
-                    skills="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores earum eius enim eveniet excepturi, facere facilis ipsa libero minus nisi nostrum odit quaerat recusandae rem sint tempore tenetur velit voluptate."
-                    pay="45 000 руб."
-            ></app-job-item>
-            <app-job-item
-                    id="2"
-                    image="job-image.png"
-                    title="Грузчик"
-                    requirements="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores earum eius enim eveniet excepturi, facere facilis ipsa libero minus nisi nostrum odit quaerat recusandae rem sint tempore tenetur velit voluptate."
-                    skills="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores earum eius enim eveniet excepturi, facere facilis ipsa libero minus nisi nostrum odit quaerat recusandae rem sint tempore tenetur velit voluptate."
-                    pay="45 000 руб."
+                    v-for="job in VACANCY"
+                    :key="job.id"
+                    :alt="job.alt"
+                    :image="job.img"
+                    :title="job.name"
+                    :requirements="job.requirements"
+                    :skills="job.skills"
+                    :pay="job.salary"
             ></app-job-item>
         </section>
         <!-- ./desktop-section -->
@@ -28,15 +22,13 @@
             </div>
 
             <carousel :items-to-show="1.3">
-                <slide v-for="(slide, index) in 3" :key="index">
+                <slide v-for="job in VACANCY" :key="job.id">
                     <div class="flex-column job-item card-shadow">
-                        <h4>Грузчик</h4>
-                        <img src="../assets/job-image.png" alt="job image">
+                        <h4>{{ job.name }}</h4>
+                        <img :src="job.img" :alt="job.alt">
                         <h4>Заработная плата</h4>
-                        <p>45 000 руб</p>
-                        <router-link :to="{ name: 'appPageJobId', params: { jobId: slide } }">
-                            <button class="btn">ОТКЛИКНУТЬСЯ</button>
-                        </router-link>
+                        <p>{{ job.salary }}</p>
+                        <button @click="routerPush(job.alt)" class="btn">ОТКЛИКНУТЬСЯ</button>
                     </div>
                 </slide>
                 <template #addons>
@@ -55,8 +47,26 @@
     import appFooter from "@/components/appFooter";
     import appJobItem from "@/components/appJobItem";
     import { Carousel, Slide, Pagination } from 'vue3-carousel';
+    import {mapActions, mapGetters} from "vuex";
 
     export default {
+        computed: {
+            ...mapGetters({
+                VACANCY:'vacancy/VACANCY'
+            })
+        },
+        methods: {
+            ...mapActions({
+                GET_VACANCY: 'vacancy/GET_VACANCY'
+            }),
+            routerPush(path) {
+                window.scrollTo(0, 0);
+                this.$router.push(`/jobs/${path}`)
+            }
+        },
+        mounted() {
+            this.GET_VACANCY()
+        },
         components: {
             appHeader, appFooter, appJobItem, Carousel, Slide, Pagination
         },
@@ -93,6 +103,7 @@
             align-self: stretch;
             margin: 1rem 0.5rem;
             padding: 2rem 0 1rem 0;
+            align-items: center;
         }
             .job-item img {
                 margin: 2rem 0;
