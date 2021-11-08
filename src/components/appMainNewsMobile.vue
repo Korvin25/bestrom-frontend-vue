@@ -1,6 +1,6 @@
 <template>
     <div @click="routerPush" class="news-small-item flex-column card-shadow">
-        <img class="news-small-item-image" :src="require(`../assets/${image}`)" alt="news image">
+        <img class="news-small-item-image" :src="image" alt="news image">
         <h4>{{ title }}</h4>
         <div class="hidden-item">
             <div class="hidden-text">
@@ -14,13 +14,13 @@
 <script>
     export default {
         props: {
-            id: String,
+            alt: String,
             title: String,
             image: String
         },
         methods: {
             routerPush() {
-                this.$router.push(`/news/${this.id}`)
+                this.$router.push(`/news/${this.alt}`)
                 window.scrollTo(0,0);
             },
         },
@@ -32,9 +32,12 @@
     .news-small-item {
         position: relative;
         width: 100%;
+        flex-grow: 1;
+        height: 19rem;
         margin: 1rem;
         padding: 0.5rem 1rem;
-        justify-content: space-between;
+        align-items: center;
+        justify-content: space-around;
     }
     .news-small-item:hover .hidden-item {
         opacity: 1;
@@ -42,7 +45,6 @@
     .news-small-item-image {
         max-width: 15rem;
         width: 100%;
-        align-self: center;
     }
     .news-small-item:hover h4,
     .news-small-item:hover .news-small-item-image {

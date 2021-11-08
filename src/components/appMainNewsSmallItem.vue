@@ -1,7 +1,7 @@
 <template>
     <div @click="routerPush" class="news-small-item flex-column card-shadow">
         <h4>{{ title }}</h4>
-        <img class="news-small-item-image" :src="pathToImage" alt="news image">
+        <img class="news-small-item-image" :src="image" alt="news image">
         <div class="hidden-item">
             <div class="hidden-text">
                 <img src="../assets/eye.png" alt="show eye">
@@ -14,24 +14,15 @@
 <script>
     export default {
         props: {
-            id: String,
+            alt: String,
             title: String,
             image: String
         },
         methods: {
             routerPush() {
-                this.$router.push(`/news/${this.id}`)
+                this.$router.push(`/news/${this.alt}`)
                 window.scrollTo(0,0);
             },
-        },
-        computed: {
-            pathToImage() {
-                if (!this.image) {
-                    return
-                }
-                const fileName = this.image.toLowerCase();
-                return require(`../assets/${fileName}`);
-            }
         },
         name: "appMainNewsSmallItem"
     }
@@ -39,15 +30,16 @@
 
 <style scoped>
     .news-small-item {
-        width: 25%;
+        width: 20%;
+        flex-grow: 1;
         position: relative;
         padding: 1rem 2rem;
-        justify-content: space-between;
+        justify-content: space-evenly;
         align-items: center;
     }
     .news-small-item h4 {
         border-bottom: 1px solid #2FC1FF;
-        height: 3rem;
+        padding-bottom: 1rem;
     }
     .news-small-item-image {
         width: 100%;
@@ -76,6 +68,7 @@
         padding: 1rem;
         cursor: pointer;
         box-shadow: 0 1px 4px 1px rgba(0, 0, 0, 0.25);
+        background: rgba(106, 106, 106, 0.8);
         border-radius: 6px;
         transition: opacity 0.4s;
         opacity: 0;

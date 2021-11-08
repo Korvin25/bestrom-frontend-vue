@@ -100,45 +100,34 @@
       <h2>Новости</h2>
 
       <carousel class="mobile-section" :breakpoints='breakpoints'>
-        <slide v-for="slide in 3" :key="slide">
+        <slide v-for="item in mobileNews" :key="item.id">
           <app-main-news-mobile
-                  id="2"
-                  title="Новое поколение упаковочных машин"
-                  image="news-img.png"
+                  :alt="item.alt"
+                  :title="item.name"
+                  :image="item.img"
           ></app-main-news-mobile>
         </slide>
+        <template #addons="{ slidesCount }">
+          <pagination v-if="slidesCount > 2" />
+        </template>
       </carousel>
 
-      <div class="news flex-column">
+      <div class="news-items flex-row">
         <app-main-news-big-item
-                id="1"
-                title="Новое поколение упаковочных машин"
-                text="Мы производим высококачественное упаковочное оборудование, которое будет четко и в срок отрабатывать необходимые объёмы. Вас ожидает лучший сервис, гарантийное обслуживание, высококвалифицированные специалисты, консультаты, которые помогут вам, в случае возникновения каких-либо проблем."
-                image="news-img.png"
+                :alt="TITLE_NEWS.alt"
+                :title="TITLE_NEWS.name"
+                :text="TITLE_NEWS.mini_description"
+                :image="TITLE_NEWS.img"
         ></app-main-news-big-item>
-
-        <div class="news-items flex-row">
-          <app-main-news-small-item
-                  id="2"
-                  title="Новое поколение упаковочных машин"
-                  image="news-img.png"
-          ></app-main-news-small-item>
-          <app-main-news-small-item
-                  id="3"
-                  title="Работаем на качество!"
-                  image="content_image.png"
-          ></app-main-news-small-item>
-          <app-main-news-small-item
-                  id="4"
-                  title="Выходим на новую скорость!"
-                  image="content_image.png"
-          ></app-main-news-small-item>
-        </div>
-        <!-- /.news-item-small -->
+        <app-main-news-small-item
+                v-for="item in secondNews"
+                :key="item.id"
+                :alt="item.alt"
+                :title="item.name"
+                :image="item.img"
+        ></app-main-news-small-item>
       </div>
-      <!-- /.news flex-column -->
     </section>
-    <!-- /.section -->
 
     <transition name="modal">
       <app-modal-partners-item v-if="customers.showModal"
@@ -171,6 +160,8 @@ import {mapActions, mapGetters} from "vuex";
 export default {
   data() {
     return {
+      secondNews: [],
+      mobileNews: [],
       customers: {
         showModal: false,
       },
@@ -193,13 +184,16 @@ export default {
   computed: {
     ...mapGetters({
       PARTNERS:'partners/PARTNERS',
-      CLIENTS:'clients/CLIENTS'
+      CLIENTS:'clients/CLIENTS',
+      TITLE_NEWS:'news/TITLE_NEWS',
+      ALL_NEWS:'news/ALL_NEWS',
     })
   },
   methods: {
     ...mapActions({
       GET_PARTNERS:'partners/GET_PARTNERS',
-      GET_CLIENTS:'clients/GET_CLIENTS'
+      GET_CLIENTS:'clients/GET_CLIENTS',
+      GET_NEWS:'news/GET_NEWS',
     }),
     pushToCatalog(radioitem) {
       this.$store.state.radioCatalogSelect = radioitem
@@ -215,6 +209,15 @@ export default {
       this.customers = this.PARTNERS.find(e => e.alt === partner)
       this.customers.machines = false
       this.customers.showModal = true
+    },
+    threeNews() {
+      let news = []
+      for (const item of this.ALL_NEWS) {
+        if (news.length < 3 && item !== this.TITLE_NEWS) {
+          news.push(item)
+        }
+      }
+      return news
     }
   },
   watch: {
@@ -232,6 +235,11 @@ export default {
   mounted() {
     this.GET_PARTNERS()
     this.GET_CLIENTS()
+    this.GET_NEWS().then(() => {
+      this.secondNews = this.threeNews()
+      this.mobileNews = this.threeNews()
+      this.mobileNews.unshift(this.TITLE_NEWS)
+    })
   },
   components: {
     appHeader, appFooter, appPartnersItem, appBlockContent, appMainNewsBigItem,
@@ -275,6 +283,8 @@ export default {
     }
     .news-items {
       margin: 3rem 0;
+      flex-wrap: wrap;
+      gap: 1rem 1rem;
       justify-content: space-between;
     }
     .desktop-section {
@@ -307,7 +317,7 @@ export default {
         flex-grow: 1;
         width: 100%;
       }
-      .news {
+      .news-items {
         display: none;
       }
     }

@@ -4,7 +4,7 @@
             <h4>{{ title }}</h4>
             <p class="text-about-content">{{ text }}</p>
         </div>
-        <img class="news-item-big-image" :src="pathToImage" alt="news image">
+        <img class="news-item-big-image" :src="image" alt="news image">
         <div class="hidden-item">
             <div class="hidden-text">
                 <img src="../assets/eye.png" alt="show eye">
@@ -16,25 +16,16 @@
 <script>
     export default {
         props: {
-            id: String,
+            alt: String,
             title: String,
             text: String,
             image: String
         },
         methods: {
             routerPush() {
-                this.$router.push(`/news/${this.id}`)
+                this.$router.push(`/news/${this.alt}`)
                 window.scrollTo(0,0);
             },
-        },
-        computed: {
-            pathToImage() {
-                if (!this.image) {
-                    return
-                }
-                const fileName = this.image.toLowerCase();
-                return require(`../assets/${fileName}`);
-            }
         },
         name: "appMainNewsBigItem"
     }
@@ -43,6 +34,7 @@
 <style scoped>
     .news-item-big {
         width: 100%;
+        flex-grow: 1;
         position: relative;
         justify-content: space-around;
         align-items: center;
@@ -75,6 +67,7 @@
         padding: 1rem;
         cursor: pointer;
         box-shadow: 0 1px 4px 1px rgba(0, 0, 0, 0.25);
+        background: rgba(106, 106, 106, 0.8);
         border-radius: 6px;
         transition: opacity 0.4s;
         opacity: 0;
