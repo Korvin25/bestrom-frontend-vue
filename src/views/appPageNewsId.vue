@@ -186,5 +186,11 @@
             text-align: center;
             width: 100%;
         }
+            .current-news[data-v-60b3ed14] p {
+                width: 100%;
+            }
+            .date-publication p {
+                text-align: left;
+            }
     }
 </style>

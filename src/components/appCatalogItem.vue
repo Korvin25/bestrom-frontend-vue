@@ -2,24 +2,40 @@
     <div class="desktop-section catalog-item-product flex-row card-shadow">
         <div class="about-content flex-column">
             <h3>{{ title }}</h3>
-            <p>{{ subTitle }}</p>
+            <p>{{ property }}</p>
             <p class="text-about-content">{{ text }}</p>
             <button  class="btn" @click="scrollToTop">ПОДРОБНЕЕ</button>
         </div>
-        <img class="content-image" :src="require(`../assets/${image}`)" alt="content image">
+
+        <carousel class="carousel" :items-to-show="1" :wrap-around="true">
+            <slide v-for="slide in PRODUCT_ID.SliderProd" :key="slide.id">
+                <img :src="slide.img" :alt="slide.alt">
+            </slide>
+            <template #addons>
+                <Pagination />
+            </template>
+        </carousel>
+
     </div>
     <!-- ./desktop-section -->
 
     <div class="mobile-section catalog-item-product flex-row card-shadow">
         <div class="about-content flex-column">
             <h3>{{ title }}</h3>
-            <img class="content-image" :src="require(`../assets/${image}`)" alt="content image">
+            <carousel class="carousel" :items-to-show="1" :wrap-around="true">
+                <slide v-for="slide in PRODUCT_ID.SliderProd" :key="slide.id">
+                    <img class="content-image" :src="slide.img" :alt="slide.alt">
+                </slide>
+                <template #addons>
+                    <Pagination />
+                </template>
+            </carousel>
 
             <carousel class="carousel" :autoplay="4000" :items-to-show="1" :wrap-around="true">
-                <slide v-for="slide in 3" :key="slide">
+                <slide v-for="slide in PRODUCT_ID.ProductPropertyValue" :key="slide.id">
                     <div class="flex-column">
-                        <h4>Размер пакета</h4>
-                        <p>длина  – 250-450 мм<br>ширина  – 150-350 мм<br>макс. масса - 10 кг</p>
+                        <h4>{{ slide.product_property.name }}</h4>
+                        <p>{{ slide.value }}</p>
                     </div>
                 </slide>
                 <template #addons>
@@ -35,20 +51,39 @@
 
 <script>
     import { Carousel, Slide, Pagination } from 'vue3-carousel';
+    import {mapActions, mapGetters} from "vuex";
 
     export default {
+        data() {
+            return {
+                property: '',
+                images: []
+            }
+        },
         props: {
-            id: String,
+            id: Number,
             title: String,
-            subTitle: String,
             text: String,
-            image: String
+        },
+        computed: {
+            ...mapGetters({
+                PRODUCT_ID:'product/PRODUCT_ID',
+            })
         },
         methods: {
+            ...mapActions({
+                GET_PRODUCT_ID:'product/GET_PRODUCT_ID'
+            }),
             scrollToTop() {
                 this.$router.push(`/catalog/${this.id}`)
                 window.scrollTo(0,0);
             },
+        },
+        mounted() {
+            this.GET_PRODUCT_ID(this.id).then(() => {
+                console.log(this.PRODUCT_ID)
+                this.property = this.PRODUCT_ID.ProductPropertyValue.find( e => e.product_property.name === 'Тип машины').value
+            })
         },
         components: {
             Carousel, Slide, Pagination
@@ -61,11 +96,11 @@
     .catalog-item-product {
         flex-grow: 1;
         width: 40%;
-        margin: 1rem 1rem;
         padding: 1rem 1.5rem;
     }
     .content-image {
         align-self: center;
+        max-width: 20rem;
         width: 100%;
     }
     .desktop-section {

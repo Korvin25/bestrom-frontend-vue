@@ -110,37 +110,6 @@
                 </div>
             </div>
             <!-- /.catalog-select-card -->
-            <div class="catalog-item flex-row">
-                <app-catalog-item
-                        id="1"
-                        title="БЕСТРОМ-420C"
-                        sub-title="Упаковочная машина вертикального типа"
-                        text="Предназначена для упаковки сыпучих, гранулированных и мелкоштучных продуктов в пакеты из термосвариваемых пленок, подаваемых с рулона в виде полотна."
-                        image="content_image.png"
-                ></app-catalog-item>
-                <app-catalog-item
-                        id="2"
-                        title="БЕСТРОМ-420C"
-                        sub-title="Упаковочная машина вертикального типа"
-                        text="Предназначена для упаковки сыпучих, гранулированных и мелкоштучных продуктов в пакеты из термосвариваемых пленок, подаваемых с рулона в виде полотна."
-                        image="content_image.png"
-                ></app-catalog-item>
-                <app-catalog-item
-                        id="3"
-                        title="БЕСТРОМ-420C"
-                        sub-title="Упаковочная машина вертикального типа"
-                        text="Предназначена для упаковки сыпучих, гранулированных и мелкоштучных продуктов в пакеты из термосвариваемых пленок, подаваемых с рулона в виде полотна."
-                        image="content_image.png"
-                ></app-catalog-item>
-                <app-catalog-item
-                        id="4"
-                        title="БЕСТРОМ-420C"
-                        sub-title="Упаковочная машина вертикального типа"
-                        text="Предназначена для упаковки сыпучих, гранулированных и мелкоштучных продуктов в пакеты из термосвариваемых пленок, подаваемых с рулона в виде полотна."
-                        image="content_image.png"
-                ></app-catalog-item>
-            </div>
-            <!-- /.catalog-item -->
         </section>
         <!-- ./desktop-section -->
 
@@ -152,41 +121,19 @@
             <transition name="modal">
                 <app-catalog-mobile-filter v-if="showMobileFilter" @close="showMobileFilter = false"></app-catalog-mobile-filter>
             </transition>
-
-            <!-- /.catalog-select-card -->
-            <div class="catalog-item flex-row">
-                <app-catalog-item
-                        id="1"
-                        title="БЕСТРОМ-420C"
-                        sub-title="Упаковочная машина вертикального типа"
-                        text="Предназначена для упаковки сыпучих, гранулированных и мелкоштучных продуктов в пакеты из термосвариваемых пленок, подаваемых с рулона в виде полотна."
-                        image="content_image.png"
-                ></app-catalog-item>
-                <app-catalog-item
-                        id="2"
-                        title="БЕСТРОМ-420C"
-                        sub-title="Упаковочная машина вертикального типа"
-                        text="Предназначена для упаковки сыпучих, гранулированных и мелкоштучных продуктов в пакеты из термосвариваемых пленок, подаваемых с рулона в виде полотна."
-                        image="content_image.png"
-                ></app-catalog-item>
-                <app-catalog-item
-                        id="3"
-                        title="БЕСТРОМ-420C"
-                        sub-title="Упаковочная машина вертикального типа"
-                        text="Предназначена для упаковки сыпучих, гранулированных и мелкоштучных продуктов в пакеты из термосвариваемых пленок, подаваемых с рулона в виде полотна."
-                        image="content_image.png"
-                ></app-catalog-item>
-                <app-catalog-item
-                        id="4"
-                        title="БЕСТРОМ-420C"
-                        sub-title="Упаковочная машина вертикального типа"
-                        text="Предназначена для упаковки сыпучих, гранулированных и мелкоштучных продуктов в пакеты из термосвариваемых пленок, подаваемых с рулона в виде полотна."
-                        image="content_image.png"
-                ></app-catalog-item>
-            </div>
-            <!-- /.catalog-item -->
         </section>
         <!-- ./mobile-section -->
+
+        <section class="catalog-item flex-row">
+            <app-catalog-item
+                    v-for="product in PRODUCT"
+                    :key="product.id"
+                    :id="product.id"
+                    :title="product.name"
+                    :text="product.description"
+            ></app-catalog-item>
+        </section>
+        <!-- /.catalog-item -->
     </main>
     <app-footer></app-footer>
 </template>
@@ -197,6 +144,7 @@
     import appCatalogTypeSelect from "@/components/appCatalogTypeSelect";
     import appCatalogItem from "@/components/appCatalogItem";
     import appCatalogMobileFilter from "@/components/appCatalogMobileFilter";
+    import {mapActions, mapGetters} from "vuex";
 
     export default {
         data() {
@@ -204,6 +152,20 @@
               showMobileFilter: false,
               typeSelect: 1
           }
+        },
+        computed: {
+            ...mapGetters({
+                PRODUCT:'product/PRODUCT',
+            })
+        },
+        methods: {
+            ...mapActions({
+                GET_PRODUCT:'product/GET_PRODUCT'
+            }),
+            routerPush(path) {
+                window.scrollTo(0, 0);
+                this.$router.push(`/product/${path}`)
+            }
         },
         watch: {
             showMobileFilter() {
@@ -213,6 +175,9 @@
                     document.body.classList.remove('modal-open') 
                 }
             }
+        },
+        mounted() {
+            this.GET_PRODUCT()
         },
         components: {
             appHeader, appFooter, appCatalogTypeSelect, appCatalogItem, appCatalogMobileFilter
@@ -248,7 +213,8 @@
         border-radius: 20px;
     }
     .catalog-item {
-        margin: 1rem -1rem;
+        margin: 0;
+        gap: 1rem 1rem;
         flex-wrap: wrap;
         justify-content: space-between;
     }
@@ -265,7 +231,10 @@
         }
         .mobile-section {
             display: block;
-            margin-top: 1.5rem;
+            margin-top: 1rem;
+        }
+        .mobile-filter {
+            margin-bottom: 1rem;
         }
             .mobile-section h2 {
                 align-self: center;
