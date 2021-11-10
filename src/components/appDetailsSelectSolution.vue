@@ -2,18 +2,18 @@
     <div class="details-select-solution">
         <div class="slider-content">
             <carousel :breakpoints='breakpoints'>
-                <slide v-for="item in 4"  :key="item">
+                <slide v-for="item in complexSolution"  :key="item.id">
                     <div class="details-select-solution-item flex-column card-shadow">
-                        <h4>КОМПЛЕКСНАЯ ЛИНИЯ ДЛЯ УПАКОВКИ КОФЕ В ГОТОВУЮ ТАРУ</h4>
-                        <img src="../assets/details-solution.png" alt="details-solution">
+                        <h4>{{ item.name }}</h4>
+                        <img :src="'http://bexram.online:8001' + item.img" :alt="item.alt">
                         <app-hidden-item
                                 text="ПОДРОБНЕЕ"
                         ></app-hidden-item>
                     </div>
                 </slide>
                 <template #addons="{ slidesCount }">
-                    <navigation v-if="slidesCount > 3" />
-                    <pagination v-if="slidesCount > 3" />
+                    <navigation v-if="slidesCount > 1" />
+                    <pagination v-if="slidesCount > 1" />
                 </template>
             </carousel>
         </div>
@@ -26,12 +26,15 @@
     import { Carousel, Slide, Navigation, Pagination } from 'vue3-carousel';
 
     export default {
+        props: {
+            complexSolution: {}
+        },
         data() {
             return {
                 breakpoints: {
                     0: {
-                        itemsToShow: 1.5,
-                        snapAlign: 'center',
+                        itemsToShow: 1.2,
+                        snapAlign: 'start',
                         wrapAround: true
                     },
                     1248: {
@@ -57,7 +60,6 @@
     }
     .details-select-solution-item {
         position: relative;
-        flex-grow: 1;
         text-align: center;
         justify-content: center;
         align-items: center;
@@ -84,13 +86,12 @@
             position: relative;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
             align-items: center;
             padding: 0.5rem 1rem;
             text-align: center;
-            width: 25%;
-            flex-grow: 1;
+            height: 16rem;
             margin: 0.5rem;
+            width: 100%;
         }
         .details-select-solution-item h4 {
             font-weight: 600;
@@ -98,7 +99,7 @@
         }
         .details-select-solution-item img {
             align-self: center;
-            max-width: 15rem;
+            max-width: 10rem;
             width: 100%;
         }
     }

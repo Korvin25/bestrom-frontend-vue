@@ -6,8 +6,8 @@
 
             <div class="slider-content card-shadow">
                 <carousel :itemsToShow=1 :snapAlign="'start'" :wrapAround=true>
-                    <slide v-for="index in 3"  :key="index">
-                        <img class="catalog-item-card-image" src="../assets/content_image.png" alt="content_image">
+                    <slide v-for="slide in PRODUCT_ID.SliderProd" :key="slide.id">
+                        <img class="catalog-item-card-image" :src="'http://bexram.online:8001' + slide.img" :alt="slide.alt">
                     </slide>
                     <template #addons="{ slidesCount }">
                         <navigation v-if="slidesCount > 1" />
@@ -53,11 +53,11 @@
                 </div>
                 <!-- /.details-select mobile-section -->
 
-                <app-details-select-settings v-if="isSelected === 0"></app-details-select-settings>
-                <app-details-select-products v-if="isSelected === 1"></app-details-select-products>
-                <app-details-select-inventory v-if="isSelected === 2"></app-details-select-inventory>
+                <app-details-select-settings :settings="PRODUCT_ID.ProductPropertyValue" v-if="isSelected === 0"></app-details-select-settings>
+                <app-details-select-products :productItems="PRODUCT_ID.Items" v-if="isSelected === 1"></app-details-select-products>
+                <app-details-select-inventory :equipment="PRODUCT_ID.Equipment" v-if="isSelected === 2"></app-details-select-inventory>
                 <app-details-select-packet v-if="isSelected === 3"></app-details-select-packet>
-                <app-details-select-solution v-if="isSelected === 4"></app-details-select-solution>
+                <app-details-select-solution :complexSolution="PRODUCT_ID.Solution" v-if="isSelected === 4"></app-details-select-solution>
             </div>
             <!-- /.details -->
         </section>
@@ -167,12 +167,14 @@
         },
         computed: {
             ...mapGetters({
-                CLIENTS:'clients/CLIENTS'
+                CLIENTS:'clients/CLIENTS',
+                PRODUCT_ID:'product/PRODUCT_ID',
             })
         },
         methods: {
             ...mapActions({
-                GET_CLIENTS:'clients/GET_CLIENTS'
+                GET_CLIENTS:'clients/GET_CLIENTS',
+                GET_PRODUCT_ID:'product/GET_PRODUCT_ID'
             }),
             showClient(client) {
                 this.customers = this.CLIENTS.find(e => e.alt === client)
@@ -182,6 +184,7 @@
         },
         mounted() {
             this.GET_CLIENTS()
+            this.GET_PRODUCT_ID(this.$route.params.catalogId)
         },
         watch: {
             customers: {
@@ -221,8 +224,8 @@
 
 <style scoped>
     .catalog-item-card-image {
-        width: 20rem;
-        height: 25rem;
+        max-width: 20rem;
+        align-self: center;
     }
     .details {
         margin: 1rem 0;
@@ -272,6 +275,18 @@
     .slider-content {
         margin: 2rem 0 1rem 0;
     }
+    @media (max-width: 1220px) {
+        .desktop-section.details-select {
+            flex-wrap: wrap;
+            gap: 1rem 1rem;
+            justify-content: space-evenly;
+        }
+        .desktop-section .details-select-item {
+            flex-grow: 1;
+            align-self: stretch;
+            margin: 0;
+        }
+    }
     @media (max-width: 980px) {
         .desktop-section {
             display: none;
@@ -284,9 +299,7 @@
             margin: 0 0 1rem 0;
         }
         .catalog-item-card-image {
-            max-width: 30rem;
-            width: 100%;
-            height: auto;
+            max-width: 15rem;
             align-self: center;
         }
         .buttons-section.catalog-ig-buttons {
