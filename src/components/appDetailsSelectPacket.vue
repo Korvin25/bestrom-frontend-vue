@@ -52,6 +52,7 @@
         padding: 0.5rem 1rem;
         text-align: center;
         width: 25%;
+        flex-grow: 1;
         margin: 1rem;
     }
     .details-select-packet-item:hover .hidden-item {

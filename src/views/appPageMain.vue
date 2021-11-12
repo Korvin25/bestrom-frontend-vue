@@ -28,31 +28,14 @@
 
     <section class="section">
       <h2>Подбор оборудования</h2>
-      <div class="flex-row inventory-mobile">
-        <div @click="pushToCatalog('ПОДБОР ПО ТИПУ МАШИНЫ')" class="inventory-item flex-column card-shadow">
-          <h4>ПО ТИПУ МАШИН</h4>
+      <div v-if="FILTERS.length > 0" class="flex-row inventory-mobile">
+        <div v-for="category in FILTERS" :key="category.id" @click="pushToCatalog(category.id)" class="inventory-item flex-column card-shadow">
+          <h4>{{ category.name }}</h4>
           <div class="inventory-item-img">
             <img  src="../assets/inventory-item-1.png" alt="inventory item image">
           </div>
           <app-hidden-item text="ПОДРОБНЕЕ"></app-hidden-item>
         </div>
-        <!-- /.inventory-item -->
-        <div @click="pushToCatalog('ПОДБОР ПО ТИПУ ПРОДУКТА')" class="inventory-item flex-column card-shadow">
-          <h4>ПО ПРОДУКТУ</h4>
-          <div class="inventory-item-img">
-            <img src="../assets/inventory-item-2.png" alt="inventory item image">
-          </div>
-          <app-hidden-item text="ПОДРОБНЕЕ"></app-hidden-item>
-        </div>
-        <!-- /.inventory-item -->
-        <div @click="pushToCatalog('ПОДБОР ПО ТИПУ УПАКОВКИ')" class="inventory-item flex-column card-shadow">
-          <h4> ПО УПАКОВКЕ</h4>
-          <div class="inventory-item-img">
-            <img src="../assets/inventory-item-3.png" alt="inventory item image">
-          </div>
-          <app-hidden-item text="ПОДРОБНЕЕ"></app-hidden-item>
-        </div>
-        <!-- /.inventory-item -->
       </div>
       <!-- /.inventory-items -->
     </section>
@@ -188,6 +171,7 @@ export default {
       CLIENTS:'clients/CLIENTS',
       TITLE_NEWS:'news/TITLE_NEWS',
       ALL_NEWS:'news/ALL_NEWS',
+      FILTERS:'filters/FILTERS'
     })
   },
   methods: {
@@ -195,10 +179,10 @@ export default {
       GET_PARTNERS:'partners/GET_PARTNERS',
       GET_CLIENTS:'clients/GET_CLIENTS',
       GET_NEWS:'news/GET_NEWS',
+      GET_FILTERS: 'filters/GET_FILTERS'
     }),
-    pushToCatalog(radioitem) {
-      this.$store.state.radioCatalogSelect = radioitem
-      this.$router.push(`/catalog`)
+    pushToCatalog(category) {
+      this.$router.push({ path: 'catalog', query: { category: category } })
       window.scrollTo(0,0);
     },
     showClient(client) {
@@ -240,6 +224,7 @@ export default {
       this.secondNews = this.threeNews()
       this.mobileNews = this.threeNews()
       this.mobileNews.unshift(this.TITLE_NEWS)
+      this.GET_FILTERS()
     })
   },
   components: {
@@ -255,8 +240,14 @@ export default {
     padding: 1rem 4rem;
     align-items: center;
     }
+    .inventory-mobile {
+      gap: 1rem 2rem;
+    }
     .inventory-item {
-      width: 30%;
+      padding: 0 1rem 1rem 1rem;
+      text-align: center;
+      width: 20%;
+      flex-grow: 1;
       position: relative;
       align-items: center;
       justify-content: space-between;
@@ -310,9 +301,8 @@ export default {
       }
       .inventory-item {
         flex-grow: 1;
-        height: 30%;
+        padding: 0 0 1rem 0;
         width: 100%;
-        margin-bottom: 1rem;
       }
       .partners-block {
         flex-grow: 1;

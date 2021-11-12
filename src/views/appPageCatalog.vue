@@ -3,109 +3,25 @@
     <main class="main-content flex-column">
         <section class="desktop-section section">
             <div class="catalog-select-card card-shadow flex-column">
-                <div class="flex-row">
-                    <div class="radio-type flex-row">
+                <div v-if="FILTERS.length > 0"  class="radio-type flex-row">
+                    <div v-for="category in FILTERS" :key="category.id">
                         <input class="custom-radio"
                                name="radio-choice"
-                               id="radio-choice-1"
+                               :id="category.id"
                                type="radio"
-                               v-model="this.$store.state.radioCatalogSelect"
-                               :value="'ПОДБОР ПО ТИПУ МАШИНЫ'"
-                               :checked="this.$store.state.radioCatalogSelect === 'ПОДБОР ПО ТИПУ МАШИНЫ'">
-                        <label for="radio-choice-1">ПОДБОР ПО ТИПУ МАШИНЫ</label>
-                        <input class="custom-radio"
-                               name="radio-choice"
-                               id="radio-choice-2"
-                               type="radio"
-                               v-model="this.$store.state.radioCatalogSelect"
-                               :value="'ПОДБОР ПО ТИПУ ПРОДУКТА'"
-                               :checked="this.$store.state.radioCatalogSelect === 'ПОДБОР ПО ТИПУ ПРОДУКТА'">
-                        <label for="radio-choice-2">ПОДБОР ПО ТИПУ ПРОДУКТА</label>
-                        <input class="custom-radio"
-                               name="radio-choice"
-                               id="radio-choice-3"
-                               type="radio"
-                               v-model="this.$store.state.radioCatalogSelect"
-                               :value="'ПОДБОР ПО ТИПУ УПАКОВКИ'"
-                               :checked="this.$store.state.radioCatalogSelect === 'ПОДБОР ПО ТИПУ УПАКОВКИ'">
-                        <label for="radio-choice-3">ПОДБОР ПО ТИПУ УПАКОВКИ</label>
-                        <input class="custom-radio"
-                               style="margin-right: 0;"
-                               name="radio-choice"
-                               id="radio-choice-4"
-                               type="radio"
-                               v-model="this.$store.state.radioCatalogSelect"
-                               :value="'ГОТОВЫЕ РЕШЕНИЯ'"
-                               :checked="this.$store.state.radioCatalogSelect === 'ГОТОВЫЕ РЕШЕНИЯ'">
-                        <label for="radio-choice-4">ГОТОВЫЕ РЕШЕНИЯ</label>
+                               v-model="radioCatalogSelect"
+                               :value="category.name"
+                               :checked="radioCatalogSelect === category.name">
+                        <label :for="category.id">{{ category.name }}</label>
                     </div>
                 </div>
-
-                <div class="type-select flex-row">
+                <div  v-if="FILTERS.length > 0 && radioCatalogSelect !== ''" class="type-select flex-row">
                     <app-catalog-type-select
-                            :class="typeSelect === 1 ? 'type-select-checked' : ''"
-                            @click="typeSelect = 1"
-                            text="Упаковочные машины вертикального типа"
-                    ></app-catalog-type-select>
-                    <app-catalog-type-select
-                            :class="typeSelect === 2 ? 'type-select-checked' : ''"
-                            @click="typeSelect = 2"
-                            text="Линии для фасовки и упаковки продуктов в готовую тару"
-                    ></app-catalog-type-select>
-                    <app-catalog-type-select
-                            :class="typeSelect === 3 ? 'type-select-checked' : ''"
-                            @click="typeSelect = 3"
-                            text="Упаковочные машины горизонтального типа"
-                    ></app-catalog-type-select>
-                    <app-catalog-type-select
-                            :class="typeSelect === 4 ? 'type-select-checked' : ''"
-                            @click="typeSelect = 4"
-                            text="Термотоннели"
-                    ></app-catalog-type-select>
-                    <app-catalog-type-select
-                            :class="typeSelect === 5 ? 'type-select-checked' : ''"
-                            @click="typeSelect = 5"
-                            text="Готовые решения"
-                    ></app-catalog-type-select>
-                    <app-catalog-type-select
-                            :class="typeSelect === 6 ? 'type-select-checked' : ''"
-                            @click="typeSelect = 6"
-                            text="Дозаторы"
-                    ></app-catalog-type-select>
-                    <app-catalog-type-select
-                            :class="typeSelect === 7 ? 'type-select-checked' : ''"
-                            @click="typeSelect = 7"
-                            text="Машины для формирования пакетов с плоским верхом"
-                    ></app-catalog-type-select>
-                    <app-catalog-type-select
-                            :class="typeSelect === 8 ? 'type-select-checked' : ''"
-                            @click="typeSelect = 8"
-                            text="Элеваторы"
-                    ></app-catalog-type-select>
-                    <app-catalog-type-select
-                            :class="typeSelect === 9 ? 'type-select-checked' : ''"
-                            @click="typeSelect = 9"
-                            text="Конвейры"
-                    ></app-catalog-type-select>
-                    <app-catalog-type-select
-                            :class="typeSelect === 10 ? 'type-select-checked' : ''"
-                            @click="typeSelect = 10"
-                            text="Транспортеры"
-                    ></app-catalog-type-select>
-                    <app-catalog-type-select
-                            :class="typeSelect === 11 ? 'type-select-checked' : ''"
-                            @click="typeSelect = 11"
-                            text="Система динамического взвешивания для контроля веса"
-                    ></app-catalog-type-select>
-                    <app-catalog-type-select
-                            :class="typeSelect === 12 ? 'type-select-checked' : ''"
-                            @click="typeSelect = 12"
-                            text="Дополнительное оборудование"
-                    ></app-catalog-type-select>
-                    <app-catalog-type-select
-                            :class="typeSelect === 13 ? 'type-select-checked' : ''"
-                            @click="typeSelect = 13"
-                            text="Оборудование для групповой упаковки пакетов в термоусадочную пленку"
+                            v-for="filters in FILTERS.find(e => e.name === radioCatalogSelect).Filters"
+                            :key="filters.id"
+                            :class="typeSelect === filters.name ? 'type-select-checked' : ''"
+                            @click="typeSelect = filters.name"
+                            :text="filters.name"
                     ></app-catalog-type-select>
                 </div>
             </div>
@@ -115,12 +31,33 @@
 
         <section class="mobile-section section">
             <div @click="showMobileFilter = true" class="mobile-filter card-shadow flex-column">
-                <h2>{{ this.$store.state.radioCatalogSelect }}</h2>
+                <h2>{{ radioCatalogSelect }}</h2>
             </div>
-
-            <transition name="modal">
-                <app-catalog-mobile-filter v-if="showMobileFilter" @close="showMobileFilter = false"></app-catalog-mobile-filter>
-            </transition>
+            <section v-if="showMobileFilter" class="mobile-nav-elements flex-column">
+                <img @click="showMobileFilter = false" class="close-mobile-menu" src="../assets/close-mobile-menu.png" alt="close-mobile-menu">
+                <p class="mobile-menu-title">Каталог</p>
+                <div class="flex-column">
+                    <div class="catalog-select-shadow">
+                        <carousel :snap-align="'center'" :wrap-around="true" :items-to-show="1.8">
+                            <slide v-for="category in FILTERS" :key="category.id">
+                                <p class="mobile-select-filter"
+                                   @click="radioCatalogSelect = category.name"
+                                   :class="radioCatalogSelect === category.name ? 'choice' : ''"
+                                >{{ category.name }}</p>
+                            </slide>
+                        </carousel>
+                    </div>
+                    <div  v-if="FILTERS.length > 0 && radioCatalogSelect !== ''" class="type-select flex-row">
+                        <app-catalog-type-select
+                                v-for="filters in FILTERS.find(e => e.name === radioCatalogSelect).Filters"
+                                :key="filters.id"
+                                :class="typeSelect === filters.name ? 'type-select-checked' : ''"
+                                @click="typeSelect = filters.name"
+                                :text="filters.name"
+                        ></app-catalog-type-select>
+                    </div>
+                </div>
+            </section>
         </section>
         <!-- ./mobile-section -->
 
@@ -143,24 +80,38 @@
     import appFooter from "@/components/appFooter";
     import appCatalogTypeSelect from "@/components/appCatalogTypeSelect";
     import appCatalogItem from "@/components/appCatalogItem";
-    import appCatalogMobileFilter from "@/components/appCatalogMobileFilter";
     import {mapActions, mapGetters} from "vuex";
+    import { Carousel, Slide } from 'vue3-carousel';
 
     export default {
         data() {
           return {
               showMobileFilter: false,
-              typeSelect: 1
+              radioCatalogSelect: '',
+              typeSelect: ''
           }
         },
         computed: {
             ...mapGetters({
                 PRODUCT:'product/PRODUCT',
-            })
+                FILTERS:'filters/FILTERS'
+            }),
+            filterInit() {
+                if (this.FILTERS.length > 0) {
+                    if (this.$route.query.category) {
+                        return this.FILTERS.find(e => e.id === Number(this.$route.query.category)).name
+                    }
+                    else {
+                        return this.FILTERS[0].name
+                    }
+                }
+                return 0
+            }
         },
         methods: {
             ...mapActions({
-                GET_PRODUCT:'product/GET_PRODUCT'
+                GET_PRODUCT:'product/GET_PRODUCT',
+                GET_FILTERS: 'filters/GET_FILTERS'
             }),
             routerPush(path) {
                 window.scrollTo(0, 0);
@@ -174,13 +125,20 @@
                 } else {
                     document.body.classList.remove('modal-open') 
                 }
+            },
+            radioCatalogSelect() {
+                this.typeSelect = this.FILTERS.find(e => e.name === this.radioCatalogSelect).Filters[0].name
             }
         },
         mounted() {
             this.GET_PRODUCT()
+            this.GET_FILTERS().then(() => {
+                this.radioCatalogSelect = this.filterInit
+            })
         },
         components: {
-            appHeader, appFooter, appCatalogTypeSelect, appCatalogItem, appCatalogMobileFilter
+            appHeader, appFooter, appCatalogTypeSelect, appCatalogItem,
+            Carousel, Slide
         },
         name: "appPageCatalog"
     }
@@ -194,9 +152,9 @@
     }
     .radio-type {
         align-items: center;
-        justify-content: space-around;
+        justify-content: space-between;
+        margin: 0 0.5rem;
         width: 100%;
-        margin: 0 1rem;
     }
     .type-select {
         margin: 1.5rem 0 1rem 0;
@@ -241,5 +199,49 @@
                 margin: 1rem;
                 font-size: 16px;
             }
+        .mobile-nav-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            z-index: 9999;
+            justify-content: flex-start;
+            background-color: #FFFFFF;
+            overflow: auto;
+        }
+        .close-mobile-menu {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 2rem;
+            height: 2rem;
+            margin: 1rem;
+        }
+        .mobile-menu-title {
+            text-align: center;
+            font-weight: 500;
+            font-size: 18px;
+            line-height: 142%;
+            text-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+        }
+        .catalog-select-shadow {
+            background: #FFFFFF;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+        }
+        .mobile-select-filter {
+            margin: 2rem 0;
+            font-weight: 500;
+            padding: 0 0.5rem;
+            font-size: 16px;
+            color: #6A6A6A;
+        }
+        .mobile-select-filter.choice {
+            color: #2FC1FF;
+        }
+        .type-select {
+            margin: 1rem 0.5rem;
+            width: 90%;
+        }
     }
 </style>

@@ -5,14 +5,10 @@ import news from "@/store/modules/news"
 import history from "@/store/modules/history";
 import vacancy from "@/store/modules/vacancy";
 import product from "@/store/modules/product";
+import filters from "@/store/modules/filters";
 
 export default createStore({
     modules: {
-        clients, partners, news, history, vacancy, product
-    },
-    state() {
-        return {
-            radioCatalogSelect: 'ПОДБОР ПО ТИПУ МАШИНЫ',
-        }
+        clients, partners, news, history, vacancy, product, filters
     }
 })

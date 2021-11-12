@@ -98,6 +98,9 @@
     .catalog-item-product {
         align-items: center;
         padding: 1rem 1.5rem;
+        min-width: 30rem;
+        width: 30%;
+        flex-grow: 1;
     }
     .catalog-item-product .about-content {
         width: 100%;
@@ -117,6 +120,7 @@
     @media (max-width: 980px) {
         .catalog-item-product {
             flex-direction: column;
+            min-width: auto;
             width: 100%;
             padding: 1rem;
         }
