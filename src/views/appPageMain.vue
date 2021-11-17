@@ -83,7 +83,7 @@
       <h2 v-if="TITLE_NEWS.length !== 0">Новости</h2>
       <h2 v-else>Новостей нет</h2>
 
-      <carousel class="mobile-section" :breakpoints='breakpoints'>
+      <carousel class="mobile-section" :items-to-show="1.5">
         <slide v-for="item in mobileNews" :key="item.id">
           <app-main-news-mobile
                   :alt="item.alt"

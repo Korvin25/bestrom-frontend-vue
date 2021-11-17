@@ -13,6 +13,7 @@
   margin: 0;
   padding: 0;
   position: relative;
+  cursor: pointer;
 }
 
 .carousel__viewport {
@@ -36,7 +37,7 @@
   --vc-pgn-width: 0.5rem;
   --vc-pgn-height: 0.5rem;
   --vc-pgn-margin: 5px;
-  --vc-pgn-border-radius: 0;
+  --vc-pgn-border-radius: var(--vc-pgn-width);
   --vc-pgn-background-color: var(--vc-clr-secondary);
   --vc-pgn-active-color: var(--vc-clr-primary);
 }
@@ -119,6 +120,11 @@
 }
 
 @media (max-width: 1248px) {
+  :root {
+    /* Pagination */
+    --vc-pgn-width: 10px;
+    --vc-pgn-height: 10px;
+  }
   .carousel__next,
   .carousel__prev {
     display: none;

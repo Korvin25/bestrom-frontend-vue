@@ -3,19 +3,21 @@
 
     <main class="main-content flex-column">
         <!-- Packet type section -->
-        <section class="section">
+        <section class="section" id="packetType">
             <h2>Тип пакета</h2>
 
             <div class="packet-mobile">
                 <carousel :items-to-show="1.4">
                     <slide v-for="packet in packetType" :key="packet">
-                        <div @click="checkType = packet.id"
+                        <a @click="checkType = packet.id"
                              :class="checkType === packet.id ? 'check-item' : ''"
-                             class="packet-type-item flex-column card-shadow">
+                             class="packet-type-item flex-column card-shadow"
+                             href="#packetOptions"
+                             v-smooth-scroll="{ updateHistory: false, offset: -60 }">
                             <div class="hidden-item"></div>
                             <img :src="require(`../assets/${packet.img}`)" :alt="packet.name">
                             <p>{{ packet.name }}</p>
-                        </div>
+                        </a>
                     </slide>
                     <template #addons>
                         <pagination />
@@ -24,44 +26,52 @@
             </div>
 
             <div class="packet-desktop packet-type flex-row">
-                <div @click="checkType = 1"
+                <a @click="checkType = 1"
                      :class="checkType === 1 ? 'check-item' : ''"
-                     class="packet-type-item flex-column card-shadow">
+                     class="packet-type-item flex-column card-shadow"
+                     href="#packetOptions"
+                     v-smooth-scroll="{ updateHistory: false, offset: -50 }">
                     <h3>Подушка</h3>
                     <img src="../assets/packet-type-1.png" alt="packet-type">
                     <div class="hidden-item"></div>
-                </div>
-                <div @click="checkType = 2"
+                </a>
+                <a @click="checkType = 2"
                      :class="checkType === 2 ? 'check-item' : ''"
-                     class="packet-type-item  flex-column card-shadow">
+                     class="packet-type-item  flex-column card-shadow"
+                     href="#packetOptions"
+                     v-smooth-scroll="{ updateHistory: false, offset: -50 }">
                     <div class="hidden-item"></div>
                     <h3>Сплоским дном</h3>
                     <img src="../assets/packet-type-2.png" alt="packet-type">
-                </div>
-                <div @click="checkType = 3"
+                </a>
+                <a @click="checkType = 3"
                      :class="checkType === 3 ? 'check-item' : ''"
-                     class="packet-type-item  flex-column card-shadow">
+                     class="packet-type-item  flex-column card-shadow"
+                     href="#packetOptions"
+                     v-smooth-scroll="{ updateHistory: false, offset: -50 }">
                     <div class="hidden-item"></div>
                     <h3>С проваренными гранями</h3>
                     <img src="../assets/packet-type-3.png" alt="packet-type">
-                </div>
-                <div @click="checkType = 4"
+                </a>
+                <a @click="checkType = 4"
                      :class="checkType === 4 ? 'check-item' : ''"
-                     class="packet-type-item  flex-column card-shadow">
+                     class="packet-type-item  flex-column card-shadow"
+                     href="#packetOptions"
+                     v-smooth-scroll="{ updateHistory: false, offset: -50 }">
                     <div class="hidden-item"></div>
                     <h3>Сплоским дном</h3>
                     <img src="../assets/packet-type-2.png" alt="packet-type">
-                </div>
+                </a>
             </div>
         </section>
 
         <!-- Packet options section -->
-        <section class="section">
+        <section class="section" id="packetOptions">
             <h2>Дополнительные опции</h2>
             <div class="packet-mobile">
                 <carousel :items-to-show="1.4">
                     <slide v-for="packet in packetOptions" :key="packet">
-                        <div @click="checkOptions = packet.id"
+                        <div @click="checkOptionsFunc(packet.id)"
                              :class="checkOptions === packet.id ? 'check-item' : ''"
                              class="packet-options-item flex-column card-shadow">
                             <div class="hidden-item"></div>
@@ -77,7 +87,7 @@
 
             <div class="packet-desktop packet-options flex-row card-shadow">
                 <div v-for="packet in packetOptions" :key="packet.id"
-                     @click="checkOptions = packet.id"
+                     @click="checkOptionsFunc(packet.id)"
                      :class="checkOptions === packet.id ? 'check-item' : ''"
                      class="packet-options-item flex-column card-shadow">
                     <div class="hidden-item"></div>
@@ -88,31 +98,31 @@
         </section>
 
         <!-- Packet seam section -->
-        <section class="section">
+        <section class="section" id="packetSeam">
             <h2>Тип шва</h2>
             <div class="packets-seam flex-row card-shadow">
-                <div @click="checkSeam = 1"
+                <div @click="checkSeamFunc(1)"
                      :class="checkSeam === 1 ? 'check-item' : ''"
                      class="packets-seam-item flex-column card-shadow">
                     <div class="hidden-item"></div>
                     <img src="../assets/seam-type-1.png" alt="seam-type">
                     <p>В нахлест влево</p>
                 </div>
-                <div  @click="checkSeam = 2"
+                <div  @click="checkSeamFunc(2)"
                       :class="checkSeam === 2 ? 'check-item' : ''"
                       class="packets-seam-item flex-column card-shadow">
                     <div class="hidden-item"></div>
                     <img src="../assets/seam-type-2.png" alt="seam-type">
                     <p>Плавник влево</p>
                 </div>
-                <div  @click="checkSeam = 3"
+                <div  @click="checkSeamFunc(3)"
                       :class="checkSeam === 3 ? 'check-item' : ''"
                       class="packets-seam-item flex-column card-shadow">
                     <div class="hidden-item"></div>
                     <img src="../assets/seam-type-3.png" alt="seam-type">
                     <p>В нахлест вправо</p>
                 </div>
-                <div  @click="checkSeam = 4"
+                <div  @click="checkSeamFunc(4)"
                       :class="checkSeam === 4 ? 'check-item' : ''"
                       class="packets-seam-item flex-column card-shadow">
                     <div class="hidden-item"></div>
@@ -124,7 +134,7 @@
 
         <!-- Packet size section -->
         <form class="flex-column" action="">
-            <section class="section">
+            <section id="packetSize" class="section">
                 <h2>Размеры пакета</h2>
                 <div class="packet-size flex-row card-shadow">
                     <div class="packet-size-parameters flex-column">
@@ -165,9 +175,9 @@
     export default {
         data() {
             return {
-                checkType: 1,
-                checkOptions: 1,
-                checkSeam: 1,
+                checkType: 0,
+                checkOptions: 0,
+                checkSeam: 0,
                 packetOptions: [
                     {
                       id: 1,
@@ -243,6 +253,50 @@
             scrollToTop() {
                 window.scrollTo(0,0);
             },
+            checkOptionsFunc(id) {
+                if (this.checkType !== 0) {
+                    this.checkOptions = id
+                    this.$smoothScroll({
+                        scrollTo: document.getElementById('packetSeam'), // scrollTo is also allowed to be number
+                        updateHistory: false,
+                        offset: -50
+                    })
+                }
+                else {
+                    alert('Сначала выберите тип пакета!!!')
+                    this.$smoothScroll({
+                        scrollTo: document.getElementById('packetType'), // scrollTo is also allowed to be number
+                        updateHistory: false,
+                        offset: -50
+                    })
+                }
+            },
+            checkSeamFunc(id) {
+                if (this.checkType === 0 && this.checkOptions === 0) {
+                    alert('Сначала выберите тип пакета!!!')
+                    this.$smoothScroll({
+                        scrollTo: document.getElementById('packetType'), // scrollTo is also allowed to be number
+                        updateHistory: false,
+                        offset: -50
+                    })
+                }
+                else if (this.checkType !== 0 && this.checkOptions === 0) {
+                    alert('Сначала выберите дополнительные опции!!!')
+                    this.$smoothScroll({
+                        scrollTo: document.getElementById('packetOptions'), // scrollTo is also allowed to be number
+                        updateHistory: false,
+                        offset: -50
+                    })
+                }
+                else if (this.checkType !== 0 && this.checkOptions !== 0) {
+                    this.checkSeam = id
+                    this.$smoothScroll({
+                        scrollTo: document.getElementById('packetSize'), // scrollTo is also allowed to be number
+                        updateHistory: false,
+                        offset: -50
+                    })
+                }
+            }
         },
         components: {
             appHeader, appFooter, Carousel, Slide, Pagination
@@ -349,7 +403,6 @@
         height: auto;
         padding: 0.5rem 2rem;
         font-size: 2rem;
-        margin-bottom: 3rem;
     }
     .router-button {
         margin: 1rem 0;

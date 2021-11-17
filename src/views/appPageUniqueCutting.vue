@@ -1,7 +1,6 @@
 <template>
     <app-header></app-header>
     <main class="main-content flex-column">
-
         <div class="desktop-section section">
             <h2 style="margin-bottom: 2rem">Рекомендуемый формат F150</h2>
             <h2 style="margin: 0">Пакет плоское дно.</h2>
@@ -59,8 +58,6 @@
             </div>
         </section>
         <!-- ./mobile-section -->
-
-
     </main>
     <app-footer></app-footer>
 </template>
@@ -134,7 +131,6 @@
         justify-content: space-around;
         flex-wrap: wrap;
     }
-
 
     @media (max-width: 980px) {
         .desktop-section {

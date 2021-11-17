@@ -28,7 +28,7 @@
         <section class="history-development-mobile section">
             <h2>История развития</h2>
             <div class="card-shadow">
-                <carousel :autoplay="4000" :items-to-show="4.5" :wrap-around="true">
+                <carousel :items-to-show="4.5" :wrap-around="true">
                     <slide v-for="item in HISTORY" :key="item.year">
                             <p class="carousel__item">{{ item.year }}</p>
                     </slide>
@@ -110,14 +110,14 @@
             <h2>Руководство БЕСТРОМ</h2>
             <div class="directors flex-row">
                 <div class="director-item flex-column">
-                    <img src="../assets/photo-bogdanov.jpg" alt="bogdanov">
-                    <h5>Богданов Олег Анатольевич</h5>
-                    <p>Генеральный директор</p>
-                </div>
-                <div class="director-item flex-column">
                     <img src="../assets/photo-krivopalov.jpg" alt="krivopalov">
                     <h5>Кривопалов Александр Васильевич</h5>
                     <p>Главный инженер</p>
+                </div>
+                <div class="director-item flex-column">
+                    <img src="../assets/photo-bogdanov.jpg" alt="bogdanov">
+                    <h5>Богданов Олег Анатольевич</h5>
+                    <p>Генеральный директор</p>
                 </div>
                 <div class="director-item flex-column">
                     <img src="../assets/photo-puzikov.jpg" alt="puzikov">
@@ -169,7 +169,7 @@
 
         <section class="directors-mobile section">
             <h2>Руководство БЕСТРОМ</h2>
-            <carousel :autoplay="4500" :items-to-show="1.3" :wrap-around="true" class="our-choice-mobile">
+            <carousel :items-to-show="1.3" :wrap-around="true" class="our-choice-mobile">
                 <slide v-for="slide in directors" :key="slide">
                     <div class="director-item flex-column">
                         <img :src="require(`../assets/${slide.img}`)" :alt="slide.name">
@@ -184,7 +184,7 @@
             <h2>История развития</h2>
 
             <div class="history-development card-shadow">
-                <carousel :autoplay="4500" :items-to-show="4.5" :wrap-around="true">
+                <carousel :items-to-show="4.5" :wrap-around="true">
                     <slide v-for="item in HISTORY" :key="item.id">
                         <p class="carousel__item">{{ item.year }}</p>
                     </slide>
@@ -289,9 +289,9 @@
                 ],
                 directors: [
                     {
-                       name: 'Богданов Олег Анатольевич',
-                       place: 'Генеральный директор',
-                       img: `photo-bogdanov.jpg`
+                        name: 'Богданов Олег Анатольевич',
+                        place: 'Генеральный директор',
+                        img: `photo-bogdanov.jpg`
                     },
                     {
                         name: 'Кривопалов Александр Васильевич',
@@ -412,7 +412,8 @@
         }
         .history-description h3 {
             font-weight: bold;
-            font-size: 93px;
+            font-size: 75px;
+            line-height: normal;
             margin: 0 0.5rem;
             align-self: auto;
         }
@@ -470,9 +471,12 @@
             width: 100%;
             margin: 1rem 1rem 1rem 0.1rem;
         }
+            .reason-mobile h5 {
+                font-size: 1rem;
+            }
         .director-item {
             margin: 0 0.5rem;
-            flex-grow: 1;
+            width: auto;
         }
         .director-item img {
             width: 100%;

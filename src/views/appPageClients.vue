@@ -40,7 +40,7 @@
         </transition>
 
     </main>
-    <app-footer></app-footer>
+    <app-footer class="clients-footer"></app-footer>
 </template>
 
 <script>
@@ -96,14 +96,21 @@
 </script>
 
 <style scoped>
+    .clients-footer {
+        position: absolute;
+        bottom: 0;
+    }
     .desktop-section {
         display: block;
     }
     .mobile-section {
         display: none;
     }
-
     @media (max-width: 980px) {
+        .clients-footer {
+            margin-top: 2rem;
+            position: relative;
+        }
         .desktop-section {
             display: none;
         }

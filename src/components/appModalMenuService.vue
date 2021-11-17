@@ -105,7 +105,7 @@
                 </div>
                 <input id="address" type="text" class="input" placeholder="г. Красногорск, Ильинское шоссе, д.15,">
                 <label for="comment">Комментарий</label>
-                <textarea id="comment" rows="5" class="textarea"/>
+                <div id="comment" class="textarea" contenteditable="true"></div>
                 <button class="call btn">ОТПРАВИТЬ</button>
             </form>
 
@@ -178,7 +178,7 @@
             width: 100%;
             margin: 0 1rem;
             box-shadow: inset 0 1px 10px 1px rgba(0, 0, 0, 0.25);
-            min-height: 4rem;
+            min-height: 3.5rem;
         }
     .btn-disabled {
         flex-grow: 1;
@@ -186,7 +186,7 @@
         margin: 0 1rem;
         transition: all .3s;
         background: #B8B8B8;
-        min-height: 4rem;
+        min-height: 3.5rem;
         box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
         border: none;
         border-radius: 6px;
@@ -220,6 +220,7 @@
     }
     .call-inputs input {
         flex-grow: 1;
+        width: 100%;
     }
     .add-btn, .del-btn {
         width: auto;

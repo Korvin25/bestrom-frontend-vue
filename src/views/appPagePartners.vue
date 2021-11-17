@@ -39,7 +39,7 @@
         </transition>
 
     </main>
-    <app-footer></app-footer>
+    <app-footer class="partners-footer"></app-footer>
 </template>
 
 <script>
@@ -95,6 +95,10 @@
 </script>
 
 <style scoped>
+    .partners-footer {
+        position: absolute;
+        bottom: 0;
+    }
     .desktop-section {
         display: block;
     }
@@ -105,7 +109,10 @@
         .desktop-section {
             display: none;
         }
-
+        .partners-footer {
+            margin-top: 2rem;
+            position: relative;
+        }
         .mobile-section {
             display: block;
         }
