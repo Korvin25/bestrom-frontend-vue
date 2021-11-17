@@ -7,7 +7,12 @@
                 <img class="close-mobile" src="../assets/close-mobile-menu.png" alt="close">
             </div>
             <h2>Заказать звонок</h2>
-            <h2 class="catalog-name-item">БЕСТРОМ - 420С</h2>
+            <div class="catalog-name flex-row">
+                <h2 class="catalog-name-item">БЕСТРОМ - 420С</h2>
+                <a href="tel:+78005557457">
+                    <h2 class="catalog-name-item">8-800-555-74-57</h2>
+                </a>
+            </div>
             <form class="form-call flex-column" action="">
                 <label for="company">Компания</label>
                 <input id="company" type="text" class="input" placeholder="БЕСТРОМ">
@@ -38,6 +43,9 @@
 </script>
 
 <style scoped>
+    a .catalog-name-item {
+        font-weight: normal;
+    }
     .form-call {
         margin-top: 1rem;
     }
@@ -54,7 +62,12 @@
             margin: 0;
             color: #6A6A6A;
         }
+        .catalog-name {
+            margin: 0.5rem 0;
+            flex-wrap: wrap;
+        }
         .catalog-name-item {
+            width: 100%;
             font-size: 22px;
             color: #2FC1FF;
         }
