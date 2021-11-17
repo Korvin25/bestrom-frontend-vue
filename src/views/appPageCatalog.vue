@@ -20,7 +20,7 @@
                             v-for="filters in FILTERS.find(e => e.name === radioCatalogSelect).Filters"
                             :key="filters.id"
                             :class="typeSelect === filters.name ? 'type-select-checked' : ''"
-                            @click="typeSelect = filters.name"
+                            @click="typeSelectFunc(filters.name, filters.search)"
                             :text="filters.name"
                     ></app-catalog-type-select>
                 </div>
@@ -52,7 +52,7 @@
                                 v-for="filters in FILTERS.find(e => e.name === radioCatalogSelect).Filters"
                                 :key="filters.id"
                                 :class="typeSelect === filters.name ? 'type-select-checked' : ''"
-                                @click="typeSelect = filters.name"
+                                @click="typeSelectFunc(filters.name, filters.search)"
                                 :text="filters.name"
                         ></app-catalog-type-select>
                     </div>
@@ -68,6 +68,7 @@
                     :id="product.id"
                     :title="product.name"
                     :text="product.description"
+                    :search="search"
             ></app-catalog-item>
         </section>
         <!-- /.catalog-item -->
@@ -88,7 +89,8 @@
           return {
               showMobileFilter: false,
               radioCatalogSelect: '',
-              typeSelect: ''
+              typeSelect: '',
+              search: ''
           }
         },
         computed: {
@@ -116,6 +118,10 @@
             routerPush(path) {
                 window.scrollTo(0, 0);
                 this.$router.push(`/product/${path}`)
+            },
+            typeSelectFunc(filterName, filterSearch) {
+                this.typeSelect = filterName
+                this.search = filterSearch
             }
         },
         watch: {
@@ -128,6 +134,7 @@
             },
             radioCatalogSelect() {
                 this.typeSelect = this.FILTERS.find(e => e.name === this.radioCatalogSelect).Filters[0].name
+                this.search = this.FILTERS.find(e => e.name === this.radioCatalogSelect).Filters[0].search
             }
         },
         mounted() {

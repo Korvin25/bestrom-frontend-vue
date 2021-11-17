@@ -1,5 +1,5 @@
 <template>
-    <div class="desktop-section catalog-item-product flex-row card-shadow">
+    <div class="desktop-section catalog-item-product flex-row card-shadow" v-if="searchBoolean">
         <div class="about-content flex-column">
             <h3>{{ title }}</h3>
             <p>{{ property }}</p>
@@ -19,7 +19,7 @@
     </div>
     <!-- ./desktop-section -->
 
-    <div class="mobile-section catalog-item-product flex-row card-shadow">
+    <div class="mobile-section catalog-item-product flex-row card-shadow" v-if="searchBoolean">
         <div class="about-content flex-column">
             <h3>{{ title }}</h3>
             <section class="section">
@@ -57,21 +57,31 @@
     import {mapActions, mapGetters} from "vuex";
 
     export default {
-        data() {
-            return {
-                property: '',
-                images: []
-            }
-        },
         props: {
             id: Number,
             title: String,
             text: String,
+            search: String
         },
         computed: {
             ...mapGetters({
                 PRODUCT_ID:'product/PRODUCT_ID',
-            })
+            }),
+            searchBoolean() {
+                for (let key in this.PRODUCT_ID) {
+                    if (typeof this.PRODUCT_ID[key] === 'object') {
+                        for (let item of this.PRODUCT_ID[key]) {
+                            if (item.name && this.search && item.name.toLowerCase() === this.search.toLowerCase()) {
+                                return true
+                            }
+                        }
+                    }
+                }
+                return false
+            },
+            property() {
+                return this.PRODUCT_ID.ProductPropertyValue.find( e => e.product_property.name === 'Тип машины').name
+            }
         },
         methods: {
             ...mapActions({
@@ -83,9 +93,7 @@
             },
         },
         mounted() {
-            this.GET_PRODUCT_ID(this.id).then(() => {
-                this.property = this.PRODUCT_ID.ProductPropertyValue.find( e => e.product_property.name === 'Тип машины').value
-            })
+            this.GET_PRODUCT_ID(this.id)
         },
         components: {
             Carousel, Slide, Pagination
