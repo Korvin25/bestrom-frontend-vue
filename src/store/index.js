@@ -6,9 +6,10 @@ import history from "@/store/modules/history";
 import vacancy from "@/store/modules/vacancy";
 import product from "@/store/modules/product";
 import filters from "@/store/modules/filters";
+import page from "@/store/modules/page";
 
 export default createStore({
     modules: {
-        clients, partners, news, history, vacancy, product, filters
+        clients, partners, news, history, vacancy, product, filters, page
     }
 })

@@ -3,18 +3,18 @@
 
   <main class="main-content flex-column">
 
-    <section class="section">
+    <section v-if="this.PAGE_ID.length > 0" class="section">
       <h2 class="desktop-section">Деятельность компании БЕСТРОМ</h2>
       <h2 class="mobile-section">Деятельность компании</h2>
 
-      <div class="main-slider-content card-shadow">
+      <div v-if="this.PAGE_ID[0].blocks.length > 0" class="main-slider-content card-shadow">
         <carousel :itemsToShow=1 :snapAlign="'start'" :wrapAround=true>
-          <slide v-for="index in 3"  :key="index">
+          <slide v-for="content in this.PAGE_ID[0].blocks.find(e => e.name === 'activity').contents"  :key="content.id">
             <app-block-content
-                    id="1"
-                    title="БЕСТРОМ СЕГОДНЯ"
-                    text="Мы производим высококачественное упаковочное оборудование, которое будет четко и в срок отрабатывать необходимые объёмы. Вас ожидает лучший сервис, гарантийное обслуживание, высококвалифицированные специалисты, консультаты, которые помогут вам, в случае возникновения каких-либо проблем"
-                    image="content_image.png"
+                    :id=content.id
+                    :title="content.name"
+                    :text="content.text"
+                    :image="content.file"
             ></app-block-content>
           </slide>
           <template #addons="{ slidesCount }">
@@ -32,7 +32,7 @@
         <div v-for="category in FILTERS" :key="category.id" @click="pushToCatalog(category.id)" class="inventory-item flex-column card-shadow">
           <h4>{{ category.name }}</h4>
           <div class="inventory-item-img">
-            <img  src="../assets/inventory-item-1.png" alt="inventory item image">
+            <img  :src="category.img" alt="inventory item image">
           </div>
           <app-hidden-item text="ПОДРОБНЕЕ"></app-hidden-item>
         </div>
@@ -171,7 +171,8 @@ export default {
       CLIENTS:'clients/CLIENTS',
       TITLE_NEWS:'news/TITLE_NEWS',
       ALL_NEWS:'news/ALL_NEWS',
-      FILTERS:'filters/FILTERS'
+      FILTERS:'filters/FILTERS',
+      PAGE_ID:'page/PAGE_ID'
     })
   },
   methods: {
@@ -179,7 +180,8 @@ export default {
       GET_PARTNERS:'partners/GET_PARTNERS',
       GET_CLIENTS:'clients/GET_CLIENTS',
       GET_NEWS:'news/GET_NEWS',
-      GET_FILTERS: 'filters/GET_FILTERS'
+      GET_FILTERS: 'filters/GET_FILTERS',
+      GET_PAGE_ID: 'page/GET_PAGE_ID'
     }),
     pushToCatalog(category) {
       this.$router.push({ path: 'catalog', query: { category: category } })
@@ -218,6 +220,9 @@ export default {
     },
   },
   mounted() {
+    this.GET_PAGE_ID(1).then(() => {
+      console.log(this.PAGE_ID[0].blocks)
+    })
     this.GET_PARTNERS()
     this.GET_CLIENTS()
     this.GET_NEWS().then(() => {

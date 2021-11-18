@@ -2,35 +2,26 @@
     <div class="block-content flex-row">
         <div class="about-content flex-column">
             <h3>{{ title }}</h3>
-            <p class="text-about-content">{{ text }}</p>
-            <button @click="routerPush" class="btn">ПОДРОБНЕЕ</button>
+            <p class="text-about-content">{{ text.split('/')[0] }}</p>
+            <button @click="routerPush(text.split('/')[1])" class="btn">ПОДРОБНЕЕ</button>
         </div>
-        <img class="content-image" :src="pathToImage" alt="content image">
+        <img v-if="image.length > 0" class="content-image" :src="'http://bexram.online:8001' + image[0].file" :alt="image[0].alt">
     </div>
 </template>
 
 <script>
     export default {
         props: {
-            id: String,
+            id: Number,
             title: String,
             text: String,
-            image: String
+            image: {}
         },
         methods: {
-            routerPush() {
-                this.$router.push(`/catalog/${this.id}`)
+            routerPush(path) {
+                this.$router.push(`/${path}`)
                 window.scrollTo(0,0);
             },
-        },
-        computed: {
-            pathToImage() {
-                if (!this.image) {
-                    return
-                }
-                const fileName = this.image.toLowerCase();
-                return require(`../assets/${fileName}`);
-            }
         },
         name: "appMainSliderContent"
     }
@@ -38,6 +29,7 @@
 
 <style scoped>
     .block-content {
+        cursor: auto;
         align-items: center;
     }
     .content-image {
