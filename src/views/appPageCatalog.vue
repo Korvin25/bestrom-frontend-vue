@@ -33,32 +33,35 @@
             <div @click="showMobileFilter = true" class="mobile-filter card-shadow flex-column">
                 <h2>{{ radioCatalogSelect }}</h2>
             </div>
-            <section v-if="showMobileFilter" class="mobile-nav-elements flex-column">
-                <img @click="showMobileFilter = false" class="close-mobile-menu" src="../assets/close-mobile-menu.png" alt="close-mobile-menu">
-                <p class="mobile-menu-title">Каталог</p>
-                <div class="flex-column">
-                    <div class="catalog-select-shadow">
-                        <carousel :snap-align="'center'" :wrap-around="true" :items-to-show="1.8">
-                            <slide v-for="category in FILTERS" :key="category.id">
-                                <p class="mobile-select-filter"
-                                   @click="radioCatalogSelect = category.name"
-                                   :class="radioCatalogSelect === category.name ? 'choice' : ''"
-                                >{{ category.name }}</p>
-                            </slide>
-                        </carousel>
+            <transition-group name="mobile-filter-modal">
+                <section v-if="showMobileFilter" class="mobile-nav-elements flex-column">
+                    <img @click="showMobileFilter = false" class="close-mobile-menu" src="../assets/close-mobile-menu.png" alt="close-mobile-menu">
+                    <p class="mobile-menu-title">Каталог</p>
+                    <div class="flex-column">
+                        <div class="catalog-select-shadow">
+                            <carousel :snap-align="'center'" :wrap-around="true" :items-to-show="1.8">
+                                <slide v-for="category in FILTERS" :key="category.id">
+                                    <p class="mobile-select-filter"
+                                       @click="radioCatalogSelect = category.name"
+                                       :class="radioCatalogSelect === category.name ? 'choice' : ''"
+                                    >{{ category.name }}</p>
+                                </slide>
+                            </carousel>
+                        </div>
+                        <div  v-if="FILTERS.length > 0 && radioCatalogSelect !== ''" class="type-select flex-row">
+                            <app-catalog-type-select
+                                    v-for="filters in FILTERS.find(e => e.name === radioCatalogSelect).Filters"
+                                    :key="filters.id"
+                                    :class="typeSelect === filters.name ? 'type-select-checked' : ''"
+                                    @click="typeSelectFunc(filters.name, filters.search)"
+                                    :text="filters.name"
+                            ></app-catalog-type-select>
+                        </div>
                     </div>
-                    <div  v-if="FILTERS.length > 0 && radioCatalogSelect !== ''" class="type-select flex-row">
-                        <app-catalog-type-select
-                                v-for="filters in FILTERS.find(e => e.name === radioCatalogSelect).Filters"
-                                :key="filters.id"
-                                :class="typeSelect === filters.name ? 'type-select-checked' : ''"
-                                @click="typeSelectFunc(filters.name, filters.search)"
-                                :text="filters.name"
-                        ></app-catalog-type-select>
-                    </div>
-                </div>
-            </section>
+                </section>
+            </transition-group>
         </section>
+
         <!-- ./mobile-section -->
 
         <section class="catalog-item flex-row">
@@ -122,6 +125,7 @@
             typeSelectFunc(filterName, filterSearch) {
                 this.typeSelect = filterName
                 this.search = filterSearch
+                setTimeout(() => {this.showMobileFilter = false}, 100)
             }
         },
         watch: {
@@ -193,6 +197,20 @@
     @media (max-width: 980px) {
         .desktop-section {
             display: none;
+        }
+        .mobile-filter-modal-enter-active {
+            animation: mobile-filter-modal-in .4s;
+        }
+        .mobile-filter-modal-leave-active {
+            animation: mobile-filter-modal-in .4s reverse;
+        }
+        @keyframes mobile-filter-modal-in {
+            0% {
+                transform: translateY(-100%);
+            }
+            100% {
+                transform: translateY(0%);
+            }
         }
         .mobile-section {
             display: block;

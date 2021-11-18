@@ -2,7 +2,7 @@
     <div class="details-select-settings flex-column">
         <div v-for="item in settings" :key="item.id" class="details-select-settings-item">
             <h4>{{ item.product_property.name }}</h4>
-            <p>{{ item.value }}</p>
+            <p>{{ item.name }}</p>
         </div>
     </div>
     <!-- /.details-select-settings -->

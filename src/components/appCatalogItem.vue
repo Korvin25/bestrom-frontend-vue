@@ -37,7 +37,7 @@
                     <slide v-for="slide in PRODUCT_ID.ProductPropertyValue" :key="slide.id">
                         <div class="flex-column">
                             <h4>{{ slide.product_property.name }}</h4>
-                            <p>{{ slide.value }}</p>
+                            <p>{{ slide.name }}</p>
                         </div>
                     </slide>
                     <template #addons>
