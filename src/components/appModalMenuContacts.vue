@@ -136,13 +136,7 @@
         methods: {
             scriptConnect(scriptUrl) {
                 const yandexScript = document.createElement('script');
-                yandexScript.setAttribute(
-                    'src',
-                    scriptUrl
-                );
-                yandexScript.addEventListener('load', () => {
-                    console.log('карта загружена');
-                });
+                yandexScript.setAttribute('src', scriptUrl)
                 document.body.appendChild(yandexScript);
             }
         },
