@@ -13,11 +13,13 @@
             </div>
 
             <h3>Головной офис</h3>
+
             <div class="flex-row">
                 <img class="location-pin" src="../assets/location_pin.png" alt="location_pin">
                 <p>143405, Россия, Московская обл., г. Красногорск, Ильинское шоссе, д.15, на территории завода "Бецема"</p>
             </div>
-            <img src="../assets/yandex-maps.png" alt="yandex-maps">
+            <div id="mymap"></div>
+            <a class="yandex-href" href="https://yandex.ru/maps/?rtext=~55.809879, 37.335034"><p>Построить маршрут в Яндекс.Карты</p></a>
 
             <div class="main-contacts flex-row">
                 <div class="main-contacts-card flex-column">
@@ -131,6 +133,22 @@
 
 <script>
     export default {
+        methods: {
+            scriptConnect(scriptUrl) {
+                const yandexScript = document.createElement('script');
+                yandexScript.setAttribute(
+                    'src',
+                    scriptUrl
+                );
+                yandexScript.addEventListener('load', () => {
+                    console.log('карта загружена');
+                });
+                document.body.appendChild(yandexScript);
+            }
+        },
+        mounted() {
+            this.scriptConnect('https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3Ab23d25421decd66ecb2e0401df4649a9fbbf12bca068dbbafcf6dde799fd92e3&amp;width=100%25&amp;height=500&amp;id=mymap&amp&lang=ru_RU&amp;scroll=true')
+        },
         name: "appModalMenuContacts"
     }
 </script>
@@ -157,6 +175,9 @@
     .main-contacts {
         margin: 1rem -1rem 2rem -1rem;
         border-bottom: 2px solid #6A6A6A;
+    }
+    .yandex-href {
+        text-decoration: underline;
     }
     .main-contacts-card {
         width: 30%;
