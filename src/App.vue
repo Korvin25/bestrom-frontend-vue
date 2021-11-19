@@ -4,14 +4,12 @@
 </template>
 
 <script>
-import {mapActions, mapGetters} from 'vuex'
+import { mapActions, mapGetters } from "vuex";
 import appNavMenu from "@/components/appNavMenu";
 
 export default {
   methods: {
-    ...mapActions([
-        "GET_CONTENT"
-    ])
+    ...mapActions(["GET_CONTENT"]),
   },
 
   mounted() {
@@ -23,14 +21,12 @@ export default {
     */
   },
 
-  computed:{
-    ...mapGetters([
-      'CONTENT'
-    ])
+  computed: {
+    ...mapGetters(["CONTENT"]),
   },
 
   components: {
-    appNavMenu
-  }
-}
+    appNavMenu,
+  },
+};
 </script>

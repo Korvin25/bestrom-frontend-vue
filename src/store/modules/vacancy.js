@@ -1,40 +1,40 @@
 import axios from "axios";
 
 export default {
-    namespaced: true,
+  namespaced: true,
 
-    state() {
-        return {
-            vacancy: [],
-        }
+  state() {
+    return {
+      vacancy: [],
+    };
+  },
+
+  getters: {
+    VACANCY(state) {
+      return state.vacancy;
     },
+  },
 
-    getters: {
-        VACANCY(state) {
-            return state.vacancy
-        }
+  mutations: {
+    SET_VACANCY(state, content) {
+      state.vacancy = content;
     },
+  },
 
-    mutations: {
-        SET_VACANCY(state, content) {
-            state.vacancy = content
-        }
+  actions: {
+    GET_VACANCY({ commit }) {
+      return axios({
+        method: "GET",
+        url: "http://bexram.online:8001/vacancy/",
+      })
+        .then((response) => {
+          commit("SET_VACANCY", response.data);
+          return response;
+        })
+        .catch((error) => {
+          console.log(error);
+          return error;
+        });
     },
-
-    actions: {
-        GET_VACANCY({commit}) {
-            return axios({
-                method: 'GET',
-                url: 'http://bexram.online:8001/vacancy/'
-            })
-                .then((response) => {
-                    commit('SET_VACANCY', response.data)
-                    return response
-                })
-                .catch((error) => {
-                    console.log(error)
-                    return error
-                })
-        }
-    }
-}
+  },
+};

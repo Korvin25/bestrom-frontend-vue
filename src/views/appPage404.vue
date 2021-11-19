@@ -1,34 +1,35 @@
 <template>
-    <app-header></app-header>
-    <main class="main-content flex-column">
-        <h2>Ошибка 404</h2>
-        <h2>Страница не найдена</h2>
-        <router-link to="/">Вернуться на главную</router-link>
-    </main>
-    <app-footer></app-footer>
+  <app-header></app-header>
+  <main class="main-content flex-column">
+    <h2>Ошибка 404</h2>
+    <h2>Страница не найдена</h2>
+    <router-link to="/">Вернуться на главную</router-link>
+  </main>
+  <app-footer></app-footer>
 </template>
 
 <script>
-    import appHeader from "@/components/appHeader";
-    import appFooter from "@/components/appFooter";
+import appHeader from "@/components/appHeader";
+import appFooter from "@/components/appFooter";
 
-    export default {
-        components: {
-            appHeader, appFooter
-        },
-        name: "appPage404"
-    }
+export default {
+  components: {
+    appHeader,
+    appFooter,
+  },
+  name: "appPage404",
+};
 </script>
 
 <style scoped>
-    .main-content {
-        align-items: center;
-        margin: 7rem 0 3rem 0;
-        gap: 3rem;
-    }
-    .main-content h2 {
-        text-align: center;
-        margin: 0;
-        align-self: normal;
-    }
+.main-content {
+  align-items: center;
+  margin: 7rem 0 3rem 0;
+  gap: 3rem;
+}
+.main-content h2 {
+  text-align: center;
+  margin: 0;
+  align-self: normal;
+}
 </style>

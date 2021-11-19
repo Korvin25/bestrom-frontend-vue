@@ -1,87 +1,106 @@
 <template>
-    <div class="modal-background">
-        <div @click="$emit('close')" class="close-background"></div>
-        <div class="modal-window card-shadow flex-column">
-            <div @click="$emit('close')" class="close">
-                <img class="close-desktop" src="../assets/close-image.png" alt="close">
-                <img class="close-mobile" src="../assets/close-mobile-menu.png" alt="close">
-            </div>
-            <h2>Отправьте нам вашу заявку</h2>
-            <form class="form-call flex-column" action="">
-                <label for="company">Компания</label>
-                <input id="company" type="text" class="input" placeholder="БЕСТРОМ">
-                <label for="fio">Ф.И.О</label>
-                <input id="fio" type="text" class="input" placeholder="Иван Иванович">
-                <label for="telephone">Телефон</label>
-                <input id="telephone" type="text" class="input" placeholder="89199966203">
-                <label for="email">E-mail</label>
-                <input id="email" type="text" class="input" placeholder="partner@thedimension.com">
-                <p>Удобный способ связи</p>
-                <div class="call-method flex-row">
-                    <div class="logo">
-                        <img src="../assets/whatsapp.png" alt="whatsapp">
-                    </div>
-                    <div class="logo">
-                        <img src="../assets/telegram.png" alt="telegram">
-                    </div>
-                    <div class="logo">
-                        <img src="../assets/viber.png" alt="viber">
-                    </div>
-                    <div class="logo">
-                        <img src="../assets/email.png" alt="email">
-                    </div>
-                </div>
-                <p>Прикрепить резюме</p>
-                <input type="file" name="file">
-                <button class="call btn">ЗАКАЗАТЬ ЗВОНОК</button>
-            </form>
+  <div class="modal-background">
+    <div @click="$emit('close')" class="close-background"></div>
+    <div class="modal-window card-shadow flex-column">
+      <div @click="$emit('close')" class="close">
+        <img
+          class="close-desktop"
+          src="../assets/close-image.png"
+          alt="close"
+        />
+        <img
+          class="close-mobile"
+          src="../assets/close-mobile-menu.png"
+          alt="close"
+        />
+      </div>
+      <h2>Отправьте нам вашу заявку</h2>
+      <form class="form-call flex-column" action="">
+        <label for="company">Компания</label>
+        <input id="company" type="text" class="input" placeholder="БЕСТРОМ" />
+        <label for="fio">Ф.И.О</label>
+        <input id="fio" type="text" class="input" placeholder="Иван Иванович" />
+        <label for="telephone">Телефон</label>
+        <input
+          id="telephone"
+          type="text"
+          class="input"
+          placeholder="89199966203"
+        />
+        <label for="email">E-mail</label>
+        <input
+          id="email"
+          type="text"
+          class="input"
+          placeholder="partner@thedimension.com"
+        />
+        <p>Удобный способ связи</p>
+        <div class="call-method flex-row">
+          <div class="logo">
+            <img src="../assets/whatsapp.png" alt="whatsapp" />
+          </div>
+          <div class="logo">
+            <img src="../assets/telegram.png" alt="telegram" />
+          </div>
+          <div class="logo">
+            <img src="../assets/viber.png" alt="viber" />
+          </div>
+          <div class="logo">
+            <img src="../assets/email.png" alt="email" />
+          </div>
         </div>
+        <p>Прикрепить резюме</p>
+        <input type="file" name="file" />
+        <button class="call btn">ЗАКАЗАТЬ ЗВОНОК</button>
+      </form>
     </div>
+  </div>
 </template>
 
 <script>
-    export default {
-        name: "appModalJobRespond"
-    }
+export default {
+  name: "appModalJobRespond",
+};
 </script>
 
 <style scoped>
-    .form-call {
-        margin-top: 1rem;
-    }
-    .form-call .input, .form-call .textarea {
-        margin: 0.5rem 0;
-    }
-    .call {
-        margin: 2rem 0 1rem 0;
-        flex-grow: 1;
-        width: 100%;
-    }
-    .call-method {
-        justify-content: flex-start;
-        margin: 0 -1rem;
-    }
-    .logo {
-        transition: all .3s;
-        cursor: pointer;
-        padding: 0;
-        margin: 0 1rem;
-        width: 3rem;
-        height: 3rem;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border-radius: 100%;
-        background: transparent;
-    }
-        .logo:hover {
-            filter: drop-shadow(0 0 12px #2FC1FF);
-        }
-    @media (max-width: 980px) {
-        h2 {
-            align-self: center;
-            text-align: center;
-            color: #6A6A6A;
-        }
-    }
+.form-call {
+  margin-top: 1rem;
+}
+.form-call .input,
+.form-call .textarea {
+  margin: 0.5rem 0;
+}
+.call {
+  margin: 2rem 0 1rem 0;
+  flex-grow: 1;
+  width: 100%;
+}
+.call-method {
+  justify-content: flex-start;
+  margin: 0 -1rem;
+}
+.logo {
+  transition: all 0.3s;
+  cursor: pointer;
+  padding: 0;
+  margin: 0 1rem;
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100%;
+  background: transparent;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 12px #2fc1ff);
+}
+@media (max-width: 980px) {
+  h2 {
+    align-self: center;
+    text-align: center;
+    color: #6a6a6a;
+  }
+}
 </style>
