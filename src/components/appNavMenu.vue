@@ -677,11 +677,11 @@
 </template>
 
 <script>
-import appModalMenuApplication from "@/components/appModalMenuApplication";
-import appModalMenuService from "@/components/appModalMenuService";
-import appModalMenuContacts from "@/components/appModalMenuContacts";
-import appModalMenuContactsCall from "@/components/appModalMenuContactsCall";
-import appModalMenuContactsQuestion from "@/components/appModalMenuContactsQuestion";
+import appModalMenuApplication from "@/components/appModalMenuApplication"
+import appModalMenuService from "@/components/appModalMenuService"
+import appModalMenuContacts from "@/components/appModalMenuContacts"
+import appModalMenuContactsCall from "@/components/appModalMenuContactsCall"
+import appModalMenuContactsQuestion from "@/components/appModalMenuContactsQuestion"
 
 export default {
   data() {
@@ -693,79 +693,79 @@ export default {
       showModalMenuContacts: false,
       showModalMenuContactsCall: false,
       showModalMenuContactsQuestion: false,
-    };
+    }
   },
   methods: {
     scrollToTop() {
-      this.showMobileMenu = false;
-      window.scrollTo(0, 0);
+      this.showMobileMenu = false
+      window.scrollTo(0, 0)
     },
     showModalMenuContactsCallFunc() {
-      this.showModalMenuContactsCall = true;
-      this.showModalMenuContacts = false;
+      this.showModalMenuContactsCall = true
+      this.showModalMenuContacts = false
     },
     showModalMenuContactsQuestionFunc() {
-      this.showModalMenuContactsQuestion = true;
-      this.showModalMenuContacts = false;
+      this.showModalMenuContactsQuestion = true
+      this.showModalMenuContacts = false
     },
     showModalMenuServiceClick() {
-      this.showMobileMenu = false;
-      this.showModalMenuService = true;
+      this.showMobileMenu = false
+      this.showModalMenuService = true
     },
     showModalMenuApplicationClick() {
-      this.showMobileMenu = false;
-      this.showModalMenuApplication = true;
+      this.showMobileMenu = false
+      this.showModalMenuApplication = true
     },
     showModalMenuContactsQuestionClick() {
-      this.showMobileMenu = false;
-      this.showModalMenuContactsQuestion = true;
+      this.showMobileMenu = false
+      this.showModalMenuContactsQuestion = true
     },
     showModalMenuContactsClick() {
-      this.showMobileMenu = false;
-      this.showModalMenuContacts = true;
+      this.showMobileMenu = false
+      this.showModalMenuContacts = true
     },
   },
   watch: {
     showMobileMenu() {
       if (this.showMobileMenu) {
-        document.body.classList.add("modal-open");
+        document.body.classList.add("modal-open")
       } else {
-        document.body.classList.remove("modal-open");
+        document.body.classList.remove("modal-open")
       }
     },
     showModalMenuApplication() {
       if (this.showModalMenuApplication) {
-        document.body.classList.add("modal-open");
+        document.body.classList.add("modal-open")
       } else {
-        document.body.classList.remove("modal-open");
+        document.body.classList.remove("modal-open")
       }
     },
     showModalMenuService() {
       if (this.showModalMenuService) {
-        document.body.classList.add("modal-open");
+        document.body.classList.add("modal-open")
       } else {
-        document.body.classList.remove("modal-open");
+        document.body.classList.remove("modal-open")
       }
     },
     showModalMenuContacts() {
       if (this.showModalMenuContacts) {
-        document.body.classList.add("modal-open");
+        document.body.classList.add("modal-open")
       } else {
-        document.body.classList.remove("modal-open");
+        document.body.classList.remove("modal-open")
       }
     },
     showModalMenuContactsCall() {
       if (this.showModalMenuContactsCall) {
-        document.body.classList.add("modal-open");
+        document.body.classList.add("modal-open")
       } else {
-        document.body.classList.remove("modal-open");
+        document.body.classList.remove("modal-open")
       }
     },
     showModalMenuContactsQuestion() {
       if (this.showModalMenuContactsQuestion) {
-        document.body.classList.add("modal-open");
+        document.body.classList.add("modal-open")
       } else {
-        document.body.classList.remove("modal-open");
+        document.body.classList.remove("modal-open")
       }
     },
   },
@@ -777,7 +777,7 @@ export default {
     appModalMenuContactsQuestion,
   },
   name: "appNavMenu",
-};
+}
 </script>
 
 <style scoped>

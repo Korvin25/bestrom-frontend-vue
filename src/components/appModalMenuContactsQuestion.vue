@@ -51,7 +51,7 @@
 <script>
 export default {
   name: "appModalMenuContactsQuestion",
-};
+}
 </script>
 
 <style scoped>

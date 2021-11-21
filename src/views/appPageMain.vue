@@ -7,7 +7,7 @@
       <h2 class="mobile-section">Деятельность компании</h2>
 
       <div
-        v-if="this.PAGE_ID[0].blocks.length > 0"
+        v-if="PAGE_ID[0].blocks.length > 0"
         class="main-slider-content card-shadow"
       >
         <carousel :itemsToShow="1" :snapAlign="'start'" :wrapAround="true">

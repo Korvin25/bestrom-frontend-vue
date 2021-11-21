@@ -45,11 +45,11 @@
 </template>
 
 <script>
-import appHeader from "@/components/appHeader";
-import appFooter from "@/components/appFooter";
-import appJobItem from "@/components/appJobItem";
-import { Carousel, Slide, Pagination } from "vue3-carousel";
-import { mapActions, mapGetters } from "vuex";
+import appHeader from "@/components/appHeader"
+import appFooter from "@/components/appFooter"
+import appJobItem from "@/components/appJobItem"
+import { Carousel, Slide, Pagination } from "vue3-carousel"
+import { mapActions, mapGetters } from "vuex"
 
 export default {
   computed: {
@@ -62,12 +62,12 @@ export default {
       GET_VACANCY: "vacancy/GET_VACANCY",
     }),
     routerPush(path) {
-      window.scrollTo(0, 0);
-      this.$router.push(`/jobs/${path}`);
+      window.scrollTo(0, 0)
+      this.$router.push(`/jobs/${path}`)
     },
   },
   mounted() {
-    this.GET_VACANCY();
+    this.GET_VACANCY()
   },
   components: {
     appHeader,
@@ -78,7 +78,7 @@ export default {
     Pagination,
   },
   name: "appPageJobs",
-};
+}
 </script>
 
 <style scoped>

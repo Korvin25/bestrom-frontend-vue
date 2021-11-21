@@ -23,8 +23,8 @@
 </template>
 
 <script>
-import appHiddenItem from "@/components/appHiddenItem";
-import { Carousel, Slide, Navigation, Pagination } from "vue3-carousel";
+import appHiddenItem from "@/components/appHiddenItem"
+import { Carousel, Slide, Navigation, Pagination } from "vue3-carousel"
 
 export default {
   props: {
@@ -46,7 +46,7 @@ export default {
           wrapAround: true,
         },
       },
-    };
+    }
   },
   components: {
     appHiddenItem,
@@ -56,7 +56,7 @@ export default {
     Pagination,
   },
   name: "appDetailsSelectSolution",
-};
+}
 </script>
 
 <style scoped>

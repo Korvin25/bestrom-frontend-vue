@@ -10,7 +10,7 @@ export default {
     text: String,
   },
   name: "appCatalogTypeSelect",
-};
+}
 </script>
 
 <style scoped>
@@ -20,7 +20,7 @@ export default {
   align-items: center;
   padding: 0 1rem;
   margin: 0.2rem;
-  text-wrap: none;
+  word-wrap: none;
   border: 1px solid #2fc1ff;
   box-sizing: border-box;
   filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, 0.25));

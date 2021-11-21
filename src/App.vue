@@ -4,8 +4,8 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
-import appNavMenu from "@/components/appNavMenu";
+import { mapActions, mapGetters } from "vuex"
+import appNavMenu from "@/components/appNavMenu"
 
 export default {
   methods: {
@@ -28,5 +28,5 @@ export default {
   components: {
     appNavMenu,
   },
-};
+}
 </script>

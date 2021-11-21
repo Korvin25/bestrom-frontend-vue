@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import appHiddenItem from "@/components/appHiddenItem";
+import appHiddenItem from "@/components/appHiddenItem"
 
 export default {
   props: {
@@ -41,7 +41,7 @@ export default {
     appHiddenItem,
   },
   name: "appModalCatalogProductExamples",
-};
+}
 </script>
 
 <style scoped>

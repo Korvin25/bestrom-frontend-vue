@@ -24,12 +24,12 @@ export default {
   },
   methods: {
     routerPush(path) {
-      window.scrollTo(0, 0);
-      this.$router.push(`/news/${path}`);
+      window.scrollTo(0, 0)
+      this.$router.push(`/news/${path}`)
     },
   },
   name: "appNewsOtherItem",
-};
+}
 </script>
 
 <style scoped>

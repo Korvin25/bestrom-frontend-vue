@@ -74,17 +74,17 @@
 </template>
 
 <script>
-import appHeader from "@/components/appHeader";
-import appFooter from "@/components/appFooter";
-import appModalJobRespond from "@/components/appModalJobRespond";
-import { mapActions, mapGetters } from "vuex";
+import appHeader from "@/components/appHeader"
+import appFooter from "@/components/appFooter"
+import appModalJobRespond from "@/components/appModalJobRespond"
+import { mapActions, mapGetters } from "vuex"
 
 export default {
   data() {
     return {
       currentJob: {},
       showModalRespond: false,
-    };
+    }
   },
   computed: {
     ...mapGetters({
@@ -100,15 +100,15 @@ export default {
     this.GET_VACANCY().then(() => {
       this.currentJob = this.VACANCY.find(
         (e) => e.alt === this.$route.params.jobId
-      );
-    });
+      )
+    })
   },
   watch: {
     showModalRespond() {
       if (this.showModalRespond) {
-        document.body.classList.add("modal-open");
+        document.body.classList.add("modal-open")
       } else {
-        document.body.classList.remove("modal-open");
+        document.body.classList.remove("modal-open")
       }
     },
   },
@@ -118,7 +118,7 @@ export default {
     appModalJobRespond,
   },
   name: "appPageJobId",
-};
+}
 </script>
 
 <style scoped>

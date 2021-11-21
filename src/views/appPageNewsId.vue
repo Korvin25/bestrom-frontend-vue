@@ -35,16 +35,16 @@
 </template>
 
 <script>
-import appHeader from "@/components/appHeader";
-import appFooter from "@/components/appFooter";
-import { mapActions, mapGetters } from "vuex";
+import appHeader from "@/components/appHeader"
+import appFooter from "@/components/appFooter"
+import { mapActions, mapGetters } from "vuex"
 
 export default {
   data() {
     return {
       currentNews: {},
       lastNews: [],
-    };
+    }
   },
   computed: {
     ...mapGetters({
@@ -56,32 +56,32 @@ export default {
       GET_NEWS: "news/GET_NEWS",
     }),
     routerPush(path) {
-      window.scrollTo(0, 0);
-      this.$router.replace(`/news/${path}`);
+      window.scrollTo(0, 0)
+      this.$router.replace(`/news/${path}`)
     },
     findCurrentNews() {
-      return this.ALL_NEWS.find((e) => e.alt === this.$route.params.newsId);
+      return this.ALL_NEWS.find((e) => e.alt === this.$route.params.newsId)
     },
     findLastNews() {
-      const news = [];
+      const news = []
       for (const item of this.ALL_NEWS) {
         if (item.alt !== this.$route.params.newsId) {
-          news.push(item);
+          news.push(item)
           if (news.length === 3) {
-            return news;
+            return news
           }
         }
       }
     },
     fetchData() {
-      this.currentNews = this.findCurrentNews();
-      this.lastNews = this.findLastNews();
+      this.currentNews = this.findCurrentNews()
+      this.lastNews = this.findLastNews()
     },
   },
   mounted() {
     this.GET_NEWS().then(() => {
-      this.fetchData();
-    });
+      this.fetchData()
+    })
   },
   watch: {
     $route: "fetchData",
@@ -91,7 +91,7 @@ export default {
     appFooter,
   },
   name: "appPageNewsId",
-};
+}
 </script>
 
 <style scoped>

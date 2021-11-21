@@ -191,18 +191,18 @@
 export default {
   methods: {
     scriptConnect(scriptUrl) {
-      const yandexScript = document.createElement("script");
-      yandexScript.setAttribute("src", scriptUrl);
-      document.body.appendChild(yandexScript);
+      const yandexScript = document.createElement("script")
+      yandexScript.setAttribute("src", scriptUrl)
+      document.body.appendChild(yandexScript)
     },
   },
   mounted() {
     this.scriptConnect(
       "https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3Ab23d25421decd66ecb2e0401df4649a9fbbf12bca068dbbafcf6dde799fd92e3&amp;width=100%25&amp;height=500&amp;id=mymap&amp&lang=ru_RU&amp;scroll=true"
-    );
+    )
   },
   name: "appModalMenuContacts",
-};
+}
 </script>
 
 <style scoped>

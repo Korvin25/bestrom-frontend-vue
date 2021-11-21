@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "axios"
 
 export default {
   namespaced: true,
@@ -6,18 +6,18 @@ export default {
   state() {
     return {
       vacancy: [],
-    };
+    }
   },
 
   getters: {
     VACANCY(state) {
-      return state.vacancy;
+      return state.vacancy
     },
   },
 
   mutations: {
     SET_VACANCY(state, content) {
-      state.vacancy = content;
+      state.vacancy = content
     },
   },
 
@@ -28,13 +28,13 @@ export default {
         url: "http://bexram.online:8001/vacancy/",
       })
         .then((response) => {
-          commit("SET_VACANCY", response.data);
-          return response;
+          commit("SET_VACANCY", response.data)
+          return response
         })
         .catch((error) => {
-          console.log(error);
-          return error;
-        });
+          console.log(error)
+          return error
+        })
     },
   },
-};
+}

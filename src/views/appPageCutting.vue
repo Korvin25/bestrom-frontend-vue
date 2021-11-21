@@ -198,9 +198,9 @@
 </template>
 
 <script>
-import appHeader from "@/components/appHeader";
-import appFooter from "@/components/appFooter";
-import { Carousel, Slide, Pagination } from "vue3-carousel";
+import appHeader from "@/components/appHeader"
+import appFooter from "@/components/appFooter"
+import { Carousel, Slide, Pagination } from "vue3-carousel"
 
 export default {
   data() {
@@ -277,51 +277,51 @@ export default {
           img: "packet-type-1.png",
         },
       ],
-    };
+    }
   },
   methods: {
     scrollToTop() {
-      window.scrollTo(0, 0);
+      window.scrollTo(0, 0)
     },
     checkOptionsFunc(id) {
       if (this.checkType !== 0) {
-        this.checkOptions = id;
+        this.checkOptions = id
         this.$smoothScroll({
           scrollTo: document.getElementById("packetSeam"), // scrollTo is also allowed to be number
           updateHistory: false,
           offset: -50,
-        });
+        })
       } else {
-        alert("Сначала выберите тип пакета!!!");
+        alert("Сначала выберите тип пакета!!!")
         this.$smoothScroll({
           scrollTo: document.getElementById("packetType"), // scrollTo is also allowed to be number
           updateHistory: false,
           offset: -50,
-        });
+        })
       }
     },
     checkSeamFunc(id) {
       if (this.checkType === 0 && this.checkOptions === 0) {
-        alert("Сначала выберите тип пакета!!!");
+        alert("Сначала выберите тип пакета!!!")
         this.$smoothScroll({
           scrollTo: document.getElementById("packetType"), // scrollTo is also allowed to be number
           updateHistory: false,
           offset: -50,
-        });
+        })
       } else if (this.checkType !== 0 && this.checkOptions === 0) {
-        alert("Сначала выберите дополнительные опции!!!");
+        alert("Сначала выберите дополнительные опции!!!")
         this.$smoothScroll({
           scrollTo: document.getElementById("packetOptions"), // scrollTo is also allowed to be number
           updateHistory: false,
           offset: -50,
-        });
+        })
       } else if (this.checkType !== 0 && this.checkOptions !== 0) {
-        this.checkSeam = id;
+        this.checkSeam = id
         this.$smoothScroll({
           scrollTo: document.getElementById("packetSize"), // scrollTo is also allowed to be number
           updateHistory: false,
           offset: -50,
-        });
+        })
       }
     },
   },
@@ -333,7 +333,7 @@ export default {
     Pagination,
   },
   name: "appPageCutting",
-};
+}
 </script>
 
 <style scoped>

@@ -113,12 +113,12 @@
 </template>
 
 <script>
-import appHeader from "@/components/appHeader";
-import appFooter from "@/components/appFooter";
-import appCatalogTypeSelect from "@/components/appCatalogTypeSelect";
-import appCatalogItem from "@/components/appCatalogItem";
-import { mapActions, mapGetters } from "vuex";
-import { Carousel, Slide } from "vue3-carousel";
+import appHeader from "@/components/appHeader"
+import appFooter from "@/components/appFooter"
+import appCatalogTypeSelect from "@/components/appCatalogTypeSelect"
+import appCatalogItem from "@/components/appCatalogItem"
+import { mapActions, mapGetters } from "vuex"
+import { Carousel, Slide } from "vue3-carousel"
 
 export default {
   data() {
@@ -127,7 +127,7 @@ export default {
       radioCatalogSelect: "",
       typeSelect: "",
       search: "",
-    };
+    }
   },
   computed: {
     ...mapGetters({
@@ -139,12 +139,12 @@ export default {
         if (this.$route.query.category) {
           return this.FILTERS.find(
             (e) => e.id === Number(this.$route.query.category)
-          ).name;
+          ).name
         } else {
-          return this.FILTERS[0].name;
+          return this.FILTERS[0].name
         }
       }
-      return 0;
+      return 0
     },
   },
   methods: {
@@ -153,39 +153,39 @@ export default {
       GET_FILTERS: "filters/GET_FILTERS",
     }),
     routerPush(path) {
-      window.scrollTo(0, 0);
-      this.$router.push(`/product/${path}`);
+      window.scrollTo(0, 0)
+      this.$router.push(`/product/${path}`)
     },
     typeSelectFunc(filterName, filterSearch) {
-      this.typeSelect = filterName;
-      this.search = filterSearch;
+      this.typeSelect = filterName
+      this.search = filterSearch
       setTimeout(() => {
-        this.showMobileFilter = false;
-      }, 100);
+        this.showMobileFilter = false
+      }, 100)
     },
   },
   watch: {
     showMobileFilter() {
       if (this.showMobileFilter) {
-        document.body.classList.add("modal-open");
+        document.body.classList.add("modal-open")
       } else {
-        document.body.classList.remove("modal-open");
+        document.body.classList.remove("modal-open")
       }
     },
     radioCatalogSelect() {
       this.typeSelect = this.FILTERS.find(
         (e) => e.name === this.radioCatalogSelect
-      ).Filters[0].name;
+      ).Filters[0].name
       this.search = this.FILTERS.find(
         (e) => e.name === this.radioCatalogSelect
-      ).Filters[0].search;
+      ).Filters[0].search
     },
   },
   mounted() {
-    this.GET_PRODUCT();
+    this.GET_PRODUCT()
     this.GET_FILTERS().then(() => {
-      this.radioCatalogSelect = this.filterInit;
-    });
+      this.radioCatalogSelect = this.filterInit
+    })
   },
   components: {
     appHeader,
@@ -196,7 +196,7 @@ export default {
     Slide,
   },
   name: "appPageCatalog",
-};
+}
 </script>
 
 <style scoped>

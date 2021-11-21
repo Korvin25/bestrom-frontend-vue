@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "axios"
 
 export default {
   namespaced: true,
@@ -6,18 +6,18 @@ export default {
   state() {
     return {
       history: [],
-    };
+    }
   },
 
   getters: {
     HISTORY(state) {
-      return state.history;
+      return state.history
     },
   },
 
   mutations: {
     SET_HISTORY(state, content) {
-      state.history = content;
+      state.history = content
     },
   },
 
@@ -28,13 +28,13 @@ export default {
         url: "http://bexram.online:8001/history/",
       })
         .then((response) => {
-          commit("SET_HISTORY", response.data);
-          return response;
+          commit("SET_HISTORY", response.data)
+          return response
         })
         .catch((error) => {
-          console.log(error);
-          return error;
-        });
+          console.log(error)
+          return error
+        })
     },
   },
-};
+}

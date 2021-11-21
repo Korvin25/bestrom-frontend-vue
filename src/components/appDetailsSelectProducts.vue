@@ -26,15 +26,15 @@
 </template>
 
 <script>
-import appModalCatalogProductExamples from "@/components/appModalCatalogProductExamples";
-import appHiddenItem from "@/components/appHiddenItem";
+import appModalCatalogProductExamples from "@/components/appModalCatalogProductExamples"
+import appHiddenItem from "@/components/appHiddenItem"
 
 export default {
   data() {
     return {
       productItemsExample: {},
       showModalCall: false,
-    };
+    }
   },
   props: {
     productItems: {},
@@ -42,9 +42,9 @@ export default {
   watch: {
     showModalCall() {
       if (this.showModalCall) {
-        document.body.classList.add("modal-open");
+        document.body.classList.add("modal-open")
       } else {
-        document.body.classList.remove("modal-open");
+        document.body.classList.remove("modal-open")
       }
     },
   },
@@ -53,7 +53,7 @@ export default {
     appModalCatalogProductExamples,
   },
   name: "appDetailsSelectProducts",
-};
+}
 </script>
 
 <style scoped>

@@ -268,26 +268,26 @@ export default {
       inputFileName: "",
       inputsDetails: [],
       inputsFile: [],
-    };
+    }
   },
   methods: {
     selectOption(item) {
-      this.selectItem = item;
-      this.active = !this.active;
+      this.selectItem = item
+      this.active = !this.active
     },
     pushInput() {
       if (this.inputDetailValue.trim() !== "") {
         this.inputsDetails.push({
           id: this.inputsDetails.length,
           content: this.inputDetailValue,
-        });
+        })
       }
-      this.inputDetailValue = "";
+      this.inputDetailValue = ""
     },
     removeInput(id) {
       for (const input of this.inputsDetails) {
         if (input.id === id) {
-          this.inputsDetails.splice(this.inputsDetails.indexOf(input), 1);
+          this.inputsDetails.splice(this.inputsDetails.indexOf(input), 1)
         }
       }
     },
@@ -296,20 +296,20 @@ export default {
         this.inputsFile.push({
           id: this.inputsFile.length,
           content: this.inputFileName,
-        });
+        })
       }
-      this.inputFileName = "";
+      this.inputFileName = ""
     },
     removeInputFile(id) {
       for (const input of this.inputsFile) {
         if (input.id === id) {
-          this.inputsFile.splice(this.inputsFile.indexOf(input), 1);
+          this.inputsFile.splice(this.inputsFile.indexOf(input), 1)
         }
       }
     },
   },
   name: "appModalMenuService",
-};
+}
 </script>
 
 <style scoped>

@@ -79,10 +79,10 @@
 </template>
 
 <script>
-import appHeader from "@/components/appHeader";
-import appFooter from "@/components/appFooter";
-import appMachinesItem from "@/components/appMachinesItem";
-import { Carousel, Slide, Navigation, Pagination } from "vue3-carousel";
+import appHeader from "@/components/appHeader"
+import appFooter from "@/components/appFooter"
+import appMachinesItem from "@/components/appMachinesItem"
+import { Carousel, Slide, Navigation, Pagination } from "vue3-carousel"
 
 export default {
   data() {
@@ -101,7 +101,7 @@ export default {
           wrapAround: true,
         },
       },
-    };
+    }
   },
   components: {
     appHeader,
@@ -113,7 +113,7 @@ export default {
     Pagination,
   },
   name: "appPageUniqueCutting",
-};
+}
 </script>
 
 <style scoped>

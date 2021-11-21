@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "axios"
 
 export default {
   namespaced: true,
@@ -6,18 +6,18 @@ export default {
   state() {
     return {
       filters: [],
-    };
+    }
   },
 
   getters: {
     FILTERS(state) {
-      return state.filters;
+      return state.filters
     },
   },
 
   mutations: {
     SET_FILTERS(state, content) {
-      state.filters = content;
+      state.filters = content
     },
   },
 
@@ -28,13 +28,13 @@ export default {
         url: "http://bexram.online:8001//filters/",
       })
         .then((response) => {
-          commit("SET_FILTERS", response.data);
-          return response;
+          commit("SET_FILTERS", response.data)
+          return response
         })
         .catch((error) => {
-          console.log(error);
-          return error;
-        });
+          console.log(error)
+          return error
+        })
     },
   },
-};
+}

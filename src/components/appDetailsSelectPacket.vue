@@ -19,14 +19,14 @@
 </template>
 
 <script>
-import appHiddenItem from "@/components/appHiddenItem";
+import appHiddenItem from "@/components/appHiddenItem"
 
 export default {
   components: {
     appHiddenItem,
   },
   name: "appDetailsSelectPacket",
-};
+}
 </script>
 
 <style scoped>

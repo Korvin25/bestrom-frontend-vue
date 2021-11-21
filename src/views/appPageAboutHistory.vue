@@ -75,8 +75,8 @@
 </template>
 
 <script>
-import appHeader from "@/components/appHeader";
-import appFooter from "@/components/appFooter";
+import appHeader from "@/components/appHeader"
+import appFooter from "@/components/appFooter"
 
 export default {
   components: {
@@ -84,7 +84,7 @@ export default {
     appFooter,
   },
   name: "appPageAboutHistory",
-};
+}
 </script>
 
 <style scoped>

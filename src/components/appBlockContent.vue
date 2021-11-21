@@ -26,12 +26,12 @@ export default {
   },
   methods: {
     routerPush(path) {
-      this.$router.push(`/${path}`);
-      window.scrollTo(0, 0);
+      this.$router.push(`/${path}`)
+      window.scrollTo(0, 0)
     },
   },
   name: "appMainSliderContent",
-};
+}
 </script>
 
 <style scoped>

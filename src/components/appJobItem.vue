@@ -29,12 +29,12 @@ export default {
   },
   methods: {
     routerPush(path) {
-      window.scrollTo(0, 0);
-      this.$router.push(`/jobs/${path}`);
+      window.scrollTo(0, 0)
+      this.$router.push(`/jobs/${path}`)
     },
   },
   name: "appJobItem",
-};
+}
 </script>
 
 <style scoped>

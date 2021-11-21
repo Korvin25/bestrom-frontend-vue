@@ -75,7 +75,7 @@
 <script>
 export default {
   name: "appModalMenuApplication",
-};
+}
 </script>
 
 <style scoped>

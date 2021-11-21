@@ -75,8 +75,8 @@
 </template>
 
 <script>
-import { Carousel, Slide, Pagination } from "vue3-carousel";
-import { mapActions, mapGetters } from "vuex";
+import { Carousel, Slide, Pagination } from "vue3-carousel"
+import { mapActions, mapGetters } from "vuex"
 
 export default {
   props: {
@@ -98,17 +98,17 @@ export default {
               this.search &&
               item.name.toLowerCase() === this.search.toLowerCase()
             ) {
-              return true;
+              return true
             }
           }
         }
       }
-      return false;
+      return false
     },
     property() {
       return this.PRODUCT_ID.ProductPropertyValue.find(
         (e) => e.product_property.name === "Тип машины"
-      ).name;
+      ).name
     },
   },
   methods: {
@@ -116,12 +116,12 @@ export default {
       GET_PRODUCT_ID: "product/GET_PRODUCT_ID",
     }),
     scrollToTop() {
-      this.$router.push(`/catalog/${this.id}`);
-      window.scrollTo(0, 0);
+      this.$router.push(`/catalog/${this.id}`)
+      window.scrollTo(0, 0)
     },
   },
   mounted() {
-    this.GET_PRODUCT_ID(this.id);
+    this.GET_PRODUCT_ID(this.id)
   },
   components: {
     Carousel,
@@ -129,7 +129,7 @@ export default {
     Pagination,
   },
   name: "appCatalogItem",
-};
+}
 </script>
 
 <style scoped>

@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "axios"
 
 export default {
   namespaced: true,
@@ -10,21 +10,21 @@ export default {
       titleNews: [], // one main news
       secondNews: [], // two main news
       otherNews: [], // all other news
-    };
+    }
   },
 
   getters: {
     ALL_NEWS(state) {
-      return state.allNews;
+      return state.allNews
     },
     TITLE_NEWS(state) {
-      return state.titleNews;
+      return state.titleNews
     },
     SECOND_NEWS(state) {
-      return state.secondNews;
+      return state.secondNews
     },
     OTHER_NEWS(state) {
-      return state.otherNews;
+      return state.otherNews
     },
   },
 
@@ -32,21 +32,21 @@ export default {
     SET_NEWS(state, content) {
       content.sort(
         (prev, next) => new Date(next.published) - new Date(prev.published)
-      );
-      Object.assign(state.allNews, content);
+      )
+      Object.assign(state.allNews, content)
 
       if (state.secondNews.length > 0) {
-        state.secondNews = [];
+        state.secondNews = []
       }
       if (content.length > 0) {
-        state.titleNews = content.shift();
+        state.titleNews = content.shift()
       }
       if (content.length > 1) {
-        state.secondNews.push(content.shift());
-        state.secondNews.push(content.shift());
+        state.secondNews.push(content.shift())
+        state.secondNews.push(content.shift())
       }
       if (content.length > 0) {
-        state.otherNews = content;
+        state.otherNews = content
       }
     },
   },
@@ -58,13 +58,13 @@ export default {
         url: "http://bexram.online:8001/news/",
       })
         .then((response) => {
-          commit("SET_NEWS", response.data);
-          return response;
+          commit("SET_NEWS", response.data)
+          return response
         })
         .catch((error) => {
-          console.log(error);
-          return error;
-        });
+          console.log(error)
+          return error
+        })
     },
   },
-};
+}

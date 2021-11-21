@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "axios"
 
 export default {
   namespaced: true,
@@ -7,24 +7,24 @@ export default {
     return {
       product: [],
       productID: [],
-    };
+    }
   },
 
   getters: {
     PRODUCT(state) {
-      return state.product;
+      return state.product
     },
     PRODUCT_ID(state) {
-      return state.productID;
+      return state.productID
     },
   },
 
   mutations: {
     SET_PRODUCT(state, content) {
-      state.product = content;
+      state.product = content
     },
     SET_PRODUCT_ID(state, content) {
-      state.productID = content;
+      state.productID = content
     },
   },
 
@@ -35,13 +35,13 @@ export default {
         url: "http://bexram.online:8001/product/",
       })
         .then((response) => {
-          commit("SET_PRODUCT", response.data);
-          return response;
+          commit("SET_PRODUCT", response.data)
+          return response
         })
         .catch((error) => {
-          console.log(error);
-          return error;
-        });
+          console.log(error)
+          return error
+        })
     },
     GET_PRODUCT_ID({ commit }, id) {
       return axios({
@@ -49,13 +49,13 @@ export default {
         url: `http://bexram.online:8001/product/${id}/`,
       })
         .then((response) => {
-          commit("SET_PRODUCT_ID", response.data);
-          return response;
+          commit("SET_PRODUCT_ID", response.data)
+          return response
         })
         .catch((error) => {
-          console.log(error);
-          return error;
-        });
+          console.log(error)
+          return error
+        })
     },
   },
-};
+}

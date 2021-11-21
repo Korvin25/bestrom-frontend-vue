@@ -42,8 +42,8 @@
 </template>
 
 <script>
-import appMachinesItem from "@/components/appMachinesItem";
-import { Carousel, Slide, Navigation, Pagination } from "vue3-carousel";
+import appMachinesItem from "@/components/appMachinesItem"
+import { Carousel, Slide, Navigation, Pagination } from "vue3-carousel"
 
 export default {
   data() {
@@ -62,7 +62,7 @@ export default {
           wrapAround: true,
         },
       },
-    };
+    }
   },
   props: {
     title: String,
@@ -79,7 +79,7 @@ export default {
     Pagination,
   },
   name: "appModalPartnersItem",
-};
+}
 </script>
 
 <style scoped>

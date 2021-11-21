@@ -5,15 +5,21 @@
       <h2>О компании</h2>
       <div class="content flex-row card-shadow">
         <div
+          v-if="this.PAGE_ID.length > 0"
           @click="this.$router.push('/about/history')"
           class="about-content flex-column"
         >
-          <h3>История Бестром</h3>
+          <h3>
+            {{
+              PAGE_ID[0].blocks.find((e) => e.name === "history").contents[0]
+                .name
+            }}
+          </h3>
           <p class="text-about-content">
-            В 1989 году Королевская Нидерландская Компания "Бегеманн" и
-            производственное объединение "Стромоборудование" учредили совместное
-            предприятие, которое было названо "Бестром" - по начальным буквам
-            названия компаний.
+            {{
+              PAGE_ID[0].blocks.find((e) => e.name === "history").contents[0]
+                .text
+            }}
           </p>
           <button
             class="content-btn btn"
@@ -307,13 +313,13 @@
 </template>
 
 <script>
-import appFooter from "@/components/appFooter";
-import appHeader from "@/components/appHeader";
-import appHiddenItem from "@/components/appHiddenItem";
-import appPartnersItem from "@/components/appPartnersItem";
-import appModalPartnersItem from "@/components/appModalPartnersItem";
-import { Carousel, Slide, Navigation, Pagination } from "vue3-carousel";
-import { mapActions, mapGetters } from "vuex";
+import appFooter from "@/components/appFooter"
+import appHeader from "@/components/appHeader"
+import appHiddenItem from "@/components/appHiddenItem"
+import appPartnersItem from "@/components/appPartnersItem"
+import appModalPartnersItem from "@/components/appModalPartnersItem"
+import { Carousel, Slide, Navigation, Pagination } from "vue3-carousel"
+import { mapActions, mapGetters } from "vuex"
 
 export default {
   data() {
@@ -361,7 +367,7 @@ export default {
           img: "photo-puzikov.jpg",
         },
       ],
-    };
+    }
   },
   computed: {
     ...mapGetters({
@@ -377,15 +383,15 @@ export default {
       GET_PAGE_ID: "page/GET_PAGE_ID",
     }),
     showClient(client) {
-      this.customers = this.CLIENTS.find((e) => e.alt === client);
-      this.customers.machines = true;
-      this.customers.showModal = true;
+      this.customers = this.CLIENTS.find((e) => e.alt === client)
+      this.customers.machines = true
+      this.customers.showModal = true
     },
     findHistory(current) {
       if (this.HISTORY.length > 0) {
-        return this.HISTORY.find((e) => e.id === current);
+        return this.HISTORY.find((e) => e.id === current)
       } else {
-        return { year: "", description: "", img: "" };
+        return { year: "", description: "", img: "" }
       }
     },
   },
@@ -393,18 +399,18 @@ export default {
     customers: {
       handler() {
         if (this.customers.showModal) {
-          document.body.classList.add("modal-open");
+          document.body.classList.add("modal-open")
         } else {
-          document.body.classList.remove("modal-open");
+          document.body.classList.remove("modal-open")
         }
       },
       deep: true,
     },
   },
   mounted() {
-    this.GET_CLIENTS();
-    this.GET_HISTORY();
-    this.GET_PAGE_ID(2);
+    this.GET_CLIENTS()
+    this.GET_HISTORY()
+    this.GET_PAGE_ID(2)
   },
   components: {
     appHeader,
@@ -418,7 +424,7 @@ export default {
     Pagination,
   },
   name: "appPageAbout",
-};
+}
 </script>
 
 <style scoped>

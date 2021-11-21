@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "axios"
 
 export default {
   namespaced: true,
@@ -6,18 +6,18 @@ export default {
   state() {
     return {
       pageID: [],
-    };
+    }
   },
 
   getters: {
     PAGE_ID(state) {
-      return state.pageID;
+      return state.pageID
     },
   },
 
   mutations: {
     SET_PAGE_ID(state, content) {
-      state.pageID = content;
+      state.pageID = content
     },
   },
 
@@ -28,13 +28,13 @@ export default {
         url: `http://bexram.online:8001/page/${id}/`,
       })
         .then((response) => {
-          commit("SET_PAGE_ID", response.data);
-          return response;
+          commit("SET_PAGE_ID", response.data)
+          return response
         })
         .catch((error) => {
-          console.log(error);
-          return error;
-        });
+          console.log(error)
+          return error
+        })
     },
   },
-};
+}

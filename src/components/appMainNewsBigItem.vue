@@ -23,12 +23,12 @@ export default {
   },
   methods: {
     routerPush() {
-      this.$router.push(`/news/${this.alt}`);
-      window.scrollTo(0, 0);
+      this.$router.push(`/news/${this.alt}`)
+      window.scrollTo(0, 0)
     },
   },
   name: "appMainNewsBigItem",
-};
+}
 </script>
 
 <style scoped>

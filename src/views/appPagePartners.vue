@@ -47,11 +47,11 @@
 </template>
 
 <script>
-import appHeader from "@/components/appHeader";
-import appFooter from "@/components/appFooter";
-import appPartnersItem from "@/components/appPartnersItem";
-import appModalPartnersItem from "@/components/appModalPartnersItem";
-import { mapGetters, mapActions } from "vuex";
+import appHeader from "@/components/appHeader"
+import appFooter from "@/components/appFooter"
+import appPartnersItem from "@/components/appPartnersItem"
+import appModalPartnersItem from "@/components/appModalPartnersItem"
+import { mapGetters, mapActions } from "vuex"
 
 export default {
   data() {
@@ -59,7 +59,7 @@ export default {
       customers: {
         showModal: false,
       },
-    };
+    }
   },
   computed: {
     ...mapGetters({
@@ -71,25 +71,25 @@ export default {
       GET_PARTNERS: "partners/GET_PARTNERS",
     }),
     showPartner(partner) {
-      this.customers = this.PARTNERS.find((e) => e.alt === partner);
-      this.customers.machines = false;
-      this.customers.showModal = true;
+      this.customers = this.PARTNERS.find((e) => e.alt === partner)
+      this.customers.machines = false
+      this.customers.showModal = true
     },
   },
   watch: {
     customers: {
       handler() {
         if (this.customers.showModal) {
-          document.body.classList.add("modal-open");
+          document.body.classList.add("modal-open")
         } else {
-          document.body.classList.remove("modal-open");
+          document.body.classList.remove("modal-open")
         }
       },
       deep: true,
     },
   },
   mounted() {
-    this.GET_PARTNERS();
+    this.GET_PARTNERS()
   },
   components: {
     appHeader,
@@ -98,7 +98,7 @@ export default {
     appModalPartnersItem,
   },
   name: "appPagePartners",
-};
+}
 </script>
 
 <style scoped>

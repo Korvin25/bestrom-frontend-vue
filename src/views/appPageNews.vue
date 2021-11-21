@@ -62,10 +62,10 @@
 </template>
 
 <script>
-import appHeader from "@/components/appHeader";
-import appFooter from "@/components/appFooter";
-import appNewsOtherItem from "@/components/appNewsOtherItem";
-import { mapGetters, mapActions } from "vuex";
+import appHeader from "@/components/appHeader"
+import appFooter from "@/components/appFooter"
+import appNewsOtherItem from "@/components/appNewsOtherItem"
+import { mapGetters, mapActions } from "vuex"
 
 export default {
   computed: {
@@ -80,12 +80,12 @@ export default {
       GET_NEWS: "news/GET_NEWS",
     }),
     routerPush(path) {
-      window.scrollTo(0, 0);
-      this.$router.push(`/news/${path}`);
+      window.scrollTo(0, 0)
+      this.$router.push(`/news/${path}`)
     },
   },
   mounted() {
-    this.GET_NEWS();
+    this.GET_NEWS()
   },
   components: {
     appHeader,
@@ -93,7 +93,7 @@ export default {
     appNewsOtherItem,
   },
   name: "appPageNews",
-};
+}
 </script>
 
 <style scoped>

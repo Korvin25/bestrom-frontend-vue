@@ -150,19 +150,19 @@
 </template>
 
 <script>
-import appHeader from "@/components/appHeader";
-import appFooter from "@/components/appFooter";
-import appDetailsSelectSettings from "@/components/appDetailsSelectSettings";
-import appDetailsSelectProducts from "@/components/appDetailsSelectProducts";
-import appDetailsSelectInventory from "@/components/appDetailsSelectInventory";
-import appDetailsSelectPacket from "@/components/appDetailsSelectPacket";
-import appDetailsSelectSolution from "@/components/appDetailsSelectSolution";
-import appPartnersItem from "@/components/appPartnersItem";
-import appModalCatalogCall from "@/components/appModalCatalogCall";
-import appModalCatalogApplication from "@/components/appModalCatalogApplication";
-import appModalPartnersItem from "@/components/appModalPartnersItem";
-import { Carousel, Slide, Navigation, Pagination } from "vue3-carousel";
-import { mapActions, mapGetters } from "vuex";
+import appHeader from "@/components/appHeader"
+import appFooter from "@/components/appFooter"
+import appDetailsSelectSettings from "@/components/appDetailsSelectSettings"
+import appDetailsSelectProducts from "@/components/appDetailsSelectProducts"
+import appDetailsSelectInventory from "@/components/appDetailsSelectInventory"
+import appDetailsSelectPacket from "@/components/appDetailsSelectPacket"
+import appDetailsSelectSolution from "@/components/appDetailsSelectSolution"
+import appPartnersItem from "@/components/appPartnersItem"
+import appModalCatalogCall from "@/components/appModalCatalogCall"
+import appModalCatalogApplication from "@/components/appModalCatalogApplication"
+import appModalPartnersItem from "@/components/appModalPartnersItem"
+import { Carousel, Slide, Navigation, Pagination } from "vue3-carousel"
+import { mapActions, mapGetters } from "vuex"
 
 export default {
   data() {
@@ -214,7 +214,7 @@ export default {
       isSelected: 0,
       showModalCall: false,
       showModalApplication: false,
-    };
+    }
   },
   computed: {
     ...mapGetters({
@@ -228,38 +228,38 @@ export default {
       GET_PRODUCT_ID: "product/GET_PRODUCT_ID",
     }),
     showClient(client) {
-      this.customers = this.CLIENTS.find((e) => e.alt === client);
-      this.customers.machines = true;
-      this.customers.showModal = true;
+      this.customers = this.CLIENTS.find((e) => e.alt === client)
+      this.customers.machines = true
+      this.customers.showModal = true
     },
   },
   mounted() {
-    this.GET_CLIENTS();
-    this.GET_PRODUCT_ID(this.$route.params.catalogId);
+    this.GET_CLIENTS()
+    this.GET_PRODUCT_ID(this.$route.params.catalogId)
   },
   watch: {
     customers: {
       handler() {
         if (this.customers.showModal) {
-          document.body.classList.add("modal-open");
+          document.body.classList.add("modal-open")
         } else {
-          document.body.classList.remove("modal-open");
+          document.body.classList.remove("modal-open")
         }
       },
       deep: true,
     },
     showModalCall() {
       if (this.showModalCall) {
-        document.body.classList.add("modal-open");
+        document.body.classList.add("modal-open")
       } else {
-        document.body.classList.remove("modal-open");
+        document.body.classList.remove("modal-open")
       }
     },
     showModalApplication() {
       if (this.showModalApplication) {
-        document.body.classList.add("modal-open");
+        document.body.classList.add("modal-open")
       } else {
-        document.body.classList.remove("modal-open");
+        document.body.classList.remove("modal-open")
       }
     },
   },
@@ -281,7 +281,7 @@ export default {
     appModalPartnersItem,
   },
   name: "appPageCatalogId",
-};
+}
 </script>
 
 <style scoped>

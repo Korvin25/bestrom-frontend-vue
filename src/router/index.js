@@ -1,18 +1,18 @@
-import { createRouter, createWebHistory } from "vue-router";
-import appPageMain from "../views/appPageMain";
-import appPageAbout from "@/views/appPageAbout";
-import appPageAboutHistory from "@/views/appPageAboutHistory";
-import appPageNews from "@/views/appPageNews";
-import appPageNewsId from "@/views/appPageNewsId";
-import appPageCutting from "@/views/appPageCutting";
-import appPageUniqueCutting from "@/views/appPageUniqueCutting";
-import appPageJobs from "@/views/appPageJobs";
-import appPageJobId from "@/views/appPageJobId";
-import appPagePartners from "@/views/appPagePartners";
-import appPageClients from "@/views/appPageClients";
-import appPageCatalog from "@/views/appPageCatalog";
-import appPageCatalogId from "@/views/appPageCatalogId";
-import appPage404 from "@/views/appPage404";
+import { createRouter, createWebHistory } from "vue-router"
+import appPageMain from "../views/appPageMain"
+import appPageAbout from "@/views/appPageAbout"
+import appPageAboutHistory from "@/views/appPageAboutHistory"
+import appPageNews from "@/views/appPageNews"
+import appPageNewsId from "@/views/appPageNewsId"
+import appPageCutting from "@/views/appPageCutting"
+import appPageUniqueCutting from "@/views/appPageUniqueCutting"
+import appPageJobs from "@/views/appPageJobs"
+import appPageJobId from "@/views/appPageJobId"
+import appPagePartners from "@/views/appPagePartners"
+import appPageClients from "@/views/appPageClients"
+import appPageCatalog from "@/views/appPageCatalog"
+import appPageCatalogId from "@/views/appPageCatalogId"
+import appPage404 from "@/views/appPage404"
 
 export default createRouter({
   mode: "history",
@@ -94,4 +94,4 @@ export default createRouter({
       redirect: "/404",
     },
   ],
-});
+})

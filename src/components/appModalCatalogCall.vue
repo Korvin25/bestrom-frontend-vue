@@ -57,7 +57,7 @@
 <script>
 export default {
   name: "appModalCatalogCall",
-};
+}
 </script>
 
 <style scoped>

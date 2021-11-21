@@ -18,7 +18,7 @@ export default {
     settings: {},
   },
   name: "appDetailsSelectSettings",
-};
+}
 </script>
 
 <style scoped>

@@ -12,7 +12,7 @@ export default {
     text: String,
   },
   name: "appHiddenItem",
-};
+}
 </script>
 
 <style scoped>
