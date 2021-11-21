@@ -6,7 +6,8 @@
     "curly" : true,
     "browser" : true,
     "devel" : true, 
-    "esversion" : 8,
+    "jquery" : true,
+    "esversion" : 11,
     "node" : true,
     "asi": true
-}    
+}     
