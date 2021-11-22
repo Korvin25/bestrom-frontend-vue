@@ -43,9 +43,9 @@
 </template>
 
 <script>
-import appHeader from '@/components/appHeader'
-import appFooter from '@/components/appFooter'
-import appJobItem from '@/components/appJobItem'
+import appHeader from '../components/appHeader.vue'
+import appFooter from '../components/appFooter.vue'
+import appJobItem from '../components/appJobItem.vue'
 import { Carousel, Slide, Pagination } from 'vue3-carousel'
 import { mapActions, mapGetters } from 'vuex'
 

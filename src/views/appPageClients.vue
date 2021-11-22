@@ -44,10 +44,10 @@
 </template>
 
 <script>
-import appHeader from '@/components/appHeader'
-import appFooter from '@/components/appFooter'
-import appPartnersItem from '@/components/appPartnersItem'
-import appModalPartnersItem from '@/components/appModalPartnersItem'
+import appHeader from '../components/appHeader.vue'
+import appFooter from '../components/appFooter.vue'
+import appPartnersItem from '../components/appPartnersItem.vue'
+import appModalPartnersItem from '../components/appModalPartnersItem.vue'
 import { mapGetters, mapActions } from 'vuex'
 
 export default {

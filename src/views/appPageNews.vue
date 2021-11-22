@@ -56,9 +56,9 @@
 </template>
 
 <script>
-import appHeader from '@/components/appHeader'
-import appFooter from '@/components/appFooter'
-import appNewsOtherItem from '@/components/appNewsOtherItem'
+import appHeader from '../components/appHeader.vue'
+import appFooter from '../components/appFooter.vue'
+import appNewsOtherItem from '../components/appNewsOtherItem.vue'
 import { mapGetters, mapActions } from 'vuex'
 
 export default {

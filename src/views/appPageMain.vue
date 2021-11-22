@@ -139,15 +139,15 @@
 </template>
 
 <script>
-import appHeader from '@/components/appHeader'
-import appFooter from '@/components/appFooter'
-import appPartnersItem from '@/components/appPartnersItem'
-import appBlockContent from '@/components/appBlockContent'
-import appMainNewsBigItem from '@/components/appMainNewsBigItem'
-import appMainNewsSmallItem from '@/components/appMainNewsSmallItem'
-import appHiddenItem from '@/components/appHiddenItem'
-import appMainNewsMobile from '@/components/appMainNewsMobile'
-import appModalPartnersItem from '@/components/appModalPartnersItem'
+import appHeader from '../components/appHeader.vue'
+import appFooter from '../components/appFooter.vue'
+import appPartnersItem from '../components/appPartnersItem.vue'
+import appBlockContent from '../components/appBlockContent.vue'
+import appMainNewsBigItem from '../components/appMainNewsBigItem.vue'
+import appMainNewsSmallItem from '../components/appMainNewsSmallItem.vue'
+import appHiddenItem from '../components/appHiddenItem.vue'
+import appMainNewsMobile from '../components/appMainNewsMobile.vue'
+import appModalPartnersItem from '../components/appModalPartnersItem.vue'
 import { Carousel, Slide, Navigation, Pagination } from 'vue3-carousel'
 import { mapActions, mapGetters } from 'vuex'
 

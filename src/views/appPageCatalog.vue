@@ -90,10 +90,10 @@
 </template>
 
 <script>
-import appHeader from '@/components/appHeader'
-import appFooter from '@/components/appFooter'
-import appCatalogTypeSelect from '@/components/appCatalogTypeSelect'
-import appCatalogItem from '@/components/appCatalogItem'
+import appHeader from '../components/appHeader.vue'
+import appFooter from '../components/appFooter.vue'
+import appCatalogTypeSelect from '../components/appCatalogTypeSelect.vue'
+import appCatalogItem from '../components/appCatalogItem.vue'
 import { mapActions, mapGetters } from 'vuex'
 import { Carousel, Slide } from 'vue3-carousel'
 

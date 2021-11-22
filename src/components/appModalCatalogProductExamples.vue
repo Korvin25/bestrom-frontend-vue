@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import appHiddenItem from '@/components/appHiddenItem'
+import appHiddenItem from '../components/appHiddenItem.vue'
 
 export default {
 	name: 'AppModalCatalogProductExamples',

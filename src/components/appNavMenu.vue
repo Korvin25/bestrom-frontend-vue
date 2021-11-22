@@ -460,11 +460,11 @@
 </template>
 
 <script>
-import appModalMenuApplication from '@/components/appModalMenuApplication'
-import appModalMenuService from '@/components/appModalMenuService'
-import appModalMenuContacts from '@/components/appModalMenuContacts'
-import appModalMenuContactsCall from '@/components/appModalMenuContactsCall'
-import appModalMenuContactsQuestion from '@/components/appModalMenuContactsQuestion'
+import appModalMenuApplication from '../components/appModalMenuApplication.vue'
+import appModalMenuService from '../components/appModalMenuService.vue'
+import appModalMenuContacts from '../components/appModalMenuContacts.vue'
+import appModalMenuContactsCall from '../components/appModalMenuContactsCall.vue'
+import appModalMenuContactsQuestion from '../components/appModalMenuContactsQuestion.vue'
 
 export default {
 	name: 'AppNavMenu',

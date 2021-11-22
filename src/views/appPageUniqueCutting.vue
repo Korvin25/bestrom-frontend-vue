@@ -76,9 +76,9 @@
 </template>
 
 <script>
-import appHeader from '@/components/appHeader'
-import appFooter from '@/components/appFooter'
-import appMachinesItem from '@/components/appMachinesItem'
+import appHeader from '../components/appHeader.vue'
+import appFooter from '../components/appFooter.vue'
+import appMachinesItem from '../components/appMachinesItem.vue'
 import { Carousel, Slide, Navigation, Pagination } from 'vue3-carousel'
 
 export default {

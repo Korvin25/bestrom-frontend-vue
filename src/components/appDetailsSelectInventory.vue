@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import appHiddenItem from '@/components/appHiddenItem'
+import appHiddenItem from '../components/appHiddenItem.vue'
 import { Carousel, Slide, Navigation, Pagination } from 'vue3-carousel'
 
 export default {

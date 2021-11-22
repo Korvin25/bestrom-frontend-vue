@@ -9,8 +9,8 @@
 </template>
 
 <script>
-import appHeader from '@/components/appHeader'
-import appFooter from '@/components/appFooter'
+import appHeader from '../components/appHeader.vue'
+import appFooter from '../components/appFooter.vue'
 
 export default {
 	name: 'AppPage404',

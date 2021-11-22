@@ -142,17 +142,17 @@
 </template>
 
 <script>
-import appHeader from '@/components/appHeader'
-import appFooter from '@/components/appFooter'
-import appDetailsSelectSettings from '@/components/appDetailsSelectSettings'
-import appDetailsSelectProducts from '@/components/appDetailsSelectProducts'
-import appDetailsSelectInventory from '@/components/appDetailsSelectInventory'
-import appDetailsSelectPacket from '@/components/appDetailsSelectPacket'
-import appDetailsSelectSolution from '@/components/appDetailsSelectSolution'
-import appPartnersItem from '@/components/appPartnersItem'
-import appModalCatalogCall from '@/components/appModalCatalogCall'
-import appModalCatalogApplication from '@/components/appModalCatalogApplication'
-import appModalPartnersItem from '@/components/appModalPartnersItem'
+import appHeader from '../components/appHeader.vue'
+import appFooter from '../components/appFooter.vue'
+import appDetailsSelectSettings from '../components/appDetailsSelectSettings.vue'
+import appDetailsSelectProducts from '../components/appDetailsSelectProducts.vue'
+import appDetailsSelectInventory from '../components/appDetailsSelectInventory.vue'
+import appDetailsSelectPacket from '../components/appDetailsSelectPacket.vue'
+import appDetailsSelectSolution from '../components/appDetailsSelectSolution.vue'
+import appPartnersItem from '../components/appPartnersItem.vue'
+import appModalCatalogCall from '../components/appModalCatalogCall.vue'
+import appModalCatalogApplication from '../components/appModalCatalogApplication.vue'
+import appModalPartnersItem from '../components/appModalPartnersItem.vue'
 import { Carousel, Slide, Navigation, Pagination } from 'vue3-carousel'
 import { mapActions, mapGetters } from 'vuex'
 

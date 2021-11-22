@@ -43,8 +43,8 @@
 </template>
 
 <script>
-import appHeader from '@/components/appHeader'
-import appFooter from '@/components/appFooter'
+import appHeader from '../components/appHeader.vue'
+import appFooter from '../components/appFooter.vue'
 import { mapActions, mapGetters } from 'vuex'
 
 export default {

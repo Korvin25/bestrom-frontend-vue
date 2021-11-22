@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import appMachinesItem from '@/components/appMachinesItem'
+import appMachinesItem from '../components/appMachinesItem.vue'
 import { Carousel, Slide, Navigation, Pagination } from 'vue3-carousel'
 
 export default {
