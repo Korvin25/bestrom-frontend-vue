@@ -39,17 +39,39 @@
   "eslintConfig": {
     "root": true,
     "env": {
-      "node": true
+        "browser": true,
+        "node": true,
+        "commonjs": true
     },
     "extends": [
-      "plugin:vue/vue3-essential",
-      "eslint:recommended",
-      "@vue/standard"
+        "plugin:vue/vue3-recommended",
+        "@vue/prettier"
     ],
     "parserOptions": {
-      "parser": "babel-eslint"
+        "ecmaVersion": 11,
+        "sourceType": "module",
+        "parser": "babel-eslint"
     },
-    "rules": {}
+    "plugins": [
+        "vue"
+    ],
+    "rules": {
+        "prettier/prettier": [
+            "warn",
+            {
+                "endOfLine": "auto",
+                "tabWidth": 1,
+                "useTabs": true,
+                "semi": false,
+                "singleQuote": true,
+                "jsxBracketSameLine": true,
+                "jsxSingleQuote": true,
+                "printWidth": 100,
+                "trailingComma": "all"
+            }
+        ],
+        "vue/no-multiple-template-root": 0
+    }
   },
   "browserslist": [
     "> 1%",
