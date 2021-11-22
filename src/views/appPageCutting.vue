@@ -185,12 +185,11 @@
           <img src="../assets/packet-size.png" alt="packet-size" />
         </div>
       </section>
-      <router-link
-        class="router-button"
-        :to="{ name: 'appPageUniqueCutting', params: { packetId: '1' } }"
-      >
-        <button class="cutting-btn btn" @click="scrollToTop">Подобрать</button>
-      </router-link>
+      <div class="router-button">
+        <button class="cutting-btn btn" @click="routerPush(1)">
+          Подобрать
+        </button>
+      </div>
     </form>
   </main>
 
@@ -280,8 +279,15 @@ export default {
     }
   },
   methods: {
-    scrollToTop() {
-      window.scrollTo(0, 0)
+    routerPush(id) {
+      if (
+        this.checkType !== 0 &&
+        this.checkOptions !== 0 &&
+        this.checkSeam !== 0
+      ) {
+        this.$router.push("/cutting/" + id)
+        window.scrollTo(0, 0)
+      }
     },
     checkOptionsFunc(id) {
       if (this.checkType !== 0) {

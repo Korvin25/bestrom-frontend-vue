@@ -1,13 +1,13 @@
 <template>
   <app-header></app-header>
 
-  <main class="main-content flex-column">
-    <section v-if="this.PAGE_ID.length > 0" class="section">
+  <main v-if="this.PAGE_ID.length > 0" class="main-content flex-column">
+    <section class="section">
       <h2 class="desktop-section">Деятельность компании БЕСТРОМ</h2>
       <h2 class="mobile-section">Деятельность компании</h2>
 
       <div
-        v-if="PAGE_ID[0].blocks.length > 0"
+        v-if="PAGE_ID[0].blocks.find((e) => e.name === 'activity')"
         class="main-slider-content card-shadow"
       >
         <carousel :itemsToShow="1" :snapAlign="'start'" :wrapAround="true">
