@@ -4,7 +4,7 @@
 </template>
 
 <script>
-import appNavMenu from '../components/appNavMenu.vue'
+import appNavMenu from '@/components/appNavMenu.vue'
 
 export default {
 	components: {

@@ -119,6 +119,7 @@ export default {
 		...mapGetters({
 			PRODUCT: 'product/PRODUCT',
 			FILTERS: 'filters/FILTERS',
+			PAGE_ID: 'page/PAGE_ID',
 		}),
 		filterInit() {
 			if (this.FILTERS.length > 0) {
@@ -149,11 +150,15 @@ export default {
 		this.GET_FILTERS().then(() => {
 			this.radioCatalogSelect = this.filterInit
 		})
+		this.GET_PAGE_ID(4).then(() => {
+			console.log(this.PAGE_ID)
+		})
 	},
 	methods: {
 		...mapActions({
 			GET_PRODUCT: 'product/GET_PRODUCT',
 			GET_FILTERS: 'filters/GET_FILTERS',
+			GET_PAGE_ID: 'page/GET_PAGE_ID',
 		}),
 		routerPush(path) {
 			window.scrollTo(0, 0)

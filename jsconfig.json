@@ -1,5 +1,19 @@
 {
-  "include": [
-    "src/**/*"
-  ]
+    "compilerOptions": {
+        "sourceMap": true,
+        "allowJs": true,
+        "target": "esnext",
+        "moduleResolution": "node",
+        "module": "esnext",
+        "allowSyntheticDefaultImports": true,
+        "baseUrl": "./",
+        "paths": {
+            "@/*": [
+                "./src/*"
+            ]
+        }
+    },
+    "include": [
+        "./src/**/*"
+    ]
 }

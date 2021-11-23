@@ -11,15 +11,17 @@
     "axios": "^0.21.4",
     "core-js": "^3.6.5",
     "jshint": "^2.13.1",
+    "lodash": "^4.17.21",
     "source-map": "^0.7.3",
     "source-map-js": "^1.0.1",
-    "vue": "^3.0.0",
+    "vue": "^3.2.22",
     "vue-router": "^4.0.11",
     "vue3-carousel": "=0.1.29",
     "vue3-smooth-scroll": "^0.8.1",
     "vuex": "^4.0.2"
   },
   "devDependencies": {
+    "@types/lodash": "^4.14.177",
     "@vue/cli-plugin-babel": "~4.5.0",
     "@vue/cli-plugin-eslint": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
@@ -39,38 +41,38 @@
   "eslintConfig": {
     "root": true,
     "env": {
-        "browser": true,
-        "node": true,
-        "commonjs": true
+      "browser": true,
+      "node": true,
+      "commonjs": true
     },
     "extends": [
-        "plugin:vue/vue3-recommended",
-        "@vue/prettier"
+      "plugin:vue/vue3-recommended",
+      "@vue/prettier"
     ],
     "parserOptions": {
-        "ecmaVersion": 11,
-        "sourceType": "module",
-        "parser": "babel-eslint"
+      "ecmaVersion": 11,
+      "sourceType": "module",
+      "parser": "babel-eslint"
     },
     "plugins": [
-        "vue"
+      "vue"
     ],
     "rules": {
-        "prettier/prettier": [
-            "warn",
-            {
-                "endOfLine": "auto",
-                "tabWidth": 1,
-                "useTabs": true,
-                "semi": false,
-                "singleQuote": true,
-                "jsxBracketSameLine": true,
-                "jsxSingleQuote": true,
-                "printWidth": 100,
-                "trailingComma": "all"
-            }
-        ],
-        "vue/no-multiple-template-root": 0
+      "prettier/prettier": [
+        "warn",
+        {
+          "endOfLine": "auto",
+          "tabWidth": 1,
+          "useTabs": true,
+          "semi": false,
+          "singleQuote": true,
+          "jsxBracketSameLine": true,
+          "jsxSingleQuote": true,
+          "printWidth": 100,
+          "trailingComma": "all"
+        }
+      ],
+      "vue/no-multiple-template-root": 0
     }
   },
   "browserslist": [
