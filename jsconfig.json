@@ -3,17 +3,29 @@
         "sourceMap": true,
         "allowJs": true,
         "target": "esnext",
-        "moduleResolution": "node",
+        "moduleResolution": "Node",
         "module": "esnext",
         "allowSyntheticDefaultImports": true,
-        "baseUrl": "./",
+        "esModuleInterop": true,
+        "experimentalDecorators": true,
+        "importHelpers": false,
+        "baseUrl": ".",
+        "lib": [
+            "DOM",
+            "DOM.Iterable",
+            "ESNext",
+            "ScriptHost"
+        ],
         "paths": {
             "@/*": [
-                "./src/*"
+                "src/*"
             ]
-        }
+        },
     },
     "include": [
-        "./src/**/*"
+        "src/**/*"
+    ],
+    "exclude": [
+        "node_modules"
     ]
 }
