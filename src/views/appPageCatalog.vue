@@ -94,7 +94,9 @@ import appHeader from '../components/appHeader.vue'
 import appFooter from '../components/appFooter.vue'
 import appCatalogTypeSelect from '../components/appCatalogTypeSelect.vue'
 import appCatalogItem from '../components/appCatalogItem.vue'
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters, useStore } from 'vuex'
+import { computed } from 'vue'
+import { useMeta } from 'vue-meta'
 import { Carousel, Slide } from 'vue3-carousel'
 
 export default {
@@ -106,6 +108,22 @@ export default {
 		appCatalogItem,
 		Carousel,
 		Slide,
+	},
+	setup() {
+		const store = useStore()
+		const computedMeta = computed(() => ({
+			title:
+				store.getters['page/PAGE_ID'].length > 0 ? store.getters['page/PAGE_ID'][0].title : 'title',
+			description:
+				store.getters['page/PAGE_ID'].length > 0
+					? store.getters['page/PAGE_ID'][0].description
+					: 'description',
+			keywords:
+				store.getters['page/PAGE_ID'].length > 0
+					? store.getters['page/PAGE_ID'][0].keywords
+					: 'keywords',
+		}))
+		useMeta(computedMeta)
 	},
 	data() {
 		return {
@@ -150,9 +168,7 @@ export default {
 		this.GET_FILTERS().then(() => {
 			this.radioCatalogSelect = this.filterInit
 		})
-		this.GET_PAGE_ID(4).then(() => {
-			console.log(this.PAGE_ID)
-		})
+		this.GET_PAGE_ID(4)
 	},
 	methods: {
 		...mapActions({

@@ -45,13 +45,31 @@
 <script>
 import appHeader from '../components/appHeader.vue'
 import appFooter from '../components/appFooter.vue'
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters, useStore } from 'vuex'
+import { computed } from 'vue'
+import { useMeta } from 'vue-meta'
 
 export default {
 	name: 'AppPageAboutHistory',
 	components: {
 		appHeader,
 		appFooter,
+	},
+	setup() {
+		const store = useStore()
+		const computedMeta = computed(() => ({
+			title:
+				store.getters['page/PAGE_ID'].length > 0 ? store.getters['page/PAGE_ID'][0].title : 'title',
+			description:
+				store.getters['page/PAGE_ID'].length > 0
+					? store.getters['page/PAGE_ID'][0].description
+					: 'description',
+			keywords:
+				store.getters['page/PAGE_ID'].length > 0
+					? store.getters['page/PAGE_ID'][0].keywords
+					: 'keywords',
+		}))
+		useMeta(computedMeta)
 	},
 	computed: {
 		...mapGetters({

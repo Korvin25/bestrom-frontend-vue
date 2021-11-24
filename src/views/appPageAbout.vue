@@ -265,7 +265,9 @@ import appHiddenItem from '../components/appHiddenItem.vue'
 import appPartnersItem from '../components/appPartnersItem.vue'
 import appModalPartnersItem from '../components/appModalPartnersItem.vue'
 import { Carousel, Navigation, Pagination, Slide } from 'vue3-carousel'
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters, useStore } from 'vuex'
+import { computed } from 'vue'
+import { useMeta } from 'vue-meta'
 
 export default {
 	name: 'AppPageAbout',
@@ -279,6 +281,22 @@ export default {
 		Slide,
 		Navigation,
 		Pagination,
+	},
+	setup() {
+		const store = useStore()
+		const computedMeta = computed(() => ({
+			title:
+				store.getters['page/PAGE_ID'].length > 0 ? store.getters['page/PAGE_ID'][0].title : 'title',
+			description:
+				store.getters['page/PAGE_ID'].length > 0
+					? store.getters['page/PAGE_ID'][0].description
+					: 'description',
+			keywords:
+				store.getters['page/PAGE_ID'].length > 0
+					? store.getters['page/PAGE_ID'][0].keywords
+					: 'keywords',
+		}))
+		useMeta(computedMeta)
 	},
 	data() {
 		return {

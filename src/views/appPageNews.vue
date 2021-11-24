@@ -59,7 +59,9 @@
 import appHeader from '../components/appHeader.vue'
 import appFooter from '../components/appFooter.vue'
 import appNewsOtherItem from '../components/appNewsOtherItem.vue'
-import { mapGetters, mapActions } from 'vuex'
+import { mapActions, mapGetters, useStore } from 'vuex'
+import { computed } from 'vue'
+import { useMeta } from 'vue-meta'
 
 export default {
 	name: 'AppPageNews',
@@ -68,19 +70,38 @@ export default {
 		appFooter,
 		appNewsOtherItem,
 	},
+	setup() {
+		const store = useStore()
+		const computedMeta = computed(() => ({
+			title:
+				store.getters['page/PAGE_ID'].length > 0 ? store.getters['page/PAGE_ID'][0].title : 'title',
+			description:
+				store.getters['page/PAGE_ID'].length > 0
+					? store.getters['page/PAGE_ID'][0].description
+					: 'description',
+			keywords:
+				store.getters['page/PAGE_ID'].length > 0
+					? store.getters['page/PAGE_ID'][0].keywords
+					: 'keywords',
+		}))
+		useMeta(computedMeta)
+	},
 	computed: {
 		...mapGetters({
 			TITLE_NEWS: 'news/TITLE_NEWS',
 			SECOND_NEWS: 'news/SECOND_NEWS',
 			OTHER_NEWS: 'news/OTHER_NEWS',
+			PAGE_ID: 'page/PAGE_ID',
 		}),
 	},
 	mounted() {
+		this.GET_PAGE_ID(6)
 		this.GET_NEWS()
 	},
 	methods: {
 		...mapActions({
 			GET_NEWS: 'news/GET_NEWS',
+			GET_PAGE_ID: 'page/GET_PAGE_ID',
 		}),
 		routerPush(path) {
 			window.scrollTo(0, 0)

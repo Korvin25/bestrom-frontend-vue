@@ -192,6 +192,9 @@
 import appHeader from '../components/appHeader.vue'
 import appFooter from '../components/appFooter.vue'
 import { Carousel, Slide, Pagination } from 'vue3-carousel'
+import { mapActions, mapGetters, useStore } from 'vuex'
+import { computed } from 'vue'
+import { useMeta } from 'vue-meta'
 
 export default {
 	name: 'AppPageCutting',
@@ -201,6 +204,22 @@ export default {
 		Carousel,
 		Slide,
 		Pagination,
+	},
+	setup() {
+		const store = useStore()
+		const computedMeta = computed(() => ({
+			title:
+				store.getters['page/PAGE_ID'].length > 0 ? store.getters['page/PAGE_ID'][0].title : 'title',
+			description:
+				store.getters['page/PAGE_ID'].length > 0
+					? store.getters['page/PAGE_ID'][0].description
+					: 'description',
+			keywords:
+				store.getters['page/PAGE_ID'].length > 0
+					? store.getters['page/PAGE_ID'][0].keywords
+					: 'keywords',
+		}))
+		useMeta(computedMeta)
 	},
 	data() {
 		return {
@@ -278,7 +297,18 @@ export default {
 			],
 		}
 	},
+	computed: {
+		...mapGetters({
+			PAGE_ID: 'page/PAGE_ID',
+		}),
+	},
+	mounted() {
+		this.GET_PAGE_ID(5)
+	},
 	methods: {
+		...mapActions({
+			GET_PAGE_ID: 'page/GET_PAGE_ID',
+		}),
 		routerPush(id) {
 			if (this.checkType !== 0 && this.checkOptions !== 0 && this.checkSeam !== 0) {
 				this.$router.push('/cutting/' + id)

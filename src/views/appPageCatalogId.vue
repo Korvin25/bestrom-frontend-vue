@@ -2,7 +2,7 @@
 	<app-header></app-header>
 	<main class="main-content flex-column">
 		<section class="section">
-			<h2>БЕСТРОМ - 420С</h2>
+			<h2>{{ PRODUCT_ID.name }}</h2>
 
 			<div class="slider-content card-shadow">
 				<carousel :items-to-show="1" :snap-align="'start'" :wrap-around="true">
@@ -154,7 +154,9 @@ import appModalCatalogCall from '../components/appModalCatalogCall.vue'
 import appModalCatalogApplication from '../components/appModalCatalogApplication.vue'
 import appModalPartnersItem from '../components/appModalPartnersItem.vue'
 import { Carousel, Slide, Navigation, Pagination } from 'vue3-carousel'
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters, useStore } from 'vuex'
+import { computed } from 'vue'
+import { useMeta } from 'vue-meta'
 
 export default {
 	name: 'AppPageCatalogId',
@@ -174,6 +176,20 @@ export default {
 		Navigation,
 		Pagination,
 		appModalPartnersItem,
+	},
+	setup() {
+		const store = useStore()
+		const computedMeta = computed(() => ({
+			title:
+				Object.keys(store.getters['product/PRODUCT_ID']).length == 0
+					? 'title'
+					: store.getters['product/PRODUCT_ID'].name,
+			description:
+				Object.keys(store.getters['product/PRODUCT_ID']).length == 0
+					? 'description'
+					: store.getters['product/PRODUCT_ID'].description,
+		}))
+		useMeta(computedMeta)
 	},
 	data() {
 		return {

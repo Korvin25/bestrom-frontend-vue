@@ -47,7 +47,9 @@ import appHeader from '../components/appHeader.vue'
 import appFooter from '../components/appFooter.vue'
 import appPartnersItem from '../components/appPartnersItem.vue'
 import appModalPartnersItem from '../components/appModalPartnersItem.vue'
-import { mapGetters, mapActions } from 'vuex'
+import { mapActions, mapGetters, useStore } from 'vuex'
+import { computed } from 'vue'
+import { useMeta } from 'vue-meta'
 
 export default {
 	name: 'AppPagePartners',
@@ -56,6 +58,22 @@ export default {
 		appFooter,
 		appPartnersItem,
 		appModalPartnersItem,
+	},
+	setup() {
+		const store = useStore()
+		const computedMeta = computed(() => ({
+			title:
+				store.getters['page/PAGE_ID'].length > 0 ? store.getters['page/PAGE_ID'][0].title : 'title',
+			description:
+				store.getters['page/PAGE_ID'].length > 0
+					? store.getters['page/PAGE_ID'][0].description
+					: 'description',
+			keywords:
+				store.getters['page/PAGE_ID'].length > 0
+					? store.getters['page/PAGE_ID'][0].keywords
+					: 'keywords',
+		}))
+		useMeta(computedMeta)
 	},
 	data() {
 		return {
@@ -67,6 +85,7 @@ export default {
 	computed: {
 		...mapGetters({
 			PARTNERS: 'partners/PARTNERS',
+			PAGE_ID: 'page/PAGE_ID',
 		}),
 	},
 	watch: {
@@ -82,11 +101,13 @@ export default {
 		},
 	},
 	mounted() {
+		this.GET_PAGE_ID(7)
 		this.GET_PARTNERS()
 	},
 	methods: {
 		...mapActions({
 			GET_PARTNERS: 'partners/GET_PARTNERS',
+			GET_PAGE_ID: 'page/GET_PAGE_ID',
 		}),
 		showPartner(partner) {
 			this.customers = this.PARTNERS.find((e) => e.alt === partner)

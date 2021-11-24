@@ -47,7 +47,9 @@ import appHeader from '../components/appHeader.vue'
 import appFooter from '../components/appFooter.vue'
 import appJobItem from '../components/appJobItem.vue'
 import { Carousel, Slide, Pagination } from 'vue3-carousel'
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters, useStore } from 'vuex'
+import { computed } from 'vue'
+import { useMeta } from 'vue-meta'
 
 export default {
 	name: 'AppPageJobs',
@@ -59,16 +61,35 @@ export default {
 		Slide,
 		Pagination,
 	},
+	setup() {
+		const store = useStore()
+		const computedMeta = computed(() => ({
+			title:
+				store.getters['page/PAGE_ID'].length > 0 ? store.getters['page/PAGE_ID'][0].title : 'title',
+			description:
+				store.getters['page/PAGE_ID'].length > 0
+					? store.getters['page/PAGE_ID'][0].description
+					: 'description',
+			keywords:
+				store.getters['page/PAGE_ID'].length > 0
+					? store.getters['page/PAGE_ID'][0].keywords
+					: 'keywords',
+		}))
+		useMeta(computedMeta)
+	},
 	computed: {
 		...mapGetters({
 			VACANCY: 'vacancy/VACANCY',
+			PAGE_ID: 'page/PAGE_ID',
 		}),
 	},
 	mounted() {
+		this.GET_PAGE_ID(9)
 		this.GET_VACANCY()
 	},
 	methods: {
 		...mapActions({
+			GET_PAGE_ID: 'page/GET_PAGE_ID',
 			GET_VACANCY: 'vacancy/GET_VACANCY',
 		}),
 		routerPush(path) {

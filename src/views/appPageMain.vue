@@ -1,11 +1,9 @@
 <template>
 	<app-header></app-header>
-
 	<main v-if="PAGE_ID.length > 0" class="main-content flex-column">
 		<section class="section">
 			<h2 class="desktop-section">Деятельность компании БЕСТРОМ</h2>
 			<h2 class="mobile-section">Деятельность компании</h2>
-
 			<div
 				v-if="PAGE_ID[0].blocks.find((e) => e.name === 'activity')"
 				class="main-slider-content card-shadow"
@@ -149,7 +147,9 @@ import appHiddenItem from '../components/appHiddenItem.vue'
 import appMainNewsMobile from '../components/appMainNewsMobile.vue'
 import appModalPartnersItem from '../components/appModalPartnersItem.vue'
 import { Carousel, Slide, Navigation, Pagination } from 'vue3-carousel'
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters, useStore } from 'vuex'
+import { computed } from 'vue'
+import { useMeta } from 'vue-meta'
 
 export default {
 	components: {
@@ -166,6 +166,22 @@ export default {
 		Pagination,
 		appMainNewsMobile,
 		appModalPartnersItem,
+	},
+	setup() {
+		const store = useStore()
+		const computedMeta = computed(() => ({
+			title:
+				store.getters['page/PAGE_ID'].length > 0 ? store.getters['page/PAGE_ID'][0].title : 'title',
+			description:
+				store.getters['page/PAGE_ID'].length > 0
+					? store.getters['page/PAGE_ID'][0].description
+					: 'description',
+			keywords:
+				store.getters['page/PAGE_ID'].length > 0
+					? store.getters['page/PAGE_ID'][0].keywords
+					: 'keywords',
+		}))
+		useMeta(computedMeta)
 	},
 	data() {
 		return {

@@ -37,13 +37,31 @@
 <script>
 import appHeader from '../components/appHeader.vue'
 import appFooter from '../components/appFooter.vue'
-import { mapActions, mapGetters } from 'vuex'
+import { useRoute } from 'vue-router'
+import { mapActions, mapGetters, useStore } from 'vuex'
+import { computed } from 'vue'
+import { useMeta } from 'vue-meta'
 
 export default {
 	name: 'AppPageNewsId',
 	components: {
 		appHeader,
 		appFooter,
+	},
+	setup() {
+		const store = useStore()
+		const routeParam = useRoute().params.newsId
+		const computedMeta = computed(() => ({
+			title:
+				store.getters['news/ALL_NEWS'].length > 0
+					? store.getters['news/ALL_NEWS'].find((e) => e.alt === routeParam).name
+					: 'title',
+			description:
+				store.getters['news/ALL_NEWS'].length > 0
+					? store.getters['news/ALL_NEWS'].find((e) => e.alt === routeParam).description
+					: 'description',
+		}))
+		useMeta(computedMeta)
 	},
 	data() {
 		return {

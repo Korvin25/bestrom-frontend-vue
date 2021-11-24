@@ -73,7 +73,10 @@
 import appHeader from '../components/appHeader.vue'
 import appFooter from '../components/appFooter.vue'
 import appModalJobRespond from '../components/appModalJobRespond.vue'
-import { mapActions, mapGetters } from 'vuex'
+import { useRoute } from 'vue-router'
+import { mapActions, mapGetters, useStore } from 'vuex'
+import { computed } from 'vue'
+import { useMeta } from 'vue-meta'
 
 export default {
 	name: 'AppPageJobId',
@@ -81,6 +84,21 @@ export default {
 		appHeader,
 		appFooter,
 		appModalJobRespond,
+	},
+	setup() {
+		const store = useStore()
+		const routeParam = useRoute().params.jobId
+		const computedMeta = computed(() => ({
+			title:
+				store.getters['vacancy/VACANCY'].length > 0
+					? store.getters['vacancy/VACANCY'].find((e) => e.alt === routeParam).name
+					: 'title',
+			description:
+				store.getters['vacancy/VACANCY'].length > 0
+					? store.getters['vacancy/VACANCY'].find((e) => e.alt === routeParam).requirements
+					: 'description',
+		}))
+		useMeta(computedMeta)
 	},
 	data() {
 		return {
