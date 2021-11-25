@@ -1,14 +1,14 @@
 <template>
-	<div v-if="searchBoolean" class="desktop-section catalog-item-product flex-row card-shadow">
+	<div class="desktop-section catalog-item-product flex-row card-shadow">
 		<div class="about-content flex-column">
-			<h3>{{ title }}</h3>
+			<h3>{{ product.name }}</h3>
 			<p>{{ property }}</p>
-			<p class="text-about-content">{{ text }}</p>
+			<p class="text-about-content">{{ product.description }}</p>
 			<button class="btn" @click="scrollToTop">ПОДРОБНЕЕ</button>
 		</div>
 		<section class="section">
 			<carousel class="carousel" :items-to-show="1" :wrap-around="true">
-				<slide v-for="slide in PRODUCT_ID.SliderProd" :key="slide.id">
+				<slide v-for="slide in product.SliderProd" :key="slide.id">
 					<img class="content-image" :src="'http://bexram.online:8001' + slide.img" :alt="slide.alt" />
 				</slide>
 				<template #addons>
@@ -19,12 +19,12 @@
 	</div>
 	<!-- ./desktop-section -->
 
-	<div v-if="searchBoolean" class="mobile-section catalog-item-product flex-row card-shadow">
+	<div class="mobile-section catalog-item-product flex-row card-shadow">
 		<div class="about-content flex-column">
-			<h3>{{ title }}</h3>
+			<h3>{{ product.name }}</h3>
 			<section class="section">
 				<carousel class="carousel" :items-to-show="1" :wrap-around="true">
-					<slide v-for="slide in PRODUCT_ID.SliderProd" :key="slide.id">
+					<slide v-for="slide in product.SliderProd" :key="slide.id">
 						<img class="content-image" :src="'http://bexram.online:8001' + slide.img" :alt="slide.alt" />
 					</slide>
 					<template #addons>
@@ -34,7 +34,7 @@
 			</section>
 			<section class="section">
 				<carousel class="carousel" :autoplay="4000" :items-to-show="1" :wrap-around="true">
-					<slide v-for="slide in PRODUCT_ID.ProductPropertyValue" :key="slide.id">
+					<slide v-for="slide in product.ProductPropertyValue" :key="slide.id">
 						<div class="flex-column">
 							<h4>{{ slide.product_property.name }}</h4>
 							<p>{{ slide.name }}</p>
@@ -54,7 +54,6 @@
 
 <script>
 import { Carousel, Slide, Pagination } from 'vue3-carousel'
-import { mapActions, mapGetters } from 'vuex'
 
 export default {
 	name: 'AppCatalogItem',
@@ -64,53 +63,20 @@ export default {
 		Pagination,
 	},
 	props: {
-		id: {
-			type: Number,
-			default: 0,
-		},
-		title: {
-			type: String,
-			default: '',
-		},
-		text: {
-			type: String,
-			default: '',
-		},
-		search: {
-			type: String,
-			default: '',
+		product: {
+			type: Object,
+			default: new Object(),
 		},
 	},
 	computed: {
-		...mapGetters({
-			PRODUCT_ID: 'product/PRODUCT_ID',
-		}),
-		searchBoolean() {
-			for (const key in this.PRODUCT_ID) {
-				if (typeof this.PRODUCT_ID[key] === 'object') {
-					for (const item of this.PRODUCT_ID[key]) {
-						if (item.name && this.search && item.name.toLowerCase() === this.search.toLowerCase()) {
-							return true
-						}
-					}
-				}
-			}
-			return false
-		},
 		property() {
-			return this.PRODUCT_ID.ProductPropertyValue.find((e) => e.product_property.name === 'Тип машины')
+			return this.product.ProductPropertyValue.find((e) => e.product_property.name === 'Тип машины')
 				.name
 		},
 	},
-	mounted() {
-		this.GET_PRODUCT_ID(this.id)
-	},
 	methods: {
-		...mapActions({
-			GET_PRODUCT_ID: 'product/GET_PRODUCT_ID',
-		}),
 		scrollToTop() {
-			this.$router.push(`/catalog/${this.id}`)
+			this.$router.push(`/catalog/${this.product.id}`)
 			window.scrollTo(0, 0)
 		},
 	},
@@ -144,7 +110,7 @@ export default {
 	.catalog-item-product {
 		flex-direction: column;
 		min-width: auto;
-		width: 100%;
+		width: auto;
 		padding: 1rem;
 	}
 	.catalog-item-product .about-content {
@@ -155,7 +121,7 @@ export default {
 	}
 	.content-image {
 		max-width: 12rem;
-		width: 100%;
+		align-self: center;
 	}
 	.catalog-item-product .about-content h3 {
 		margin-bottom: 3rem;

@@ -8,7 +8,7 @@
         "allowSyntheticDefaultImports": true,
         "esModuleInterop": true,
         "experimentalDecorators": true,
-        "importHelpers": false,
+        "importHelpers": true,
         "baseUrl": ".",
         "lib": [
             "DOM",

@@ -27,10 +27,7 @@
 					></app-catalog-type-select>
 				</div>
 			</div>
-			<!-- /.catalog-select-card -->
 		</section>
-		<!-- ./desktop-section -->
-
 		<section class="mobile-section section">
 			<div class="mobile-filter card-shadow flex-column" @click="showMobileFilter = true">
 				<h2>{{ radioCatalogSelect }}</h2>
@@ -71,17 +68,11 @@
 				</section>
 			</transition-group>
 		</section>
-
-		<!-- ./mobile-section -->
-
-		<section class="catalog-item flex-row">
+		<section v-if="PRODUCT.length > 0" class="catalog-item flex-row">
 			<app-catalog-item
-				v-for="product in PRODUCT"
-				:id="product.id"
+				v-for="product in computedProducts"
 				:key="product.id"
-				:title="product.name"
-				:text="product.description"
-				:search="search"
+				:product="product"
 			></app-catalog-item>
 		</section>
 		<!-- /.catalog-item -->
@@ -148,6 +139,21 @@ export default {
 				}
 			}
 			return 0
+		},
+		computedProducts() {
+			let tempProduct = new Array()
+			for (const product of this.PRODUCT) {
+				for (const key in product) {
+					if (typeof product[key] === 'object') {
+						for (const item of product[key]) {
+							if (item.name && this.search && item.name.toLowerCase() === this.search.toLowerCase()) {
+								tempProduct.push(product)
+							}
+						}
+					}
+				}
+			}
+			return tempProduct
 		},
 	},
 	watch: {
@@ -234,6 +240,10 @@ export default {
 	.desktop-section {
 		display: none;
 	}
+	.catalog-item {
+		flex-wrap: nowrap;
+		flex-direction: column;
+	}
 	.mobile-filter-modal-enter-active {
 		animation: mobile-filter-modal-in 0.4s;
 	}
@@ -256,6 +266,7 @@ export default {
 		margin-bottom: 1rem;
 	}
 	.mobile-section h2 {
+		text-align: center;
 		align-self: center;
 		margin: 1rem;
 		font-size: 16px;

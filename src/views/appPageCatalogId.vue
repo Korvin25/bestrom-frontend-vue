@@ -1,6 +1,6 @@
 <template>
 	<app-header></app-header>
-	<main class="main-content flex-column">
+	<main v-if="Object.keys(PRODUCT_ID).length > 0" class="main-content flex-column">
 		<section class="section">
 			<h2>{{ PRODUCT_ID.name }}</h2>
 
@@ -154,8 +154,9 @@ import appModalCatalogCall from '../components/appModalCatalogCall.vue'
 import appModalCatalogApplication from '../components/appModalCatalogApplication.vue'
 import appModalPartnersItem from '../components/appModalPartnersItem.vue'
 import { Carousel, Slide, Navigation, Pagination } from 'vue3-carousel'
+import { useRoute } from 'vue-router'
 import { mapActions, mapGetters, useStore } from 'vuex'
-import { computed } from 'vue'
+import { computed, onMounted } from 'vue'
 import { useMeta } from 'vue-meta'
 
 export default {
@@ -179,20 +180,27 @@ export default {
 	},
 	setup() {
 		const store = useStore()
+		const routeId = useRoute().params.catalogId
+		onMounted(() => {
+			if (store.getters['product/PRODUCT'].length === 0) {
+				store.dispatch('product/GET_PRODUCT')
+			}
+		})
 		const computedMeta = computed(() => ({
 			title:
-				Object.keys(store.getters['product/PRODUCT_ID']).length == 0
-					? 'title'
-					: store.getters['product/PRODUCT_ID'].name,
+				store.getters['product/PRODUCT'].length > 0
+					? store.getters['product/PRODUCT'].find((e) => e.id.toString() === routeId).name
+					: 'title',
 			description:
-				Object.keys(store.getters['product/PRODUCT_ID']).length == 0
-					? 'description'
-					: store.getters['product/PRODUCT_ID'].description,
+				store.getters['product/PRODUCT'].length > 0
+					? store.getters['product/PRODUCT'].find((e) => e.id.toString() === routeId).description
+					: 'description',
 		}))
 		useMeta(computedMeta)
 	},
 	data() {
 		return {
+			PRODUCT_ID: new Object(),
 			customers: {
 				showModal: false,
 			},
@@ -245,7 +253,7 @@ export default {
 	computed: {
 		...mapGetters({
 			CLIENTS: 'clients/CLIENTS',
-			PRODUCT_ID: 'product/PRODUCT_ID',
+			PRODUCT: 'product/PRODUCT',
 		}),
 	},
 	watch: {
@@ -276,17 +284,26 @@ export default {
 	},
 	mounted() {
 		this.GET_CLIENTS()
-		this.GET_PRODUCT_ID(this.$route.params.catalogId)
+		if (this.PRODUCT.length === 0) {
+			this.GET_PRODUCT().then(() => {
+				this.findProduct(this.$route.params.catalogId)
+			})
+		} else {
+			this.findProduct(this.$route.params.catalogId)
+		}
 	},
 	methods: {
 		...mapActions({
 			GET_CLIENTS: 'clients/GET_CLIENTS',
-			GET_PRODUCT_ID: 'product/GET_PRODUCT_ID',
+			GET_PRODUCT: 'product/GET_PRODUCT',
 		}),
 		showClient(client) {
 			this.customers = this.CLIENTS.find((e) => e.alt === client)
 			this.customers.machines = true
 			this.customers.showModal = true
+		},
+		findProduct(route) {
+			this.PRODUCT_ID = this.PRODUCT.find((e) => e.id.toString() === route)
 		},
 	},
 }
