@@ -31,7 +31,7 @@
 
 		<section class="section">
 			<h2>Подбор оборудования</h2>
-			<div v-if="FILTERS.length > 0" class="flex-row inventory-mobile">
+			<div v-if="FILTERS.length > 0" class="inventory-mobile flex-row">
 				<div
 					v-for="category in FILTERS"
 					:key="category.id"
@@ -334,7 +334,7 @@ export default {
 	.mobile-section {
 		display: block;
 	}
-	.inventory-mobile {
+	.flex-row.inventory-mobile {
 		height: 44rem;
 		flex-direction: column;
 	}
@@ -347,7 +347,7 @@ export default {
 		flex-grow: 1;
 		width: 100%;
 	}
-	.news-items {
+	.flex-row.news-items {
 		display: none;
 	}
 }

@@ -22,7 +22,7 @@
 				</p>
 			</div>
 			<div id="mymap"></div>
-			<a class="yandex-href" href="https://yandex.ru/maps/?rtext=~55.809879, 37.335034"
+			<a class="btn yandex-href" href="https://yandex.ru/maps/?rtext=~55.809879, 37.335034"
 				><p>Построить маршрут в Яндекс.Карты</p></a
 			>
 
@@ -199,7 +199,12 @@ export default {
 	border-bottom: 2px solid #6a6a6a;
 }
 .yandex-href {
-	text-decoration: underline;
+	width: 90%;
+	display: flex;
+	align-self: center;
+	align-items: center;
+	justify-content: center;
+	margin-top: 1rem;
 }
 .main-contacts-card {
 	width: 30%;
@@ -261,6 +266,13 @@ export default {
 	.main-contacts-card {
 		margin: 0 1rem;
 		width: 100%;
+	}
+	.yandex-href {
+		width: 80%;
+		padding: 0.5rem 1rem;
+	}
+	.yandex-href p {
+		text-align: center;
 	}
 	.dilers {
 		flex-direction: column;

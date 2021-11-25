@@ -4,12 +4,12 @@
 			<img class="logo-img" src="../assets/bestrom_logo.png" alt="bestrom logo" />
 			<h1>БЕСТРОМ</h1>
 		</router-link>
-		<p class="desktop-language language">EN</p>
+		<!-- <p class="desktop-language language">EN</p>
 		<div class="mobile-language flex-row">
 			<img src="../assets/language-world.png" alt="language-world" />
 			<p class="language">Rus</p>
 			<img src="../assets/language-arrow.png" alt="language-arrow" />
-		</div>
+		</div> -->
 	</header>
 </template>
 
