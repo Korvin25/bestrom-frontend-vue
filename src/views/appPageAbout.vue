@@ -39,8 +39,7 @@
 						<div class="history-description">
 							<img
 								:alt="findHistory(currentSlide + 1).description"
-								:src="findHistory(currentSlide + 1).img"
-							/>
+								:src="findHistory(currentSlide + 1).img" />
 							<h3>{{ findHistory(currentSlide + 1).description }}</h3>
 						</div>
 					</template>
@@ -66,8 +65,7 @@
 							routerPush(
 								PAGE_ID[0].blocks.find((e) => e.name === 'reasons').contents[0].text.split('/')[1],
 							)
-						"
-					>
+						">
 						ПОДРОБНЕЕ
 					</button>
 				</div>
@@ -78,8 +76,7 @@
 						:src="
 							'http://bexram.online:8001' +
 							PAGE_ID[0].blocks.find((e) => e.name === 'reasons').contents[0].file[0].file
-						"
-					/>
+						" />
 				</div>
 			</div>
 
@@ -87,16 +84,14 @@
 				v-if="
 					PAGE_ID[0].blocks.find((e) => e.name === 'reasons').contents.find((e) => e.name === 'choice')
 				"
-				class="our-choice flex-column"
-			>
+				class="our-choice flex-column">
 				<div class="reasons flex-row">
 					<div
 						v-for="item in PAGE_ID[0].blocks
 							.find((e) => e.name === 'reasons')
 							.contents.find((e) => e.name === 'choice').file"
 						:key="item.id"
-						class="item-reason card-shadow"
-					>
+						class="item-reason card-shadow">
 						<img :alt="item.alt" :src="'http://bexram.online:8001' + item.file" />
 						<app-hidden-item :text="item.alt"></app-hidden-item>
 					</div>
@@ -107,15 +102,13 @@
 
 		<section
 			v-if="PAGE_ID[0].blocks.find((e) => e.name === 'directors')"
-			class="directors-desktop section"
-		>
+			class="directors-desktop section">
 			<h2>Руководство БЕСТРОМ</h2>
 			<div class="directors flex-row">
 				<div
 					v-for="item in PAGE_ID[0].blocks.find((e) => e.name === 'directors').contents"
 					:key="item.id"
-					class="director-item flex-column"
-				>
+					class="director-item flex-column">
 					<img :alt="item.file[0].alt" :src="'http://bexram.online:8001' + item.file[0].file" />
 					<h5>{{ item.name }}</h5>
 					<p>{{ item.text }}</p>
@@ -130,8 +123,7 @@
 			<carousel :autoplay="4000" :items-to-show="1.5" :wrap-around="true" class="our-choice-mobile">
 				<slide
 					v-for="slide in PAGE_ID[0].blocks.find((e) => e.name === 'we-create').contents"
-					:key="slide.id"
-				>
+					:key="slide.id">
 					<div class="reason-mobile item-reason card-shadow">
 						<h5>{{ slide.name }}</h5>
 					</div>
@@ -143,8 +135,7 @@
 					<div
 						v-for="item in PAGE_ID[0].blocks.find((e) => e.name === 'we-create').contents"
 						:key="item.id"
-						class="item-reason card-shadow"
-					>
+						class="item-reason card-shadow">
 						<h5>{{ item.name }}</h5>
 					</div>
 				</div>
@@ -154,14 +145,12 @@
 
 		<section
 			v-if="PAGE_ID[0].blocks.find((e) => e.name === 'directors')"
-			class="directors-mobile section"
-		>
+			class="directors-mobile section">
 			<h2>Руководство БЕСТРОМ</h2>
 			<carousel :items-to-show="1.3" :autoplay="3800" :wrap-around="true" class="our-choice-mobile">
 				<slide
 					v-for="slide in PAGE_ID[0].blocks.find((e) => e.name === 'directors').contents"
-					:key="slide.id"
-				>
+					:key="slide.id">
 					<div class="director-item flex-column">
 						<img :alt="slide.file[0].alt" :src="'http://bexram.online:8001' + slide.file[0].file" />
 						<h5>{{ slide.name }}</h5>
@@ -183,8 +172,7 @@
 						<div class="history-description">
 							<img
 								:alt="findHistory(currentSlide + 1).description"
-								:src="findHistory(currentSlide + 1).img"
-							/>
+								:src="findHistory(currentSlide + 1).img" />
 							<h3>{{ findHistory(currentSlide + 1).description }}</h3>
 						</div>
 					</template>
@@ -201,8 +189,7 @@
 						<app-partners-item
 							:alt="client.alt"
 							:image="client.logo"
-							@click="showClient(client.alt)"
-						></app-partners-item>
+							@click="showClient(client.alt)"></app-partners-item>
 					</slide>
 					<template #addons="{ slidesCount }">
 						<navigation v-if="slidesCount > 3" />
@@ -215,8 +202,7 @@
 
 		<section
 			v-if="PAGE_ID[0].blocks.find((e) => e.name === 'purpose')"
-			class="purpose-desktop section"
-		>
+			class="purpose-desktop section">
 			<h2>
 				{{ PAGE_ID[0].blocks.find((e) => e.name === 'purpose').contents[0].name }}
 			</h2>
@@ -230,8 +216,7 @@
 
 		<section
 			v-if="PAGE_ID[0].blocks.find((e) => e.name === 'mission')"
-			class="mission-desktop section"
-		>
+			class="mission-desktop section">
 			<h2>
 				{{ PAGE_ID[0].blocks.find((e) => e.name === 'mission').contents[0].name }}
 			</h2>
@@ -251,8 +236,7 @@
 				:machines="customers.machines"
 				:text="customers.description"
 				:title="customers.name"
-				@close="customers.showModal = false"
-			></app-modal-partners-item>
+				@close="customers.showModal = false"></app-modal-partners-item>
 		</transition>
 	</main>
 	<app-footer></app-footer>
@@ -394,6 +378,7 @@ export default {
 }
 
 .item-reason:hover .hidden-item {
+	cursor: default;
 	opacity: 1;
 }
 

@@ -10,8 +10,7 @@
 						<img
 							class="catalog-item-card-image"
 							:src="'http://bexram.online:8001' + slide.img"
-							:alt="slide.alt"
-						/>
+							:alt="slide.alt" />
 					</slide>
 					<template #addons="{ slidesCount }">
 						<navigation v-if="slidesCount > 1" />
@@ -32,18 +31,15 @@
 						:key="index"
 						:class="isSelected === index ? 'details-select-item-choice' : ''"
 						class="details-select-item flex-column card-shadow"
-						@click="isSelected = index"
-					>
+						@click="isSelected = index">
 						<img
 							v-if="isSelected !== index"
 							:src="require(`../assets/${item.disableImage}`)"
-							alt="catalog-details"
-						/>
+							alt="catalog-details" />
 						<img
 							v-if="isSelected === index"
 							:src="require(`../assets/${item.activeImage}`)"
-							alt="catalog-details"
-						/>
+							alt="catalog-details" />
 						<p>{{ item.title }}</p>
 					</div>
 				</div>
@@ -55,18 +51,15 @@
 							<div
 								:class="isSelected === index ? 'details-select-item-choice' : ''"
 								class="details-select-item flex-column card-shadow"
-								@click="isSelected = index"
-							>
+								@click="isSelected = index">
 								<img
 									v-if="isSelected !== index"
 									:src="require(`../assets/${item.disableImage}`)"
-									alt="catalog-details"
-								/>
+									alt="catalog-details" />
 								<img
 									v-if="isSelected === index"
 									:src="require(`../assets/${item.activeImage}`)"
-									alt="catalog-details"
-								/>
+									alt="catalog-details" />
 								<p>{{ item.title }}</p>
 							</div>
 						</slide>
@@ -79,21 +72,17 @@
 
 				<app-details-select-settings
 					v-if="isSelected === 0"
-					:settings="PRODUCT_ID.ProductPropertyValue"
-				></app-details-select-settings>
+					:settings="PRODUCT_ID.ProductPropertyValue"></app-details-select-settings>
 				<app-details-select-products
 					v-if="isSelected === 1"
-					:product-items="PRODUCT_ID.Items"
-				></app-details-select-products>
+					:product-items="PRODUCT_ID.Items"></app-details-select-products>
 				<app-details-select-inventory
 					v-if="isSelected === 2"
-					:equipment="PRODUCT_ID.Equipment"
-				></app-details-select-inventory>
+					:equipment="PRODUCT_ID.Equipment"></app-details-select-inventory>
 				<app-details-select-packet v-if="isSelected === 3"></app-details-select-packet>
 				<app-details-select-solution
 					v-if="isSelected === 4"
-					:complex-solution="PRODUCT_ID.Solution"
-				></app-details-select-solution>
+					:complex-solution="PRODUCT_ID.Solution"></app-details-select-solution>
 			</div>
 			<!-- /.details -->
 		</section>
@@ -102,12 +91,11 @@
 			<h2 class="title-brand">Бренды купившие эту машину</h2>
 			<div class="slider-content card-shadow">
 				<carousel :breakpoints="breakpoints">
-					<slide v-for="client in CLIENTS" :key="client.id">
+					<slide v-for="client in PRODUCT_ID.clients" :key="client.id">
 						<app-partners-item
 							:image="client.logo"
 							:alt="client.alt"
-							@click="showClient(client.alt)"
-						></app-partners-item>
+							@click="showClient(client.alt)"></app-partners-item>
 					</slide>
 					<template #addons="{ slidesCount }">
 						<navigation v-if="slidesCount > 3" />
@@ -121,12 +109,10 @@
 	<transition-group name="modal">
 		<app-modal-catalog-call
 			v-if="showModalCall"
-			@close="showModalCall = false"
-		></app-modal-catalog-call>
+			@close="showModalCall = false"></app-modal-catalog-call>
 		<app-modal-catalog-application
 			v-if="showModalApplication"
-			@close="showModalApplication = false"
-		></app-modal-catalog-application>
+			@close="showModalApplication = false"></app-modal-catalog-application>
 		<app-modal-partners-item
 			v-if="customers.showModal"
 			:image="customers.logo"
@@ -134,8 +120,7 @@
 			:title="customers.name"
 			:text="customers.description"
 			:machines="customers.machines"
-			@close="customers.showModal = false"
-		></app-modal-partners-item>
+			@close="customers.showModal = false"></app-modal-partners-item>
 	</transition-group>
 
 	<app-footer></app-footer>
@@ -208,14 +193,12 @@ export default {
 				0: {
 					itemsToShow: 1.5,
 					snapAlign: 'center',
-					wrapAround: true,
 				},
 				1248: {
 					itemsToShow: 3,
-					snapAlign: 'center',
+					snapAlign: 'start',
 					mouseDrag: false,
 					touchDrag: false,
-					wrapAround: true,
 				},
 			},
 			aboutItem: [

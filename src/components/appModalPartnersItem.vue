@@ -8,16 +8,21 @@
 			</div>
 			<h2 class="title">{{ title }}</h2>
 			<div class="flex-row about-partner">
-				<img class="partner-logo" :src="image" :alt="alt" />
+				<img class="partner-logo" :src="imageLogoComputed" :alt="alt" />
 				<p>{{ text }}</p>
 			</div>
 
 			<section v-if="machines">
 				<h2>Машины приобретенные данным клиентом</h2>
-				<div class="slider-content card-shadow">
+				<div v-if="CLIENTS.length > 0" class="slider-content card-shadow">
 					<carousel :breakpoints="breakpoints">
-						<slide v-for="slide in 3" :key="slide">
-							<app-machines-item title="Б-420" image="content_image.png"></app-machines-item>
+						<slide v-for="slide in CLIENTS.find((e) => e.alt === alt).Product" :key="slide.id">
+							<app-machines-item
+								:id="slide.id"
+								:title="slide.name"
+								:image="slide.SliderProd[0].img"
+								@close="$emit('close')"
+							></app-machines-item>
 						</slide>
 						<template #addons="{ slidesCount }">
 							<navigation v-if="slidesCount > 2" />
@@ -33,6 +38,7 @@
 <script>
 import appMachinesItem from '../components/appMachinesItem.vue'
 import { Carousel, Slide, Navigation, Pagination } from 'vue3-carousel'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
 	name: 'AppModalPartnersItem',
@@ -83,6 +89,28 @@ export default {
 				},
 			},
 		}
+	},
+	computed: {
+		...mapGetters({
+			CLIENTS: 'clients/CLIENTS',
+		}),
+		imageLogoComputed() {
+			if (this.image.includes('http://bexram.online:8001')) {
+				return this.image
+			} else {
+				return 'http://bexram.online:8001' + this.image
+			}
+		},
+	},
+	mounted() {
+		if (this.CLIENTS.length === 0) {
+			this.GET_CLIENTS()
+		}
+	},
+	methods: {
+		...mapActions({
+			GET_CLIENTS: 'clients/GET_CLIENTS',
+		}),
 	},
 }
 </script>

@@ -30,7 +30,9 @@ export default {
 
 	mutations: {
 		SET_NEWS(state, content) {
+			content = content.filter((date) => new Date(date.published) < new Date())
 			content.sort((prev, next) => new Date(next.published) - new Date(prev.published))
+
 			Object.assign(state.allNews, content)
 
 			if (state.secondNews.length > 0) {

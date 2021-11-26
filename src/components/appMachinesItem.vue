@@ -1,7 +1,7 @@
 <template>
-	<div class="machine-item flex-column">
+	<div class="machine-item flex-column" @click="pushToCatalog">
 		<h3>{{ title }}</h3>
-		<img :src="require(`../assets/${image}`)" alt="logo" />
+		<img :src="imageComputed" :alt="title" />
 		<app-hidden-item text="ПОДРОБНЕЕ"></app-hidden-item>
 	</div>
 </template>
@@ -15,6 +15,10 @@ export default {
 		appHiddenItem,
 	},
 	props: {
+		id: {
+			type: Number,
+			default: 0,
+		},
 		title: {
 			type: String,
 			default: '',
@@ -22,6 +26,23 @@ export default {
 		image: {
 			type: String,
 			default: '',
+		},
+	},
+	emits: ['close'],
+	computed: {
+		imageComputed() {
+			if (this.image.includes('http://bexram.online:8001')) {
+				return this.image
+			} else {
+				return 'http://bexram.online:8001' + this.image
+			}
+		},
+	},
+	methods: {
+		pushToCatalog() {
+			this.$emit('close')
+			this.$router.push(`/catalog/${this.id}`)
+			window.scrollTo(0, 0)
 		},
 	},
 }
@@ -42,6 +63,7 @@ export default {
 	border-radius: 6px;
 }
 .machine-item h3 {
+	font-size: 1rem;
 	align-self: auto;
 }
 .machine-item:hover .hidden-item {
@@ -56,8 +78,7 @@ export default {
 }
 .machine-item img {
 	margin-top: 1rem;
-	max-width: 20rem;
-	max-height: 10rem;
+	max-width: 10rem;
 }
 
 @media (max-width: 980px) {

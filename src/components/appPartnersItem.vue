@@ -1,6 +1,6 @@
 <template>
 	<div class="partners-item">
-		<img :src="image" :alt="alt" />
+		<img :src="imageComputed" :alt="alt" />
 		<app-hidden-item text="ПОДРОБНЕЕ"></app-hidden-item>
 	</div>
 </template>
@@ -21,6 +21,15 @@ export default {
 		alt: {
 			type: String,
 			default: '',
+		},
+	},
+	computed: {
+		imageComputed() {
+			if (this.image.includes('http://bexram.online:8001')) {
+				return this.image
+			} else {
+				return 'http://bexram.online:8001' + this.image
+			}
 		},
 	},
 }
