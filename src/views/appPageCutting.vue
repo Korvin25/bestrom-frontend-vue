@@ -14,8 +14,7 @@
 							:class="checkType === packet.id ? 'check-item' : ''"
 							class="packet-type-item flex-column card-shadow"
 							href="#packetOptions"
-							@click="checkType = packet.id"
-						>
+							@click="checkType = packet.id">
 							<div class="hidden-item"></div>
 							<img :src="require(`../assets/${packet.img}`)" :alt="packet.name" />
 							<p>{{ packet.name }}</p>
@@ -33,8 +32,7 @@
 					:class="checkType === 1 ? 'check-item' : ''"
 					class="packet-type-item flex-column card-shadow"
 					href="#packetOptions"
-					@click="checkType = 1"
-				>
+					@click="checkType = 1">
 					<h3>Подушка</h3>
 					<img src="../assets/packet-type-1.png" alt="packet-type" />
 					<div class="hidden-item"></div>
@@ -44,8 +42,7 @@
 					:class="checkType === 2 ? 'check-item' : ''"
 					class="packet-type-item flex-column card-shadow"
 					href="#packetOptions"
-					@click="checkType = 2"
-				>
+					@click="checkType = 2">
 					<div class="hidden-item"></div>
 					<h3>Сплоским дном</h3>
 					<img src="../assets/packet-type-2.png" alt="packet-type" />
@@ -55,8 +52,7 @@
 					:class="checkType === 3 ? 'check-item' : ''"
 					class="packet-type-item flex-column card-shadow"
 					href="#packetOptions"
-					@click="checkType = 3"
-				>
+					@click="checkType = 3">
 					<div class="hidden-item"></div>
 					<h3>С проваренными гранями</h3>
 					<img src="../assets/packet-type-3.png" alt="packet-type" />
@@ -66,8 +62,7 @@
 					:class="checkType === 4 ? 'check-item' : ''"
 					class="packet-type-item flex-column card-shadow"
 					href="#packetOptions"
-					@click="checkType = 4"
-				>
+					@click="checkType = 4">
 					<div class="hidden-item"></div>
 					<h3>Сплоским дном</h3>
 					<img src="../assets/packet-type-2.png" alt="packet-type" />
@@ -84,8 +79,7 @@
 						<div
 							:class="checkOptions === packet.id ? 'check-item' : ''"
 							class="packet-options-item flex-column card-shadow"
-							@click="checkOptionsFunc(packet.id)"
-						>
+							@click="checkOptionsFunc(packet.id)">
 							<div class="hidden-item"></div>
 							<img :src="require(`../assets/${packet.img}`)" :alt="packet.name" />
 							<p>{{ packet.name }}</p>
@@ -103,8 +97,7 @@
 					:key="packet.id"
 					:class="checkOptions === packet.id ? 'check-item' : ''"
 					class="packet-options-item flex-column card-shadow"
-					@click="checkOptionsFunc(packet.id)"
-				>
+					@click="checkOptionsFunc(packet.id)">
 					<div class="hidden-item"></div>
 					<img :src="require(`../assets/${packet.img}`)" :alt="packet.name" />
 					<p>{{ packet.name }}</p>
@@ -119,8 +112,7 @@
 				<div
 					:class="checkSeam === 1 ? 'check-item' : ''"
 					class="packets-seam-item flex-column card-shadow"
-					@click="checkSeamFunc(1)"
-				>
+					@click="checkSeamFunc(1)">
 					<div class="hidden-item"></div>
 					<img src="../assets/seam-type-1.png" alt="seam-type" />
 					<p>В нахлест влево</p>
@@ -128,8 +120,7 @@
 				<div
 					:class="checkSeam === 2 ? 'check-item' : ''"
 					class="packets-seam-item flex-column card-shadow"
-					@click="checkSeamFunc(2)"
-				>
+					@click="checkSeamFunc(2)">
 					<div class="hidden-item"></div>
 					<img src="../assets/seam-type-2.png" alt="seam-type" />
 					<p>Плавник влево</p>
@@ -137,8 +128,7 @@
 				<div
 					:class="checkSeam === 3 ? 'check-item' : ''"
 					class="packets-seam-item flex-column card-shadow"
-					@click="checkSeamFunc(3)"
-				>
+					@click="checkSeamFunc(3)">
 					<div class="hidden-item"></div>
 					<img src="../assets/seam-type-3.png" alt="seam-type" />
 					<p>В нахлест вправо</p>
@@ -146,8 +136,7 @@
 				<div
 					:class="checkSeam === 4 ? 'check-item' : ''"
 					class="packets-seam-item flex-column card-shadow"
-					@click="checkSeamFunc(4)"
-				>
+					@click="checkSeamFunc(4)">
 					<div class="hidden-item"></div>
 					<img src="../assets/seam-type-4.png" alt="seam-type" />
 					<p>Плавник вправо</p>
@@ -300,14 +289,23 @@ export default {
 	computed: {
 		...mapGetters({
 			PAGE_ID: 'page/PAGE_ID',
+			PACKETS: 'packets/PACKETS',
+			PACKETS_OPTIONS: 'packets/PACKETS_OPTIONS',
+			PACKETS_SEAMS: 'packets/PACKETS_SEAMS',
 		}),
 	},
 	mounted() {
 		this.GET_PAGE_ID(5)
+		this.GET_PACKETS().then(() => console.log(this.PACKETS))
+		this.GET_PACKETS_OPTIONS().then(() => console.log(this.PACKETS_OPTIONS))
+		this.GET_PACKETS_SEAMS().then(() => console.log(this.PACKETS_SEAMS))
 	},
 	methods: {
 		...mapActions({
 			GET_PAGE_ID: 'page/GET_PAGE_ID',
+			GET_PACKETS: 'packets/GET_PACKETS',
+			GET_PACKETS_OPTIONS: 'packets/GET_PACKETS_OPTIONS',
+			GET_PACKETS_SEAMS: 'packets/GET_PACKETS_SEAMS',
 		}),
 		routerPush(id) {
 			if (this.checkType !== 0 && this.checkOptions !== 0 && this.checkSeam !== 0) {

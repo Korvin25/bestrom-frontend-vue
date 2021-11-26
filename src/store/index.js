@@ -1,12 +1,13 @@
 import { createStore } from 'vuex'
-import clients from '../store/modules/clients'
-import partners from '../store/modules/partners'
-import news from '../store/modules/news'
-import history from '../store/modules/history'
-import vacancy from '../store/modules/vacancy'
-import product from '../store/modules/product'
-import filters from '../store/modules/filters'
-import page from '../store/modules/page'
+import clients from './modules/clients'
+import filters from './modules/filters'
+import history from './modules/history'
+import news from './modules/news'
+import packets from './modules/packets'
+import page from './modules/page'
+import partners from './modules/partners'
+import product from './modules/product'
+import vacancy from './modules/vacancy'
 
 export default createStore({
 	modules: {
@@ -18,5 +19,6 @@ export default createStore({
 		product,
 		filters,
 		page,
+		packets,
 	},
 })
