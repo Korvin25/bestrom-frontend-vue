@@ -11,8 +11,7 @@
 				<div
 					v-for="item in productExamples"
 					:key="item.id"
-					class="details-select-products-item card-shadow"
-				>
+					class="details-select-products-item card-shadow">
 					<h4>{{ item.name }}</h4>
 					<img :src="'http://bexram.online:8001' + item.img" :alt="item.alt" />
 					<app-hidden-item text="ПОДРОБНЕЕ"></app-hidden-item>

@@ -21,8 +21,7 @@
 				<div
 					v-for="second_news in SECOND_NEWS"
 					:key="second_news.id"
-					class="small-title-news flex-column"
-				>
+					class="small-title-news flex-column">
 					<div class="image-news card-shadow" @click="routerPush(second_news.alt)">
 						<img :src="second_news.img" :alt="second_news.alt" />
 						<div class="hidden-item">
@@ -45,8 +44,7 @@
 					:key="other_news.id"
 					:title="other_news.name"
 					:text="other_news.mini_description"
-					:image="other_news.img"
-				></app-news-other-item>
+					:image="other_news.img"></app-news-other-item>
 			</div>
 			<!-- /.other-news flex-row -->
 		</section>

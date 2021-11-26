@@ -12,8 +12,7 @@
 							name="radio-choice"
 							type="radio"
 							:value="category.name"
-							:checked="radioCatalogSelect === category.name"
-						/>
+							:checked="radioCatalogSelect === category.name" />
 						<label :for="category.id">{{ category.name }}</label>
 					</div>
 				</div>
@@ -23,8 +22,7 @@
 						:key="filters.id"
 						:class="typeSelect === filters.name ? 'type-select-checked' : ''"
 						:text="filters.name"
-						@click="typeSelectFunc(filters.name, filters.search)"
-					></app-catalog-type-select>
+						@click="typeSelectFunc(filters.name, filters.search)"></app-catalog-type-select>
 				</div>
 			</div>
 		</section>
@@ -38,8 +36,7 @@
 						class="close-mobile-menu"
 						src="../assets/close-mobile-menu.png"
 						alt="close-mobile-menu"
-						@click="showMobileFilter = false"
-					/>
+						@click="showMobileFilter = false" />
 					<p class="mobile-menu-title">Каталог</p>
 					<div class="flex-column">
 						<div class="catalog-select-shadow">
@@ -48,8 +45,7 @@
 									<p
 										class="mobile-select-filter"
 										:class="radioCatalogSelect === category.name ? 'choice' : ''"
-										@click="radioCatalogSelect = category.name"
-									>
+										@click="radioCatalogSelect = category.name">
 										{{ category.name }}
 									</p>
 								</slide>
@@ -61,8 +57,7 @@
 								:key="filters.id"
 								:class="typeSelect === filters.name ? 'type-select-checked' : ''"
 								:text="filters.name"
-								@click="typeSelectFunc(filters.name, filters.search)"
-							></app-catalog-type-select>
+								@click="typeSelectFunc(filters.name, filters.search)"></app-catalog-type-select>
 						</div>
 					</div>
 				</section>
@@ -72,8 +67,7 @@
 			<app-catalog-item
 				v-for="product in computedProducts"
 				:key="product.id"
-				:product="product"
-			></app-catalog-item>
+				:product="product"></app-catalog-item>
 		</section>
 		<!-- /.catalog-item -->
 	</main>

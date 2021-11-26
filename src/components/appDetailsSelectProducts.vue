@@ -4,8 +4,7 @@
 			v-for="item in productItems"
 			:key="item.id"
 			class="details-select-products-item card-shadow"
-			@click="productItemsExample = item.ItemsExample"
-		>
+			@click="productItemsExample = item.ItemsExample">
 			<h4>{{ item.name }}</h4>
 			<img :src="'http://bexram.online:8001' + item.img" :alt="item.alt" />
 			<app-hidden-item text="ПОДРОБНЕЕ" @click="showModalCall = true"></app-hidden-item>
@@ -17,8 +16,7 @@
 		<app-modal-catalog-product-examples
 			v-if="showModalCall"
 			:product-examples="productItemsExample"
-			@close="showModalCall = false"
-		></app-modal-catalog-product-examples>
+			@close="showModalCall = false"></app-modal-catalog-product-examples>
 	</transition>
 </template>
 

@@ -21,8 +21,7 @@
 								:id="slide.id"
 								:title="slide.name"
 								:image="slide.SliderProd[0].img"
-								@close="$emit('close')"
-							></app-machines-item>
+								@close="$emit('close')"></app-machines-item>
 						</slide>
 						<template #addons="{ slidesCount }">
 							<navigation v-if="slidesCount > 2" />

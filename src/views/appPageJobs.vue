@@ -12,8 +12,7 @@
 				:title="job.name"
 				:requirements="job.requirements"
 				:skills="job.skills"
-				:pay="job.salary"
-			></app-job-item>
+				:pay="job.salary"></app-job-item>
 		</section>
 		<!-- ./desktop-section -->
 

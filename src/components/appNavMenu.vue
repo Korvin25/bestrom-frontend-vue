@@ -9,8 +9,7 @@
 				to="/"
 				@mouseenter="hoverItem = 1"
 				@mouseleave="hoverItem = 0"
-				@click="scrollToTop"
-			>
+				@click="scrollToTop">
 				<img class="logo-bestrom" src="../assets/bestrom_logo.png" alt="menu-item-img" />
 			</router-link>
 			<router-link
@@ -19,8 +18,7 @@
 				to="/about"
 				@mouseenter="hoverItem = 2"
 				@mouseleave="hoverItem = 0"
-				@click="scrollToTop"
-			>
+				@click="scrollToTop">
 				<img src="../assets/menu-item-2.png" alt="menu-item-img" />
 			</router-link>
 			<router-link
@@ -29,8 +27,7 @@
 				to="/catalog"
 				@mouseenter="hoverItem = 3"
 				@mouseleave="hoverItem = 0"
-				@click="scrollToTop"
-			>
+				@click="scrollToTop">
 				<img src="../assets/menu-item-3.png" alt="menu-item-img" />
 			</router-link>
 			<router-link
@@ -39,8 +36,7 @@
 				to="/cutting"
 				@mouseenter="hoverItem = 4"
 				@mouseleave="hoverItem = 0"
-				@click="scrollToTop"
-			>
+				@click="scrollToTop">
 				<img src="../assets/menu-item-4.png" alt="menu-item-img" />
 			</router-link>
 			<a
@@ -48,8 +44,7 @@
 				class="nav-item img"
 				@mouseenter="hoverItem = 5"
 				@mouseleave="hoverItem = 0"
-				@click="showModalMenuService = true"
-			>
+				@click="showModalMenuService = true">
 				<img src="../assets/menu-item-5,8.png" alt="menu-item-img" />
 			</a>
 			<router-link
@@ -58,8 +53,7 @@
 				to="/news"
 				@mouseenter="hoverItem = 6"
 				@mouseleave="hoverItem = 0"
-				@click="scrollToTop"
-			>
+				@click="scrollToTop">
 				<img src="../assets/menu-item-6.png" alt="menu-item-img" />
 			</router-link>
 			<router-link
@@ -68,8 +62,7 @@
 				to="/partners"
 				@mouseenter="hoverItem = 7"
 				@mouseleave="hoverItem = 0"
-				@click="scrollToTop"
-			>
+				@click="scrollToTop">
 				<img src="../assets/menu-item-7.png" alt="menu-item-img" />
 			</router-link>
 			<router-link
@@ -78,8 +71,7 @@
 				to="/clients"
 				@mouseenter="hoverItem = 8"
 				@mouseleave="hoverItem = 0"
-				@click="scrollToTop"
-			>
+				@click="scrollToTop">
 				<img src="../assets/menu-item-5,8.png" alt="menu-item-img" />
 			</router-link>
 			<a
@@ -87,8 +79,7 @@
 				class="nav-item img"
 				@mouseenter="hoverItem = 9"
 				@mouseleave="hoverItem = 0"
-				@click="showModalMenuContacts = true"
-			>
+				@click="showModalMenuContacts = true">
 				<img src="../assets/menu-item-9.png" alt="menu-item-img" />
 			</a>
 			<router-link
@@ -97,8 +88,7 @@
 				to="/jobs"
 				@mouseenter="hoverItem = 10"
 				@mouseleave="hoverItem = 0"
-				@click="scrollToTop"
-			>
+				@click="scrollToTop">
 				<img src="../assets/menu-item-10.png" alt="menu-item-img" />
 			</router-link>
 			<a
@@ -106,8 +96,7 @@
 				class="nav-item img logo"
 				@mouseenter="hoverItem = 11"
 				@mouseleave="hoverItem = 0"
-				@click="showModalMenuApplication = true"
-			>
+				@click="showModalMenuApplication = true">
 				<img src="../assets/mobile.png" alt="menu-item-img" />
 			</a>
 			<a
@@ -115,8 +104,7 @@
 				:class="hoverItem === 12 ? 'logo-hover' : ''"
 				class="nav-item img logo"
 				@mouseenter="hoverItem = 12"
-				@mouseleave="hoverItem = 0"
-			>
+				@mouseleave="hoverItem = 0">
 				<img style="width: 33px" src="../assets/vk.png" alt="menu-item-img" />
 			</a>
 			<a
@@ -124,8 +112,7 @@
 				:class="hoverItem === 13 ? 'logo-hover' : ''"
 				class="nav-item img logo"
 				@mouseenter="hoverItem = 13"
-				@mouseleave="hoverItem = 0"
-			>
+				@mouseleave="hoverItem = 0">
 				<img style="width: 25px" src="../assets/youtube.png" alt="menu-item-img" />
 			</a>
 			<a
@@ -133,8 +120,7 @@
 				:class="hoverItem === 14 ? 'logo-hover' : ''"
 				class="nav-item img logo"
 				@mouseenter="hoverItem = 14"
-				@mouseleave="hoverItem = 0"
-			>
+				@mouseleave="hoverItem = 0">
 				<img style="width: 30px" src="../assets/instagram.png" alt="menu-item-img" />
 			</a>
 		</div>
@@ -147,8 +133,7 @@
 				to="/"
 				@mouseenter="hoverItem = 1"
 				@mouseleave="hoverItem = 0"
-				@click="scrollToTop"
-			>
+				@click="scrollToTop">
 				<p>Главная</p>
 			</router-link>
 			<router-link
@@ -157,8 +142,7 @@
 				to="/about"
 				@mouseenter="hoverItem = 2"
 				@mouseleave="hoverItem = 0"
-				@click="scrollToTop"
-			>
+				@click="scrollToTop">
 				<p>О компании</p>
 			</router-link>
 			<router-link
@@ -167,8 +151,7 @@
 				to="/catalog"
 				@mouseenter="hoverItem = 3"
 				@mouseleave="hoverItem = 0"
-				@click="scrollToTop"
-			>
+				@click="scrollToTop">
 				<p>Каталог</p>
 			</router-link>
 			<router-link
@@ -177,8 +160,7 @@
 				to="/cutting"
 				@mouseenter="hoverItem = 4"
 				@mouseleave="hoverItem = 0"
-				@click="scrollToTop"
-			>
+				@click="scrollToTop">
 				<p>Раскрой пакета</p>
 			</router-link>
 			<a
@@ -186,8 +168,7 @@
 				class="nav-item text"
 				@mouseenter="hoverItem = 5"
 				@mouseleave="hoverItem = 0"
-				@click="showModalMenuService = true"
-			>
+				@click="showModalMenuService = true">
 				<p>Сервис</p>
 			</a>
 			<router-link
@@ -196,8 +177,7 @@
 				to="/news"
 				@mouseenter="hoverItem = 6"
 				@mouseleave="hoverItem = 0"
-				@click="scrollToTop"
-			>
+				@click="scrollToTop">
 				<p>Новости</p>
 			</router-link>
 			<router-link
@@ -206,8 +186,7 @@
 				to="/partners"
 				@mouseenter="hoverItem = 7"
 				@mouseleave="hoverItem = 0"
-				@click="scrollToTop"
-			>
+				@click="scrollToTop">
 				<p>Партнеры</p>
 			</router-link>
 			<router-link
@@ -216,8 +195,7 @@
 				to="/clients"
 				@mouseenter="hoverItem = 8"
 				@mouseleave="hoverItem = 0"
-				@click="scrollToTop"
-			>
+				@click="scrollToTop">
 				<p>Клиенты</p>
 			</router-link>
 			<a
@@ -225,8 +203,7 @@
 				class="nav-item text"
 				@mouseenter="hoverItem = 9"
 				@mouseleave="hoverItem = 0"
-				@click="showModalMenuContacts = true"
-			>
+				@click="showModalMenuContacts = true">
 				<p>Контакты</p>
 			</a>
 			<router-link
@@ -235,8 +212,7 @@
 				to="/jobs"
 				@mouseenter="hoverItem = 10"
 				@mouseleave="hoverItem = 0"
-				@click="scrollToTop"
-			>
+				@click="scrollToTop">
 				<p>Вакансии</p>
 			</router-link>
 			<a
@@ -244,8 +220,7 @@
 				class="nav-item text"
 				@mouseenter="hoverItem = 11"
 				@mouseleave="hoverItem = 0"
-				@click="showModalMenuApplication = true"
-			>
+				@click="showModalMenuApplication = true">
 				<p>Оставить заявку</p>
 			</a>
 			<a
@@ -253,8 +228,7 @@
 				:class="hoverItem === 12 ? 'text-hover' : ''"
 				class="nav-item text"
 				@mouseenter="hoverItem = 12"
-				@mouseleave="hoverItem = 0"
-			>
+				@mouseleave="hoverItem = 0">
 				<p>ВКонтакте</p>
 			</a>
 			<a
@@ -262,8 +236,7 @@
 				:class="hoverItem === 13 ? 'text-hover' : ''"
 				class="nav-item text"
 				@mouseenter="hoverItem = 13"
-				@mouseleave="hoverItem = 0"
-			>
+				@mouseleave="hoverItem = 0">
 				<p>YouTube</p>
 			</a>
 			<a
@@ -271,8 +244,7 @@
 				:class="hoverItem === 14 ? 'text-hover' : ''"
 				class="nav-item text"
 				@mouseenter="hoverItem = 14"
-				@mouseleave="hoverItem = 0"
-			>
+				@mouseleave="hoverItem = 0">
 				<p>Instagram</p>
 			</a>
 		</div>
@@ -296,8 +268,7 @@
 					class="close-mobile-menu"
 					src="../assets/close-mobile-menu.png"
 					alt="close-mobile-menu"
-					@click="showMobileMenu = false"
-				/>
+					@click="showMobileMenu = false" />
 				<p class="mobile-menu-title">Меню</p>
 
 				<div class="mobile-menu-logo flex-row">
@@ -316,8 +287,7 @@
 					<router-link class="nav-mobile-item flex-row" to="/" @click="scrollToTop">
 						<div
 							:class="hoverItem === 1 || $route.path === '/' ? 'img-hover' : ''"
-							class="nav-mobile-item-img card-shadow"
-						>
+							class="nav-mobile-item-img card-shadow">
 							<img class="logo-bestrom" src="../assets/bestrom_logo.png" alt="menu-item-img" />
 						</div>
 						<p :class="hoverItem === 1 || $route.path === '/' ? 'text-hover' : ''">Главная</p>
@@ -325,8 +295,7 @@
 					<router-link class="nav-mobile-item flex-row" to="/about" @click="scrollToTop">
 						<div
 							:class="hoverItem === 2 || $route.path.includes('/about') ? 'img-hover' : ''"
-							class="nav-mobile-item-img card-shadow"
-						>
+							class="nav-mobile-item-img card-shadow">
 							<img src="../assets/menu-item-2.png" alt="menu-item-img" />
 						</div>
 						<p :class="hoverItem === 2 || $route.path.includes('/about') ? 'text-hover' : ''">
@@ -336,8 +305,7 @@
 					<router-link class="nav-mobile-item flex-row" to="/catalog" @click="scrollToTop">
 						<div
 							:class="hoverItem === 3 || $route.path.includes('/catalog') ? 'img-hover' : ''"
-							class="nav-mobile-item-img card-shadow"
-						>
+							class="nav-mobile-item-img card-shadow">
 							<img src="../assets/menu-item-3.png" alt="menu-item-img" />
 						</div>
 						<p :class="hoverItem === 3 || $route.path.includes('/catalog') ? 'text-hover' : ''">
@@ -347,8 +315,7 @@
 					<router-link class="nav-mobile-item flex-row" to="/cutting" @click="scrollToTop">
 						<div
 							:class="hoverItem === 4 || $route.path.includes('/cutting') ? 'img-hover' : ''"
-							class="nav-mobile-item-img card-shadow"
-						>
+							class="nav-mobile-item-img card-shadow">
 							<img src="../assets/menu-item-4.png" alt="menu-item-img" />
 						</div>
 						<p :class="hoverItem === 4 || $route.path.includes('/cutting') ? 'text-hover' : ''">
@@ -364,8 +331,7 @@
 					<router-link class="nav-mobile-item flex-row" to="/news" @click="scrollToTop">
 						<div
 							:class="hoverItem === 6 || $route.path.includes('/news') ? 'img-hover' : ''"
-							class="nav-mobile-item-img card-shadow"
-						>
+							class="nav-mobile-item-img card-shadow">
 							<img src="../assets/menu-item-6.png" alt="menu-item-img" />
 						</div>
 						<p :class="hoverItem === 6 || $route.path.includes('/news') ? 'text-hover' : ''">Новости</p>
@@ -373,8 +339,7 @@
 					<router-link class="nav-mobile-item flex-row" to="/partners" @click="scrollToTop">
 						<div
 							:class="hoverItem === 7 || $route.path.includes('/partners') ? 'img-hover' : ''"
-							class="nav-mobile-item-img card-shadow"
-						>
+							class="nav-mobile-item-img card-shadow">
 							<img src="../assets/menu-item-7.png" alt="menu-item-img" />
 						</div>
 						<p :class="hoverItem === 7 || $route.path.includes('/partners') ? 'text-hover' : ''">
@@ -384,8 +349,7 @@
 					<router-link class="nav-mobile-item flex-row" to="/clients" @click="scrollToTop">
 						<div
 							:class="hoverItem === 8 || $route.path.includes('/clients') ? 'img-hover' : ''"
-							class="nav-mobile-item-img card-shadow"
-						>
+							class="nav-mobile-item-img card-shadow">
 							<img src="../assets/menu-item-5,8.png" alt="menu-item-img" />
 						</div>
 						<p :class="hoverItem === 8 || $route.path.includes('/clients') ? 'text-hover' : ''">
@@ -397,8 +361,7 @@
 							<img
 								:class="hoverItem === 10 || $route.path.includes('/jobs') ? 'img-hover' : ''"
 								src="../assets/menu-item-10.png"
-								alt="menu-item-img"
-							/>
+								alt="menu-item-img" />
 						</div>
 						<p :class="hoverItem === 10 || $route.path.includes('/jobs') ? 'text-hover' : ''">Вакансии</p>
 					</router-link>
@@ -406,22 +369,19 @@
 					<div class="mobile-menu-nav-bottom flex-row">
 						<div
 							class="mobile-menu-nav-bottom-item card-shadow flex-column"
-							@click="showModalMenuApplicationClick"
-						>
+							@click="showModalMenuApplicationClick">
 							<img src="../assets/menu-mobile-call.png" alt="menu-mobile-call" />
 							<p>Заявка</p>
 						</div>
 						<div
 							class="mobile-menu-nav-bottom-item card-shadow flex-column"
-							@click="showModalMenuContactsQuestionClick"
-						>
+							@click="showModalMenuContactsQuestionClick">
 							<img src="../assets/menu-mobile-message.png" alt="menu-mobile-message" />
 							<p>Написать</p>
 						</div>
 						<div
 							class="mobile-menu-nav-bottom-item card-shadow flex-column"
-							@click="showModalMenuContactsClick"
-						>
+							@click="showModalMenuContactsClick">
 							<img src="../assets/menu-mobile-contacts.png" alt="menu-mobile-contacts" />
 							<p>Контакты</p>
 						</div>
@@ -436,26 +396,21 @@
 	<transition-group name="modal">
 		<app-modal-menu-application
 			v-if="showModalMenuApplication"
-			@close="showModalMenuApplication = false"
-		></app-modal-menu-application>
+			@close="showModalMenuApplication = false"></app-modal-menu-application>
 		<app-modal-menu-service
 			v-if="showModalMenuService"
-			@close="showModalMenuService = false"
-		></app-modal-menu-service>
+			@close="showModalMenuService = false"></app-modal-menu-service>
 		<app-modal-menu-contacts
 			v-if="showModalMenuContacts"
 			@close="showModalMenuContacts = false"
 			@call="showModalMenuContactsCallFunc"
-			@question="showModalMenuContactsQuestionFunc"
-		></app-modal-menu-contacts>
+			@question="showModalMenuContactsQuestionFunc"></app-modal-menu-contacts>
 		<app-modal-menu-contacts-call
 			v-if="showModalMenuContactsCall"
-			@close="showModalMenuContactsCall = false"
-		></app-modal-menu-contacts-call>
+			@close="showModalMenuContactsCall = false"></app-modal-menu-contacts-call>
 		<app-modal-menu-contacts-question
 			v-if="showModalMenuContactsQuestion"
-			@close="showModalMenuContactsQuestion = false"
-		></app-modal-menu-contacts-question>
+			@close="showModalMenuContactsQuestion = false"></app-modal-menu-contacts-question>
 	</transition-group>
 </template>
 

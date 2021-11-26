@@ -11,13 +11,11 @@
 				<img
 					class="unique-packet-scheme"
 					src="../assets/unique-packet-scheme.png"
-					alt="unique-packet-scheme"
-				/>
+					alt="unique-packet-scheme" />
 				<img
 					class="unique-packet-preview"
 					src="../assets/unique-packet-preview.png"
-					alt="unique-packet-preview"
-				/>
+					alt="unique-packet-preview" />
 			</div>
 			<div class="flex-row buttons">
 				<button class="cutting-btn btn">Напечатать</button>
@@ -38,16 +36,14 @@
 					<img
 						class="unique-packet-preview"
 						src="../assets/unique-packet-preview.png"
-						alt="unique-packet-preview"
-					/>
+						alt="unique-packet-preview" />
 				</div>
 			</div>
 			<h2>Рекомендуемый раскрой пакета</h2>
 			<img
 				class="unique-packet-scheme"
 				src="../assets/unique-packet-scheme.png"
-				alt="unique-packet-scheme"
-			/>
+				alt="unique-packet-scheme" />
 			<div class="flex-row buttons">
 				<button class="cutting-btn btn">Напечатать</button>
 				<a href="../assets/unique-packet-preview.png" download>

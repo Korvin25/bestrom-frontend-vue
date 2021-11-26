@@ -6,19 +6,16 @@
 			<h2 class="mobile-section">Деятельность компании</h2>
 			<div
 				v-if="PAGE_ID[0].blocks.find((e) => e.name === 'activity')"
-				class="main-slider-content card-shadow"
-			>
+				class="main-slider-content card-shadow">
 				<carousel :items-to-show="1" :snap-align="'start'" :wrap-around="true">
 					<slide
 						v-for="content in PAGE_ID[0].blocks.find((e) => e.name === 'activity').contents"
-						:key="content.id"
-					>
+						:key="content.id">
 						<app-block-content
 							:id="content.id"
 							:title="content.name"
 							:text="content.text"
-							:image="content.file"
-						></app-block-content>
+							:image="content.file"></app-block-content>
 					</slide>
 					<template #addons="{ slidesCount }">
 						<navigation v-if="slidesCount > 1" />
@@ -36,8 +33,7 @@
 					v-for="category in FILTERS"
 					:key="category.id"
 					class="inventory-item flex-column card-shadow"
-					@click="pushToCatalog(category.id)"
-				>
+					@click="pushToCatalog(category.id)">
 					<h4>{{ category.name }}</h4>
 					<div class="inventory-item-img">
 						<img :src="category.img" alt="inventory item image" />
@@ -57,8 +53,7 @@
 						<app-partners-item
 							:image="partner.logo"
 							:alt="partner.alt"
-							@click="showPartner(partner.alt)"
-						></app-partners-item>
+							@click="showPartner(partner.alt)"></app-partners-item>
 					</slide>
 					<template #addons="{ slidesCount }">
 						<navigation v-if="slidesCount > 3" />
@@ -76,8 +71,7 @@
 						<app-partners-item
 							:image="client.logo"
 							:alt="client.alt"
-							@click="showClient(client.alt)"
-						></app-partners-item>
+							@click="showClient(client.alt)"></app-partners-item>
 					</slide>
 					<template #addons="{ slidesCount }">
 						<navigation v-if="slidesCount > 3" />
@@ -96,8 +90,7 @@
 					<app-main-news-mobile
 						:alt="item.alt"
 						:title="item.name"
-						:image="item.img"
-					></app-main-news-mobile>
+						:image="item.img"></app-main-news-mobile>
 				</slide>
 				<template #addons="{ slidesCount }">
 					<pagination v-if="slidesCount > 2" />
@@ -109,15 +102,13 @@
 					:alt="TITLE_NEWS.alt"
 					:title="TITLE_NEWS.name"
 					:text="TITLE_NEWS.mini_description"
-					:image="TITLE_NEWS.img"
-				></app-main-news-big-item>
+					:image="TITLE_NEWS.img"></app-main-news-big-item>
 				<app-main-news-small-item
 					v-for="item in secondNews"
 					:key="item.id"
 					:alt="item.alt"
 					:title="item.name"
-					:image="item.img"
-				></app-main-news-small-item>
+					:image="item.img"></app-main-news-small-item>
 			</div>
 		</section>
 
@@ -129,8 +120,7 @@
 				:title="customers.name"
 				:text="customers.description"
 				:machines="customers.machines"
-				@close="customers.showModal = false"
-			></app-modal-partners-item>
+				@close="customers.showModal = false"></app-modal-partners-item>
 		</transition>
 	</main>
 	<app-footer></app-footer>

@@ -8,8 +8,7 @@
 					v-for="partner in PARTNERS"
 					:key="partner.id"
 					:image="partner.logo"
-					@click="showPartner(partner.alt)"
-				></app-partners-item>
+					@click="showPartner(partner.alt)"></app-partners-item>
 			</div>
 		</section>
 
@@ -20,8 +19,7 @@
 					<app-partners-item
 						:image="partner.logo"
 						:alt="partner.alt"
-						@click="showPartner(partner.alt)"
-					></app-partners-item>
+						@click="showPartner(partner.alt)"></app-partners-item>
 					<p>{{ partner.name }}</p>
 				</div>
 			</div>
@@ -35,8 +33,7 @@
 				:title="customers.name"
 				:text="customers.description"
 				:machines="customers.machines"
-				@close="customers.showModal = false"
-			></app-modal-partners-item>
+				@close="customers.showModal = false"></app-modal-partners-item>
 		</transition>
 	</main>
 	<app-footer class="partners-footer"></app-footer>

@@ -9,8 +9,7 @@
 					:key="client.id"
 					:image="client.logo"
 					:alt="client.alt"
-					@click="showClient(client.alt)"
-				></app-partners-item>
+					@click="showClient(client.alt)"></app-partners-item>
 			</div>
 		</section>
 
@@ -21,8 +20,7 @@
 					<app-partners-item
 						:image="client.logo"
 						:alt="client.alt"
-						@click="showClient(client.alt)"
-					></app-partners-item>
+						@click="showClient(client.alt)"></app-partners-item>
 					<p>{{ client.name }}</p>
 				</div>
 			</div>
@@ -36,8 +34,7 @@
 				:title="customers.name"
 				:text="customers.description"
 				:machines="customers.machines"
-				@close="customers.showModal = false"
-			></app-modal-partners-item>
+				@close="customers.showModal = false"></app-modal-partners-item>
 		</transition>
 	</main>
 	<app-footer class="clients-footer"></app-footer>

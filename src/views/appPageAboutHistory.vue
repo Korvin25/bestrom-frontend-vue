@@ -30,8 +30,7 @@
 							'http://bexram.online:8001' +
 							PAGE_ID[0].blocks.find((e) => e.name === 'advanced-history').contents[1].file[0].file
 						"
-						:alt="PAGE_ID[0].blocks.find((e) => e.name === 'advanced-history').contents[1].file[0].alt"
-					/>
+						:alt="PAGE_ID[0].blocks.find((e) => e.name === 'advanced-history').contents[1].file[0].alt" />
 					<p>
 						{{ PAGE_ID[0].blocks.find((e) => e.name === 'advanced-history').contents[1].text }}
 					</p>

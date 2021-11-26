@@ -18,8 +18,7 @@
 						v-for="news in lastNews"
 						:key="news.id"
 						class="image-news card-shadow"
-						@click="routerPush(news.alt)"
-					>
+						@click="routerPush(news.alt)">
 						<img :src="news.img" :alt="news.alt" />
 						<div class="hidden-item">
 							<div class="hidden-text">

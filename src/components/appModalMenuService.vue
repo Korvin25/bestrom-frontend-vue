@@ -119,24 +119,21 @@
 						name="delivery-choice"
 						type="radio"
 						:value="1"
-						checked
-					/>
+						checked />
 					<label for="delivery-choice-1">Доставка</label>
 					<input
 						id="delivery-choice-2"
 						class="custom-radio"
 						name="delivery-choice"
 						type="radio"
-						:value="2"
-					/>
+						:value="2" />
 					<label for="delivery-choice-2">Самовывоз</label>
 				</div>
 				<input
 					id="address"
 					type="text"
 					class="input"
-					placeholder="г. Красногорск, Ильинское шоссе, д.15,"
-				/>
+					placeholder="г. Красногорск, Ильинское шоссе, д.15," />
 				<label for="comment">Комментарий</label>
 				<div id="comment" class="textarea" contenteditable="true"></div>
 				<button class="call btn">ОТПРАВИТЬ</button>

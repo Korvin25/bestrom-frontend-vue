@@ -9,8 +9,7 @@
 			v-if="image.length > 0"
 			class="content-image"
 			:src="'http://bexram.online:8001' + image[0].file"
-			:alt="image[0].alt"
-		/>
+			:alt="image[0].alt" />
 	</div>
 </template>
 
