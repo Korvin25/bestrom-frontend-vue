@@ -5,18 +5,22 @@
 			<h2>{{ PRODUCT_ID.name }}</h2>
 
 			<div class="slider-content card-shadow">
-				<carousel :items-to-show="1" :snap-align="'start'" :wrap-around="true">
+				<carousel
+					v-if="PRODUCT_ID.SliderProd.length > 0"
+					:items-to-show="1"
+					:snap-align="'start'"
+					:wrap-around="true">
 					<slide v-for="slide in PRODUCT_ID.SliderProd" :key="slide.id">
-						<img
-							class="catalog-item-card-image"
-							:src="'http://bexram.online:8001' + slide.img"
-							:alt="slide.alt" />
+						<img class="catalog-item-card-image" :src="imageComputed(slide.img)" :alt="slide.alt" />
 					</slide>
 					<template #addons="{ slidesCount }">
 						<navigation v-if="slidesCount > 1" />
 						<pagination v-if="slidesCount > 1" />
 					</template>
 				</carousel>
+				<div v-else class="flex-row else-flex">
+					<img class="catalog-item-card-image" :src="require('../assets/no-image.jpg')" alt="no-image" />
+				</div>
 			</div>
 
 			<div class="buttons-section catalog-ig-buttons flex-row">
@@ -288,6 +292,13 @@ export default {
 		findProduct(route) {
 			this.PRODUCT_ID = this.PRODUCT.find((e) => e.id.toString() === route)
 		},
+		imageComputed(image) {
+			if (image.includes('http://bexram.online:8001')) {
+				return image
+			} else {
+				return 'http://bexram.online:8001' + image
+			}
+		},
 	},
 }
 </script>
@@ -296,6 +307,10 @@ export default {
 .catalog-item-card-image {
 	max-width: 20rem;
 	align-self: center;
+}
+.else-flex {
+	align-items: center;
+	justify-content: center;
 }
 .details {
 	margin: 1rem 0;

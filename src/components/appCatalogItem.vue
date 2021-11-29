@@ -7,14 +7,21 @@
 			<button class="btn" @click="scrollToTop">ПОДРОБНЕЕ</button>
 		</div>
 		<section class="section">
-			<carousel class="carousel" :items-to-show="1" :wrap-around="true">
+			<carousel
+				v-if="product.SliderProd.length > 0"
+				class="carousel"
+				:items-to-show="1"
+				:wrap-around="true">
 				<slide v-for="slide in product.SliderProd" :key="slide.id">
-					<img class="content-image" :src="'http://bexram.online:8001' + slide.img" :alt="slide.alt" />
+					<img class="content-image" :src="imageComputed(slide.img)" :alt="slide.alt" />
 				</slide>
 				<template #addons>
 					<Pagination />
 				</template>
 			</carousel>
+			<div v-else class="flex-row else-flex">
+				<img class="content-image" :src="require('../assets/no-image.jpg')" alt="no-image" />
+			</div>
 		</section>
 	</div>
 	<!-- ./desktop-section -->
@@ -23,14 +30,21 @@
 		<div class="about-content flex-column">
 			<h3>{{ product.name }}</h3>
 			<section class="section">
-				<carousel class="carousel" :items-to-show="1" :wrap-around="true">
+				<carousel
+					v-if="product.SliderProd.length > 0"
+					class="carousel"
+					:items-to-show="1"
+					:wrap-around="true">
 					<slide v-for="slide in product.SliderProd" :key="slide.id">
-						<img class="content-image" :src="'http://bexram.online:8001' + slide.img" :alt="slide.alt" />
+						<img class="content-image" :src="imageComputed(slide.img)" :alt="slide.alt" />
 					</slide>
 					<template #addons>
 						<Pagination />
 					</template>
 				</carousel>
+				<div v-else class="flex-row else-flex">
+					<img class="content-image" :src="require('../assets/no-image.jpg')" alt="no-image" />
+				</div>
 			</section>
 			<section class="section">
 				<carousel class="carousel" :autoplay="4000" :items-to-show="1" :wrap-around="true">
@@ -79,6 +93,13 @@ export default {
 			this.$router.push(`/catalog/${this.product.id}`)
 			window.scrollTo(0, 0)
 		},
+		imageComputed(image) {
+			if (image.includes('http://bexram.online:8001')) {
+				return image
+			} else {
+				return 'http://bexram.online:8001' + image
+			}
+		},
 	},
 }
 </script>
@@ -94,6 +115,10 @@ export default {
 .catalog-item-product .about-content {
 	width: 100%;
 	flex-grow: 1;
+}
+.else-flex {
+	align-items: center;
+	justify-content: center;
 }
 .content-image {
 	max-width: 15rem;

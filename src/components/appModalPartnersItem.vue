@@ -20,12 +20,12 @@
 							<app-machines-item
 								:id="slide.id"
 								:title="slide.name"
-								:image="slide.SliderProd[0].img"
+								:image="slide.SliderProd.length > 0 ? slide.SliderProd[0].img : 'no-image'"
 								@close="$emit('close')"></app-machines-item>
 						</slide>
 						<template #addons="{ slidesCount }">
-							<navigation v-if="slidesCount > 2" />
-							<pagination v-if="slidesCount > 2" />
+							<navigation v-if="slidesCount > 1" />
+							<pagination v-if="slidesCount > 1" />
 						</template>
 					</carousel>
 				</div>
@@ -84,7 +84,6 @@ export default {
 					snapAlign: 'center',
 					mouseDrag: false,
 					touchDrag: false,
-					wrapAround: true,
 				},
 			},
 		}

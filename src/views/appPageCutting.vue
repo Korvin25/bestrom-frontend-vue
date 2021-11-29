@@ -3,12 +3,12 @@
 
 	<main class="main-content flex-column">
 		<!-- Packet type section -->
-		<section id="packetType" class="section">
+		<section v-if="PACKETS.length > 0" id="packetType" class="section">
 			<h2>Тип пакета</h2>
 
 			<div class="packet-mobile">
 				<carousel :items-to-show="1.4">
-					<slide v-for="packet in packetType" :key="packet">
+					<slide v-for="packet in PACKETS" :key="packet.id">
 						<a
 							v-smooth-scroll="{ updateHistory: false, offset: -60 }"
 							:class="checkType === packet.id ? 'check-item' : ''"
@@ -16,7 +16,7 @@
 							href="#packetOptions"
 							@click="checkType = packet.id">
 							<div class="hidden-item"></div>
-							<img :src="require(`../assets/${packet.img}`)" :alt="packet.name" />
+							<img :src="packet.img" :alt="packet.name" />
 							<p>{{ packet.name }}</p>
 						</a>
 					</slide>
@@ -28,61 +28,33 @@
 
 			<div class="packet-desktop packet-type flex-row">
 				<a
+					v-for="packet in PACKETS"
+					:key="packet.id"
 					v-smooth-scroll="{ updateHistory: false, offset: -50 }"
-					:class="checkType === 1 ? 'check-item' : ''"
+					:class="checkType === packet.id ? 'check-item' : ''"
 					class="packet-type-item flex-column card-shadow"
 					href="#packetOptions"
-					@click="checkType = 1">
-					<h3>Подушка</h3>
-					<img src="../assets/packet-type-1.png" alt="packet-type" />
+					@click="checkType = packet.id">
+					<h3>{{ packet.name }}</h3>
+					<img :src="packet.img" :alt="packet.alt" />
 					<div class="hidden-item"></div>
-				</a>
-				<a
-					v-smooth-scroll="{ updateHistory: false, offset: -50 }"
-					:class="checkType === 2 ? 'check-item' : ''"
-					class="packet-type-item flex-column card-shadow"
-					href="#packetOptions"
-					@click="checkType = 2">
-					<div class="hidden-item"></div>
-					<h3>Сплоским дном</h3>
-					<img src="../assets/packet-type-2.png" alt="packet-type" />
-				</a>
-				<a
-					v-smooth-scroll="{ updateHistory: false, offset: -50 }"
-					:class="checkType === 3 ? 'check-item' : ''"
-					class="packet-type-item flex-column card-shadow"
-					href="#packetOptions"
-					@click="checkType = 3">
-					<div class="hidden-item"></div>
-					<h3>С проваренными гранями</h3>
-					<img src="../assets/packet-type-3.png" alt="packet-type" />
-				</a>
-				<a
-					v-smooth-scroll="{ updateHistory: false, offset: -50 }"
-					:class="checkType === 4 ? 'check-item' : ''"
-					class="packet-type-item flex-column card-shadow"
-					href="#packetOptions"
-					@click="checkType = 4">
-					<div class="hidden-item"></div>
-					<h3>Сплоским дном</h3>
-					<img src="../assets/packet-type-2.png" alt="packet-type" />
 				</a>
 			</div>
 		</section>
 
 		<!-- Packet options section -->
-		<section id="packetOptions" class="section">
+		<section v-if="PACKETS_OPTIONS.length > 0" id="packetOptions" class="section">
 			<h2>Дополнительные опции</h2>
 			<div class="packet-mobile">
 				<carousel :items-to-show="1.4">
-					<slide v-for="packet in packetOptions" :key="packet">
+					<slide v-for="packetOptions in PACKETS_OPTIONS" :key="packetOptions.id">
 						<div
-							:class="checkOptions === packet.id ? 'check-item' : ''"
+							:class="checkOptions === packetOptions.id ? 'check-item' : ''"
 							class="packet-options-item flex-column card-shadow"
-							@click="checkOptionsFunc(packet.id)">
+							@click="checkOptionsFunc(packetOptions.id)">
 							<div class="hidden-item"></div>
-							<img :src="require(`../assets/${packet.img}`)" :alt="packet.name" />
-							<p>{{ packet.name }}</p>
+							<img :src="packetOptions.img" :alt="packetOptions.name" />
+							<p>{{ packetOptions.name }}</p>
 						</div>
 					</slide>
 					<template #addons>
@@ -93,85 +65,61 @@
 
 			<div class="packet-desktop packet-options flex-row card-shadow">
 				<div
-					v-for="packet in packetOptions"
-					:key="packet.id"
-					:class="checkOptions === packet.id ? 'check-item' : ''"
+					v-for="packetOptions in PACKETS_OPTIONS"
+					:key="packetOptions.id"
+					:class="checkOptions === packetOptions.id ? 'check-item' : ''"
 					class="packet-options-item flex-column card-shadow"
-					@click="checkOptionsFunc(packet.id)">
+					@click="checkOptionsFunc(packetOptions.id)">
 					<div class="hidden-item"></div>
-					<img :src="require(`../assets/${packet.img}`)" :alt="packet.name" />
-					<p>{{ packet.name }}</p>
+					<img :src="packetOptions.img" :alt="packetOptions.name" />
+					<p>{{ packetOptions.name }}</p>
 				</div>
 			</div>
 		</section>
 
 		<!-- Packet seam section -->
-		<section id="packetSeam" class="section">
+		<section v-if="PACKETS_SEAMS.length > 0" id="packetSeam" class="section">
 			<h2>Тип шва</h2>
 			<div class="packets-seam flex-row card-shadow">
 				<div
-					:class="checkSeam === 1 ? 'check-item' : ''"
+					v-for="packetSeams in PACKETS_SEAMS"
+					:key="packetSeams.id"
+					:class="checkSeam === packetSeams.id ? 'check-item' : ''"
 					class="packets-seam-item flex-column card-shadow"
-					@click="checkSeamFunc(1)">
+					@click="checkSeamFunc(packetSeams.id)">
 					<div class="hidden-item"></div>
-					<img src="../assets/seam-type-1.png" alt="seam-type" />
-					<p>В нахлест влево</p>
-				</div>
-				<div
-					:class="checkSeam === 2 ? 'check-item' : ''"
-					class="packets-seam-item flex-column card-shadow"
-					@click="checkSeamFunc(2)">
-					<div class="hidden-item"></div>
-					<img src="../assets/seam-type-2.png" alt="seam-type" />
-					<p>Плавник влево</p>
-				</div>
-				<div
-					:class="checkSeam === 3 ? 'check-item' : ''"
-					class="packets-seam-item flex-column card-shadow"
-					@click="checkSeamFunc(3)">
-					<div class="hidden-item"></div>
-					<img src="../assets/seam-type-3.png" alt="seam-type" />
-					<p>В нахлест вправо</p>
-				</div>
-				<div
-					:class="checkSeam === 4 ? 'check-item' : ''"
-					class="packets-seam-item flex-column card-shadow"
-					@click="checkSeamFunc(4)">
-					<div class="hidden-item"></div>
-					<img src="../assets/seam-type-4.png" alt="seam-type" />
-					<p>Плавник вправо</p>
+					<img :src="packetSeams.img" :alt="packetSeams.alt" />
+					<p>{{ packetSeams.name }}</p>
 				</div>
 			</div>
 		</section>
 
 		<!-- Packet size section -->
-		<form class="flex-column" action="">
-			<section id="packetSize" class="section">
-				<h2>Размеры пакета</h2>
-				<div class="packet-size flex-row card-shadow">
-					<div class="packet-size-parameters flex-column">
-						<label>
-							<p>Ширина пакета (A):</p>
-							<input class="input" type="text" placeholder="100" />
-						</label>
-						<label>
-							<p>Глубина пакета (B):</p>
-							<input class="input" type="text" placeholder="100" />
-						</label>
-					</div>
-					<div class="packet-size-description flex-column card-shadow">
-						<h4>Примечание</h4>
-						<p>Глубина пакета B — оне более 110мм</p>
-						<p>Сумма ширины и глубины A + B — от 60мм до 600мм</p>
-						<p>Соотношение ширины и глубины A / B — от 1,2 до 4.45</p>
-					</div>
-					<img src="../assets/packet-size.png" alt="packet-size" />
+		<section id="packetSize" class="section">
+			<h2>Размеры пакета</h2>
+			<div class="packet-size flex-row card-shadow">
+				<div class="packet-size-parameters flex-column">
+					<label>
+						<p>Ширина пакета (A):</p>
+						<input class="input" type="text" placeholder="100" />
+					</label>
+					<label>
+						<p>Глубина пакета (B):</p>
+						<input class="input" type="text" placeholder="100" />
+					</label>
 				</div>
-			</section>
-			<div class="router-button">
-				<button class="cutting-btn btn" @click="routerPush(1)">Подобрать</button>
+				<div class="packet-size-description flex-column card-shadow">
+					<h4>Примечание</h4>
+					<p>Глубина пакета B — оне более 110мм</p>
+					<p>Сумма ширины и глубины A + B — от 60мм до 600мм</p>
+					<p>Соотношение ширины и глубины A / B — от 1,2 до 4.45</p>
+				</div>
+				<img src="../assets/packet-size.png" alt="packet-size" />
 			</div>
-		</form>
+		</section>
+		<div class="router-button">
+			<button class="cutting-btn btn" @click="routerPush(1)">Подобрать</button>
+		</div>
 	</main>
 
 	<app-footer></app-footer>
@@ -215,75 +163,6 @@ export default {
 			checkType: 0,
 			checkOptions: 0,
 			checkSeam: 0,
-			packetOptions: [
-				{
-					id: 1,
-					name: 'Ручка под ладонь',
-					img: 'packet-option-1.png',
-				},
-				{
-					id: 2,
-					name: 'Ручка под ладонь',
-					img: 'packet-option-3.png',
-				},
-				{
-					id: 3,
-					name: 'Ручка под ладонь',
-					img: 'packet-option-2.png',
-				},
-				{
-					id: 4,
-					name: 'Ручка под ладонь',
-					img: 'packet-option-1.png',
-				},
-				{
-					id: 5,
-					name: 'Ручка под ладонь',
-					img: 'packet-option-2.png',
-				},
-				{
-					id: 6,
-					name: 'Ручка под ладонь',
-					img: 'packet-option-3.png',
-				},
-				{
-					id: 7,
-					name: 'Ручка под ладонь',
-					img: 'packet-option-1.png',
-				},
-				{
-					id: 8,
-					name: 'Ручка под ладонь',
-					img: 'packet-option-2.png',
-				},
-				{
-					id: 9,
-					name: 'Ручка под ладонь',
-					img: 'packet-option-3.png',
-				},
-			],
-			packetType: [
-				{
-					id: 1,
-					name: 'Подушка',
-					img: 'packet-type-1.png',
-				},
-				{
-					id: 2,
-					name: 'Сплоским дном',
-					img: 'packet-type-2.png',
-				},
-				{
-					id: 3,
-					name: 'С проваренными гранями',
-					img: 'packet-type-3.png',
-				},
-				{
-					id: 4,
-					name: 'Сплоским дном',
-					img: 'packet-type-1.png',
-				},
-			],
 		}
 	},
 	computed: {
@@ -296,9 +175,15 @@ export default {
 	},
 	mounted() {
 		this.GET_PAGE_ID(5)
-		this.GET_PACKETS().then(() => console.log(this.PACKETS))
-		this.GET_PACKETS_OPTIONS().then(() => console.log(this.PACKETS_OPTIONS))
-		this.GET_PACKETS_SEAMS().then(() => console.log(this.PACKETS_SEAMS))
+		if (this.PACKETS.length === 0) {
+			this.GET_PACKETS()
+		}
+		if (this.PACKETS_OPTIONS.length === 0) {
+			this.GET_PACKETS_OPTIONS()
+		}
+		if (this.PACKETS_SEAMS.length === 0) {
+			this.GET_PACKETS_SEAMS()
+		}
 	},
 	methods: {
 		...mapActions({
@@ -311,6 +196,27 @@ export default {
 			if (this.checkType !== 0 && this.checkOptions !== 0 && this.checkSeam !== 0) {
 				this.$router.push('/cutting/' + id)
 				window.scrollTo(0, 0)
+			} else if (this.checkType === 0) {
+				alert('Выберите тип пакета!!!')
+				this.$smoothScroll({
+					scrollTo: document.getElementById('packetType'), // scrollTo is also allowed to be number
+					updateHistory: false,
+					offset: -50,
+				})
+			} else if (this.checkOptions === 0) {
+				alert('Выберите дополнительные опции!!!')
+				this.$smoothScroll({
+					scrollTo: document.getElementById('packetOptions'), // scrollTo is also allowed to be number
+					updateHistory: false,
+					offset: -50,
+				})
+			} else if (this.checkSeam === 0) {
+				alert('Выберите тип шва!!!')
+				this.$smoothScroll({
+					scrollTo: document.getElementById('packetSeam'), // scrollTo is also allowed to be number
+					updateHistory: false,
+					offset: -50,
+				})
 			}
 		},
 		checkOptionsFunc(id) {
