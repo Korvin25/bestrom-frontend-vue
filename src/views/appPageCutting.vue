@@ -122,12 +122,20 @@
 		</div>
 	</main>
 
+	<transition-group name="modal">
+		<app-modal-cutting-alert
+			v-if="modalAlert.show"
+			:text="modalAlert.text"
+			@close="modalAlert.show = false"></app-modal-cutting-alert>
+	</transition-group>
+
 	<app-footer></app-footer>
 </template>
 
 <script>
 import appHeader from '../components/appHeader.vue'
 import appFooter from '../components/appFooter.vue'
+import AppModalCuttingAlert from '../components/appModalCuttingAlert.vue'
 import { Carousel, Slide, Pagination } from 'vue3-carousel'
 import { mapActions, mapGetters, useStore } from 'vuex'
 import { computed } from 'vue'
@@ -138,6 +146,7 @@ export default {
 	components: {
 		appHeader,
 		appFooter,
+		AppModalCuttingAlert,
 		Carousel,
 		Slide,
 		Pagination,
@@ -160,6 +169,10 @@ export default {
 	},
 	data() {
 		return {
+			modalAlert: {
+				show: false,
+				text: 'Alert',
+			},
 			checkType: 0,
 			checkOptions: 0,
 			checkSeam: 0,
@@ -197,13 +210,16 @@ export default {
 				this.$router.push('/cutting/' + id)
 				window.scrollTo(0, 0)
 			} else if (this.checkType === 0) {
-				alert('Выберите тип пакета!!!')
+				this.modalAlert.text = 'Сначала выберите тип пакета!!!'
+				this.modalAlert.show = true
 				this.$smoothScroll({
 					scrollTo: document.getElementById('packetType'), // scrollTo is also allowed to be number
 					updateHistory: false,
 					offset: -50,
 				})
 			} else if (this.checkOptions === 0) {
+				this.modalAlert.text = 'Сначала выберите дополнительные опции!!!'
+				this.modalAlert.show = true
 				alert('Выберите дополнительные опции!!!')
 				this.$smoothScroll({
 					scrollTo: document.getElementById('packetOptions'), // scrollTo is also allowed to be number
@@ -211,6 +227,8 @@ export default {
 					offset: -50,
 				})
 			} else if (this.checkSeam === 0) {
+				this.modalAlert.text = 'Сначала выберите тип шва!!!'
+				this.modalAlert.show = true
 				alert('Выберите тип шва!!!')
 				this.$smoothScroll({
 					scrollTo: document.getElementById('packetSeam'), // scrollTo is also allowed to be number
@@ -228,7 +246,8 @@ export default {
 					offset: -50,
 				})
 			} else {
-				alert('Сначала выберите тип пакета!!!')
+				this.modalAlert.text = 'Сначала выберите тип пакета!!!'
+				this.modalAlert.show = true
 				this.$smoothScroll({
 					scrollTo: document.getElementById('packetType'), // scrollTo is also allowed to be number
 					updateHistory: false,
@@ -238,14 +257,16 @@ export default {
 		},
 		checkSeamFunc(id) {
 			if (this.checkType === 0 && this.checkOptions === 0) {
-				alert('Сначала выберите тип пакета!!!')
+				this.modalAlert.text = 'Сначала выберите тип пакета!!!'
+				this.modalAlert.show = true
 				this.$smoothScroll({
 					scrollTo: document.getElementById('packetType'), // scrollTo is also allowed to be number
 					updateHistory: false,
 					offset: -50,
 				})
 			} else if (this.checkType !== 0 && this.checkOptions === 0) {
-				alert('Сначала выберите дополнительные опции!!!')
+				this.modalAlert.text = 'Сначала выберите дополнительные опции!!!'
+				this.modalAlert.show = true
 				this.$smoothScroll({
 					scrollTo: document.getElementById('packetOptions'), // scrollTo is also allowed to be number
 					updateHistory: false,

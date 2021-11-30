@@ -25,7 +25,7 @@ export default {
 		GET_FILTERS({ commit }) {
 			return axios({
 				method: 'GET',
-				url: 'http://bexram.online:8001//filters/',
+				url: 'http://bexram.online:8001/filters/',
 			})
 				.then((response) => {
 					commit('SET_FILTERS', response.data)
