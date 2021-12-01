@@ -11,17 +11,13 @@
 					<p>
 						{{ PAGE_ID[0].blocks.find((e) => e.name === 'advanced-history').contents[0].text }}
 					</p>
-					<div class="image-content">
-						<div class="video flex-column">
-							<div class="video-title flex-row">
-								<img class="logo" src="../assets/bestrom_logo.png" alt="bestrom logo" />
-								<h1>БЕСТРОМ</h1>
-							</div>
-							<div class="video-play flex-column">
-								<img src="../assets/video-play.png" alt="video play button" />
-							</div>
-						</div>
-					</div>
+					<YouTube
+						ref="youtube"
+						color="white"
+						class="video-player"
+						width="100%"
+						height="100%"
+						:src="PAGE_ID[0].blocks.find((e) => e.name === 'youtube').contents[0].text" />
 				</div>
 
 				<div class="flex-row second-row">
@@ -44,6 +40,7 @@
 <script>
 import appHeader from '../components/appHeader.vue'
 import appFooter from '../components/appFooter.vue'
+import YouTube from 'vue3-youtube'
 import { mapActions, mapGetters, useStore } from 'vuex'
 import { computed } from 'vue'
 import { useMeta } from 'vue-meta'
@@ -53,6 +50,7 @@ export default {
 	components: {
 		appHeader,
 		appFooter,
+		YouTube,
 	},
 	setup() {
 		const store = useStore()
@@ -87,6 +85,11 @@ export default {
 </script>
 
 <style scoped>
+.video-player {
+	margin-left: 2rem;
+	flex-grow: 1;
+	height: 15rem;
+}
 .flex-row {
 	justify-content: space-between;
 }
@@ -95,16 +98,6 @@ export default {
 	padding: 26px 0 0 0;
 	border-top: 1px solid #2fc1ff;
 	width: 50%;
-}
-.image-content {
-	padding: 0 0 0 2rem;
-}
-.video {
-	align-self: flex-start;
-	width: 100%;
-	height: 100%;
-	max-width: 40rem;
-	max-height: 22rem;
 }
 .second-row {
 	margin-top: 2rem;
@@ -121,6 +114,10 @@ export default {
 }
 
 @media (max-width: 980px) {
+	.video-player {
+		margin-left: 0;
+		flex-grow: 1;
+	}
 	.first-row {
 		flex-direction: column-reverse;
 	}
@@ -128,12 +125,6 @@ export default {
 		width: 100%;
 		padding-top: 1rem;
 		border: none;
-	}
-	.image-content {
-		border-top: 1px solid #2fc1ff;
-		padding: 1rem 0 0 0;
-		height: 10rem;
-		width: 100%;
 	}
 	.second-row {
 		margin-top: 1rem;

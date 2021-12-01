@@ -62,8 +62,7 @@
 	<transition-group name="modal">
 		<app-modal-job-respond
 			v-if="showModalRespond"
-			@close="showModalRespond = false"
-		></app-modal-job-respond>
+			@close="showModalRespond = false"></app-modal-job-respond>
 	</transition-group>
 
 	<app-footer></app-footer>

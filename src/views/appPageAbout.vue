@@ -13,17 +13,12 @@
 					</p>
 					<button class="content-btn btn" @click="$router.push('/about/history')">ПОДРОБНЕЕ</button>
 				</div>
-				<div class="image-content">
-					<a class="video flex-column card-shadow" href="http://youtube.com">
-						<div class="video-title flex-row">
-							<img alt="bestrom logo" class="logo" src="../assets/bestrom_logo.png" />
-							<h1>БЕСТРОМ</h1>
-						</div>
-						<div class="video-play flex-column">
-							<img alt="video play button" src="../assets/video-play.png" />
-						</div>
-					</a>
-				</div>
+				<YouTube
+					ref="youtube"
+					class="video-player"
+					width="100%"
+					height="100%"
+					:src="PAGE_ID[0].blocks.find((e) => e.name === 'youtube').contents[0].text" />
 			</div>
 		</section>
 		<!-- /.section -->
@@ -248,6 +243,7 @@ import appHeader from '../components/appHeader.vue'
 import appHiddenItem from '../components/appHiddenItem.vue'
 import appPartnersItem from '../components/appPartnersItem.vue'
 import appModalPartnersItem from '../components/appModalPartnersItem.vue'
+import YouTube from 'vue3-youtube'
 import { Carousel, Navigation, Pagination, Slide } from 'vue3-carousel'
 import { mapActions, mapGetters, useStore } from 'vuex'
 import { computed } from 'vue'
@@ -265,6 +261,7 @@ export default {
 		Slide,
 		Navigation,
 		Pagination,
+		YouTube,
 	},
 	setup() {
 		const store = useStore()
@@ -355,6 +352,10 @@ export default {
 </script>
 
 <style scoped>
+.video-player {
+	flex-grow: 1;
+	height: 15rem;
+}
 .reasons {
 	margin: 1rem 0;
 	flex-wrap: wrap;
@@ -445,6 +446,10 @@ export default {
 }
 
 @media (max-width: 980px) {
+	.video-player {
+		flex-grow: 1;
+		height: 10rem;
+	}
 	.about-content {
 		margin: 0 1rem;
 		width: 100%;

@@ -54,7 +54,7 @@ h2 {
 }
 
 h3 {
-	margin: 0;
+	margin: 0 0 0.5rem 0;
 	align-self: flex-start;
 	font-weight: bold;
 	font-size: 22px;
@@ -285,43 +285,12 @@ label:hover {
 	width: 2rem;
 	height: 2rem;
 }
-
-/* ----------------------------------------------------- */
-/* Styles for video with transparent background */
 .image-content {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	width: 60%;
 }
-.video {
-	position: relative;
-	align-items: center;
-	width: 33rem;
-	height: 16rem;
-	margin: 0 2rem;
-}
-.video-title {
-	align-items: center;
-}
-.video-play {
-	cursor: pointer;
-	position: absolute;
-	align-items: center;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	left: 0;
-	background: rgba(106, 106, 106, 0.6);
-	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
-	border-radius: 6px;
-}
-.video-play img {
-	width: 6rem;
-	height: 6rem;
-}
-/* ----------------------------------------------------- */
-
 .about-content {
 	margin: 2rem;
 	width: 45%;
