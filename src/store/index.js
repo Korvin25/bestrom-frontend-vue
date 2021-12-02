@@ -10,6 +10,11 @@ import product from './modules/product'
 import vacancy from './modules/vacancy'
 
 export default createStore({
+	state() {
+		return {
+			language: 'RU',
+		}
+	},
 	modules: {
 		clients,
 		partners,

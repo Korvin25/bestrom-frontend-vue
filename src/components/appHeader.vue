@@ -1,15 +1,29 @@
 <template>
-	<header class="header flex-row">
+	<header v-if="$store.state.language" class="header flex-row">
 		<router-link class="header-title" to="/">
 			<img class="logo-img" src="../assets/bestrom_logo.png" alt="bestrom logo" />
-			<h1>БЕСТРОМ</h1>
+			<h1>{{ $store.state.language === 'RU' ? 'БЕСТРОМ' : 'BESTROM' }}</h1>
 		</router-link>
-		<!-- <p class="desktop-language language">EN</p>
+		<p
+			class="desktop-language language"
+			@click="
+				$store.state.language === 'RU' ? ($store.state.language = 'EN') : ($store.state.language = 'RU')
+			">
+			{{ $store.state.language }}
+		</p>
 		<div class="mobile-language flex-row">
 			<img src="../assets/language-world.png" alt="language-world" />
-			<p class="language">Rus</p>
-			<img src="../assets/language-arrow.png" alt="language-arrow" />
-		</div> -->
+			<p
+				class="language"
+				@click="
+					$store.state.language === 'RU'
+						? ($store.state.language = 'EN')
+						: ($store.state.language = 'RU')
+				">
+				{{ $store.state.language }}
+			</p>
+			<!-- <img src="../assets/language-arrow.png" alt="language-arrow" /> -->
+		</div>
 	</header>
 </template>
 
@@ -61,6 +75,7 @@ export default {
 	margin-right: 0.3rem;
 }
 .language {
+	cursor: pointer;
 	margin: 0 1rem;
 }
 @media (max-width: 980px) {

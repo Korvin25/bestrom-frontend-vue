@@ -1,9 +1,17 @@
 <template>
 	<app-header></app-header>
-	<main class="main-content flex-column">
-		<h2>Ошибка 404</h2>
-		<h2>Страница не найдена</h2>
-		<router-link to="/">Вернуться на главную</router-link>
+	<main v-if="PAGE_ID.length > 0" class="main-content flex-column">
+		<h2>{{ $store.state.language === 'RU' ? 'Ошибка 404' : 'Error 404' }}</h2>
+		<h2>
+			{{
+				$store.state.language === 'RU'
+					? PAGE_ID[0].blocks.find((e) => e.name === '404').contents[0].text
+					: PAGE_ID[0].blocks.find((e) => e.name === '404').contents[0].text_en
+			}}
+		</h2>
+		<router-link class="link-to-main" to="/">{{
+			$store.state.language === 'RU' ? 'Вернуться на главную страницу' : 'Return to the main apge'
+		}}</router-link>
 	</main>
 	<app-footer></app-footer>
 </template>
@@ -63,6 +71,9 @@ export default {
 	text-align: center;
 	margin: 0;
 	align-self: normal;
+}
+.link-to-main {
+	text-decoration: underline;
 }
 @media (max-width: 980px) {
 	.main-content {
