@@ -13,7 +13,9 @@
 							type="radio"
 							:value="category.name"
 							:checked="radioCatalogSelect === category.name" />
-						<label :for="category.id">{{ category.name }}</label>
+						<label :for="category.id">{{
+							$store.state.language === 'RU' ? category.name : category.name_en
+						}}</label>
 					</div>
 				</div>
 				<div v-if="FILTERS.length > 0 && radioCatalogSelect !== ''" class="type-select flex-row">
@@ -21,14 +23,20 @@
 						v-for="filters in FILTERS.find((e) => e.name === radioCatalogSelect).Filters"
 						:key="filters.id"
 						:class="typeSelect === filters.name ? 'type-select-checked' : ''"
-						:text="filters.name"
+						:text="$store.state.language === 'RU' ? filters.name : filters.name_en"
 						@click="typeSelectFunc(filters.name, filters.search)"></app-catalog-type-select>
 				</div>
 			</div>
 		</section>
 		<section class="mobile-section section">
 			<div class="mobile-filter card-shadow flex-column" @click="showMobileFilter = true">
-				<h2>{{ radioCatalogSelect }}</h2>
+				<h2 v-if="FILTERS.length > 0 && radioCatalogSelect">
+					{{
+						$store.state.language === 'RU'
+							? FILTERS.find((e) => e.name === radioCatalogSelect).name
+							: FILTERS.find((e) => e.name === radioCatalogSelect).name_en
+					}}
+				</h2>
 			</div>
 			<transition-group name="mobile-filter-modal">
 				<section v-if="showMobileFilter" class="mobile-nav-elements flex-column">
@@ -46,7 +54,7 @@
 										class="mobile-select-filter"
 										:class="radioCatalogSelect === category.name ? 'choice' : ''"
 										@click="radioCatalogSelect = category.name">
-										{{ category.name }}
+										{{ $store.state.language === 'RU' ? category.name : category.name_en }}
 									</p>
 								</slide>
 							</carousel>
@@ -56,7 +64,7 @@
 								v-for="filters in FILTERS.find((e) => e.name === radioCatalogSelect).Filters"
 								:key="filters.id"
 								:class="typeSelect === filters.name ? 'type-select-checked' : ''"
-								:text="filters.name"
+								:text="$store.state.language === 'RU' ? filters.name : filters.name_en"
 								@click="typeSelectFunc(filters.name, filters.search)"></app-catalog-type-select>
 						</div>
 					</div>

@@ -2,8 +2,16 @@
 	<app-header></app-header>
 	<main v-if="PAGE_ID.length > 0" class="main-content flex-column">
 		<section class="section">
-			<h2 class="desktop-section">Деятельность компании БЕСТРОМ</h2>
-			<h2 class="mobile-section">Деятельность компании</h2>
+			<h2 class="desktop-section">
+				{{
+					$store.state.language === 'RU'
+						? 'Деятельность компании БЕСТРОМ'
+						: 'Activities of the company BESTROM'
+				}}
+			</h2>
+			<h2 class="mobile-section">
+				{{ $store.state.language === 'RU' ? 'Деятельность компании' : 'Activities of the company' }}
+			</h2>
 			<div
 				v-if="PAGE_ID[0].blocks.find((e) => e.name === 'activity')"
 				class="main-slider-content card-shadow">
@@ -13,8 +21,8 @@
 						:key="content.id">
 						<app-block-content
 							:id="content.id"
-							:title="content.name"
-							:text="content.text"
+							:title="$store.state.language === 'RU' ? content.name : content.name_en"
+							:text="$store.state.language === 'RU' ? content.text : content.text_en"
 							:image="content.file"></app-block-content>
 					</slide>
 					<template #addons="{ slidesCount }">
@@ -27,18 +35,19 @@
 		<!-- /.section -->
 
 		<section class="section">
-			<h2>Подбор оборудования</h2>
+			<h2>{{ $store.state.language === 'RU' ? 'Подбор оборудования' : 'Equipment selection' }}</h2>
 			<div v-if="FILTERS.length > 0" class="inventory-mobile flex-row">
 				<div
 					v-for="category in FILTERS"
 					:key="category.id"
 					class="inventory-item flex-column card-shadow"
 					@click="pushToCatalog(category.id)">
-					<h4>{{ category.name }}</h4>
+					<h4>{{ $store.state.language === 'RU' ? category.name : category.name_en }}</h4>
 					<div class="inventory-item-img">
 						<img :src="category.img" alt="inventory item image" />
 					</div>
-					<app-hidden-item text="ПОДРОБНЕЕ"></app-hidden-item>
+					<app-hidden-item
+						:text="$store.state.language === 'RU' ? 'ПОДРОБНЕЕ' : 'READ MORE'"></app-hidden-item>
 				</div>
 			</div>
 			<!-- /.inventory-items -->
@@ -46,7 +55,7 @@
 		<!-- /.section -->
 
 		<section class="section">
-			<h2>Партнеры</h2>
+			<h2>{{ $store.state.language === 'RU' ? 'Партнеры' : 'Partners' }}</h2>
 			<div class="slider-content card-shadow">
 				<carousel :breakpoints="breakpoints">
 					<slide v-for="partner in PARTNERS" :key="partner.id">
@@ -64,7 +73,7 @@
 		</section>
 
 		<section class="section">
-			<h2>Клиенты</h2>
+			<h2>{{ $store.state.language === 'RU' ? 'Клиенты' : 'Clients' }}</h2>
 			<div class="slider-content card-shadow">
 				<carousel :breakpoints="breakpoints">
 					<slide v-for="client in CLIENTS" :key="client.id">
@@ -82,14 +91,14 @@
 		</section>
 
 		<section class="section">
-			<h2 v-if="TITLE_NEWS.length !== 0">Новости</h2>
-			<h2 v-else>Новостей нет</h2>
+			<h2 v-if="TITLE_NEWS.length !== 0">{{ $store.state.language === 'RU' ? 'Новости' : 'News' }}</h2>
+			<h2 v-else>{{ $store.state.language === 'RU' ? 'Новостей нет' : 'No news' }}</h2>
 
 			<carousel class="mobile-section" :items-to-show="1.5">
 				<slide v-for="item in mobileNews" :key="item.id">
 					<app-main-news-mobile
 						:alt="item.alt"
-						:title="item.name"
+						:title="$store.state.language === 'RU' ? item.name : item.name_en"
 						:image="item.img"></app-main-news-mobile>
 				</slide>
 				<template #addons="{ slidesCount }">
@@ -100,14 +109,16 @@
 			<div v-if="TITLE_NEWS.length !== 0" class="news-items flex-row">
 				<app-main-news-big-item
 					:alt="TITLE_NEWS.alt"
-					:title="TITLE_NEWS.name"
-					:text="TITLE_NEWS.mini_description"
+					:title="$store.state.language === 'RU' ? TITLE_NEWS.name : TITLE_NEWS.name_en"
+					:text="
+						$store.state.language === 'RU' ? TITLE_NEWS.mini_description : TITLE_NEWS.mini_description_en
+					"
 					:image="TITLE_NEWS.img"></app-main-news-big-item>
 				<app-main-news-small-item
 					v-for="item in secondNews"
 					:key="item.id"
 					:alt="item.alt"
-					:title="item.name"
+					:title="$store.state.language === 'RU' ? item.name : item.name_en"
 					:image="item.img"></app-main-news-small-item>
 			</div>
 		</section>
@@ -118,7 +129,7 @@
 				:image="customers.logo"
 				:alt="customers.alt"
 				:title="customers.name"
-				:text="customers.description"
+				:text="$store.state.language === 'RU' ? customers.description : customers.description_en"
 				:machines="customers.machines"
 				@close="customers.showModal = false"></app-modal-partners-item>
 		</transition>
@@ -280,6 +291,9 @@ export default {
 	position: relative;
 	align-items: center;
 	justify-content: space-between;
+}
+.inventory-item h4 {
+	margin: 1rem 1rem 0 1rem;
 }
 .inventory-item-img {
 	height: 100%;

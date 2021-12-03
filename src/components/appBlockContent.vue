@@ -3,7 +3,9 @@
 		<div class="about-content flex-column">
 			<h3>{{ title }}</h3>
 			<p class="text-about-content">{{ text.split('/')[0] }}</p>
-			<button class="btn" @click="routerPush(text.split('/')[1])">ПОДРОБНЕЕ</button>
+			<button class="btn" @click="routerPush(text.split('/')[1])">
+				{{ $store.state.language === 'RU' ? 'ПОДРОБНЕЕ' : 'READ MORE' }}
+			</button>
 		</div>
 		<img
 			v-if="image.length > 0"

@@ -1,8 +1,12 @@
 <template>
 	<div class="details-select-settings flex-column">
 		<div v-for="item in settings" :key="item.id" class="details-select-settings-item">
-			<h4>{{ item.product_property.name }}</h4>
-			<p>{{ item.name }}</p>
+			<h4>
+				{{
+					$store.state.language === 'RU' ? item.product_property.name : item.product_property.name_en
+				}}
+			</h4>
+			<p>{{ $store.state.language === 'RU' ? item.name : item.name_en }}</p>
 		</div>
 	</div>
 	<!-- /.details-select-settings -->

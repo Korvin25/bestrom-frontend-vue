@@ -1,7 +1,8 @@
 <template>
 	<div class="partners-item">
 		<img :src="imageComputed" :alt="alt" />
-		<app-hidden-item text="ПОДРОБНЕЕ"></app-hidden-item>
+		<app-hidden-item
+			:text="$store.state.language === 'RU' ? 'ПОДРОБНЕЕ' : 'READ MORE'"></app-hidden-item>
 	</div>
 </template>
 

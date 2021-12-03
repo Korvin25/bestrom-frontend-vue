@@ -6,15 +6,22 @@
 				<img class="close-desktop" src="../assets/close-image.png" alt="close" />
 				<img class="close-mobile" src="../assets/close-mobile-menu.png" alt="close" />
 			</div>
-			<h2>Примеры порошкообразной продукции</h2>
+			<h2>
+				{{
+					$store.state.language === 'RU'
+						? 'Примеры порошкообразной продукции'
+						: 'Examples of powdered products'
+				}}
+			</h2>
 			<div class="details-select-products flex-row">
 				<div
 					v-for="item in productExamples"
 					:key="item.id"
 					class="details-select-products-item card-shadow">
-					<h4>{{ item.name }}</h4>
+					<h4>{{ $store.state.language === 'RU' ? item.name : item.name_en }}</h4>
 					<img :src="'http://bexram.online:8001' + item.img" :alt="item.alt" />
-					<app-hidden-item text="ПОДРОБНЕЕ"></app-hidden-item>
+					<app-hidden-item
+						:text="$store.state.language === 'RU' ? 'ПОДРОБНЕЕ' : 'READ MORE'"></app-hidden-item>
 				</div>
 			</div>
 		</div>

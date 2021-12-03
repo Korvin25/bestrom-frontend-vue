@@ -2,14 +2,22 @@
 	<app-header></app-header>
 	<main v-if="PAGE_ID.length > 0" class="main-content flex-column">
 		<section v-if="PAGE_ID[0].blocks.find((e) => e.name === 'advanced-history')" class="section">
-			<h2>О компании</h2>
+			<h2>{{ $store.state.language === 'RU' ? 'О компании' : 'About company' }}</h2>
 			<div class="history-company flex-column">
 				<h4>
-					{{ PAGE_ID[0].blocks.find((e) => e.name === 'advanced-history').contents[0].name }}
+					{{
+						$store.state.language === 'RU'
+							? PAGE_ID[0].blocks.find((e) => e.name === 'advanced-history').contents[0].name
+							: PAGE_ID[0].blocks.find((e) => e.name === 'advanced-history').contents[0].name_en
+					}}
 				</h4>
 				<div class="first-row flex-row">
 					<p>
-						{{ PAGE_ID[0].blocks.find((e) => e.name === 'advanced-history').contents[0].text }}
+						{{
+							$store.state.language === 'RU'
+								? PAGE_ID[0].blocks.find((e) => e.name === 'advanced-history').contents[0].text
+								: PAGE_ID[0].blocks.find((e) => e.name === 'advanced-history').contents[0].text_en
+						}}
 					</p>
 					<YouTube
 						ref="youtube"
@@ -28,7 +36,11 @@
 						"
 						:alt="PAGE_ID[0].blocks.find((e) => e.name === 'advanced-history').contents[1].file[0].alt" />
 					<p>
-						{{ PAGE_ID[0].blocks.find((e) => e.name === 'advanced-history').contents[1].text }}
+						{{
+							$store.state.language === 'RU'
+								? PAGE_ID[0].blocks.find((e) => e.name === 'advanced-history').contents[1].text
+								: PAGE_ID[0].blocks.find((e) => e.name === 'advanced-history').contents[1].text_en
+						}}
 					</p>
 				</div>
 			</div>

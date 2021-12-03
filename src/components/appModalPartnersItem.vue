@@ -13,13 +13,19 @@
 			</div>
 
 			<section v-if="machines">
-				<h2>Машины приобретенные данным клиентом</h2>
+				<h2>
+					{{
+						$store.state.language === 'RU'
+							? 'Машины приобретенные данным клиентом'
+							: 'Machines purchased by this customer'
+					}}
+				</h2>
 				<div v-if="CLIENTS.length > 0" class="slider-content card-shadow">
 					<carousel :breakpoints="breakpoints">
 						<slide v-for="slide in CLIENTS.find((e) => e.alt === alt).Product" :key="slide.id">
 							<app-machines-item
 								:id="slide.id"
-								:title="slide.name"
+								:title="$store.state.language === 'RU' ? slide.name : slide.name_en"
 								:image="slide.SliderProd.length > 0 ? slide.SliderProd[0].img : 'no-image'"
 								@close="$emit('close')"></app-machines-item>
 						</slide>

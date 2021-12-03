@@ -4,9 +4,10 @@
 			<carousel :breakpoints="breakpoints">
 				<slide v-for="item in equipment" :key="item.id">
 					<div class="details-select-inventory-item flex-column card-shadow">
-						<h4>{{ item.name }}</h4>
+						<h4>{{ $store.state.language === 'RU' ? item.name : item.name_en }}</h4>
 						<img :src="'http://bexram.online:8001' + item.img" :alt="item.alt" />
-						<app-hidden-item text="ПОДРОБНЕЕ"></app-hidden-item>
+						<app-hidden-item
+							:text="$store.state.language === 'RU' ? 'ПОДРОБНЕЕ' : 'READ MORE'"></app-hidden-item>
 					</div>
 				</slide>
 				<template #addons="{ slidesCount }">

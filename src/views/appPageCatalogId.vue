@@ -2,7 +2,7 @@
 	<app-header></app-header>
 	<main v-if="Object.keys(PRODUCT_ID).length > 0" class="main-content flex-column">
 		<section class="section">
-			<h2>{{ PRODUCT_ID.name }}</h2>
+			<h2>{{ $store.state.language === 'RU' ? PRODUCT_ID.name : PRODUCT_ID.name_en }}</h2>
 
 			<div class="slider-content card-shadow">
 				<carousel
@@ -24,8 +24,12 @@
 			</div>
 
 			<div class="buttons-section catalog-ig-buttons flex-row">
-				<button class="btn" @click="showModalCall = true">ЗАКАЗАТЬ ЗВОНОК</button>
-				<button class="btn" @click="showModalApplication = true">ОТПРАВИТЬ ЗАЯВКУ</button>
+				<button class="btn" @click="showModalCall = true">
+					{{ $store.state.language === 'RU' ? 'ЗАКАЗАТЬ ЗВОНОК' : 'REQUEST A CALL' }}
+				</button>
+				<button class="btn" @click="showModalApplication = true">
+					{{ $store.state.language === 'RU' ? 'ОТПРАВИТЬ ЗАЯВКУ' : 'SEND AN APPLICATION' }}
+				</button>
 			</div>
 
 			<div class="details flex-column card-shadow">
@@ -44,7 +48,7 @@
 							v-if="isSelected === index"
 							:src="require(`../assets/${item.activeImage}`)"
 							alt="catalog-details" />
-						<p>{{ item.title }}</p>
+						<p>{{ $store.state.language === 'RU' ? item.title : item.title_en }}</p>
 					</div>
 				</div>
 				<!-- /.details-select desktop-section -->
@@ -64,7 +68,7 @@
 									v-if="isSelected === index"
 									:src="require(`../assets/${item.activeImage}`)"
 									alt="catalog-details" />
-								<p>{{ item.title }}</p>
+								<p>{{ $store.state.language === 'RU' ? item.title : item.title_en }}</p>
 							</div>
 						</slide>
 						<template #addons>
@@ -83,7 +87,9 @@
 				<app-details-select-inventory
 					v-if="isSelected === 2"
 					:equipment="PRODUCT_ID.Equipment"></app-details-select-inventory>
-				<app-details-select-packet v-if="isSelected === 3"></app-details-select-packet>
+				<app-details-select-packet
+					v-if="isSelected === 3"
+					:packets-items="PRODUCT_ID.Packet"></app-details-select-packet>
 				<app-details-select-solution
 					v-if="isSelected === 4"
 					:complex-solution="PRODUCT_ID.Solution"></app-details-select-solution>
@@ -92,7 +98,13 @@
 		</section>
 
 		<section class="section">
-			<h2 class="title-brand">Бренды купившие эту машину</h2>
+			<h2 class="title-brand">
+				{{
+					$store.state.language === 'RU'
+						? 'Бренды купившие эту машину'
+						: 'Brands that bought this machine'
+				}}
+			</h2>
 			<div class="slider-content card-shadow">
 				<carousel :breakpoints="breakpoints">
 					<slide v-for="client in PRODUCT_ID.clients" :key="client.id">
@@ -113,16 +125,18 @@
 	<transition-group name="modal">
 		<app-modal-catalog-call
 			v-if="showModalCall"
+			:name-machine="$store.state.language === 'RU' ? PRODUCT_ID.name : PRODUCT_ID.name_en"
 			@close="showModalCall = false"></app-modal-catalog-call>
 		<app-modal-catalog-application
 			v-if="showModalApplication"
+			:name-machine="$store.state.language === 'RU' ? PRODUCT_ID.name : PRODUCT_ID.name_en"
 			@close="showModalApplication = false"></app-modal-catalog-application>
 		<app-modal-partners-item
 			v-if="customers.showModal"
 			:image="customers.logo"
 			:alt="customers.alt"
 			:title="customers.name"
-			:text="customers.description"
+			:text="$store.state.language === 'RU' ? customers.description : customers.description_en"
 			:machines="customers.machines"
 			@close="customers.showModal = false"></app-modal-partners-item>
 	</transition-group>
@@ -210,26 +224,31 @@ export default {
 					disableImage: 'catalog-details-settings.png',
 					activeImage: 'catalog-details-settings-active.png',
 					title: 'технические характеристики',
+					title_en: 'specifications',
 				},
 				{
 					disableImage: 'catalog-details-products.png',
 					activeImage: 'catalog-details-products-active.png',
 					title: 'продукты',
+					title_en: 'products',
 				},
 				{
 					disableImage: 'catalog-details-inventory.png',
 					activeImage: 'catalog-details-inventory-active.png',
 					title: 'доп. оборудование',
+					title_en: 'optional equipment',
 				},
 				{
 					disableImage: 'catalog-details-packet.png',
 					activeImage: 'catalog-details-packet-active.png',
 					title: 'тип пакета',
+					title_en: 'package type',
 				},
 				{
 					disableImage: 'catalog-details-solution.png',
 					activeImage: 'catalog-details-solution-active.png',
 					title: 'готовые решения',
+					title_en: 'ready-made solutions',
 				},
 			],
 			isSelected: 0,

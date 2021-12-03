@@ -1,8 +1,14 @@
 <template>
 	<footer class="footer flex-row">
-		<p>© ЗАО "Бестром" 2021, упаковочное оборудование</p>
+		<p>
+			{{
+				$store.state.language === 'RU'
+					? '© ЗАО "Бестром" 2021, упаковочное оборудование'
+					: '© ZAO "Bestrom" 2021, packaging equipment'
+			}}
+		</p>
 		<p><a href="tel:88005557457">8-800-555-74-57</a></p>
-		<p>ПРЕСС-ЦЕНТР</p>
+		<p>{{ $store.state.language === 'RU' ? 'ПРЕСС-ЦЕНТР' : 'PRESS CENTER' }}</p>
 	</footer>
 	<!-- /.footer -->
 </template>

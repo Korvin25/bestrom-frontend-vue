@@ -2,16 +2,26 @@
 	<app-header></app-header>
 	<main v-if="PAGE_ID.length > 0" class="main-content flex-column">
 		<section v-if="PAGE_ID[0].blocks.find((e) => e.name === 'history')" class="section">
-			<h2>О компании</h2>
+			<h2>{{ $store.state.language === 'RU' ? 'О компании' : 'About company' }}</h2>
 			<div class="content flex-row card-shadow">
 				<div class="about-content fex-column" @click="$router.push('/about/history')">
 					<h3>
-						{{ PAGE_ID[0].blocks.find((e) => e.name === 'history').contents[0].name }}
+						{{
+							$store.state.language === 'RU'
+								? PAGE_ID[0].blocks.find((e) => e.name === 'history').contents[0].name
+								: PAGE_ID[0].blocks.find((e) => e.name === 'history').contents[0].name_en
+						}}
 					</h3>
 					<p class="text-about-content">
-						{{ PAGE_ID[0].blocks.find((e) => e.name === 'history').contents[0].text }}
+						{{
+							$store.state.language === 'RU'
+								? PAGE_ID[0].blocks.find((e) => e.name === 'history').contents[0].text
+								: PAGE_ID[0].blocks.find((e) => e.name === 'history').contents[0].text_en
+						}}
 					</p>
-					<button class="content-btn btn" @click="$router.push('/about/history')">ПОДРОБНЕЕ</button>
+					<button class="content-btn btn" @click="$router.push('/about/history')">
+						{{ $store.state.language === 'RU' ? 'ПОДРОБНЕЕ' : 'READ MORE' }}
+					</button>
 				</div>
 				<YouTube
 					ref="youtube"
@@ -24,7 +34,7 @@
 		<!-- /.section -->
 
 		<section class="history-development-mobile section">
-			<h2>История развития</h2>
+			<h2>{{ $store.state.language === 'RU' ? 'История развития' : 'The history of development' }}</h2>
 			<div class="card-shadow">
 				<carousel :items-to-show="4.5" :wrap-around="true">
 					<slide v-for="item in HISTORY" :key="item.year">
@@ -33,9 +43,19 @@
 					<template #addons="{ currentSlide }">
 						<div class="history-description">
 							<img
-								:alt="findHistory(currentSlide + 1).description"
+								:alt="
+									$store.state.language === 'RU'
+										? findHistory(currentSlide + 1).description
+										: findHistory(currentSlide + 1).description_en
+								"
 								:src="findHistory(currentSlide + 1).img" />
-							<h3>{{ findHistory(currentSlide + 1).description }}</h3>
+							<h3>
+								{{
+									$store.state.language === 'RU'
+										? findHistory(currentSlide + 1).description
+										: findHistory(currentSlide + 1).description_en
+								}}
+							</h3>
 						</div>
 					</template>
 				</carousel>
@@ -44,24 +64,34 @@
 		<!-- /.section -->
 
 		<section v-if="PAGE_ID[0].blocks.find((e) => e.name === 'reasons')" class="section">
-			<h2>Почему выбирают нас</h2>
+			<h2>{{ $store.state.language === 'RU' ? 'Почему выбирают нас' : 'Why choose us' }}</h2>
 
 			<div class="content flex-row card-shadow">
 				<div class="about-content flex-column">
 					<h3>
-						{{ PAGE_ID[0].blocks.find((e) => e.name === 'reasons').contents[0].name }}
+						{{
+							$store.state.language === 'RU'
+								? PAGE_ID[0].blocks.find((e) => e.name === 'reasons').contents[0].name
+								: PAGE_ID[0].blocks.find((e) => e.name === 'reasons').contents[0].name_en
+						}}
 					</h3>
 					<p class="text-about-content" style="padding: 1rem 0">
-						{{ PAGE_ID[0].blocks.find((e) => e.name === 'reasons').contents[0].text.split('/')[0] }}
+						{{
+							$store.state.language === 'RU'
+								? PAGE_ID[0].blocks.find((e) => e.name === 'reasons').contents[0].text.split('/')[0]
+								: PAGE_ID[0].blocks.find((e) => e.name === 'reasons').contents[0].text_en.split('/')[0]
+						}}
 					</p>
 					<button
 						class="content-btn btn"
 						@click="
 							routerPush(
-								PAGE_ID[0].blocks.find((e) => e.name === 'reasons').contents[0].text.split('/')[1],
+								$store.state.language === 'RU'
+									? PAGE_ID[0].blocks.find((e) => e.name === 'reasons').contents[0].text.split('/')[1]
+									: PAGE_ID[0].blocks.find((e) => e.name === 'reasons').contents[0].text_en.split('/')[1],
 							)
 						">
-						ПОДРОБНЕЕ
+						{{ $store.state.language === 'RU' ? 'ПОДРОБНЕЕ' : 'READ MORE' }}
 					</button>
 				</div>
 				<div class="image-content">
@@ -98,29 +128,33 @@
 		<section
 			v-if="PAGE_ID[0].blocks.find((e) => e.name === 'directors')"
 			class="directors-desktop section">
-			<h2>Руководство БЕСТРОМ</h2>
+			<h2>{{ $store.state.language === 'RU' ? 'Руководство БЕСТРОМ' : 'BESTROM management' }}</h2>
 			<div class="directors flex-row">
 				<div
 					v-for="item in PAGE_ID[0].blocks.find((e) => e.name === 'directors').contents"
 					:key="item.id"
 					class="director-item flex-column">
 					<img :alt="item.file[0].alt" :src="'http://bexram.online:8001' + item.file[0].file" />
-					<h5>{{ item.name }}</h5>
-					<p>{{ item.text }}</p>
+					<h5>{{ $store.state.language === 'RU' ? item.name : item.name_en }}</h5>
+					<p>{{ $store.state.language === 'RU' ? item.text : item.text_en }}</p>
 				</div>
 			</div>
 		</section>
 		<!-- /.section -->
 
 		<section v-if="PAGE_ID[0].blocks.find((e) => e.name === 'we-create')" class="section">
-			<h2>Мы производим и реализуем</h2>
+			<h2>
+				{{
+					$store.state.language === 'RU' ? 'Мы производим и реализуем' : 'We manufacture and distribute'
+				}}
+			</h2>
 
 			<carousel :autoplay="4000" :items-to-show="1.5" :wrap-around="true" class="our-choice-mobile">
 				<slide
 					v-for="slide in PAGE_ID[0].blocks.find((e) => e.name === 'we-create').contents"
 					:key="slide.id">
 					<div class="reason-mobile item-reason card-shadow">
-						<h5>{{ slide.name }}</h5>
+						<h5>{{ $store.state.language === 'RU' ? slide.name : slide.name_en }}</h5>
 					</div>
 				</slide>
 			</carousel>
@@ -131,7 +165,7 @@
 						v-for="item in PAGE_ID[0].blocks.find((e) => e.name === 'we-create').contents"
 						:key="item.id"
 						class="item-reason card-shadow">
-						<h5>{{ item.name }}</h5>
+						<h5>{{ $store.state.language === 'RU' ? item.name : item.name_en }}</h5>
 					</div>
 				</div>
 			</div>
@@ -141,22 +175,22 @@
 		<section
 			v-if="PAGE_ID[0].blocks.find((e) => e.name === 'directors')"
 			class="directors-mobile section">
-			<h2>Руководство БЕСТРОМ</h2>
+			<h2>{{ $store.state.language === 'RU' ? 'Руководство БЕСТРОМ' : 'BESTROM management' }}</h2>
 			<carousel :items-to-show="1.3" :autoplay="3800" :wrap-around="true" class="our-choice-mobile">
 				<slide
 					v-for="slide in PAGE_ID[0].blocks.find((e) => e.name === 'directors').contents"
 					:key="slide.id">
 					<div class="director-item flex-column">
 						<img :alt="slide.file[0].alt" :src="'http://bexram.online:8001' + slide.file[0].file" />
-						<h5>{{ slide.name }}</h5>
-						<p>{{ slide.text }}</p>
+						<h5>{{ $store.state.language === 'RU' ? slide.name : slide.name_en }}</h5>
+						<p>{{ $store.state.language === 'RU' ? slide.text : slide.text_en }}</p>
 					</div>
 				</slide>
 			</carousel>
 		</section>
 
 		<section class="history-development-desktop section">
-			<h2>История развития</h2>
+			<h2>{{ $store.state.language === 'RU' ? 'История развития' : 'The history of development' }}</h2>
 
 			<div class="history-development card-shadow">
 				<carousel :items-to-show="4.5" :wrap-around="true">
@@ -166,9 +200,19 @@
 					<template #addons="{ currentSlide }">
 						<div class="history-description">
 							<img
-								:alt="findHistory(currentSlide + 1).description"
+								:alt="
+									$store.state.language === 'RU'
+										? findHistory(currentSlide + 1).description
+										: findHistory(currentSlide + 1).description_en
+								"
 								:src="findHistory(currentSlide + 1).img" />
-							<h3>{{ findHistory(currentSlide + 1).description }}</h3>
+							<h3>
+								{{
+									$store.state.language === 'RU'
+										? findHistory(currentSlide + 1).description
+										: findHistory(currentSlide + 1).description_en
+								}}
+							</h3>
 						</div>
 					</template>
 				</carousel>
@@ -177,7 +221,7 @@
 		<!-- /.section -->
 
 		<section class="clients-desktop section">
-			<h2>Клиенты</h2>
+			<h2>{{ $store.state.language === 'RU' ? 'Клиенты' : 'Clients' }}</h2>
 			<div class="slider-content card-shadow">
 				<carousel :breakpoints="breakpoints">
 					<slide v-for="client in CLIENTS" :key="client.id">
@@ -199,11 +243,19 @@
 			v-if="PAGE_ID[0].blocks.find((e) => e.name === 'purpose')"
 			class="purpose-desktop section">
 			<h2>
-				{{ PAGE_ID[0].blocks.find((e) => e.name === 'purpose').contents[0].name }}
+				{{
+					$store.state.language === 'RU'
+						? PAGE_ID[0].blocks.find((e) => e.name === 'purpose').contents[0].name
+						: PAGE_ID[0].blocks.find((e) => e.name === 'purpose').contents[0].name_en
+				}}
 			</h2>
 			<div class="purpose card-shadow flex-column">
 				<h5>
-					{{ PAGE_ID[0].blocks.find((e) => e.name === 'purpose').contents[0].text }}
+					{{
+						$store.state.language === 'RU'
+							? PAGE_ID[0].blocks.find((e) => e.name === 'purpose').contents[0].text
+							: PAGE_ID[0].blocks.find((e) => e.name === 'purpose').contents[0].text_en
+					}}
 				</h5>
 			</div>
 		</section>
@@ -213,11 +265,19 @@
 			v-if="PAGE_ID[0].blocks.find((e) => e.name === 'mission')"
 			class="mission-desktop section">
 			<h2>
-				{{ PAGE_ID[0].blocks.find((e) => e.name === 'mission').contents[0].name }}
+				{{
+					$store.state.language === 'RU'
+						? PAGE_ID[0].blocks.find((e) => e.name === 'mission').contents[0].name
+						: PAGE_ID[0].blocks.find((e) => e.name === 'mission').contents[0].name_en
+				}}
 			</h2>
 			<div class="mission card-shadow flex-column">
 				<h5>
-					{{ PAGE_ID[0].blocks.find((e) => e.name === 'mission').contents[0].text }}
+					{{
+						$store.state.language === 'RU'
+							? PAGE_ID[0].blocks.find((e) => e.name === 'mission').contents[0].text
+							: PAGE_ID[0].blocks.find((e) => e.name === 'mission').contents[0].text_en
+					}}
 				</h5>
 			</div>
 		</section>

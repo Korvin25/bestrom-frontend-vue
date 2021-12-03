@@ -1,10 +1,14 @@
 <template>
 	<div class="desktop-section catalog-item-product flex-row card-shadow">
 		<div class="about-content flex-column">
-			<h3>{{ product.name }}</h3>
+			<h3>{{ $store.state.language === 'RU' ? product.name : product.name_en }}</h3>
 			<p>{{ property }}</p>
-			<p class="text-about-content">{{ product.description }}</p>
-			<button class="btn" @click="scrollToTop">ПОДРОБНЕЕ</button>
+			<p class="text-about-content">
+				{{ $store.state.language === 'RU' ? product.description : product.description_en }}
+			</p>
+			<button class="btn" @click="scrollToTop">
+				{{ $store.state.language === 'RU' ? 'ПОДРОБНЕЕ' : 'READ MORE' }}
+			</button>
 		</div>
 		<section class="section">
 			<carousel
@@ -28,7 +32,7 @@
 
 	<div class="mobile-section catalog-item-product flex-row card-shadow">
 		<div class="about-content flex-column">
-			<h3>{{ product.name }}</h3>
+			<h3>{{ $store.state.language === 'RU' ? product.name : product.name_en }}</h3>
 			<section class="section">
 				<carousel
 					v-if="product.SliderProd.length > 0"
@@ -50,8 +54,14 @@
 				<carousel class="carousel" :autoplay="4000" :items-to-show="1" :wrap-around="true">
 					<slide v-for="slide in product.ProductPropertyValue" :key="slide.id">
 						<div class="flex-column">
-							<h4>{{ slide.product_property.name }}</h4>
-							<p>{{ slide.name }}</p>
+							<h4>
+								{{
+									$store.state.language === 'RU'
+										? slide.product_property.name
+										: slide.product_property.name_en
+								}}
+							</h4>
+							<p>{{ $store.state.language === 'RU' ? slide.name : slide.name_en }}</p>
 						</div>
 					</slide>
 					<template #addons>
@@ -60,7 +70,9 @@
 				</carousel>
 			</section>
 
-			<button class="btn" @click="scrollToTop">ПОДРОБНЕЕ</button>
+			<button class="btn" @click="scrollToTop">
+				{{ $store.state.language === 'RU' ? 'ПОДРОБНЕЕ' : 'READ MORE' }}
+			</button>
 		</div>
 	</div>
 	<!-- ./mobile-section -->
@@ -84,8 +96,10 @@ export default {
 	},
 	computed: {
 		property() {
-			return this.product.ProductPropertyValue.find((e) => e.product_property.name === 'Тип машины')
-				.name
+			return this.$store.state.language === 'RU'
+				? this.product.ProductPropertyValue.find((e) => e.product_property.name === 'Тип машины').name
+				: this.product.ProductPropertyValue.find((e) => e.product_property.name === 'Тип машины')
+						.name_en
 		},
 	},
 	methods: {

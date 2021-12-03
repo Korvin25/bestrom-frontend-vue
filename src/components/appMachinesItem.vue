@@ -4,7 +4,8 @@
 		<div class="image-machine">
 			<img :src="imageComputed" :alt="title" />
 		</div>
-		<app-hidden-item text="ПОДРОБНЕЕ"></app-hidden-item>
+		<app-hidden-item
+			:text="$store.state.language === 'RU' ? 'ПОДРОБНЕЕ' : 'READ MORE'"></app-hidden-item>
 	</div>
 </template>
 
