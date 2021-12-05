@@ -2,8 +2,10 @@
 	<app-header></app-header>
 	<main class="main-content flex-column">
 		<section class="desktop-section section flex-column">
-			<h2 v-if="VACANCY.length !== 0">Вакансии</h2>
-			<h2 v-else>Вакансий нет</h2>
+			<h2 v-if="VACANCY.length !== 0">
+				{{ $store.state.language === 'RU' ? 'Вакансии' : 'Vacancies' }}
+			</h2>
+			<h2 v-else>{{ $store.state.language === 'RU' ? 'Вакансий нет' : 'VACANCIES' }}</h2>
 			<app-job-item
 				v-for="job in VACANCY"
 				:key="job.id"
@@ -18,7 +20,7 @@
 
 		<section class="mobile-section section flex-column">
 			<div class="vacation card-shadow">
-				<h2>ВАКАНСИИ</h2>
+				<h2>{{ $store.state.language === 'RU' ? 'ВАКАНСИИ' : 'VACANCIES' }}</h2>
 			</div>
 
 			<carousel :items-to-show="1.3">

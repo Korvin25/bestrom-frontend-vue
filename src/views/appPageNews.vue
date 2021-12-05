@@ -2,8 +2,10 @@
 	<app-header></app-header>
 	<main class="main-content flex-column">
 		<section class="all-news section">
-			<h2 v-if="TITLE_NEWS.length !== 0">Последние новости</h2>
-			<h2 v-else>Новостей нет</h2>
+			<h2 v-if="TITLE_NEWS.length !== 0">
+				{{ $store.state.language === 'RU' ? 'Последние новости' : 'Last news' }}
+			</h2>
+			<h2 v-else>{{ $store.state.language === 'RU' ? 'Новостей нет' : 'There is no news' }}</h2>
 			<div class="title-news flex-row">
 				<div v-if="TITLE_NEWS.length !== 0" class="big-title-news flex-column">
 					<div class="image-news card-shadow" @click="routerPush(TITLE_NEWS.alt)">
@@ -14,8 +16,12 @@
 							</div>
 						</div>
 					</div>
-					<h4>{{ TITLE_NEWS.name }}</h4>
-					<p>{{ TITLE_NEWS.mini_description }}</p>
+					<h4>{{ $store.state.language === 'RU' ? TITLE_NEWS.name : TITLE_NEWS.name_en }}</h4>
+					<p>
+						{{
+							$store.state.language === 'RU' ? TITLE_NEWS.mini_description : TITLE_NEWS.mini_description_en
+						}}
+					</p>
 				</div>
 				<!-- /.big-title-news -->
 				<div
@@ -30,8 +36,12 @@
 							</div>
 						</div>
 					</div>
-					<h4>{{ second_news.name }}</h4>
-					<p>{{ second_news.mini_description }}</p>
+					<h4>{{ $store.state.language === 'RU' ? second_news.name : second_news.name_en }}</h4>
+					<p>
+						{{
+							$store.state.language === 'RU' ? second_news.mini_description : second_news.mini_description
+						}}
+					</p>
 				</div>
 				<!-- /.small-title-news -->
 			</div>
@@ -42,8 +52,10 @@
 					v-for="other_news in OTHER_NEWS"
 					:id="other_news.alt"
 					:key="other_news.id"
-					:title="other_news.name"
-					:text="other_news.mini_description"
+					:title="$store.state.language === 'RU' ? other_news.name : other_news.name_en"
+					:text="
+						$store.state.language === 'RU' ? other_news.mini_description : other_news.mini_description_en
+					"
 					:image="other_news.img"></app-news-other-item>
 			</div>
 			<!-- /.other-news flex-row -->

@@ -2,18 +2,20 @@
 	<app-header></app-header>
 	<main class="main-content flex-column">
 		<section class="section">
-			<h2>{{ currentNews.name }}</h2>
+			<h2>{{ $store.state.language === 'RU' ? currentNews.name : currentNews.name_en }}</h2>
 			<div class="id-news flex-row">
 				<div class="current-news flex-column">
 					<img :src="currentNews.img" :alt="currentNews.alt" />
-					<p>{{ currentNews.description }}</p>
+					<p>
+						{{ $store.state.language === 'RU' ? currentNews.description : currentNews.description_en }}
+					</p>
 					<div class="date-publication flex-row">
 						<img src="../assets/calendar.png" alt="calendar" />
 						<p>{{ new Date(currentNews.published).toLocaleDateString() }}</p>
 					</div>
 				</div>
 				<div class="last-news flex-column card-shadow">
-					<h3>Недавние новости</h3>
+					<h3>{{ $store.state.language === 'RU' ? 'Недавние новости' : 'Recent news' }}</h3>
 					<div
 						v-for="news in lastNews"
 						:key="news.id"
@@ -53,11 +55,15 @@ export default {
 		const computedMeta = computed(() => ({
 			title:
 				store.getters['news/ALL_NEWS'].length > 0
-					? store.getters['news/ALL_NEWS'].find((e) => e.alt === routeParam).name
+					? store.state.language === 'RU'
+						? store.getters['news/ALL_NEWS'].find((e) => e.alt === routeParam).name
+						: store.getters['news/ALL_NEWS'].find((e) => e.alt === routeParam).name_en
 					: 'title',
 			description:
 				store.getters['news/ALL_NEWS'].length > 0
-					? store.getters['news/ALL_NEWS'].find((e) => e.alt === routeParam).description
+					? store.state.language === 'RU'
+						? store.getters['news/ALL_NEWS'].find((e) => e.alt === routeParam).mini_description
+						: store.getters['news/ALL_NEWS'].find((e) => e.alt === routeParam).mini_description_en
 					: 'description',
 		}))
 		useMeta(computedMeta)

@@ -192,11 +192,15 @@ export default {
 		const computedMeta = computed(() => ({
 			title:
 				store.getters['product/PRODUCT'].length > 0
-					? store.getters['product/PRODUCT'].find((e) => e.id.toString() === routeId).name
+					? store.state.language === 'RU'
+						? store.getters['product/PRODUCT'].find((e) => e.id.toString() === routeId).name
+						: store.getters['product/PRODUCT'].find((e) => e.id.toString() === routeId).name_en
 					: 'title',
 			description:
 				store.getters['product/PRODUCT'].length > 0
-					? store.getters['product/PRODUCT'].find((e) => e.id.toString() === routeId).description
+					? store.state.language === 'RU'
+						? store.getters['product/PRODUCT'].find((e) => e.id.toString() === routeId).description
+						: store.getters['product/PRODUCT'].find((e) => e.id.toString() === routeId).description_en
 					: 'description',
 		}))
 		useMeta(computedMeta)

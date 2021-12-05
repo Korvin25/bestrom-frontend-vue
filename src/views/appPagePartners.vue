@@ -2,7 +2,7 @@
 	<app-header></app-header>
 	<main class="main-content flex-column">
 		<section class="desktop-section section">
-			<h2>Партнеры</h2>
+			<h2>{{ $store.state.language === 'RU' ? 'Партнеры' : 'Partners' }}</h2>
 			<div class="flex-row partners">
 				<app-partners-item
 					v-for="partner in PARTNERS"
@@ -13,7 +13,7 @@
 		</section>
 
 		<section class="mobile-section section">
-			<h2>Партнеры</h2>
+			<h2>{{ $store.state.language === 'RU' ? 'Партнеры' : 'Partners' }}</h2>
 			<div class="flex-row partners">
 				<div v-for="partner in PARTNERS" :key="partner.id" class="mobile-partners-item">
 					<app-partners-item
@@ -31,7 +31,7 @@
 				:image="customers.logo"
 				:alt="customers.alt"
 				:title="customers.name"
-				:text="customers.description"
+				:text="$store.state.language === 'RU' ? customers.description : customers.description_en"
 				:machines="customers.machines"
 				@close="customers.showModal = false"></app-modal-partners-item>
 		</transition>

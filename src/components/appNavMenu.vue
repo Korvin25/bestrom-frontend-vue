@@ -134,7 +134,7 @@
 				@mouseenter="hoverItem = 1"
 				@mouseleave="hoverItem = 0"
 				@click="scrollToTop">
-				<p>Главная</p>
+				<p>{{ $store.state.language === 'RU' ? 'Главная' : 'Main page' }}</p>
 			</router-link>
 			<router-link
 				:class="hoverItem === 2 || $route.path.includes('/about') ? 'text-hover' : ''"
@@ -143,7 +143,7 @@
 				@mouseenter="hoverItem = 2"
 				@mouseleave="hoverItem = 0"
 				@click="scrollToTop">
-				<p>О компании</p>
+				<p>{{ $store.state.language === 'RU' ? 'О компании' : 'About company' }}</p>
 			</router-link>
 			<router-link
 				:class="hoverItem === 3 || $route.path.includes('/catalog') ? 'text-hover' : ''"
@@ -152,7 +152,7 @@
 				@mouseenter="hoverItem = 3"
 				@mouseleave="hoverItem = 0"
 				@click="scrollToTop">
-				<p>Каталог</p>
+				<p>{{ $store.state.language === 'RU' ? 'Каталог' : 'Catalog' }}</p>
 			</router-link>
 			<router-link
 				:class="hoverItem === 4 || $route.path.includes('/cutting') ? 'text-hover' : ''"
@@ -161,7 +161,7 @@
 				@mouseenter="hoverItem = 4"
 				@mouseleave="hoverItem = 0"
 				@click="scrollToTop">
-				<p>Раскрой пакета</p>
+				<p>{{ $store.state.language === 'RU' ? 'Раскрой пакета' : 'Uncover the package' }}</p>
 			</router-link>
 			<a
 				:class="hoverItem === 5 ? 'text-hover' : ''"
@@ -169,7 +169,7 @@
 				@mouseenter="hoverItem = 5"
 				@mouseleave="hoverItem = 0"
 				@click="showModalMenuService = true">
-				<p>Сервис</p>
+				<p>{{ $store.state.language === 'RU' ? 'Сервис' : 'Service' }}</p>
 			</a>
 			<router-link
 				:class="hoverItem === 6 || $route.path.includes('/news') ? 'text-hover' : ''"
@@ -178,7 +178,7 @@
 				@mouseenter="hoverItem = 6"
 				@mouseleave="hoverItem = 0"
 				@click="scrollToTop">
-				<p>Новости</p>
+				<p>{{ $store.state.language === 'RU' ? 'Новости' : 'News' }}</p>
 			</router-link>
 			<router-link
 				:class="hoverItem === 7 || $route.path.includes('/partners') ? 'text-hover' : ''"
@@ -187,7 +187,7 @@
 				@mouseenter="hoverItem = 7"
 				@mouseleave="hoverItem = 0"
 				@click="scrollToTop">
-				<p>Партнеры</p>
+				<p>{{ $store.state.language === 'RU' ? 'Партнеры' : 'Partners' }}</p>
 			</router-link>
 			<router-link
 				:class="hoverItem === 8 || $route.path.includes('/clients') ? 'text-hover' : ''"
@@ -196,7 +196,7 @@
 				@mouseenter="hoverItem = 8"
 				@mouseleave="hoverItem = 0"
 				@click="scrollToTop">
-				<p>Клиенты</p>
+				<p>{{ $store.state.language === 'RU' ? 'Клиенты' : 'Clients' }}</p>
 			</router-link>
 			<a
 				:class="hoverItem === 9 ? 'text-hover' : ''"
@@ -204,7 +204,7 @@
 				@mouseenter="hoverItem = 9"
 				@mouseleave="hoverItem = 0"
 				@click="showModalMenuContacts = true">
-				<p>Контакты</p>
+				<p>{{ $store.state.language === 'RU' ? 'Контакты' : 'Contacts' }}</p>
 			</a>
 			<router-link
 				:class="hoverItem === 10 || $route.path.includes('/jobs') ? 'text-hover' : ''"
@@ -213,7 +213,7 @@
 				@mouseenter="hoverItem = 10"
 				@mouseleave="hoverItem = 0"
 				@click="scrollToTop">
-				<p>Вакансии</p>
+				<p>{{ $store.state.language === 'RU' ? 'Вакансии' : 'Vacancies' }}</p>
 			</router-link>
 			<a
 				:class="hoverItem === 11 || showModalMenuApplication ? 'text-hover' : ''"
@@ -221,7 +221,7 @@
 				@mouseenter="hoverItem = 11"
 				@mouseleave="hoverItem = 0"
 				@click="showModalMenuApplication = true">
-				<p>Оставить заявку</p>
+				<p>{{ $store.state.language === 'RU' ? 'Оставить заявку' : 'Submit your application' }}</p>
 			</a>
 			<a
 				href="https://vk.com"
@@ -255,10 +255,10 @@
 		<div class="mobile-nav-buttons">
 			<div class="mobile-nav-buttons-item" @click="showMobileMenu = true">
 				<img src="../assets/menu-burger.png" alt="menu-burger" />
-				<p>Меню</p>
+				<p>{{ $store.state.language === 'RU' ? 'Меню' : 'Menu' }}</p>
 			</div>
 			<a href="tel:+78005557457" class="mobile-nav-buttons-item">
-				<p>Позвонить</p>
+				<p>{{ $store.state.language === 'RU' ? 'Позвонить' : 'Call' }}</p>
 			</a>
 		</div>
 
@@ -269,7 +269,7 @@
 					src="../assets/close-mobile-menu.png"
 					alt="close-mobile-menu"
 					@click="showMobileMenu = false" />
-				<p class="mobile-menu-title">Меню</p>
+				<p class="mobile-menu-title">{{ $store.state.language === 'RU' ? 'Меню' : 'Menu' }}</p>
 
 				<div class="mobile-menu-logo flex-row">
 					<a href="https://vk.com" class="nav-item img logo">
@@ -290,7 +290,9 @@
 							class="nav-mobile-item-img card-shadow">
 							<img class="logo-bestrom" src="../assets/bestrom_logo.png" alt="menu-item-img" />
 						</div>
-						<p :class="hoverItem === 1 || $route.path === '/' ? 'text-hover' : ''">Главная</p>
+						<p :class="hoverItem === 1 || $route.path === '/' ? 'text-hover' : ''">
+							{{ $store.state.language === 'RU' ? 'Главная' : 'Main page' }}
+						</p>
 					</router-link>
 					<router-link class="nav-mobile-item flex-row" to="/about" @click="scrollToTop">
 						<div
@@ -299,7 +301,7 @@
 							<img src="../assets/menu-item-2.png" alt="menu-item-img" />
 						</div>
 						<p :class="hoverItem === 2 || $route.path.includes('/about') ? 'text-hover' : ''">
-							О компании
+							{{ $store.state.language === 'RU' ? 'О компании' : 'About company' }}
 						</p>
 					</router-link>
 					<router-link class="nav-mobile-item flex-row" to="/catalog" @click="scrollToTop">
@@ -309,7 +311,7 @@
 							<img src="../assets/menu-item-3.png" alt="menu-item-img" />
 						</div>
 						<p :class="hoverItem === 3 || $route.path.includes('/catalog') ? 'text-hover' : ''">
-							Каталог
+							{{ $store.state.language === 'RU' ? 'Каталог' : 'Catalog' }}
 						</p>
 					</router-link>
 					<router-link class="nav-mobile-item flex-row" to="/cutting" @click="scrollToTop">
@@ -319,14 +321,16 @@
 							<img src="../assets/menu-item-4.png" alt="menu-item-img" />
 						</div>
 						<p :class="hoverItem === 4 || $route.path.includes('/cutting') ? 'text-hover' : ''">
-							Раскрой пакета
+							{{ $store.state.language === 'RU' ? 'Раскрой пакета' : 'Uncover the package' }}
 						</p>
 					</router-link>
 					<a class="nav-mobile-item flex-row" @click="showModalMenuServiceClick">
 						<div :class="hoverItem === 5 ? 'img-hover' : ''" class="nav-mobile-item-img card-shadow">
 							<img src="../assets/menu-item-5,8.png" alt="menu-item-img" />
 						</div>
-						<p :class="hoverItem === 5 ? 'text-hover' : ''">Сервис</p>
+						<p :class="hoverItem === 5 ? 'text-hover' : ''">
+							{{ $store.state.language === 'RU' ? 'Сервис' : 'Service' }}
+						</p>
 					</a>
 					<router-link class="nav-mobile-item flex-row" to="/news" @click="scrollToTop">
 						<div
@@ -334,7 +338,9 @@
 							class="nav-mobile-item-img card-shadow">
 							<img src="../assets/menu-item-6.png" alt="menu-item-img" />
 						</div>
-						<p :class="hoverItem === 6 || $route.path.includes('/news') ? 'text-hover' : ''">Новости</p>
+						<p :class="hoverItem === 6 || $route.path.includes('/news') ? 'text-hover' : ''">
+							{{ $store.state.language === 'RU' ? 'Новости' : 'News' }}
+						</p>
 					</router-link>
 					<router-link class="nav-mobile-item flex-row" to="/partners" @click="scrollToTop">
 						<div
@@ -343,7 +349,7 @@
 							<img src="../assets/menu-item-7.png" alt="menu-item-img" />
 						</div>
 						<p :class="hoverItem === 7 || $route.path.includes('/partners') ? 'text-hover' : ''">
-							Партнеры
+							{{ $store.state.language === 'RU' ? 'Партнеры' : 'Partners' }}
 						</p>
 					</router-link>
 					<router-link class="nav-mobile-item flex-row" to="/clients" @click="scrollToTop">
@@ -353,7 +359,7 @@
 							<img src="../assets/menu-item-5,8.png" alt="menu-item-img" />
 						</div>
 						<p :class="hoverItem === 8 || $route.path.includes('/clients') ? 'text-hover' : ''">
-							Клиенты
+							{{ $store.state.language === 'RU' ? 'Клиенты' : 'Clients' }}
 						</p>
 					</router-link>
 					<router-link class="nav-mobile-item flex-row" to="/jobs" @click="scrollToTop">
@@ -363,7 +369,9 @@
 								src="../assets/menu-item-10.png"
 								alt="menu-item-img" />
 						</div>
-						<p :class="hoverItem === 10 || $route.path.includes('/jobs') ? 'text-hover' : ''">Вакансии</p>
+						<p :class="hoverItem === 10 || $route.path.includes('/jobs') ? 'text-hover' : ''">
+							{{ $store.state.language === 'RU' ? 'Вакансии' : 'Vacancies' }}
+						</p>
 					</router-link>
 
 					<div class="mobile-menu-nav-bottom flex-row">
@@ -371,19 +379,19 @@
 							class="mobile-menu-nav-bottom-item card-shadow flex-column"
 							@click="showModalMenuApplicationClick">
 							<img src="../assets/menu-mobile-call.png" alt="menu-mobile-call" />
-							<p>Заявка</p>
+							<p>{{ $store.state.language === 'RU' ? 'Заявка' : 'Application' }}</p>
 						</div>
 						<div
 							class="mobile-menu-nav-bottom-item card-shadow flex-column"
 							@click="showModalMenuContactsQuestionClick">
 							<img src="../assets/menu-mobile-message.png" alt="menu-mobile-message" />
-							<p>Написать</p>
+							<p>{{ $store.state.language === 'RU' ? 'Написать' : 'Write a message' }}</p>
 						</div>
 						<div
 							class="mobile-menu-nav-bottom-item card-shadow flex-column"
 							@click="showModalMenuContactsClick">
 							<img src="../assets/menu-mobile-contacts.png" alt="menu-mobile-contacts" />
-							<p>Контакты</p>
+							<p>{{ $store.state.language === 'RU' ? 'Контакты' : 'Contacts' }}</p>
 						</div>
 					</div>
 				</div>
@@ -741,7 +749,8 @@ export default {
 		flex-grow: 1;
 	}
 	.mobile-menu-nav-bottom-item p {
-		margin: 0;
+		margin: 0.5rem 0 0 0;
+		text-align: center;
 	}
 	.mobile-menu-modal-enter-active {
 		animation: mobile-menu-modal-in 0.4s;
