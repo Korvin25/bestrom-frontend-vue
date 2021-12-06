@@ -35,7 +35,7 @@ module.exports = {
 		'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
 		'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
 		quotes: ['error', 'single'],
-		'vue/no-v-html': false,
+		'vue/no-v-html': 0,
 		'vue/no-multiple-template-root': 0,
 		'vue/html-closing-bracket-spacing': ['warn', { selfClosingTag: 'always' }],
 		'vue/no-unused-components': 'warn',

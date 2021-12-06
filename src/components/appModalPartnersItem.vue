@@ -9,7 +9,7 @@
 			<h2 class="title">{{ title }}</h2>
 			<div class="flex-row about-partner">
 				<img class="partner-logo" :src="imageLogoComputed" :alt="alt" />
-				<p v-html="text"></p>
+				<span v-html="text"></span>
 			</div>
 
 			<section v-if="machines">
