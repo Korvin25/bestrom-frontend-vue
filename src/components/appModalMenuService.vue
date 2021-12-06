@@ -6,31 +6,49 @@
 				<img class="close-desktop" src="../assets/close-image.png" alt="close" />
 				<img class="close-mobile" src="../assets/close-mobile-menu.png" alt="close" />
 			</div>
-			<h2 v-if="switchContent">Сервисное обслуживание</h2>
-			<h2 v-if="!switchContent">Заказ запчастей</h2>
+			<h2 v-if="switchContent">
+				{{ $store.state.language === 'RU' ? 'Сервисное обслуживание' : 'Service maintenance' }}
+			</h2>
+			<h2 v-if="!switchContent">
+				{{ $store.state.language === 'RU' ? 'Заказ запчастей' : 'Parts order' }}
+			</h2>
 			<div class="service-buttons flex-row">
 				<button :class="!switchContent ? 'btn-disabled' : 'btn'" @click="switchContent = true">
-					ВЫЗОВ СПЕЦИАЛИСТА
+					{{ $store.state.language === 'RU' ? 'ВЫЗОВ СПЕЦИАЛИСТА' : 'CALL A SPECIALIST' }}
 				</button>
 				<button :class="switchContent ? 'btn-disabled' : 'btn'" @click="switchContent = false">
-					ЗАКАЗ ЗАПЧАСТЕЙ
+					{{ $store.state.language === 'RU' ? 'ЗАКАЗ ЗАПЧАСТЕЙ' : 'ORDERING SPARE PARTS' }}
 				</button>
 			</div>
 
 			<!-- Call to specialist -->
 			<form v-if="switchContent" class="form-call flex-column" action="">
-				<label for="company">Компания</label>
-				<input id="company" type="text" class="input" placeholder="БЕСТРОМ" />
-				<label for="fio">Ф.И.О</label>
-				<input id="fio" type="text" class="input" placeholder="Иван Иванович" />
-				<label for="telephone">Телефон</label>
+				<label for="company">{{ $store.state.language === 'RU' ? 'Компания' : 'Company' }}</label>
+				<input
+					id="company"
+					type="text"
+					class="input"
+					:placeholder="$store.state.language === 'RU' ? 'БЕСТРОМ' : 'BESTROM'" />
+				<label for="fio">{{ $store.state.language === 'RU' ? 'Ф.И.О' : 'Full name' }}</label>
+				<input
+					id="fio"
+					type="text"
+					class="input"
+					:placeholder="$store.state.language === 'RU' ? 'Иван Иванович' : 'Ivan Ivanovich'" />
+				<label for="telephone">{{ $store.state.language === 'RU' ? 'Телефон' : 'Telephone' }}</label>
 				<input id="telephone" type="text" class="input" placeholder="89199966203" />
 				<label for="email">E-mail</label>
 				<input id="email" type="text" class="input" placeholder="partner@thedimension.com" />
-				<label for="model">Модель оборудования</label>
-				<input id="model" type="text" class="input" placeholder="БЕСТРОМ - 420С" />
+				<label for="model">{{
+					$store.state.language === 'RU' ? 'Модель оборудования' : 'Equipment model'
+				}}</label>
+				<input
+					id="model"
+					type="text"
+					class="input"
+					:placeholder="$store.state.language === 'RU' ? 'БЕСТРОМ - 420С' : 'BESTROM-420S'" />
 
-				<p>Вид обслуживания</p>
+				<p>{{ $store.state.language === 'RU' ? 'Вид обслуживания' : 'Service type' }}</p>
 				<div class="__select" :data-state="active ? 'active' : ''" @click="active = !active">
 					<div :class="active ? 'active' : ''" class="__select__title">
 						{{ selectItem }}
@@ -42,73 +60,132 @@
 						<label
 							for="singleSelect0"
 							class="__select__label"
-							@click="selectOption('Пуско-наладочные работы')"
-							>Пуско-наладочные работы</label
+							@click="
+								selectOption(
+									$store.state.language === 'RU' ? 'Пуско-наладочные работы' : 'Commissioning works',
+								)
+							"
+							>{{
+								$store.state.language === 'RU' ? 'Пуско-наладочные работы' : 'Commissioning works'
+							}}</label
 						>
 						<input id="singleSelect1" class="__select__input" type="radio" name="singleSelect" />
 						<label
 							for="singleSelect1"
 							class="__select__label"
-							@click="selectOption('Гарантийное обслуживание')"
-							>Гарантийное обслуживание</label
+							@click="
+								selectOption(
+									$store.state.language === 'RU' ? 'Гарантийное обслуживание' : 'Warranty service',
+								)
+							"
+							>{{
+								$store.state.language === 'RU' ? 'Гарантийное обслуживание' : 'Warranty service'
+							}}</label
 						>
 						<input id="singleSelect2" class="__select__input" type="radio" name="singleSelect" />
 						<label
 							for="singleSelect2"
 							class="__select__label"
-							@click="selectOption('Сервисное обслуживание')"
-							>Сервисное обслуживание</label
+							@click="
+								selectOption(
+									$store.state.language === 'RU' ? 'Сервисное обслуживание' : 'Service maintenance',
+								)
+							"
+							>{{
+								$store.state.language === 'RU' ? 'Сервисное обслуживание' : 'Service maintenance'
+							}}</label
 						>
 						<input id="singleSelect3" class="__select__input" type="radio" name="singleSelect" />
-						<label for="singleSelect3" class="__select__label" @click="selectOption('Другое')"
-							>Другое</label
+						<label
+							for="singleSelect3"
+							class="__select__label"
+							@click="selectOption($store.state.language === 'RU' ? 'Другое' : 'Other')"
+							>{{ $store.state.language === 'RU' ? 'Другое' : 'Other' }}</label
 						>
 					</div>
 				</div>
 
-				<label for="date">Желаемая дата прибытия специалиста</label>
-				<input id="date" type="text" class="input" placeholder="Сегодня" />
-				<button class="call btn">ОТПРАВИТЬ</button>
+				<label for="date">{{
+					$store.state.language === 'RU'
+						? 'Желаемая дата прибытия специалиста'
+						: 'Desired date of arrival of the specialist'
+				}}</label>
+				<input
+					id="date"
+					type="text"
+					class="input"
+					:placeholder="$store.state.language === 'RU' ? 'Сегодня' : 'Today'" />
+				<button class="call btn">{{ $store.state.language === 'RU' ? 'ОТПРАВИТЬ' : 'SEND' }}</button>
 			</form>
 
 			<!-- Ordering spare parts -->
 			<form v-if="!switchContent" class="form-call flex-column" action="">
-				<label for="company-call">Компания</label>
-				<input id="company-call" type="text" class="input" placeholder="БЕСТРОМ" />
-				<label for="fio-call">Ф.И.О</label>
-				<input id="fio-call" type="text" class="input" placeholder="Иван Иванович" />
-				<label for="telephone-call">Телефон</label>
-				<input id="telephone-call" type="text" class="input" placeholder="89199966203" />
-				<label for="email-call">E-mail</label>
-				<input id="email-call" type="text" class="input" placeholder="partner@thedimension.com" />
-				<label for="model-call">Модель оборудования</label>
-				<input id="model-call" type="text" class="input" placeholder="БЕСТРОМ - 420С" />
-				<label for="number-model">Заводской номер</label>
+				<label for="company">{{ $store.state.language === 'RU' ? 'Компания' : 'Company' }}</label>
+				<input
+					id="company"
+					type="text"
+					class="input"
+					:placeholder="$store.state.language === 'RU' ? 'БЕСТРОМ' : 'BESTROM'" />
+				<label for="fio">{{ $store.state.language === 'RU' ? 'Ф.И.О' : 'Full name' }}</label>
+				<input
+					id="fio"
+					type="text"
+					class="input"
+					:placeholder="$store.state.language === 'RU' ? 'Иван Иванович' : 'Ivan Ivanovich'" />
+				<label for="telephone">{{ $store.state.language === 'RU' ? 'Телефон' : 'Telephone' }}</label>
+				<input id="telephone" type="text" class="input" placeholder="89199966203" />
+				<label for="email">E-mail</label>
+				<input id="email" type="text" class="input" placeholder="partner@thedimension.com" />
+				<label for="model">{{
+					$store.state.language === 'RU' ? 'Модель оборудования' : 'Equipment model'
+				}}</label>
+				<input
+					id="model"
+					type="text"
+					class="input"
+					:placeholder="$store.state.language === 'RU' ? 'БЕСТРОМ - 420С' : 'BESTROM-420S'" />
+				<label for="number-model">{{
+					$store.state.language === 'RU' ? 'Заводской номер' : 'Factory number'
+				}}</label>
 				<input id="number-model" type="text" class="input" placeholder="420С2801" />
 
-				<p>Наименование запчасти</p>
+				<p>{{ $store.state.language === 'RU' ? 'Наименование запчасти' : 'Part name' }}</p>
 				<div class="flex-row call-inputs">
 					<input v-model.trim="inputDetailValue" type="text" class="input" placeholder="0253121" />
-					<div class="add-btn" @click="pushInput">Добавить</div>
+					<div class="add-btn" @click="pushInput">
+						{{ $store.state.language === 'RU' ? 'Добавить' : 'Add' }}
+					</div>
 				</div>
 
 				<transition-group name="modal">
 					<div v-for="input in inputsDetails" :key="input.id" class="flex-row call-inputs">
 						<input type="text" class="input" :value="input.content" readonly />
-						<div class="del-btn" @click="removeInput(input.id)">Удалить</div>
+						<div class="del-btn" @click="removeInput(input.id)">
+							{{ $store.state.language === 'RU' ? 'Удалить' : 'Remove' }}
+						</div>
 					</div>
 				</transition-group>
 
-				<p>Вложение (Добавте фото интересующей Вас детали)</p>
+				<p>
+					{{
+						$store.state.language === 'RU'
+							? 'Вложение (Добавте фото интересующей Вас детали)'
+							: 'Attachment (Add a photo of the detail you are interested in)'
+					}}
+				</p>
 				<div class="flex-row call-inputs">
 					<input v-model.trim="inputFileName" type="text" class="input" placeholder="File name" />
-					<div class="add-btn" @click="pushInputFile">Добавить</div>
+					<div class="add-btn" @click="pushInputFile">
+						{{ $store.state.language === 'RU' ? 'Добавить' : 'Add' }}
+					</div>
 				</div>
 
 				<transition-group name="modal">
 					<div v-for="input in inputsFile" :key="input.id" class="flex-row call-inputs">
 						<input type="text" class="input" :value="input.content" readonly />
-						<div class="del-btn" @click="removeInputFile(input.id)">Удалить</div>
+						<div class="del-btn" @click="removeInputFile(input.id)">
+							{{ $store.state.language === 'RU' ? 'Удалить' : 'Remove' }}
+						</div>
 					</div>
 				</transition-group>
 
@@ -120,23 +197,31 @@
 						type="radio"
 						:value="1"
 						checked />
-					<label for="delivery-choice-1">Доставка</label>
+					<label for="delivery-choice-1">{{
+						$store.state.language === 'RU' ? 'Доставка' : 'Delivery'
+					}}</label>
 					<input
 						id="delivery-choice-2"
 						class="custom-radio"
 						name="delivery-choice"
 						type="radio"
 						:value="2" />
-					<label for="delivery-choice-2">Самовывоз</label>
+					<label for="delivery-choice-2">{{
+						$store.state.language === 'RU' ? 'Самовывоз' : 'Self-pickup'
+					}}</label>
 				</div>
 				<input
 					id="address"
 					type="text"
 					class="input"
-					placeholder="г. Красногорск, Ильинское шоссе, д.15," />
-				<label for="comment">Комментарий</label>
+					:placeholder="
+						$store.state.language === 'RU'
+							? 'г. Красногорск, Ильинское шоссе, д.15'
+							: 'Krasnogorsk, Ilyinskoe highway, 15'
+					" />
+				<label for="comment">{{ $store.state.language === 'RU' ? 'Комментарий' : 'Comment' }}</label>
 				<div id="comment" class="textarea" contenteditable="true"></div>
-				<button class="call btn">ОТПРАВИТЬ</button>
+				<button class="call btn">{{ $store.state.language === 'RU' ? 'ОТПРАВИТЬ' : 'SEND' }}</button>
 			</form>
 		</div>
 	</div>
@@ -150,7 +235,8 @@ export default {
 		return {
 			switchContent: true,
 			active: false,
-			selectItem: 'Пуско-наладочные работы',
+			selectItem:
+				this.$store.state.language === 'RU' ? 'Пуско-наладочные работы' : 'Commissioning works',
 			inputDetailValue: '',
 			inputFileName: '',
 			inputsDetails: [],

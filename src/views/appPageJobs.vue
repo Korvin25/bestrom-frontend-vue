@@ -28,9 +28,11 @@
 					<div class="flex-column job-item card-shadow">
 						<h4>{{ job.name }}</h4>
 						<img :src="job.img" :alt="job.alt" />
-						<h4>Заработная плата</h4>
+						<h4>{{ $store.state.language === 'RU' ? 'Заработная плата' : 'Salary' }}</h4>
 						<p>{{ job.salary }}</p>
-						<button class="btn" @click="routerPush(job.alt)">ОТКЛИКНУТЬСЯ</button>
+						<button class="btn" @click="routerPush(job.alt)">
+							{{ $store.state.language === 'RU' ? 'ОТКЛИКНУТЬСЯ' : 'RESPOND' }}
+						</button>
 					</div>
 				</slide>
 				<template #addons>
@@ -66,7 +68,11 @@ export default {
 		const store = useStore()
 		const computedMeta = computed(() => ({
 			title:
-				store.getters['page/PAGE_ID'].length > 0 ? store.getters['page/PAGE_ID'][0].title : 'title',
+				store.getters['page/PAGE_ID'].length > 0
+					? store.state.language === 'RU'
+						? store.getters['page/PAGE_ID'][0].title
+						: store.getters['page/PAGE_ID'][0].title_en
+					: 'title',
 			description:
 				store.getters['page/PAGE_ID'].length > 0
 					? store.getters['page/PAGE_ID'][0].description

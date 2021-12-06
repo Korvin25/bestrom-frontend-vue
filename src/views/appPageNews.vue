@@ -39,7 +39,9 @@
 					<h4>{{ $store.state.language === 'RU' ? second_news.name : second_news.name_en }}</h4>
 					<p>
 						{{
-							$store.state.language === 'RU' ? second_news.mini_description : second_news.mini_description
+							$store.state.language === 'RU'
+								? second_news.mini_description
+								: second_news.mini_description_en
 						}}
 					</p>
 				</div>
@@ -84,7 +86,11 @@ export default {
 		const store = useStore()
 		const computedMeta = computed(() => ({
 			title:
-				store.getters['page/PAGE_ID'].length > 0 ? store.getters['page/PAGE_ID'][0].title : 'title',
+				store.getters['page/PAGE_ID'].length > 0
+					? store.state.language === 'RU'
+						? store.getters['page/PAGE_ID'][0].title
+						: store.getters['page/PAGE_ID'][0].title_en
+					: 'title',
 			description:
 				store.getters['page/PAGE_ID'].length > 0
 					? store.getters['page/PAGE_ID'][0].description

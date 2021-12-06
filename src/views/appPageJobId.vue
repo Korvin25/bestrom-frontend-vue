@@ -8,27 +8,31 @@
 					<img :src="currentJob.img" :alt="currentJob.alt" />
 					<div class="flex-column job-item-description">
 						<h4>{{ currentJob.name }}</h4>
-						<h5>Основные требования:</h5>
+						<h5>
+							{{ $store.state.language === 'RU' ? 'Основные требования:' : 'Primary requirements:' }}
+						</h5>
 						<p>{{ currentJob.requirements }}</p>
-						<h5>Основные навыки:</h5>
+						<h5>{{ $store.state.language === 'RU' ? 'Основные навыки:' : 'Basic skills:' }}</h5>
 						<p>{{ currentJob.skills }}</p>
-						<h5>Образование:</h5>
+						<h5>{{ $store.state.language === 'RU' ? 'Образование:' : 'Education:' }}</h5>
 						<p>{{ currentJob.education }}</p>
-						<h5>Опыт работы:</h5>
+						<h5>{{ $store.state.language === 'RU' ? 'Опыт работы:' : 'Work experience:' }}</h5>
 						<p>{{ currentJob.experience }}</p>
-						<h5>Вы получаете:</h5>
+						<h5>{{ $store.state.language === 'RU' ? 'Вы получаете:' : 'You are getting:' }}</h5>
 						<p>{{ currentJob.youget }}</p>
 					</div>
 					<div class="flex-column job-item-pay">
-						<h4>Заработная плата</h4>
+						<h4>{{ $store.state.language === 'RU' ? 'Заработная плата' : 'Salary' }}</h4>
 						<p>{{ currentJob.salary }}</p>
 					</div>
 				</div>
 				<div class="flex-row flex-buttons">
 					<a href="tel:+78005557457">
-						<button class="btn">Позвонить</button>
+						<button class="btn">{{ $store.state.language === 'RU' ? 'Позвонить' : 'Call' }}</button>
 					</a>
-					<button class="btn" @click="showModalRespond = true">Откликнуться</button>
+					<button class="btn" @click="showModalRespond = true">
+						{{ $store.state.language === 'RU' ? 'Откликнуться' : 'Respond' }}
+					</button>
 				</div>
 			</div>
 		</section>
@@ -40,19 +44,21 @@
 			</div>
 			<div class="flex-column job-item card-shadow">
 				<img src="../assets/job-image.png" alt="job image" />
-				<h4>Заработная плата</h4>
+				<h4>{{ $store.state.language === 'RU' ? 'Заработная плата' : 'Salary' }}</h4>
 				<p>{{ currentJob.salary }}</p>
-				<h4>Основные требования</h4>
+				<h4>{{ $store.state.language === 'RU' ? 'Основные требования:' : 'Primary requirements:' }}</h4>
 				<p>{{ currentJob.requirements }}</p>
-				<h4>Основные навыки</h4>
+				<h4>{{ $store.state.language === 'RU' ? 'Основные навыки:' : 'Basic skills:' }}</h4>
 				<p>{{ currentJob.skills }}</p>
-				<h4>Вас ждёт</h4>
+				<h4>{{ $store.state.language === 'RU' ? 'Вас ждёт:' : 'Waiting for you:' }}</h4>
 				<p>{{ currentJob.youget }}</p>
 				<div class="flex-row flex-buttons">
 					<a href="tel:+78005557457">
-						<button class="btn">Позвонить</button>
+						<button class="btn">{{ $store.state.language === 'RU' ? 'Позвонить' : 'Call' }}</button>
 					</a>
-					<button class="btn" @click="showModalRespond = true">Откликнуться</button>
+					<button class="btn" @click="showModalRespond = true">
+						{{ $store.state.language === 'RU' ? 'Откликнуться' : 'Respond' }}
+					</button>
 				</div>
 			</div>
 		</section>

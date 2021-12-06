@@ -61,7 +61,11 @@ export default {
 		const store = useStore()
 		const computedMeta = computed(() => ({
 			title:
-				store.getters['page/PAGE_ID'].length > 0 ? store.getters['page/PAGE_ID'][0].title : 'title',
+				store.getters['page/PAGE_ID'].length > 0
+					? store.state.language === 'RU'
+						? store.getters['page/PAGE_ID'][0].title
+						: store.getters['page/PAGE_ID'][0].title_en
+					: 'title',
 			description:
 				store.getters['page/PAGE_ID'].length > 0
 					? store.getters['page/PAGE_ID'][0].description

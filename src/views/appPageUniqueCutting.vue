@@ -2,9 +2,15 @@
 	<app-header></app-header>
 	<main class="main-content flex-column">
 		<div class="desktop-section section">
-			<h2 style="margin-bottom: 2rem">Рекомендуемый формат F150</h2>
-			<h2 style="margin: 0">Пакет плоское дно.</h2>
-			<h2 style="margin: 3rem 0 0 0">ОСНОВНАЯ ИНФОРМАЦИЯ</h2>
+			<h2 style="margin-bottom: 2rem">
+				{{ $store.state.language === 'RU' ? 'Рекомендуемый формат F150' : 'Recommended format F150' }}
+			</h2>
+			<h2 style="margin: 0">
+				{{ $store.state.language === 'RU' ? 'Пакет плоское дно.' : 'Flat bottom package.' }}
+			</h2>
+			<h2 style="margin: 3rem 0 0 0">
+				{{ $store.state.language === 'RU' ? 'ОСНОВНАЯ ИНФОРМАЦИЯ' : 'BASIC INFORMATION' }}
+			</h2>
 		</div>
 		<section class="desktop-section section flex-column">
 			<div class="unique-packet flex-row">
@@ -18,9 +24,13 @@
 					alt="unique-packet-preview" />
 			</div>
 			<div class="flex-row buttons">
-				<button class="cutting-btn btn">Напечатать</button>
+				<button class="cutting-btn btn">
+					{{ $store.state.language === 'RU' ? 'Напечатать' : 'Print' }}
+				</button>
 				<a href="../assets/unique-packet-preview.png" download>
-					<button class="cutting-btn btn">Сохранить</button>
+					<button class="cutting-btn btn">
+						{{ $store.state.language === 'RU' ? 'Сохранить' : 'Save' }}
+					</button>
 				</a>
 			</div>
 		</section>
@@ -28,9 +38,12 @@
 		<section class="mobile-section section flex-column">
 			<div class="mobile-preview flex-row">
 				<div class="mobile-information flex-column">
-					<h2>Тип пакета</h2>
-					<h4>Рекомендуемый формат F150<br />Пакет плоское дно.</h4>
-					<h4>ОСНОВНАЯ ИНФОРМАЦИЯ</h4>
+					<h2>{{ $store.state.language === 'RU' ? 'Тип пакета' : 'Package type' }}</h2>
+					<h4>
+						{{ $store.state.language === 'RU' ? 'Рекомендуемый формат F150' : 'Recommended format F150'
+						}}<br />{{ $store.state.language === 'RU' ? 'Пакет плоское дно.' : 'Flat bottom package.' }}
+					</h4>
+					<h4>{{ $store.state.language === 'RU' ? 'ОСНОВНАЯ ИНФОРМАЦИЯ' : 'BASIC INFORMATION' }}</h4>
 				</div>
 				<div class="mobile-information flex-column">
 					<img
@@ -39,25 +52,41 @@
 						alt="unique-packet-preview" />
 				</div>
 			</div>
-			<h2>Рекомендуемый раскрой пакета</h2>
+			<h2>
+				{{
+					$store.state.language === 'RU' ? 'Рекомендуемый раскрой пакета' : 'Recommended package size'
+				}}
+			</h2>
 			<img
 				class="unique-packet-scheme"
 				src="../assets/unique-packet-scheme.png"
 				alt="unique-packet-scheme" />
 			<div class="flex-row buttons">
-				<button class="cutting-btn btn">Напечатать</button>
+				<button class="cutting-btn btn">
+					{{ $store.state.language === 'RU' ? 'Напечатать' : 'Print' }}
+				</button>
 				<a href="../assets/unique-packet-preview.png" download>
-					<button class="cutting-btn btn">Сохранить</button>
+					<button class="cutting-btn btn">
+						{{ $store.state.language === 'RU' ? 'Сохранить' : 'Save' }}
+					</button>
 				</a>
 			</div>
 		</section>
 
 		<section class="section">
-			<h2>Машины работающие с данным форматом</h2>
+			<h2>
+				{{
+					$store.state.language === 'RU'
+						? 'Машины работающие с данным форматом'
+						: 'Machines working with this format'
+				}}
+			</h2>
 			<div class="slider-content card-shadow">
 				<carousel :breakpoints="breakpoints">
 					<slide v-for="slide in 3" :key="slide">
-						<app-machines-item title="Б-420" image="content_image.png"></app-machines-item>
+						<app-machines-item
+							:title="$store.state.language === 'RU' ? 'Б-420' : 'B-420'"
+							image="content_image.png"></app-machines-item>
 					</slide>
 					<template #addons="{ slidesCount }">
 						<navigation v-if="slidesCount > 2" />

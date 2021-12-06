@@ -4,7 +4,7 @@
 	<main class="main-content flex-column">
 		<!-- Packet type section -->
 		<section v-if="PACKETS.length > 0" id="packetType" class="section">
-			<h2>Тип пакета</h2>
+			<h2>{{ $store.state.language === 'RU' ? 'Тип пакета' : 'Package type' }}</h2>
 
 			<div class="packet-mobile">
 				<carousel :items-to-show="1.4">
@@ -16,8 +16,8 @@
 							href="#packetOptions"
 							@click="checkType = packet.id">
 							<div class="hidden-item"></div>
-							<img :src="packet.img" :alt="packet.name" />
-							<p>{{ packet.name }}</p>
+							<img :src="packet.img" :alt="packet.alt" />
+							<p>{{ $store.state.language === 'RU' ? packet.name : packet.name_en }}</p>
 						</a>
 					</slide>
 					<template #addons>
@@ -35,7 +35,7 @@
 					class="packet-type-item flex-column card-shadow"
 					href="#packetOptions"
 					@click="checkType = packet.id">
-					<h3>{{ packet.name }}</h3>
+					<h3>{{ $store.state.language === 'RU' ? packet.name : packet.name_en }}</h3>
 					<img :src="packet.img" :alt="packet.alt" />
 					<div class="hidden-item"></div>
 				</a>
@@ -44,7 +44,7 @@
 
 		<!-- Packet options section -->
 		<section v-if="PACKETS_OPTIONS.length > 0" id="packetOptions" class="section">
-			<h2>Дополнительные опции</h2>
+			<h2>{{ $store.state.language === 'RU' ? 'Дополнительные опции' : 'Additional options' }}</h2>
 			<div class="packet-mobile">
 				<carousel :items-to-show="1.4">
 					<slide v-for="packetOptions in PACKETS_OPTIONS" :key="packetOptions.id">
@@ -53,8 +53,8 @@
 							class="packet-options-item flex-column card-shadow"
 							@click="checkOptionsFunc(packetOptions.id)">
 							<div class="hidden-item"></div>
-							<img :src="packetOptions.img" :alt="packetOptions.name" />
-							<p>{{ packetOptions.name }}</p>
+							<img :src="packetOptions.img" :alt="packetOptions.alt" />
+							<p>{{ $store.state.language === 'RU' ? packetOptions.name : packetOptions.name_en }}</p>
 						</div>
 					</slide>
 					<template #addons>
@@ -71,15 +71,15 @@
 					class="packet-options-item flex-column card-shadow"
 					@click="checkOptionsFunc(packetOptions.id)">
 					<div class="hidden-item"></div>
-					<img :src="packetOptions.img" :alt="packetOptions.name" />
-					<p>{{ packetOptions.name }}</p>
+					<img :src="packetOptions.img" :alt="packetOptions.alt" />
+					<p>{{ $store.state.language === 'RU' ? packetOptions.name : packetOptions.name_en }}</p>
 				</div>
 			</div>
 		</section>
 
 		<!-- Packet seam section -->
 		<section v-if="PACKETS_SEAMS.length > 0" id="packetSeam" class="section">
-			<h2>Тип шва</h2>
+			<h2>{{ $store.state.language === 'RU' ? 'Тип шва' : 'Seam type' }}</h2>
 			<div class="packets-seam flex-row card-shadow">
 				<div
 					v-for="packetSeams in PACKETS_SEAMS"
@@ -89,36 +89,56 @@
 					@click="checkSeamFunc(packetSeams.id)">
 					<div class="hidden-item"></div>
 					<img :src="packetSeams.img" :alt="packetSeams.alt" />
-					<p>{{ packetSeams.name }}</p>
+					<p>{{ $store.state.language === 'RU' ? packetSeams.name : packetSeams.name_en }}</p>
 				</div>
 			</div>
 		</section>
 
 		<!-- Packet size section -->
 		<section id="packetSize" class="section">
-			<h2>Размеры пакета</h2>
+			<h2>{{ $store.state.language === 'RU' ? 'Размеры пакета' : 'Package dimensions' }}</h2>
 			<div class="packet-size flex-row card-shadow">
 				<div class="packet-size-parameters flex-column">
 					<label>
-						<p>Ширина пакета (A):</p>
+						<p>{{ $store.state.language === 'RU' ? 'Ширина пакета (A):' : 'Bag width (A):' }}</p>
 						<input class="input" type="text" placeholder="100" />
 					</label>
 					<label>
-						<p>Глубина пакета (B):</p>
+						<p>{{ $store.state.language === 'RU' ? 'Глубина пакета (B):' : 'Package depth (B):' }}</p>
 						<input class="input" type="text" placeholder="100" />
 					</label>
 				</div>
 				<div class="packet-size-description flex-column card-shadow">
-					<h4>Примечание</h4>
-					<p>Глубина пакета B — оне более 110мм</p>
-					<p>Сумма ширины и глубины A + B — от 60мм до 600мм</p>
-					<p>Соотношение ширины и глубины A / B — от 1,2 до 4.45</p>
+					<h4>{{ $store.state.language === 'RU' ? 'Примечание' : 'Note' }}</h4>
+					<p>
+						{{
+							$store.state.language === 'RU'
+								? 'Глубина пакета B — оне более 110мм'
+								: 'Package depth B - more than 110mm'
+						}}
+					</p>
+					<p>
+						{{
+							$store.state.language === 'RU'
+								? 'Сумма ширины и глубины A + B — от 60мм до 600мм'
+								: 'The sum of the width and depth A + B - from 60mm to 600mm'
+						}}
+					</p>
+					<p>
+						{{
+							$store.state.language === 'RU'
+								? 'Соотношение ширины и глубины A / B — от 1,2 до 4.45'
+								: 'Width to depth ratio A / B - 1.2 to 4.45'
+						}}
+					</p>
 				</div>
 				<img src="../assets/packet-size.png" alt="packet-size" />
 			</div>
 		</section>
 		<div class="router-button">
-			<button class="cutting-btn btn" @click="routerPush(1)">Подобрать</button>
+			<button class="cutting-btn btn" @click="routerPush(1)">
+				{{ $store.state.language === 'RU' ? 'Подобрать' : 'Pick up' }}
+			</button>
 		</div>
 	</main>
 
@@ -155,7 +175,11 @@ export default {
 		const store = useStore()
 		const computedMeta = computed(() => ({
 			title:
-				store.getters['page/PAGE_ID'].length > 0 ? store.getters['page/PAGE_ID'][0].title : 'title',
+				store.getters['page/PAGE_ID'].length > 0
+					? store.state.language === 'RU'
+						? store.getters['page/PAGE_ID'][0].title
+						: store.getters['page/PAGE_ID'][0].title_en
+					: 'title',
 			description:
 				store.getters['page/PAGE_ID'].length > 0
 					? store.getters['page/PAGE_ID'][0].description
@@ -210,7 +234,10 @@ export default {
 				this.$router.push('/cutting/' + id)
 				window.scrollTo(0, 0)
 			} else if (this.checkType === 0) {
-				this.modalAlert.text = 'Сначала выберите тип пакета!!!'
+				this.modalAlert.text =
+					this.$store.state.language === 'RU'
+						? 'Сначала выберите тип пакета!!!'
+						: 'First select the type of package !!!'
 				this.modalAlert.show = true
 				this.$smoothScroll({
 					scrollTo: document.getElementById('packetType'), // scrollTo is also allowed to be number
@@ -218,18 +245,22 @@ export default {
 					offset: -50,
 				})
 			} else if (this.checkOptions === 0) {
-				this.modalAlert.text = 'Сначала выберите дополнительные опции!!!'
+				this.modalAlert.text =
+					this.$store.state.language === 'RU'
+						? 'Сначала выберите дополнительные опции!!!'
+						: 'Please select additional options first !!!'
 				this.modalAlert.show = true
-				alert('Выберите дополнительные опции!!!')
 				this.$smoothScroll({
 					scrollTo: document.getElementById('packetOptions'), // scrollTo is also allowed to be number
 					updateHistory: false,
 					offset: -50,
 				})
 			} else if (this.checkSeam === 0) {
-				this.modalAlert.text = 'Сначала выберите тип шва!!!'
+				this.modalAlert.text =
+					this.$store.state.language === 'RU'
+						? 'Сначала выберите тип шва!!!'
+						: 'First select the type of seam !!!'
 				this.modalAlert.show = true
-				alert('Выберите тип шва!!!')
 				this.$smoothScroll({
 					scrollTo: document.getElementById('packetSeam'), // scrollTo is also allowed to be number
 					updateHistory: false,
@@ -246,7 +277,10 @@ export default {
 					offset: -50,
 				})
 			} else {
-				this.modalAlert.text = 'Сначала выберите тип пакета!!!'
+				this.modalAlert.text =
+					this.$store.state.language === 'RU'
+						? 'Сначала выберите тип пакета!!!'
+						: 'First select the type of package !!!'
 				this.modalAlert.show = true
 				this.$smoothScroll({
 					scrollTo: document.getElementById('packetType'), // scrollTo is also allowed to be number
@@ -257,7 +291,10 @@ export default {
 		},
 		checkSeamFunc(id) {
 			if (this.checkType === 0 && this.checkOptions === 0) {
-				this.modalAlert.text = 'Сначала выберите тип пакета!!!'
+				this.modalAlert.text =
+					this.$store.state.language === 'RU'
+						? 'Сначала выберите тип пакета!!!'
+						: 'First select the type of package !!!'
 				this.modalAlert.show = true
 				this.$smoothScroll({
 					scrollTo: document.getElementById('packetType'), // scrollTo is also allowed to be number
@@ -265,7 +302,10 @@ export default {
 					offset: -50,
 				})
 			} else if (this.checkType !== 0 && this.checkOptions === 0) {
-				this.modalAlert.text = 'Сначала выберите дополнительные опции!!!'
+				this.modalAlert.text =
+					this.$store.state.language === 'RU'
+						? 'Сначала выберите дополнительные опции!!!'
+						: 'Please select additional options first !!!'
 				this.modalAlert.show = true
 				this.$smoothScroll({
 					scrollTo: document.getElementById('packetOptions'), // scrollTo is also allowed to be number

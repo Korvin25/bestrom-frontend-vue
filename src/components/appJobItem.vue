@@ -3,15 +3,17 @@
 		<img :src="image" alt="job image" />
 		<div class="flex-column job-item-description">
 			<h4>{{ title }}</h4>
-			<h5>Основные требования:</h5>
+			<h5>{{ $store.state.language === 'RU' ? 'Основные требования:' : 'Primary requirements:' }}</h5>
 			<p>{{ requirements }}</p>
-			<h5>Основные навыки:</h5>
+			<h5>{{ $store.state.language === 'RU' ? 'Основные навыки:' : 'Basic skills:' }}</h5>
 			<p>{{ skills }}</p>
 		</div>
 		<div class="flex-column job-item-pay">
-			<h4>Заработная плата</h4>
+			<h4>{{ $store.state.language === 'RU' ? 'Заработная плата' : 'Salary' }}</h4>
 			<p>{{ pay }}</p>
-			<button class="btn" @click="routerPush(alt)">Подробнее</button>
+			<button class="btn" @click="routerPush(alt)">
+				{{ $store.state.language === 'RU' ? 'Подробнее' : 'More details' }}
+			</button>
 		</div>
 	</div>
 	<!-- ./desktop-section -->
