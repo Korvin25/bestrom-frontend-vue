@@ -49,13 +49,13 @@
 										: findHistory(currentSlide + 1).description_en
 								"
 								:src="findHistory(currentSlide + 1).img" />
-							<h3>
+							<p>
 								{{
 									$store.state.language === 'RU'
 										? findHistory(currentSlide + 1).description
 										: findHistory(currentSlide + 1).description_en
 								}}
-							</h3>
+							</p>
 						</div>
 					</template>
 				</carousel>
@@ -206,13 +206,13 @@
 										: findHistory(currentSlide + 1).description_en
 								"
 								:src="findHistory(currentSlide + 1).img" />
-							<h3>
+							<p>
 								{{
 									$store.state.language === 'RU'
 										? findHistory(currentSlide + 1).description
 										: findHistory(currentSlide + 1).description_en
 								}}
-							</h3>
+							</p>
 						</div>
 					</template>
 				</carousel>
@@ -479,23 +479,17 @@ export default {
 
 .history-description {
 	display: flex;
+	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	margin-top: 1rem;
 	width: 100%;
-	height: 15rem;
+	height: 10rem;
 }
 
 .history-description img {
-	max-width: 6rem;
-	max-height: 6rem;
-}
-
-.history-description h3 {
-	font-weight: bold;
-	font-size: 75px;
-	line-height: normal;
-	margin: 0 0.5rem;
-	align-self: auto;
+	max-width: 4rem;
+	max-height: 4rem;
 }
 
 .purpose,
@@ -544,7 +538,7 @@ export default {
 	}
 
 	.history-description {
-		height: 10rem;
+		height: 8rem;
 	}
 
 	.history-description img {

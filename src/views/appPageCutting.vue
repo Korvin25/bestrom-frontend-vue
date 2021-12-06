@@ -100,37 +100,15 @@
 			<div class="packet-size flex-row card-shadow">
 				<div class="packet-size-parameters flex-column">
 					<label>
-						<p>{{ $store.state.language === 'RU' ? 'Ширина пакета (A):' : 'Bag width (A):' }}</p>
+						<p>{{ $store.state.language === 'RU' ? 'Ширина пакета (A), мм:' : 'Bag width (A), mm:' }}</p>
 						<input class="input" type="text" placeholder="100" />
 					</label>
 					<label>
-						<p>{{ $store.state.language === 'RU' ? 'Глубина пакета (B):' : 'Package depth (B):' }}</p>
+						<p>
+							{{ $store.state.language === 'RU' ? 'Глубина пакета (B), мм:' : 'Package depth (B), mm:' }}
+						</p>
 						<input class="input" type="text" placeholder="100" />
 					</label>
-				</div>
-				<div class="packet-size-description flex-column card-shadow">
-					<h4>{{ $store.state.language === 'RU' ? 'Примечание' : 'Note' }}</h4>
-					<p>
-						{{
-							$store.state.language === 'RU'
-								? 'Глубина пакета B — оне более 110мм'
-								: 'Package depth B - more than 110mm'
-						}}
-					</p>
-					<p>
-						{{
-							$store.state.language === 'RU'
-								? 'Сумма ширины и глубины A + B — от 60мм до 600мм'
-								: 'The sum of the width and depth A + B - from 60mm to 600mm'
-						}}
-					</p>
-					<p>
-						{{
-							$store.state.language === 'RU'
-								? 'Соотношение ширины и глубины A / B — от 1,2 до 4.45'
-								: 'Width to depth ratio A / B - 1.2 to 4.45'
-						}}
-					</p>
 				</div>
 				<img src="../assets/packet-size.png" alt="packet-size" />
 			</div>
@@ -393,7 +371,7 @@ export default {
 }
 .packet-size {
 	padding: 2rem;
-	justify-content: stretch;
+	justify-content: space-around;
 }
 .packet-size img {
 	align-self: flex-start;
@@ -401,11 +379,14 @@ export default {
 }
 .packet-size-parameters {
 	justify-content: flex-start;
-	width: 20rem;
-	margin-right: 2rem;
+	margin-right: 3rem;
+	width: 100%;
 }
 .packet-size-parameters p {
 	margin: 0;
+}
+.packet-size-parameters .input {
+	width: 100%;
 }
 .packet-size-description {
 	align-self: flex-start;
@@ -477,6 +458,7 @@ export default {
 		flex-direction: column;
 	}
 	.packet-size-parameters .input {
+		width: auto;
 		flex-grow: 1;
 	}
 	.packet-size-description {
