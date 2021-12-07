@@ -300,13 +300,13 @@ export default {
 	margin: 1rem 1rem 0 1rem;
 }
 .inventory-item-img {
-	height: 100%;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 }
 .inventory-item-img img {
 	width: 100%;
+	max-height: 10rem;
 }
 .inventory-item:hover .hidden-item {
 	opacity: 1;
