@@ -6,9 +6,10 @@
 			<div class="id-news flex-row">
 				<div class="current-news flex-column">
 					<img :src="currentNews.img" :alt="currentNews.alt" />
-					<p>
-						{{ $store.state.language === 'RU' ? currentNews.description : currentNews.description_en }}
-					</p>
+					<p
+						v-html="
+							$store.state.language === 'RU' ? currentNews.description : currentNews.description_en
+						"></p>
 					<div class="date-publication flex-row">
 						<img src="../assets/calendar.png" alt="calendar" />
 						<p>{{ new Date(currentNews.published).toLocaleDateString() }}</p>

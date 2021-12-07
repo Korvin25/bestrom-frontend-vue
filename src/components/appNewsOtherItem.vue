@@ -9,7 +9,7 @@
 			</div>
 		</div>
 		<h4>{{ title }}</h4>
-		<p>{{ text }}</p>
+		<p v-html="text"></p>
 	</div>
 	<!-- /.small-title-news -->
 </template>

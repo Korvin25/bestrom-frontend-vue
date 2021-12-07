@@ -3,9 +3,9 @@
 		<div class="about-content flex-column">
 			<h3>{{ $store.state.language === 'RU' ? product.name : product.name_en }}</h3>
 			<p>{{ property }}</p>
-			<p class="text-about-content">
-				{{ $store.state.language === 'RU' ? product.description : product.description_en }}
-			</p>
+			<p
+				class="text-about-content"
+				v-html="$store.state.language === 'RU' ? product.description : product.description_en"></p>
 			<button class="btn" @click="scrollToTop">
 				{{ $store.state.language === 'RU' ? 'ПОДРОБНЕЕ' : 'READ MORE' }}
 			</button>

@@ -199,8 +199,8 @@ export default {
 			description:
 				store.getters['product/PRODUCT'].length > 0
 					? store.state.language === 'RU'
-						? store.getters['product/PRODUCT'].find((e) => e.id.toString() === routeId).description
-						: store.getters['product/PRODUCT'].find((e) => e.id.toString() === routeId).description_en
+						? store.getters['product/PRODUCT'].find((e) => e.id.toString() === routeId).name
+						: store.getters['product/PRODUCT'].find((e) => e.id.toString() === routeId).name_en
 					: 'description',
 		}))
 		useMeta(computedMeta)

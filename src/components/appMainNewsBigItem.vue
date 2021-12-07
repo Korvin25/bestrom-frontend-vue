@@ -2,7 +2,7 @@
 	<div class="news-item-big flex-row card-shadow" @click="routerPush">
 		<div class="about-content flex-column">
 			<h4>{{ title }}</h4>
-			<p class="text-about-content">{{ text }}</p>
+			<p class="text-about-content" v-html="text"></p>
 		</div>
 		<img class="news-item-big-image" :src="image" alt="news image" />
 		<div class="hidden-item">

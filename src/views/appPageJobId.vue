@@ -11,15 +11,15 @@
 						<h5>
 							{{ $store.state.language === 'RU' ? 'Основные требования:' : 'Primary requirements:' }}
 						</h5>
-						<p>{{ currentJob.requirements }}</p>
+						<p v-html="currentJob.requirements"></p>
 						<h5>{{ $store.state.language === 'RU' ? 'Основные навыки:' : 'Basic skills:' }}</h5>
-						<p>{{ currentJob.skills }}</p>
+						<p v-html="currentJob.skills"></p>
 						<h5>{{ $store.state.language === 'RU' ? 'Образование:' : 'Education:' }}</h5>
 						<p>{{ currentJob.education }}</p>
 						<h5>{{ $store.state.language === 'RU' ? 'Опыт работы:' : 'Work experience:' }}</h5>
 						<p>{{ currentJob.experience }}</p>
 						<h5>{{ $store.state.language === 'RU' ? 'Вы получаете:' : 'You are getting:' }}</h5>
-						<p>{{ currentJob.youget }}</p>
+						<p v-html="currentJob.youget"></p>
 					</div>
 					<div class="flex-column job-item-pay">
 						<h4>{{ $store.state.language === 'RU' ? 'Заработная плата' : 'Salary' }}</h4>
@@ -47,11 +47,11 @@
 				<h4>{{ $store.state.language === 'RU' ? 'Заработная плата' : 'Salary' }}</h4>
 				<p>{{ currentJob.salary }}</p>
 				<h4>{{ $store.state.language === 'RU' ? 'Основные требования:' : 'Primary requirements:' }}</h4>
-				<p>{{ currentJob.requirements }}</p>
+				<p v-html="currentJob.requirements"></p>
 				<h4>{{ $store.state.language === 'RU' ? 'Основные навыки:' : 'Basic skills:' }}</h4>
-				<p>{{ currentJob.skills }}</p>
+				<p v-html="currentJob.skills"></p>
 				<h4>{{ $store.state.language === 'RU' ? 'Вас ждёт:' : 'Waiting for you:' }}</h4>
-				<p>{{ currentJob.youget }}</p>
+				<p v-html="currentJob.youget"></p>
 				<div class="flex-row flex-buttons">
 					<a href="tel:+78005557457">
 						<button class="btn">{{ $store.state.language === 'RU' ? 'Позвонить' : 'Call' }}</button>
@@ -100,7 +100,7 @@ export default {
 					: 'title',
 			description:
 				store.getters['vacancy/VACANCY'].length > 0
-					? store.getters['vacancy/VACANCY'].find((e) => e.alt === routeParam).requirements
+					? store.getters['vacancy/VACANCY'].find((e) => e.alt === routeParam).name
 					: 'description',
 		}))
 		useMeta(computedMeta)

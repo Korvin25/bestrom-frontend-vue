@@ -4,9 +4,9 @@
 		<div class="flex-column job-item-description">
 			<h4>{{ title }}</h4>
 			<h5>{{ $store.state.language === 'RU' ? 'Основные требования:' : 'Primary requirements:' }}</h5>
-			<p>{{ requirements }}</p>
+			<p v-html="requirements"></p>
 			<h5>{{ $store.state.language === 'RU' ? 'Основные навыки:' : 'Basic skills:' }}</h5>
-			<p>{{ skills }}</p>
+			<p v-html="skills"></p>
 		</div>
 		<div class="flex-column job-item-pay">
 			<h4>{{ $store.state.language === 'RU' ? 'Заработная плата' : 'Salary' }}</h4>

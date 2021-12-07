@@ -17,11 +17,10 @@
 						</div>
 					</div>
 					<h4>{{ $store.state.language === 'RU' ? TITLE_NEWS.name : TITLE_NEWS.name_en }}</h4>
-					<p>
-						{{
+					<p
+						v-html="
 							$store.state.language === 'RU' ? TITLE_NEWS.mini_description : TITLE_NEWS.mini_description_en
-						}}
-					</p>
+						"></p>
 				</div>
 				<!-- /.big-title-news -->
 				<div
@@ -37,13 +36,12 @@
 						</div>
 					</div>
 					<h4>{{ $store.state.language === 'RU' ? second_news.name : second_news.name_en }}</h4>
-					<p>
-						{{
+					<p
+						v-html="
 							$store.state.language === 'RU'
 								? second_news.mini_description
 								: second_news.mini_description_en
-						}}
-					</p>
+						"></p>
 				</div>
 				<!-- /.small-title-news -->
 			</div>
