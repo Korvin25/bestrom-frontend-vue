@@ -22,28 +22,41 @@
 			</div>
 
 			<!-- Call to specialist -->
-			<form v-if="switchContent" class="form-call flex-column" action="">
+			<section v-if="switchContent" class="form-call flex-column" action="">
 				<label for="company">{{ $store.state.language === 'RU' ? 'Компания' : 'Company' }}</label>
 				<input
 					id="company"
+					v-model="inputCompany"
 					type="text"
 					class="input"
 					:placeholder="$store.state.language === 'RU' ? 'БЕСТРОМ' : 'BESTROM'" />
 				<label for="fio">{{ $store.state.language === 'RU' ? 'Ф.И.О' : 'Full name' }}</label>
 				<input
 					id="fio"
+					v-model="inputName"
 					type="text"
 					class="input"
 					:placeholder="$store.state.language === 'RU' ? 'Иван Иванович' : 'Ivan Ivanovich'" />
 				<label for="telephone">{{ $store.state.language === 'RU' ? 'Телефон' : 'Telephone' }}</label>
-				<input id="telephone" type="text" class="input" placeholder="89199966203" />
+				<input
+					id="telephone"
+					v-model="inputTelephone"
+					type="text"
+					class="input"
+					placeholder="89199966203" />
 				<label for="email">E-mail</label>
-				<input id="email" type="text" class="input" placeholder="partner@thedimension.com" />
+				<input
+					id="email"
+					v-model="inputEmail"
+					type="text"
+					class="input"
+					placeholder="partner@thedimension.com" />
 				<label for="model">{{
 					$store.state.language === 'RU' ? 'Модель оборудования' : 'Equipment model'
 				}}</label>
 				<input
 					id="model"
+					v-model="inputModel"
 					type="text"
 					class="input"
 					:placeholder="$store.state.language === 'RU' ? 'БЕСТРОМ - 420С' : 'BESTROM-420S'" />
@@ -51,7 +64,7 @@
 				<p>{{ $store.state.language === 'RU' ? 'Вид обслуживания' : 'Service type' }}</p>
 				<div class="__select" :data-state="active ? 'active' : ''" @click="active = !active">
 					<div :class="active ? 'active' : ''" class="__select__title">
-						{{ selectItem }}
+						{{ inputServiceType }}
 					</div>
 					<div class="__select__content">
 						<input id="singleSelect" class="__select__input" type="radio" name="singleSelect" />
@@ -112,14 +125,17 @@
 				}}</label>
 				<input
 					id="date"
+					v-model="inputDate"
 					type="text"
 					class="input"
 					:placeholder="$store.state.language === 'RU' ? 'Сегодня' : 'Today'" />
-				<button class="call btn">{{ $store.state.language === 'RU' ? 'ОТПРАВИТЬ' : 'SEND' }}</button>
-			</form>
+				<button class="call btn" @click="sendPostSpecialist">
+					{{ $store.state.language === 'RU' ? 'ОТПРАВИТЬ' : 'SEND' }}
+				</button>
+			</section>
 
 			<!-- Ordering spare parts -->
-			<form v-if="!switchContent" class="form-call flex-column" action="">
+			<section v-if="!switchContent" class="form-call flex-column" action="">
 				<label for="company">{{ $store.state.language === 'RU' ? 'Компания' : 'Company' }}</label>
 				<input
 					id="company"
@@ -222,12 +238,14 @@
 				<label for="comment">{{ $store.state.language === 'RU' ? 'Комментарий' : 'Comment' }}</label>
 				<div id="comment" class="textarea" contenteditable="true"></div>
 				<button class="call btn">{{ $store.state.language === 'RU' ? 'ОТПРАВИТЬ' : 'SEND' }}</button>
-			</form>
+			</section>
 		</div>
 	</div>
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
 	name: 'AppModalMenuService',
 	emits: ['close'],
@@ -235,17 +253,64 @@ export default {
 		return {
 			switchContent: true,
 			active: false,
-			selectItem:
+			inputServiceType:
 				this.$store.state.language === 'RU' ? 'Пуско-наладочные работы' : 'Commissioning works',
 			inputDetailValue: '',
 			inputFileName: '',
 			inputsDetails: [],
 			inputsFile: [],
+			inputCompany: '',
+			inputName: '',
+			inputTelephone: '',
+			inputEmail: '',
+			inputModel: '',
+			inputDate: '',
+			inputComment: '',
 		}
 	},
 	methods: {
+		sendPostSpecialist() {
+			if (
+				(this.inputTelephone.length > 10 ||
+					(this.inputEmail.includes('@') && this.inputEmail.length > 6)) &&
+				this.inputName.length !== 0 &&
+				this.inputCompany.length !== 0 &&
+				this.inputModel.length !== 0 &&
+				this.inputDate.length !== 0
+			) {
+				axios
+					.post('http://bexram.online:8001/forms/', {
+						type: 'Вызов специалиста',
+						telephone: this.inputTelephone,
+						email: this.inputEmail,
+						name: this.inputName,
+						other:
+							'Компания: ' +
+							this.inputCompany +
+							', Модель оборудования: ' +
+							this.inputModel +
+							', Вид обслуживания: ' +
+							this.inputServiceType +
+							', Желаемая дата прибытия специалиста: ' +
+							this.inputDate,
+					})
+					.then(() => {
+						this.inputCompany = ''
+						this.inputTelephone = ''
+						this.inputName = ''
+						this.inputEmail = ''
+						this.inputModel = ''
+						this.inputDate = ''
+					})
+					.catch((error) => {
+						console.log(error)
+					})
+			} else {
+				alert('Проверьте правильность ввода всех полей!')
+			}
+		},
 		selectOption(item) {
-			this.selectItem = item
+			this.inputServiceType = item
 			this.active = !this.active
 		},
 		pushInput() {

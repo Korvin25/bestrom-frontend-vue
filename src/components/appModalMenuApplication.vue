@@ -91,7 +91,7 @@
 						<img src="../assets/mobile.png" alt="menu-item-img" />
 					</a>
 				</div>
-				<button class="call btn" @click="sendPostContacts">
+				<button class="call btn" @click="sendPost">
 					{{ $store.state.language === 'RU' ? 'ОТПРАВИТЬ ЗАЯВКУ' : 'SEND AN APPLICATION' }}
 				</button>
 			</section>
@@ -117,29 +117,30 @@ export default {
 		}
 	},
 	methods: {
-		sendPostContacts() {
+		sendPost() {
 			if (
 				(this.inputTelephone.length > 10 ||
 					(this.inputEmail.includes('@') && this.inputEmail.length > 6)) &&
 				this.inputName.length !== 0 &&
 				this.inputProduct.length !== 0 &&
+				this.inputCompany.length !== 0 &&
 				this.inputDosage.length !== 0 &&
 				this.inputPerformance.length !== 0
 			) {
 				axios
 					.post('http://bexram.online:8001/forms/', {
-						type: this.$store.state.language === 'RU' ? 'Заявка' : 'Application',
+						type: 'Заявка',
 						telephone: this.inputTelephone,
 						email: this.inputEmail,
 						name: this.inputName,
 						other:
-							(this.$store.state.language === 'RU' ? 'Компания: ' : 'Company: ') +
+							'Компания: ' +
 							this.inputCompany +
-							(this.$store.state.language === 'RU' ? ', Продукт: ' : ', Product: ') +
+							', Продукт: ' +
 							this.inputProduct +
-							(this.$store.state.language === 'RU' ? ', Дозировка: ' : ', Dosage: ') +
+							', Дозировка: ' +
 							this.inputDosage +
-							(this.$store.state.language === 'RU' ? ', Производительность: ' : ', Performance: ') +
+							', Производительность: ' +
 							this.inputPerformance,
 					})
 					.then(() => {
