@@ -228,20 +228,21 @@
 </template>
 
 <script>
+import { computed } from 'vue'
+import { useMeta } from 'vue-meta'
+
 export default {
 	name: 'AppModalMenuContacts',
 	emits: ['close', 'call', 'question'],
-	mounted() {
-		this.scriptConnect(
-			'https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3Ab23d25421decd66ecb2e0401df4649a9fbbf12bca068dbbafcf6dde799fd92e3&amp;width=100%25&amp;height=500&amp;id=mymap&amp&lang=ru_RU&amp;scroll=true',
-		)
-	},
-	methods: {
-		scriptConnect(scriptUrl) {
-			const yandexScript = document.createElement('script')
-			yandexScript.setAttribute('src', scriptUrl)
-			document.body.appendChild(yandexScript)
-		},
+	setup() {
+		const computedMeta = computed(() => ({
+			script: [
+				{
+					src: 'https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3Ab23d25421decd66ecb2e0401df4649a9fbbf12bca068dbbafcf6dde799fd92e3&amp;width=100%25&amp;height=500&amp;id=mymap&amp&lang=ru_RU&amp;scroll=true',
+				},
+			],
+		}))
+		useMeta(computedMeta)
 	},
 }
 </script>

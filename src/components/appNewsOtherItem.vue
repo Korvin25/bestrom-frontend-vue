@@ -59,8 +59,8 @@ export default {
 	position: relative;
 }
 .image-news img {
-	width: 100%;
-	max-width: 15rem;
+	max-width: 100%;
+	max-height: 100%;
 }
 .image-news:hover .hidden-item {
 	opacity: 1;

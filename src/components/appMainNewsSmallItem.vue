@@ -43,7 +43,7 @@ export default {
 	flex-grow: 1;
 	position: relative;
 	padding: 1rem 2rem;
-	justify-content: space-evenly;
+	justify-content: space-between;
 	align-items: center;
 }
 .news-small-item h4 {
@@ -51,8 +51,9 @@ export default {
 	padding-bottom: 1rem;
 }
 .news-small-item-image {
-	width: 100%;
-	max-width: 15rem;
+	margin-bottom: 2rem;
+	max-width: 100%;
+	max-height: 100%;
 }
 .hidden-item img {
 	max-width: 398px;

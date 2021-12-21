@@ -43,17 +43,23 @@
 					<template #addons="{ currentSlide }">
 						<div class="history-description">
 							<img
+								v-if="findHistory(currentSlide).img"
 								:alt="
 									$store.state.language === 'RU'
-										? findHistory(currentSlide + 1).description
-										: findHistory(currentSlide + 1).description_en
+										? findHistory(currentSlide).description
+										: findHistory(currentSlide).description_en
 								"
-								:src="findHistory(currentSlide + 1).img" />
-							<p>
+								:src="findHistory(currentSlide).img" />
+							<p
+								v-if="
+									$store.state.language === 'RU'
+										? findHistory(currentSlide).description
+										: findHistory(currentSlide).description_en
+								">
 								{{
 									$store.state.language === 'RU'
-										? findHistory(currentSlide + 1).description
-										: findHistory(currentSlide + 1).description_en
+										? findHistory(currentSlide).description
+										: findHistory(currentSlide).description_en
 								}}
 							</p>
 						</div>
@@ -200,17 +206,23 @@
 					<template #addons="{ currentSlide }">
 						<div class="history-description">
 							<img
+								v-if="findHistory(currentSlide).img"
 								:alt="
 									$store.state.language === 'RU'
-										? findHistory(currentSlide + 1).description
-										: findHistory(currentSlide + 1).description_en
+										? findHistory(currentSlide).description
+										: findHistory(currentSlide).description_en
 								"
-								:src="findHistory(currentSlide + 1).img" />
-							<p>
+								:src="findHistory(currentSlide).img" />
+							<p
+								v-if="
+									$store.state.language === 'RU'
+										? findHistory(currentSlide).description
+										: findHistory(currentSlide).description_en
+								">
 								{{
 									$store.state.language === 'RU'
-										? findHistory(currentSlide + 1).description
-										: findHistory(currentSlide + 1).description_en
+										? findHistory(currentSlide).description
+										: findHistory(currentSlide).description_en
 								}}
 							</p>
 						</div>
@@ -406,7 +418,7 @@ export default {
 		},
 		findHistory(current) {
 			if (this.HISTORY.length > 0) {
-				return this.HISTORY.find((e) => e.id === current)
+				return this.HISTORY.find((e, i) => i === current)
 			} else {
 				return { year: '', description: '', img: '' }
 			}
@@ -482,9 +494,8 @@ export default {
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	margin-top: 1rem;
+	margin: 1rem 0rem;
 	width: 100%;
-	height: 10rem;
 }
 
 .history-description img {
@@ -537,14 +548,13 @@ export default {
 		padding: 0;
 	}
 
-	.history-description {
-		height: 8rem;
-	}
-
 	.history-description img {
 		max-width: 3rem;
 		max-height: 3rem;
 		align-self: center;
+	}
+	.history-description p {
+		margin: 1rem;
 	}
 
 	.history-description h3 {

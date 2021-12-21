@@ -106,9 +106,6 @@ export default {
 	flex-grow: 1;
 	height: 15rem;
 }
-.flex-row {
-	justify-content: space-between;
-}
 .history-company p {
 	margin: 0;
 	padding: 26px 0 0 0;

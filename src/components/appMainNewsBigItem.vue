@@ -52,8 +52,8 @@ export default {
 	align-items: center;
 }
 .news-item-big-image {
-	width: 100%;
-	max-width: 15rem;
+	max-width: 100%;
+	max-height: 10rem;
 }
 .hidden-item img {
 	max-width: 398px;
