@@ -135,9 +135,8 @@ export default {
 	justify-content: center;
 }
 .content-image {
-	max-width: 15rem;
-	width: 100%;
-	flex-grow: 1;
+	max-width: 100%;
+	max-height: 100%;
 }
 .desktop-section {
 	display: flex;
