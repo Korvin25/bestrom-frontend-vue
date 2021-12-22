@@ -25,7 +25,7 @@ export default {
 		GET_VACANCY({ commit }) {
 			return axios({
 				method: 'GET',
-				url: 'http://bexram.online:8001/vacancy/',
+				url: this.state.server + 'vacancy/',
 			})
 				.then((response) => {
 					commit('SET_VACANCY', response.data)

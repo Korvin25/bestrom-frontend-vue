@@ -39,7 +39,7 @@ export default {
 		GET_PACKETS({ commit }) {
 			return axios({
 				method: 'GET',
-				url: 'http://bexram.online:8001/packets/',
+				url: this.state.server + 'packets/',
 			})
 				.then((response) => {
 					commit('SET_PACKETS', response.data)
@@ -53,7 +53,7 @@ export default {
 		GET_PACKETS_OPTIONS({ commit }) {
 			return axios({
 				method: 'GET',
-				url: 'http://bexram.online:8001/packetoptions/',
+				url: this.state.server + 'packetoptions/',
 			})
 				.then((response) => {
 					commit('SET_PACKETS_OPTIONS', response.data)
@@ -67,7 +67,7 @@ export default {
 		GET_PACKETS_SEAMS({ commit }) {
 			return axios({
 				method: 'GET',
-				url: 'http://bexram.online:8001/packetseams/',
+				url: this.state.server + 'packetseams/',
 			})
 				.then((response) => {
 					commit('SET_PACKETS_SEAMS', response.data)

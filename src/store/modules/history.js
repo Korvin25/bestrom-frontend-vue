@@ -25,7 +25,7 @@ export default {
 		GET_HISTORY({ commit }) {
 			return axios({
 				method: 'GET',
-				url: 'http://bexram.online:8001/history/',
+				url: this.state.server + 'history/',
 			})
 				.then((response) => {
 					commit('SET_HISTORY', response.data)

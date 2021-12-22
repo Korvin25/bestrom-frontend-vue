@@ -25,7 +25,7 @@ export default {
 		GET_CLIENTS({ commit }) {
 			return axios({
 				method: 'GET',
-				url: 'http://bexram.online:8001/client/',
+				url: this.state.server + 'client/',
 			})
 				.then((response) => {
 					commit('SET_CLIENTS', response.data)

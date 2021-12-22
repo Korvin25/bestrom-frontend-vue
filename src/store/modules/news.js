@@ -33,6 +33,14 @@ export default {
 			content = content.filter((date) => new Date(date.published) < new Date())
 			content.sort((prev, next) => new Date(next.published) - new Date(prev.published))
 
+			for (const iterator of content) {
+				iterator.description = iterator.description.replaceAll('src="/', 'src="' + this.state.server)
+				iterator.description_en = iterator.description_en.replaceAll(
+					'src="/',
+					'src="' + this.state.server,
+				)
+			}
+
 			Object.assign(state.allNews, content)
 
 			if (state.secondNews.length > 0) {
@@ -55,7 +63,7 @@ export default {
 		GET_NEWS({ commit }) {
 			return axios({
 				method: 'GET',
-				url: 'http://bexram.online:8001/news/',
+				url: this.state.server + 'news/',
 			})
 				.then((response) => {
 					commit('SET_NEWS', response.data)

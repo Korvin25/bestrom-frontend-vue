@@ -25,7 +25,7 @@ export default {
 		GET_PARTNERS({ commit }) {
 			return axios({
 				method: 'GET',
-				url: 'http://bexram.online:8001/partner/',
+				url: this.state.server + 'partner/',
 			})
 				.then((response) => {
 					commit('SET_PARTNERS', response.data)

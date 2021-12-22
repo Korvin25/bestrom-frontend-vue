@@ -26,7 +26,7 @@ export default {
 		GET_PRODUCT({ commit }) {
 			return axios({
 				method: 'GET',
-				url: 'http://bexram.online:8001/product/',
+				url: this.state.server + 'product/',
 			})
 				.then((response) => {
 					commit('SET_PRODUCT', response.data)

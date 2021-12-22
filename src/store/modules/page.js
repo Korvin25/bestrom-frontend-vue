@@ -25,7 +25,7 @@ export default {
 		GET_PAGE_ID({ commit }, id) {
 			return axios({
 				method: 'GET',
-				url: `http://bexram.online:8001/page/${id}/`,
+				url: this.state.server + `page/${id}/`,
 			})
 				.then((response) => {
 					commit('SET_PAGE_ID', response.data)
