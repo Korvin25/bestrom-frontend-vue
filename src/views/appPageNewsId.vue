@@ -112,6 +112,14 @@ export default {
 		},
 		fetchData() {
 			this.currentNews = this.findCurrentNews()
+			this.currentNews.description = this.currentNews.description.replaceAll(
+				'src="/',
+				'src="' + this.$store.state.server,
+			)
+			this.currentNews.description_en = this.currentNews.description_en.replaceAll(
+				'src="/',
+				'src="' + this.$store.state.server,
+			)
 			this.lastNews = this.findLastNews()
 		},
 	},

@@ -12,6 +12,7 @@ import vacancy from './modules/vacancy'
 export default createStore({
 	state() {
 		return {
+			server: 'http://bexram.online:8001/',
 			language: 'RU',
 		}
 	},

@@ -185,15 +185,12 @@
 				<p>
 					{{
 						$store.state.language === 'RU'
-							? 'Вложение (Добавте фото интересующей Вас детали)'
+							? 'Вложение (Добавьте фото интересующей Вас детали)'
 							: 'Attachment (Add a photo of the detail you are interested in)'
 					}}
 				</p>
 				<div class="flex-row call-inputs">
-					<input v-model.trim="inputFileName" type="text" class="input" placeholder="File name" />
-					<div class="add-btn" @click="pushInputFile">
-						{{ $store.state.language === 'RU' ? 'Добавить' : 'Add' }}
-					</div>
+					<input class="input-file" type="file" name="file" />
 				</div>
 
 				<transition-group name="modal">
@@ -403,6 +400,9 @@ export default {
 .call-inputs input {
 	flex-grow: 1;
 	width: 100%;
+}
+.input-file {
+	margin: 0.5rem 0;
 }
 .add-btn,
 .del-btn {
