@@ -31,7 +31,7 @@
 				<div class="flex-row second-row">
 					<img
 						:src="
-							'http://bexram.online:8001' +
+							$store.state.server.slice(0, -1) +
 							PAGE_ID[0].blocks.find((e) => e.name === 'advanced-history').contents[1].file[0].file
 						"
 						:alt="PAGE_ID[0].blocks.find((e) => e.name === 'advanced-history').contents[1].file[0].alt" />

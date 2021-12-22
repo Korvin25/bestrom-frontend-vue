@@ -111,7 +111,7 @@ export default {
 				this.inputPerformance.length !== 0
 			) {
 				axios
-					.post('http://bexram.online:8001/forms/', {
+					.post(this.$store.state.server + 'forms/', {
 						type: 'Обратный звонок по машине ' + this.nameMachine,
 						telephone: this.inputTelephone,
 						email: this.inputEmail,

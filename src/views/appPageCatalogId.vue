@@ -316,10 +316,10 @@ export default {
 			this.PRODUCT_ID = this.PRODUCT.find((e) => e.id.toString() === route)
 		},
 		imageComputed(image) {
-			if (image.includes('http://bexram.online:8001')) {
+			if (image.includes(this.$store.state.server.slice(0, -1))) {
 				return image
 			} else {
-				return 'http://bexram.online:8001' + image
+				return this.$store.state.server.slice(0, -1) + image
 			}
 		},
 	},

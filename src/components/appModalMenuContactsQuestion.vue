@@ -99,7 +99,7 @@ export default {
 				this.inputPerformance.length !== 0
 			) {
 				axios
-					.post('http://bexram.online:8001/forms/', {
+					.post(this.$store.state.server + 'forms/', {
 						type: 'Вопрос',
 						telephone: this.inputTelephone,
 						email: this.inputEmail,

@@ -6,7 +6,7 @@
 			class="details-select-products-item card-shadow"
 			@click="productItemsExample = item.ItemsExample">
 			<h4>{{ $store.state.language === 'RU' ? item.name : item.name_en }}</h4>
-			<img :src="'http://bexram.online:8001' + item.img" :alt="item.alt" />
+			<img :src="$store.state.server.slice(0, -1) + item.img" :alt="item.alt" />
 			<app-hidden-item
 				:text="$store.state.language === 'RU' ? 'ПОДРОБНЕЕ' : 'READ MORE'"
 				@click="showModalCall = true"></app-hidden-item>

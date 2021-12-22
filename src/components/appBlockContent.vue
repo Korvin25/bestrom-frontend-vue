@@ -10,7 +10,7 @@
 		<img
 			v-if="image.length > 0"
 			class="content-image"
-			:src="'http://bexram.online:8001' + image[0].file"
+			:src="$store.state.server.slice(0, -1) + image[0].file"
 			:alt="image[0].alt" />
 	</div>
 </template>

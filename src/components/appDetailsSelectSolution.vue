@@ -5,7 +5,7 @@
 				<slide v-for="item in complexSolution" :key="item.id">
 					<div class="details-select-solution-item flex-column card-shadow">
 						<h4>{{ $store.state.language === 'RU' ? item.name : item.name_en }}</h4>
-						<img :src="'http://bexram.online:8001' + item.img" :alt="item.alt" />
+						<img :src="$store.state.server.slice(0, -1) + item.img" :alt="item.alt" />
 						<app-hidden-item
 							:text="$store.state.language === 'RU' ? 'ПОДРОБНЕЕ' : 'READ MORE'"></app-hidden-item>
 					</div>

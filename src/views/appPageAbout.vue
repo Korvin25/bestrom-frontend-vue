@@ -105,7 +105,7 @@
 						:alt="PAGE_ID[0].blocks.find((e) => e.name === 'reasons').contents[0].file[0].alt"
 						class="image-world"
 						:src="
-							'http://bexram.online:8001' +
+							$store.state.server.slice(0, -1) +
 							PAGE_ID[0].blocks.find((e) => e.name === 'reasons').contents[0].file[0].file
 						" />
 				</div>
@@ -123,7 +123,7 @@
 							.contents.find((e) => e.name === 'choice').file"
 						:key="item.id"
 						class="item-reason card-shadow">
-						<img :alt="item.alt" :src="'http://bexram.online:8001' + item.file" />
+						<img :alt="item.alt" :src="$store.state.server.slice(0, -1) + item.file" />
 						<app-hidden-item :text="item.alt"></app-hidden-item>
 					</div>
 				</div>
@@ -140,7 +140,7 @@
 					v-for="item in PAGE_ID[0].blocks.find((e) => e.name === 'directors').contents"
 					:key="item.id"
 					class="director-item flex-column">
-					<img :alt="item.file[0].alt" :src="'http://bexram.online:8001' + item.file[0].file" />
+					<img :alt="item.file[0].alt" :src="$store.state.server.slice(0, -1) + item.file[0].file" />
 					<h5>{{ $store.state.language === 'RU' ? item.name : item.name_en }}</h5>
 					<p>{{ $store.state.language === 'RU' ? item.text : item.text_en }}</p>
 				</div>
@@ -187,7 +187,7 @@
 					v-for="slide in PAGE_ID[0].blocks.find((e) => e.name === 'directors').contents"
 					:key="slide.id">
 					<div class="director-item flex-column">
-						<img :alt="slide.file[0].alt" :src="'http://bexram.online:8001' + slide.file[0].file" />
+						<img :alt="slide.file[0].alt" :src="$store.state.server.slice(0, -1) + slide.file[0].file" />
 						<h5>{{ $store.state.language === 'RU' ? slide.name : slide.name_en }}</h5>
 						<p>{{ $store.state.language === 'RU' ? slide.text : slide.text_en }}</p>
 					</div>

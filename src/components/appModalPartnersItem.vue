@@ -99,10 +99,10 @@ export default {
 			CLIENTS: 'clients/CLIENTS',
 		}),
 		imageLogoComputed() {
-			if (this.image.includes('http://bexram.online:8001')) {
+			if (this.image.includes(this.$store.state.server.slice(0, -1))) {
 				return this.image
 			} else {
-				return 'http://bexram.online:8001' + this.image
+				return this.$store.state.server.slice(0, -1) + this.image
 			}
 		},
 	},

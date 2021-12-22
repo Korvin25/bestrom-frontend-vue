@@ -276,7 +276,7 @@ export default {
 				this.inputDate.length !== 0
 			) {
 				axios
-					.post('http://bexram.online:8001/forms/', {
+					.post(this.$store.state.server + 'forms/', {
 						type: 'Вызов специалиста',
 						telephone: this.inputTelephone,
 						email: this.inputEmail,
