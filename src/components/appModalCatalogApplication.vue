@@ -72,6 +72,7 @@
 				<button class="call btn" @click="sendPost">
 					{{ $store.state.language === 'RU' ? 'ОТПРАВИТЬ ЗАЯВКУ' : 'SEND AN APPLICATION' }}
 				</button>
+				<h4 v-if="statusSend.length > 0" class="send-status">{{ statusSend }}</h4>
 			</section>
 		</div>
 	</div>
@@ -91,6 +92,7 @@ export default {
 	emits: ['close'],
 	data() {
 		return {
+			statusSend: '',
 			inputCompany: '',
 			inputName: '',
 			inputTelephone: '',
@@ -139,8 +141,10 @@ export default {
 						this.inputDosage = ''
 						this.inputPerformance = ''
 						this.inputComment = ''
+						this.statusSend = 'Заявка успешно отправлена!'
 					})
 					.catch((error) => {
+						this.statusSend = 'Ошибка отправки заявки! Ошибка: ' + error
 						console.log(error)
 					})
 			} else {
@@ -152,6 +156,10 @@ export default {
 </script>
 
 <style scoped>
+.send-status {
+	margin: 0;
+	font-weight: normal;
+}
 a .catalog-name-item {
 	font-weight: normal;
 }

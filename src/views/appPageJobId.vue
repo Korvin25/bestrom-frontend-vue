@@ -68,6 +68,7 @@
 	<transition-group name="modal">
 		<app-modal-job-respond
 			v-if="showModalRespond"
+			:job-name="currentJob.name"
 			@close="showModalRespond = false"></app-modal-job-respond>
 	</transition-group>
 

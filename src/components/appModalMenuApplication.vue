@@ -75,25 +75,41 @@
 					}}
 				</p>
 				<div class="call-method flex-row">
-					<div class="logo">
+					<div
+						class="logo"
+						:class="inputCommunication === 'WhatsApp' ? 'active' : ''"
+						@click="inputCommunication = 'WhatsApp'">
 						<img src="../assets/whatsapp.png" alt="whatsapp" />
 					</div>
-					<div class="logo">
+					<div
+						class="logo"
+						:class="inputCommunication === 'Telegram' ? 'active' : ''"
+						@click="inputCommunication = 'Telegram'">
 						<img src="../assets/telegram.png" alt="telegram" />
 					</div>
-					<div class="logo">
+					<div
+						class="logo"
+						:class="inputCommunication === 'Viber' ? 'active' : ''"
+						@click="inputCommunication = 'Viber'">
 						<img src="../assets/viber.png" alt="viber" />
 					</div>
-					<div class="logo">
+					<div
+						class="logo"
+						:class="inputCommunication === 'E-Mail' ? 'active' : ''"
+						@click="inputCommunication = 'E-Mail'">
 						<img src="../assets/email.png" alt="email" />
 					</div>
-					<a href="tel:+78005557457" class="logo-mobile">
+					<div
+						class="logo-mobile logo"
+						:class="inputCommunication === 'Telephone' ? 'active' : ''"
+						@click="inputCommunication = 'Telephone'">
 						<img src="../assets/mobile.png" alt="menu-item-img" />
-					</a>
+					</div>
 				</div>
 				<button class="call btn" @click="sendPost">
 					{{ $store.state.language === 'RU' ? 'ОТПРАВИТЬ ЗАЯВКУ' : 'SEND AN APPLICATION' }}
 				</button>
+				<h4 v-if="statusSend.length > 0" class="send-status">{{ statusSend }}</h4>
 			</section>
 		</div>
 	</div>
@@ -107,6 +123,7 @@ export default {
 	emits: ['close'],
 	data() {
 		return {
+			statusSend: '',
 			inputCompany: '',
 			inputName: '',
 			inputTelephone: '',
@@ -114,6 +131,7 @@ export default {
 			inputProduct: '',
 			inputDosage: '',
 			inputPerformance: '',
+			inputCommunication: '',
 		}
 	},
 	methods: {
@@ -125,6 +143,7 @@ export default {
 				this.inputProduct.length !== 0 &&
 				this.inputCompany.length !== 0 &&
 				this.inputDosage.length !== 0 &&
+				this.inputCommunication.length !== 0 &&
 				this.inputPerformance.length !== 0
 			) {
 				axios
@@ -141,7 +160,9 @@ export default {
 							', Дозировка: ' +
 							this.inputDosage +
 							', Производительность: ' +
-							this.inputPerformance,
+							this.inputPerformance +
+							', Удобный способ связи: ' +
+							this.inputCommunication,
 					})
 					.then(() => {
 						this.inputCompany = ''
@@ -151,8 +172,11 @@ export default {
 						this.inputProduct = ''
 						this.inputDosage = ''
 						this.inputPerformance = ''
+						this.inputCommunication = ''
+						this.statusSend = 'Заявка успешно отправлена!'
 					})
 					.catch((error) => {
+						this.statusSend = 'Ошибка отправки заявки! Ошибка: ' + error
 						console.log(error)
 					})
 			} else {
@@ -164,6 +188,10 @@ export default {
 </script>
 
 <style scoped>
+.send-status {
+	margin: 0;
+	font-weight: normal;
+}
 .tel-buttons {
 	flex-wrap: wrap;
 }
@@ -211,6 +239,9 @@ export default {
 	align-items: center;
 	border-radius: 100%;
 	background: transparent;
+}
+.logo.active {
+	filter: drop-shadow(0 0 12px #2fc1ff);
 }
 .logo.mobile {
 	display: none;

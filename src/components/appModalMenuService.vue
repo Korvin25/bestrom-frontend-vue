@@ -132,6 +132,7 @@
 				<button class="call btn" @click="sendPostSpecialist">
 					{{ $store.state.language === 'RU' ? 'ОТПРАВИТЬ' : 'SEND' }}
 				</button>
+				<h4 v-if="statusSendSpecialist.length > 0" class="send-status">{{ statusSendSpecialist }}</h4>
 			</section>
 
 			<!-- Ordering spare parts -->
@@ -139,31 +140,49 @@
 				<label for="company">{{ $store.state.language === 'RU' ? 'Компания' : 'Company' }}</label>
 				<input
 					id="company"
+					v-model="inputCompany"
 					type="text"
 					class="input"
 					:placeholder="$store.state.language === 'RU' ? 'БЕСТРОМ' : 'BESTROM'" />
 				<label for="fio">{{ $store.state.language === 'RU' ? 'Ф.И.О' : 'Full name' }}</label>
 				<input
 					id="fio"
+					v-model="inputName"
 					type="text"
 					class="input"
 					:placeholder="$store.state.language === 'RU' ? 'Иван Иванович' : 'Ivan Ivanovich'" />
 				<label for="telephone">{{ $store.state.language === 'RU' ? 'Телефон' : 'Telephone' }}</label>
-				<input id="telephone" type="text" class="input" placeholder="89199966203" />
+				<input
+					id="telephone"
+					v-model="inputTelephone"
+					type="text"
+					class="input"
+					placeholder="89199966203" />
 				<label for="email">E-mail</label>
-				<input id="email" type="text" class="input" placeholder="partner@thedimension.com" />
+				<input
+					id="email"
+					v-model="inputEmail"
+					type="text"
+					class="input"
+					placeholder="partner@thedimension.com" />
 				<label for="model">{{
 					$store.state.language === 'RU' ? 'Модель оборудования' : 'Equipment model'
 				}}</label>
 				<input
 					id="model"
+					v-model="inputModel"
 					type="text"
 					class="input"
 					:placeholder="$store.state.language === 'RU' ? 'БЕСТРОМ - 420С' : 'BESTROM-420S'" />
 				<label for="number-model">{{
 					$store.state.language === 'RU' ? 'Заводской номер' : 'Factory number'
 				}}</label>
-				<input id="number-model" type="text" class="input" placeholder="420С2801" />
+				<input
+					id="number-model"
+					v-model="inputSerialNumber"
+					type="text"
+					class="input"
+					placeholder="420С2801" />
 
 				<p>{{ $store.state.language === 'RU' ? 'Наименование запчасти' : 'Part name' }}</p>
 				<div class="flex-row call-inputs">
@@ -190,41 +209,43 @@
 					}}
 				</p>
 				<div class="flex-row call-inputs">
-					<input class="input-file" type="file" name="file" />
+					<input
+						id="file"
+						ref="file"
+						class="input-file"
+						type="file"
+						name="file"
+						@change="handleFileUpload" />
 				</div>
-
-				<transition-group name="modal">
-					<div v-for="input in inputsFile" :key="input.id" class="flex-row call-inputs">
-						<input type="text" class="input" :value="input.content" readonly />
-						<div class="del-btn" @click="removeInputFile(input.id)">
-							{{ $store.state.language === 'RU' ? 'Удалить' : 'Remove' }}
-						</div>
-					</div>
-				</transition-group>
 
 				<div class="radio-type flex-row">
 					<input
 						id="delivery-choice-1"
+						v-model="radioCatalogSelect"
 						class="custom-radio"
 						name="delivery-choice"
 						type="radio"
-						:value="1"
-						checked />
+						value="Доставка"
+						:checked="radioCatalogSelect === 'Доставка'" />
 					<label for="delivery-choice-1">{{
 						$store.state.language === 'RU' ? 'Доставка' : 'Delivery'
 					}}</label>
 					<input
 						id="delivery-choice-2"
+						v-model="radioCatalogSelect"
 						class="custom-radio"
 						name="delivery-choice"
 						type="radio"
-						:value="2" />
+						value="Самовывоз"
+						:checked="radioCatalogSelect === 'Самовывоз'" />
 					<label for="delivery-choice-2">{{
 						$store.state.language === 'RU' ? 'Самовывоз' : 'Self-pickup'
 					}}</label>
 				</div>
 				<input
+					v-if="radioCatalogSelect === 'Доставка'"
 					id="address"
+					v-model="inputAddress"
 					type="text"
 					class="input"
 					:placeholder="
@@ -234,7 +255,10 @@
 					" />
 				<label for="comment">{{ $store.state.language === 'RU' ? 'Комментарий' : 'Comment' }}</label>
 				<div id="comment" class="textarea" contenteditable="true"></div>
-				<button class="call btn">{{ $store.state.language === 'RU' ? 'ОТПРАВИТЬ' : 'SEND' }}</button>
+				<button class="call btn" @click="sendPostParts">
+					{{ $store.state.language === 'RU' ? 'ОТПРАВИТЬ' : 'SEND' }}
+				</button>
+				<h4 v-if="statusSendParts.length > 0" class="send-status">{{ statusSendParts }}</h4>
 			</section>
 		</div>
 	</div>
@@ -248,14 +272,17 @@ export default {
 	emits: ['close'],
 	data() {
 		return {
+			statusSendSpecialist: '',
+			statusSendParts: '',
 			switchContent: true,
 			active: false,
+			radioCatalogSelect: 'Доставка',
 			inputServiceType:
 				this.$store.state.language === 'RU' ? 'Пуско-наладочные работы' : 'Commissioning works',
 			inputDetailValue: '',
 			inputFileName: '',
 			inputsDetails: [],
-			inputsFile: [],
+			inputFile: '',
 			inputCompany: '',
 			inputName: '',
 			inputTelephone: '',
@@ -263,9 +290,126 @@ export default {
 			inputModel: '',
 			inputDate: '',
 			inputComment: '',
+			inputSerialNumber: '',
+			inputAddress: '',
 		}
 	},
 	methods: {
+		handleFileUpload() {
+			this.inputFile = this.$refs.file.files[0]
+		},
+		sendPostParts() {
+			if (
+				(this.inputTelephone.length > 10 ||
+					(this.inputEmail.includes('@') && this.inputEmail.length > 6)) &&
+				this.inputName.length !== 0 &&
+				this.inputCompany.length !== 0 &&
+				this.inputFile.length !== 0 &&
+				this.inputModel.length !== 0 &&
+				this.inputSerialNumber.length !== 0 &&
+				this.inputsDetails.length !== 0
+			) {
+				if (this.radioCatalogSelect === 'Самовывоз') {
+					const formData = new FormData()
+					formData.append('type', 'Заказ запчастей')
+					formData.append('telephone', this.inputTelephone)
+					formData.append('email', this.inputEmail)
+					formData.append('name', this.inputName)
+					formData.append(
+						'other',
+						'Компания: ' +
+							this.inputCompany +
+							', Модель оборудования: ' +
+							this.inputModel +
+							', Заводской номер: ' +
+							this.inputSerialNumber +
+							', Наименование запчастей: ' +
+							this.inputsDetails
+								.map(function (item) {
+									return item.content
+								})
+								.join(' ') +
+							', ' +
+							this.radioCatalogSelect +
+							', Комментарий: ' +
+							this.inputComment,
+					)
+					formData.append('file', this.inputFile)
+
+					axios
+						.post(this.$store.state.server + 'forms/', formData)
+						.then(() => {
+							this.statusSendParts = 'Заявка успешно отправлена!'
+							this.inputCompany = ''
+							this.inputTelephone = ''
+							this.inputName = ''
+							this.inputEmail = ''
+							this.inputFile = ''
+							this.inputModel = ''
+							this.inputSerialNumber = ''
+							this.inputsDetails = []
+							this.inputComment = ''
+						})
+						.catch((error) => {
+							this.statusSend = 'Ошибка отправки заявки! Ошибка: ' + error
+							console.log(error)
+						})
+				} else {
+					if (this.inputAddress.length !== 0) {
+						const formData = new FormData()
+						formData.append('type', 'Заказ запчастей')
+						formData.append('telephone', this.inputTelephone)
+						formData.append('email', this.inputEmail)
+						formData.append('name', this.inputName)
+						formData.append(
+							'other',
+							'Компания: ' +
+								this.inputCompany +
+								', Модель оборудования: ' +
+								this.inputModel +
+								', Заводской номер: ' +
+								this.inputSerialNumber +
+								', Наименование запчастей: ' +
+								this.inputsDetails
+									.map(function (item) {
+										return item.content
+									})
+									.join(' ') +
+								', ' +
+								this.radioCatalogSelect +
+								this.inputAddress +
+								', Комментарий: ' +
+								this.inputComment,
+						)
+						formData.append('file', this.inputFile)
+
+						axios
+							.post(this.$store.state.server + 'forms/', formData)
+							.then(() => {
+								this.statusSendParts = 'Заявка успешно отправлена!'
+								this.inputCompany = ''
+								this.inputTelephone = ''
+								this.inputName = ''
+								this.inputEmail = ''
+								this.inputFile = ''
+								this.inputModel = ''
+								this.inputSerialNumber = ''
+								this.inputsDetails = []
+								this.inputAddress = ''
+								this.inputComment = ''
+							})
+							.catch((error) => {
+								this.statusSend = 'Ошибка отправки заявки! Ошибка: ' + error
+								console.log(error)
+							})
+					} else {
+						alert('Введите адрес доставки!')
+					}
+				}
+			} else {
+				alert('Проверьте правильность ввода всех полей!')
+			}
+		},
 		sendPostSpecialist() {
 			if (
 				(this.inputTelephone.length > 10 ||
@@ -292,6 +436,7 @@ export default {
 							this.inputDate,
 					})
 					.then(() => {
+						this.statusSendSpecialist = 'Заявка успешно отправлена!'
 						this.inputCompany = ''
 						this.inputTelephone = ''
 						this.inputName = ''
@@ -300,6 +445,7 @@ export default {
 						this.inputDate = ''
 					})
 					.catch((error) => {
+						this.statusSendSpecialist = 'Ошибка отправки заявки! Ошибка: ' + error
 						console.log(error)
 					})
 			} else {
@@ -326,27 +472,15 @@ export default {
 				}
 			}
 		},
-		pushInputFile() {
-			if (this.inputFileName.trim() !== '') {
-				this.inputsFile.push({
-					id: this.inputsFile.length,
-					content: this.inputFileName,
-				})
-			}
-			this.inputFileName = ''
-		},
-		removeInputFile(id) {
-			for (const input of this.inputsFile) {
-				if (input.id === id) {
-					this.inputsFile.splice(this.inputsFile.indexOf(input), 1)
-				}
-			}
-		},
 	},
 }
 </script>
 
 <style scoped>
+.send-status {
+	margin: 0;
+	font-weight: normal;
+}
 .service-buttons {
 	margin: 1rem -1rem;
 }
