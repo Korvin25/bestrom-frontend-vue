@@ -17,7 +17,7 @@ export default {
 
 	mutations: {
 		SET_FILTERS(state, content) {
-			state.filters = content
+			state.filters = content.sort((prev, next) => prev.sort - next.sort)
 		},
 	},
 
