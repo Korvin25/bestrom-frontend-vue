@@ -62,7 +62,7 @@ export default {
 
 <style scoped>
 .details-select-solution {
-	margin: 2rem 1rem 1rem 1rem;
+	margin: 2rem 0 1rem 0;
 }
 .details-select-solution-item {
 	position: relative;
@@ -86,7 +86,7 @@ export default {
 }
 @media (max-width: 980px) {
 	.details-select-solution {
-		margin: 2rem 0 0 0;
+		margin: 2rem 0.5rem 0 0.5rem;
 	}
 	.details-select-solution-item {
 		position: relative;

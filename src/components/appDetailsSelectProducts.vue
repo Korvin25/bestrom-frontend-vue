@@ -9,7 +9,9 @@
 			<img :src="$store.state.server.slice(0, -1) + item.img" :alt="item.alt" />
 			<app-hidden-item
 				:text="$store.state.language === 'RU' ? 'ПОДРОБНЕЕ' : 'READ MORE'"
-				@click="showModalCall = true"></app-hidden-item>
+				@click="
+					showModalCallFunc($store.state.language === 'RU' ? item.name : item.name_en)
+				"></app-hidden-item>
 		</div>
 	</div>
 	<!-- /.details-select-products -->
@@ -17,6 +19,7 @@
 	<transition name="modal">
 		<app-modal-catalog-product-examples
 			v-if="showModalCall"
+			:title="productTitle"
 			:product-examples="productItemsExample"
 			@close="showModalCall = false"></app-modal-catalog-product-examples>
 	</transition>
@@ -40,6 +43,7 @@ export default {
 	},
 	data() {
 		return {
+			productTitle: '',
 			productItemsExample: {},
 			showModalCall: false,
 		}
@@ -51,6 +55,12 @@ export default {
 			} else {
 				document.body.classList.remove('modal-open')
 			}
+		},
+	},
+	methods: {
+		showModalCallFunc(title) {
+			this.showModalCall = true
+			this.productTitle = title
 		},
 	},
 }

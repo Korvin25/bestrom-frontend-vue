@@ -7,11 +7,7 @@
 				<img class="close-mobile" src="../assets/close-mobile-menu.png" alt="close" />
 			</div>
 			<h2>
-				{{
-					$store.state.language === 'RU'
-						? 'Примеры порошкообразной продукции'
-						: 'Examples of powdered products'
-				}}
+				{{ title }}
 			</h2>
 			<div class="details-select-products flex-row">
 				<div
@@ -37,6 +33,10 @@ export default {
 		appHiddenItem,
 	},
 	props: {
+		title: {
+			type: String,
+			default: 'Пример продукции',
+		},
 		productExamples: {
 			type: Object,
 			default: new Object(),

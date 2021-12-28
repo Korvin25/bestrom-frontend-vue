@@ -16,11 +16,11 @@
 
 			<div class="flex-row">
 				<img class="location-pin" src="../assets/location_pin.png" alt="location_pin" />
-				<p>
+				<p v-if="content.length > 0">
 					{{
 						$store.state.language === 'RU'
-							? '143405, Россия, Московская обл., г. Красногорск, Ильинское шоссе, д.15, на территории завода "Бецема"'
-							: '143405, Russia, Moscow region, Krasnogorsk, Ilyinskoe highway, 15, on the territory of the plant "Betsema"'
+							? content.find((e) => e.name === 'Головной офис').text
+							: content.find((e) => e.name === 'Головной офис').text_en
 					}}
 				</p>
 			</div>
@@ -35,28 +35,25 @@
 				</p></a
 			>
 
-			<div class="main-contacts flex-row">
+			<div v-if="content.length > 0" class="main-contacts flex-row">
 				<div class="main-contacts-card flex-column">
-					<a href="tel:+78005557457">
+					<div>
 						<h5>{{ $store.state.language === 'RU' ? 'Общий:' : 'General:' }}</h5>
-						<p>8-800-555-74-57</p>
-					</a>
-					<a href="tel:+74955618478">
+						<p>{{ content.find((e) => e.name === 'Общий').text }}</p>
+					</div>
+					<div>
 						<h5>{{ $store.state.language === 'RU' ? 'Сервисная служба:' : 'Customer Service:' }}</h5>
-						<p>+7 (495) 561-8478</p>
-					</a>
-					<a href="tel:+74955638634">
+						<p>{{ content.find((e) => e.name === 'Сервисная служба').text }}</p>
+					</div>
+					<div>
 						<h5>{{ $store.state.language === 'RU' ? 'Отдел запчастей:' : 'Spare Parts Department:' }}</h5>
-						<p>+7 (495) 563-8634</p>
-					</a>
+						<p>{{ content.find((e) => e.name === 'Отдел запчастей').text }}</p>
+					</div>
 				</div>
 				<div class="main-contacts-card flex-column">
 					<div>
 						<h5>{{ $store.state.language === 'RU' ? 'Секретарь:' : 'Secretary:' }}</h5>
-						<p>
-							<a href="tel:+74955622429">+7 (495) 562-2429</a>,
-							<a href="tel:+74955618482">561-8482</a>
-						</p>
+						<p>{{ content.find((e) => e.name === 'Секретарь').text }}</p>
 					</div>
 					<div>
 						<h5>
@@ -67,150 +64,71 @@
 							}}
 						</h5>
 						<p>
-							<a href="tel:+74955808102">+7 (495) 580-8102</a>, <a href="tel:+74955621383">562-1383</a>;
-							<a href="tel:+79857693882">+7 (985) 769-3882</a>
+							{{ content.find((e) => e.name === 'Коммерческий отдел и отдел продаж').text }}
 						</p>
 					</div>
-					<a href="tel:+74955620496">
+					<div>
 						<h5>{{ $store.state.language === 'RU' ? 'Отдел снабжения:' : 'Supply Department:' }}</h5>
-						<p>+7 (495) 562-0496</p>
-					</a>
+						<p>{{ content.find((e) => e.name === 'Отдел снабжения').text }}</p>
+					</div>
 				</div>
 				<div class="main-contacts-card flex-column">
-					<a href="tel:+74955612811">
+					<div>
 						<h5>{{ $store.state.language === 'RU' ? 'Бухгалтерия:' : 'Accounting:' }}</h5>
-						<p>+7 (495) 561-2811</p>
-					</a>
-					<a href="mailto:company@bestrom.ru">
+						<p>{{ content.find((e) => e.name === 'Бухгалтерия').text }}</p>
+					</div>
+					<div>
 						<h5>E-mail:</h5>
-						<p>company@bestrom.ru</p>
-					</a>
+						<p>{{ content.find((e) => e.name === 'E-mail').text }}</p>
+					</div>
 				</div>
 			</div>
 
 			<h3>{{ $store.state.language === 'RU' ? 'Дилеры' : 'Dealers' }}</h3>
-			<div class="dilers flex-row">
+			<div v-if="content.length > 0" class="dilers flex-row">
 				<div class="dilers-card">
-					<p>
-						{{
-							$store.state.language === 'RU' ? 'Бестром - Россия (Сибирь)' : 'Bestrom - Russia (Siberia)'
-						}}
-					</p>
-					<p>{{ $store.state.language === 'RU' ? 'г. Барнаул' : 'Barnaul' }}</p>
-					<p>
-						<a href="tel:+73852624137"
-							><b>{{ $store.state.language === 'RU' ? 'Телефон:' : 'Telephone:' }}</b> +7(3852) 624 137</a
-						>
-					</p>
-					<p>
-						<b>{{ $store.state.language === 'RU' ? 'Телефон:' : 'Telephone:' }}</b
-						><a href="tel:+79039488388">+7(903) 948 83 88</a>;
-						<a href="tel:+79132238637">+7(913) 223 86 37</a>
-					</p>
-					<p>
-						<a href="mailto:or_bestrom@mail.ru"><b>E-mail:</b> or_bestrom@mail.ru</a>
-					</p>
-					<p>
-						<a href="https://bestrom-sibir.com"
-							><b>{{ $store.state.language === 'RU' ? 'Сайт:' : 'Site:' }}</b> https://bestrom-sibir.com</a
-						>
-					</p>
-					<br />
-					<p>
-						{{
+					<p
+						v-html="
 							$store.state.language === 'RU'
-								? '656015, г. Барнаул, пр-т Социалистический 109, офис 408'
-								: '656015, Barnaul, 109 Socialist Ave., office 408'
-						}}
-					</p>
-					<br />
-					<p>
-						<b>{{
-							$store.state.language === 'RU'
-								? 'Контактное лицо: Захарьящева Наталья'
-								: 'Contact person: Natalia Zakharyasheva'
-						}}</b>
-					</p>
+								? content.find((e) => e.name === 'Дилеры Сибирь').text.replaceAll('\n', '<br />')
+								: content.find((e) => e.name === 'Дилеры Сибирь').text_en.replaceAll('\n', '<br />')
+						"></p>
 				</div>
 				<div class="dilers-card">
-					<p>
-						{{
+					<p
+						v-html="
 							$store.state.language === 'RU'
-								? 'Представительство в Республике Беларусь'
-								: 'Representative office in the Republic of Belarus'
-						}}
-					</p>
-					<p>{{ $store.state.language === 'RU' ? 'г. Минск' : 'Minsk' }}</p>
-					<p>
-						<a href="tel:+70173121185"
-							><b>{{ $store.state.language === 'RU' ? 'Телефон:' : 'Telephone:' }}</b> 8 017 312 11 85</a
-						>
-					</p>
-					<p>
-						<a href="tel:+375173121186"
-							><b>{{ $store.state.language === 'RU' ? 'Телефон:' : 'Telephone:' }}</b> +375(17) 312 11
-							86</a
-						>
-					</p>
-					<p>
-						<a href="mailto:info@btes.by"><b>E-mail:</b> info@btes.by</a>
-					</p>
-					<p>
-						<a href="http://www.btes.by"
-							><b>{{ $store.state.language === 'RU' ? 'Сайт:' : 'Site:' }}</b> http://www.btes.by</a
-						>
-					</p>
-					<br />
-					<p>
-						{{
-							$store.state.language === 'RU'
-								? 'ЧПУП «БелТрансЭнергоСервис»'
-								: 'NPUP "BelTransEnergoService"'
-						}}
-					</p>
-					<p>
-						{{
-							$store.state.language === 'RU'
-								? 'Адрес: РБ, 220140, г. Минск, ул. Притыцкого, 62.'
-								: 'Address: RB, 220140, Minsk, Prytytskogo str., 62.'
-						}}
-					</p>
-					<br />
-					<p>
-						<b>{{
-							$store.state.language === 'RU'
-								? 'Контактное лицо: Валерий Сайко'
-								: 'Contact person: Valery Saiko'
-						}}</b>
-					</p>
+								? content.find((e) => e.name === 'Дилеры Беларусь').text.replaceAll('\n', '<br />')
+								: content.find((e) => e.name === 'Дилеры Беларусь').text_en.replaceAll('\n', '<br />')
+						"></p>
 				</div>
 			</div>
 
 			<h3>{{ $store.state.language === 'RU' ? 'Социальные сети' : 'Social network' }}</h3>
-			<div class="social flex-row">
-				<a href="https://vk.com" class="social-logo">
+			<div v-if="content.length > 0" class="social flex-row">
+				<a :href="content.find((e) => e.name === 'vk').text" class="social-logo">
 					<img style="width: 33px" src="../assets/vk.png" alt="menu-item-img" />
 				</a>
-				<a href="https://youtube.com" class="social-logo">
+				<a :href="content.find((e) => e.name === 'youtube').text" class="social-logo">
 					<img style="width: 25px" src="../assets/youtube.png" alt="menu-item-img" />
 				</a>
-				<a href="https://instagram.com" class="social-logo">
+				<a :href="content.find((e) => e.name === 'instagram').text" class="social-logo">
 					<img style="width: 30px" src="../assets/instagram.png" alt="menu-item-img" />
 				</a>
 			</div>
 
 			<h3>{{ $store.state.language === 'RU' ? 'Мессенджеры' : 'Messengers' }}</h3>
-			<div style="border: none" class="social flex-row">
-				<a href="" class="social-logo">
+			<div v-if="content.length > 0" style="border: none" class="social flex-row">
+				<a :href="content.find((e) => e.name === 'whatsapp').text" class="social-logo">
 					<img src="../assets/whatsapp.png" alt="whatsapp" />
 				</a>
-				<a href="" class="social-logo">
+				<a :href="content.find((e) => e.name === 'telegram').text" class="social-logo">
 					<img src="../assets/telegram.png" alt="telegram" />
 				</a>
-				<a href="" class="social-logo">
+				<a :href="content.find((e) => e.name === 'viber').text" class="social-logo">
 					<img src="../assets/viber.png" alt="viber" />
 				</a>
-				<a href="" class="social-logo">
+				<a :href="'mailto:' + content.find((e) => e.name === 'E-mail').text" class="social-logo">
 					<img src="../assets/email.png" alt="email" />
 				</a>
 			</div>
@@ -230,6 +148,7 @@
 <script>
 import { computed } from 'vue'
 import { useMeta } from 'vue-meta'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
 	name: 'AppModalMenuContacts',
@@ -243,6 +162,26 @@ export default {
 			],
 		}))
 		useMeta(computedMeta)
+	},
+	data() {
+		return {
+			content: [],
+		}
+	},
+	computed: {
+		...mapGetters({
+			PAGE_ID: 'page/PAGE_ID',
+		}),
+	},
+	mounted() {
+		this.GET_PAGE_ID(1).then(() => {
+			this.content = this.PAGE_ID[0].blocks.find((e) => e.name === 'contacts').contents
+		})
+	},
+	methods: {
+		...mapActions({
+			GET_PAGE_ID: 'page/GET_PAGE_ID',
+		}),
 	},
 }
 </script>

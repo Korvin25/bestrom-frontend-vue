@@ -2,7 +2,7 @@
 	<div class="details-select-packet flex-row">
 		<div v-for="item in packetsItems" :key="item.id" class="details-select-packet-item card-shadow">
 			<h4>{{ $store.state.language === 'RU' ? item.name : item.name_en }}</h4>
-			<img src="../assets/details-packet-1.png" alt="packet" />
+			<img :src="$store.state.server.slice(0, -1) + item.img" :alt="item.alt" />
 			<app-hidden-item
 				:text="$store.state.language === 'RU' ? 'ПОДРОБНЕЕ' : 'READ MORE'"></app-hidden-item>
 		</div>

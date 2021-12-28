@@ -338,7 +338,7 @@ export default {
 .details {
 	margin: 1rem 0;
 	height: 100%;
-	padding: 2rem 1rem;
+	padding: 2rem 0;
 }
 .details-select {
 	justify-content: flex-start;
