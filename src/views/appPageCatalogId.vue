@@ -86,7 +86,7 @@
 					:product-items="PRODUCT_ID.Items"></app-details-select-products>
 				<app-details-select-inventory
 					v-if="isSelected === 2"
-					:equipment="PRODUCT_ID.Equipment"></app-details-select-inventory>
+					:equipment="PRODUCT_ID.equipments"></app-details-select-inventory>
 				<app-details-select-packet
 					v-if="isSelected === 3"
 					:packets-items="PRODUCT_ID.Packet"></app-details-select-packet>
@@ -267,6 +267,7 @@ export default {
 		}),
 	},
 	watch: {
+		$route: 'fetchData',
 		customers: {
 			handler() {
 				if (this.customers.showModal) {
@@ -294,13 +295,9 @@ export default {
 	},
 	mounted() {
 		this.GET_CLIENTS()
-		if (this.PRODUCT.length === 0) {
-			this.GET_PRODUCT().then(() => {
-				this.findProduct(this.$route.params.catalogId)
-			})
-		} else {
-			this.findProduct(this.$route.params.catalogId)
-		}
+		this.GET_PRODUCT().then(() => {
+			this.fetchData()
+		})
 	},
 	methods: {
 		...mapActions({
@@ -312,15 +309,15 @@ export default {
 			this.customers.machines = true
 			this.customers.showModal = true
 		},
-		findProduct(route) {
-			this.PRODUCT_ID = this.PRODUCT.find((e) => e.id.toString() === route)
-		},
 		imageComputed(image) {
 			if (image.includes(this.$store.state.server.slice(0, -1))) {
 				return image
 			} else {
 				return this.$store.state.server.slice(0, -1) + image
 			}
+		},
+		fetchData() {
+			this.PRODUCT_ID = this.PRODUCT.find((e) => e.id.toString() === this.$route.params.catalogId)
 		},
 	},
 }

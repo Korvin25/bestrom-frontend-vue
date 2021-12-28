@@ -3,9 +3,13 @@
 		<div class="slider-content">
 			<carousel :breakpoints="breakpoints">
 				<slide v-for="item in equipment" :key="item.id">
-					<div class="details-select-inventory-item flex-column card-shadow">
+					<div
+						class="details-select-inventory-item flex-column card-shadow"
+						@click="routerPush(item.id)">
 						<h4>{{ $store.state.language === 'RU' ? item.name : item.name_en }}</h4>
-						<img :src="$store.state.server.slice(0, -1) + item.img" :alt="item.alt" />
+						<img
+							:src="$store.state.server.slice(0, -1) + item.SliderProd[0].img"
+							:alt="item.SliderProd[0].alt" />
 						<app-hidden-item
 							:text="$store.state.language === 'RU' ? 'ПОДРОБНЕЕ' : 'READ MORE'"></app-hidden-item>
 					</div>
@@ -57,6 +61,12 @@ export default {
 			},
 		}
 	},
+	methods: {
+		routerPush(path) {
+			window.scrollTo(0, 0)
+			this.$router.replace(`/catalog/${path}`)
+		},
+	},
 }
 </script>
 
@@ -87,8 +97,7 @@ export default {
 	margin-top: 0;
 }
 .details-select-inventory-item img {
-	max-width: 13rem;
-	width: 100%;
+	max-height: 9rem;
 }
 @media (max-width: 980px) {
 	.details-select-inventory {
