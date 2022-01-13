@@ -350,7 +350,7 @@ export default {
 .packet-type-item img,
 .packet-options-item img,
 .packets-seam-item img {
-	width: 6rem;
+	max-width: 10rem;
 }
 .packets-seam {
 	padding: 1rem;
