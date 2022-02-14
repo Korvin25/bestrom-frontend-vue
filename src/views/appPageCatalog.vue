@@ -83,14 +83,14 @@
 </template>
 
 <script>
-import appHeader from '../components/appHeader.vue'
-import appFooter from '../components/appFooter.vue'
-import appCatalogTypeSelect from '../components/appCatalogTypeSelect.vue'
-import appCatalogItem from '../components/appCatalogItem.vue'
-import { mapActions, mapGetters, useStore } from 'vuex'
 import { computed } from 'vue'
 import { useMeta } from 'vue-meta'
 import { Carousel, Slide } from 'vue3-carousel'
+import { mapActions, mapGetters, useStore } from 'vuex'
+import appCatalogItem from '../components/appCatalogItem.vue'
+import appCatalogTypeSelect from '../components/appCatalogTypeSelect.vue'
+import appFooter from '../components/appFooter.vue'
+import appHeader from '../components/appHeader.vue'
 
 export default {
 	name: 'AppPageCatalog',
@@ -148,17 +148,24 @@ export default {
 		},
 		computedProducts() {
 			let tempProduct = new Array()
-			for (const product of this.PRODUCT) {
-				for (const key in product) {
-					if (typeof product[key] === 'object') {
-						for (const item of product[key]) {
-							if (item.name && this.search && item.name.toLowerCase() === this.search.toLowerCase()) {
-								tempProduct.push(product)
+			if (this.typeSelect === '') {
+				for (const product of this.PRODUCT) {
+					tempProduct.push(product)
+				}
+			} else {
+				for (const product of this.PRODUCT) {
+					for (const key in product) {
+						if (typeof product[key] === 'object') {
+							for (const item of product[key]) {
+								if (item.name && this.search && item.name.toLowerCase() === this.search.toLowerCase()) {
+									tempProduct.push(product)
+								}
 							}
 						}
 					}
 				}
 			}
+			tempProduct.sort((a, b) => a.name > b.name)
 			return tempProduct
 		},
 	},
@@ -171,7 +178,7 @@ export default {
 			}
 		},
 		radioCatalogSelect() {
-			this.typeSelect = this.FILTERS.find((e) => e.name === this.radioCatalogSelect).Filters[0].name
+			//this.typeSelect = this.FILTERS.find((e) => e.name === this.radioCatalogSelect).Filters[0].name
 			this.search = this.FILTERS.find((e) => e.name === this.radioCatalogSelect).Filters[0].search
 		},
 	},
