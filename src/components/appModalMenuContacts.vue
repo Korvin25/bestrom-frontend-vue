@@ -106,29 +106,31 @@
 
 			<h3>{{ $store.state.language === 'RU' ? 'Социальные сети' : 'Social network' }}</h3>
 			<div v-if="content.length > 0" class="social flex-row">
-				<a :href="content.find((e) => e.name === 'vk').text" class="social-logo">
+				<a :href="content.find((e) => e.name === 'vk').text" class="social-logo network">
 					<img style="width: 33px" src="../assets/vk.png" alt="menu-item-img" />
 				</a>
-				<a :href="content.find((e) => e.name === 'youtube').text" class="social-logo">
+				<a :href="content.find((e) => e.name === 'youtube').text" class="social-logo network">
 					<img style="width: 25px" src="../assets/youtube.png" alt="menu-item-img" />
 				</a>
-				<a :href="content.find((e) => e.name === 'instagram').text" class="social-logo">
+				<a :href="content.find((e) => e.name === 'instagram').text" class="social-logo network">
 					<img style="width: 30px" src="../assets/instagram.png" alt="menu-item-img" />
 				</a>
 			</div>
 
 			<h3>{{ $store.state.language === 'RU' ? 'Мессенджеры' : 'Messengers' }}</h3>
 			<div v-if="content.length > 0" style="border: none" class="social flex-row">
-				<a :href="content.find((e) => e.name === 'whatsapp').text" class="social-logo">
+				<a :href="content.find((e) => e.name === 'whatsapp').text" class="social-logo messenger">
 					<img src="../assets/whatsapp.png" alt="whatsapp" />
 				</a>
-				<a :href="content.find((e) => e.name === 'telegram').text" class="social-logo">
+				<a :href="content.find((e) => e.name === 'telegram').text" class="social-logo messenger">
 					<img src="../assets/telegram.png" alt="telegram" />
 				</a>
-				<a :href="content.find((e) => e.name === 'viber').text" class="social-logo">
+				<a :href="content.find((e) => e.name === 'viber').text" class="social-logo messenger">
 					<img src="../assets/viber.png" alt="viber" />
 				</a>
-				<a :href="'mailto:' + content.find((e) => e.name === 'E-mail').text" class="social-logo">
+				<a
+					:href="'mailto:' + content.find((e) => e.name === 'E-mail').text"
+					class="social-logo messenger">
 					<img src="../assets/email.png" alt="email" />
 				</a>
 			</div>
@@ -246,7 +248,19 @@ export default {
 	padding-bottom: 1rem;
 	border-bottom: 2px solid #6a6a6a;
 }
-.social-logo {
+
+.social-logo.network {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 3rem;
+	height: 3rem;
+	background: #6a6a6a;
+	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+	border-radius: 50%;
+	margin: 1rem 1rem;
+}
+.social-logo.messenger {
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -255,7 +269,7 @@ export default {
 	background: #6a6a6a;
 	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
 	border-radius: 50%;
-	margin: 1rem 1rem;
+	margin: 1rem 1.25rem;
 }
 .social-logo:hover {
 	transition: all 0.5s;

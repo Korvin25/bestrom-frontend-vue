@@ -34,8 +34,8 @@
   --vc-nav-background-color: white;
 
   /* Pagination */
-  --vc-pgn-width: 0.5rem;
-  --vc-pgn-height: 0.5rem;
+  --vc-pgn-width: 10px;
+  --vc-pgn-height: 10px;
   --vc-pgn-margin: 5px;
   --vc-pgn-border-radius: var(--vc-pgn-width);
   --vc-pgn-background-color: var(--vc-clr-secondary);
