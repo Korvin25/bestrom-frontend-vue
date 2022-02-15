@@ -1,37 +1,18 @@
 module.exports = {
 	root: true,
 	env: {
+		browser: true,
+		es2021: true,
 		node: true,
-		commonjs: true,
+		'vue/setup-compiler-macros': true,
 	},
-	extends: [
-		'eslint:recommended',
-		'plugin:vue/vue3-recommended',
-		'plugin:prettier/recommended',
-		'prettier',
-	],
+	extends: ['eslint:recommended', 'plugin:vue/vue3-recommended', 'prettier'],
 	parserOptions: {
-		ecmaVersion: 11,
+		ecmaVersion: 12,
 		sourceType: 'module',
-		parser: 'babel-eslint',
 	},
-	plugins: ['prettier', 'vue'],
+	plugins: ['vue'],
 	rules: {
-		'prettier/prettier': [
-			'warn',
-			{
-				endOfLine: 'auto',
-				tabWidth: 1,
-				useTabs: true,
-				semi: false,
-				bracketSameLine: true,
-				singleQuote: true,
-				printWidth: 100,
-				trailingComma: 'all',
-			},
-		],
-		'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-		'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
 		quotes: ['error', 'single'],
 		'vue/no-v-html': 0,
 		'vue/no-multiple-template-root': 0,

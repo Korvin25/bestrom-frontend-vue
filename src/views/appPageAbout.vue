@@ -34,7 +34,9 @@
 		<!-- /.section -->
 
 		<section class="history-development-mobile section">
-			<h2>{{ $store.state.language === 'RU' ? 'История развития' : 'The history of development' }}</h2>
+			<h2>
+				{{ $store.state.language === 'RU' ? 'История развития' : 'The history of development' }}
+			</h2>
 			<div class="card-shadow">
 				<carousel :items-to-show="4.5" :wrap-around="true">
 					<slide v-for="item in HISTORY" :key="item.year">
@@ -85,7 +87,9 @@
 						{{
 							$store.state.language === 'RU'
 								? PAGE_ID[0].blocks.find((e) => e.name === 'reasons').contents[0].text.split('/')[0]
-								: PAGE_ID[0].blocks.find((e) => e.name === 'reasons').contents[0].text_en.split('/')[0]
+								: PAGE_ID[0].blocks
+										.find((e) => e.name === 'reasons')
+										.contents[0].text_en.split('/')[0]
 						}}
 					</p>
 					<button
@@ -93,8 +97,12 @@
 						@click="
 							routerPush(
 								$store.state.language === 'RU'
-									? PAGE_ID[0].blocks.find((e) => e.name === 'reasons').contents[0].text.split('/')[1]
-									: PAGE_ID[0].blocks.find((e) => e.name === 'reasons').contents[0].text_en.split('/')[1],
+									? PAGE_ID[0].blocks
+											.find((e) => e.name === 'reasons')
+											.contents[0].text.split('/')[1]
+									: PAGE_ID[0].blocks
+											.find((e) => e.name === 'reasons')
+											.contents[0].text_en.split('/')[1]
 							)
 						">
 						{{ $store.state.language === 'RU' ? 'ПОДРОБНЕЕ' : 'READ MORE' }}
@@ -113,7 +121,9 @@
 
 			<div
 				v-if="
-					PAGE_ID[0].blocks.find((e) => e.name === 'reasons').contents.find((e) => e.name === 'choice')
+					PAGE_ID[0].blocks
+						.find((e) => e.name === 'reasons')
+						.contents.find((e) => e.name === 'choice')
 				"
 				class="our-choice flex-column">
 				<div class="reasons flex-row">
@@ -140,7 +150,9 @@
 					v-for="item in PAGE_ID[0].blocks.find((e) => e.name === 'directors').contents"
 					:key="item.id"
 					class="director-item flex-column">
-					<img :alt="item.file[0].alt" :src="$store.state.server.slice(0, -1) + item.file[0].file" />
+					<img
+						:alt="item.file[0].alt"
+						:src="$store.state.server.slice(0, -1) + item.file[0].file" />
 					<h5>{{ $store.state.language === 'RU' ? item.name : item.name_en }}</h5>
 					<p>{{ $store.state.language === 'RU' ? item.text : item.text_en }}</p>
 				</div>
@@ -151,7 +163,9 @@
 		<section v-if="PAGE_ID[0].blocks.find((e) => e.name === 'we-create')" class="section">
 			<h2>
 				{{
-					$store.state.language === 'RU' ? 'Мы производим и реализуем' : 'We manufacture and distribute'
+					$store.state.language === 'RU'
+						? 'Мы производим и реализуем'
+						: 'We manufacture and distribute'
 				}}
 			</h2>
 
@@ -187,7 +201,9 @@
 					v-for="slide in PAGE_ID[0].blocks.find((e) => e.name === 'directors').contents"
 					:key="slide.id">
 					<div class="director-item flex-column">
-						<img :alt="slide.file[0].alt" :src="$store.state.server.slice(0, -1) + slide.file[0].file" />
+						<img
+							:alt="slide.file[0].alt"
+							:src="$store.state.server.slice(0, -1) + slide.file[0].file" />
 						<h5>{{ $store.state.language === 'RU' ? slide.name : slide.name_en }}</h5>
 						<p>{{ $store.state.language === 'RU' ? slide.text : slide.text_en }}</p>
 					</div>
@@ -196,7 +212,9 @@
 		</section>
 
 		<section class="history-development-desktop section">
-			<h2>{{ $store.state.language === 'RU' ? 'История развития' : 'The history of development' }}</h2>
+			<h2>
+				{{ $store.state.language === 'RU' ? 'История развития' : 'The history of development' }}
+			</h2>
 
 			<div class="history-development card-shadow">
 				<carousel :items-to-show="4.5" :wrap-around="true">
@@ -306,20 +324,20 @@
 				@close="customers.showModal = false"></app-modal-partners-item>
 		</transition>
 	</main>
-	<app-footer></app-footer>
+	<app-footer> </app-footer>
 </template>
 
 <script>
-import appFooter from '../components/appFooter.vue'
-import appHeader from '../components/appHeader.vue'
-import appHiddenItem from '../components/appHiddenItem.vue'
-import appPartnersItem from '../components/appPartnersItem.vue'
-import appModalPartnersItem from '../components/appModalPartnersItem.vue'
-import YouTube from 'vue3-youtube'
-import { Carousel, Navigation, Pagination, Slide } from 'vue3-carousel'
-import { mapActions, mapGetters, useStore } from 'vuex'
+import appFooter from '@/components/appFooter.vue'
+import appHeader from '@/components/appHeader.vue'
+import appHiddenItem from '@/components/appHiddenItem.vue'
+import appModalPartnersItem from '@/components/appModalPartnersItem.vue'
+import appPartnersItem from '@/components/appPartnersItem.vue'
 import { computed } from 'vue'
 import { useMeta } from 'vue-meta'
+import { Carousel, Navigation, Pagination, Slide } from 'vue3-carousel'
+import YouTube from 'vue3-youtube'
+import { mapActions, mapGetters, useStore } from 'vuex'
 
 export default {
 	name: 'AppPageAbout',
