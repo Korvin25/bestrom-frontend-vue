@@ -217,35 +217,7 @@
 			</h2>
 
 			<div class="history-development card-shadow">
-				<carousel :items-to-show="4.5" :wrap-around="true">
-					<slide v-for="item in HISTORY" :key="item.id">
-						<p class="carousel__item">{{ item.year }}</p>
-					</slide>
-					<template #addons="{ currentSlide }">
-						<div class="history-description">
-							<img
-								v-if="findHistory(currentSlide).img"
-								:alt="
-									$store.state.language === 'RU'
-										? findHistory(currentSlide).description
-										: findHistory(currentSlide).description_en
-								"
-								:src="findHistory(currentSlide).img" />
-							<p
-								v-if="
-									$store.state.language === 'RU'
-										? findHistory(currentSlide).description
-										: findHistory(currentSlide).description_en
-								">
-								{{
-									$store.state.language === 'RU'
-										? findHistory(currentSlide).description
-										: findHistory(currentSlide).description_en
-								}}
-							</p>
-						</div>
-					</template>
-				</carousel>
+				<appSwiper />
 			</div>
 		</section>
 		<!-- /.section -->
@@ -333,6 +305,7 @@ import appHeader from '@/components/appHeader.vue'
 import appHiddenItem from '@/components/appHiddenItem.vue'
 import appModalPartnersItem from '@/components/appModalPartnersItem.vue'
 import appPartnersItem from '@/components/appPartnersItem.vue'
+import appSwiper from '@/components/appSwiper.vue'
 import { computed } from 'vue'
 import { useMeta } from 'vue-meta'
 import { Carousel, Navigation, Pagination, Slide } from 'vue3-carousel'
@@ -352,6 +325,7 @@ export default {
 		Navigation,
 		Pagination,
 		YouTube,
+		appSwiper,
 	},
 	setup() {
 		const store = useStore()
