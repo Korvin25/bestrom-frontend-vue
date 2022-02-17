@@ -1,37 +1,56 @@
-<script setup>
+<script>
+import { Mousewheel, Pagination } from 'swiper'
 import 'swiper/modules/pagination/pagination.scss'
 import 'swiper/swiper.scss'
 import { Swiper, SwiperSlide } from 'swiper/vue/swiper-vue'
-import { Pagination, Mousewheel } from 'swiper'
-import { useStore } from 'vuex'
+import { ref } from 'vue'
+import { mapActions, mapGetters, useStore } from 'vuex'
 
-const store = useStore()
-const history = store.getters['history/HISTORY']
+export default {
+	components: {
+		Swiper,
+		SwiperSlide,
+	},
+	setup() {
+		const history = ref(useStore().getters['history/HISTORY'])
 
-console.log(history)
-
-const pagination = {
-	dynamicBullets: true,
-	clickable: true,
-	renderBullet: function (index, className) {
-		return '<span class="' + className + '">' + history[index].year + '</span>'
+		return {
+			pagination: {
+				clickable: true,
+				dynamicBullets: true,
+				renderBullet: function (index, className) {
+					return '<span class="' + className + '">' + history.value[index].year + '</span>'
+				},
+			},
+			modules: [Pagination, Mousewheel],
+		}
+	},
+	computed: {
+		...mapGetters({
+			HISTORY: 'history/HISTORY',
+		}),
+	},
+	mounted() {
+		this.GET_HISTORY()
+	},
+	methods: {
+		...mapActions({
+			GET_HISTORY: 'history/GET_HISTORY',
+		}),
 	},
 }
-
-const modules = [Pagination, Mousewheel]
 </script>
 
 <template>
 	<swiper
 		:direction="'vertical'"
-		:observer="true"
-		:observe-parents="true"
-		:observe-slide-children="true"
 		:pagination="pagination"
 		:mousewheel="true"
+		:initial-slide="HISTORY.length - 1"
+		on
 		:modules="modules"
 		class="mySwiper">
-		<swiper-slide v-for="item in history" :key="item.id" class="swiper-slide">
+		<swiper-slide v-for="item in HISTORY" :key="item.id" class="swiper-slide">
 			<img
 				v-if="item.img"
 				:alt="$store.state.language === 'RU' ? item.description : item.description_en"
@@ -44,13 +63,17 @@ const modules = [Pagination, Mousewheel]
 </template>
 
 <style scoped>
-::v-deep .swiper {
+.mySwiper {
+	height: 500px;
+}
+.mySwiper .swiper {
 	width: 100%;
 	height: 100%;
 }
 
-::v-deep .swiper-slide {
-	margin: 3rem 0;
+.mySwiper .swiper-slide {
+	padding-left: 7rem;
+	width: auto;
 	font-size: 18px;
 	color: #2fc1ff;
 	text-align: center;
@@ -70,19 +93,21 @@ const modules = [Pagination, Mousewheel]
 	align-items: center;
 }
 
-::v-deep .swiper-slide img {
+.mySwiper .swiper-slide img {
 	display: block;
 	width: 5rem;
 	height: auto;
 	object-fit: cover;
 }
 ::v-deep .swiper-pagination {
-	width: auto;
-	bottom: auto;
+	width: 5rem !important;
+	height: 100% !important;
+	right: auto;
+	background: transparent;
 }
 ::v-deep .swiper-pagination-bullet {
-	width: 10rem;
-	height: auto;
+	width: 5rem !important;
+	height: 20% !important;
 	text-align: center;
 	line-height: 20px;
 	font-size: 26px;
