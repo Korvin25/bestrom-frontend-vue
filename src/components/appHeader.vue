@@ -4,13 +4,18 @@
 			<img class="logo-img" src="../assets/bestrom_logo.png" alt="bestrom logo" />
 			<h1>{{ $store.state.language === 'RU' ? 'БЕСТРОМ' : 'BESTROM' }}</h1>
 		</router-link>
-		<p
-			class="desktop-language language"
+		<div
+			class="header-language flex-row"
 			@click="
-				$store.state.language === 'RU' ? ($store.state.language = 'EN') : ($store.state.language = 'RU')
+				$store.state.language === 'RU'
+					? ($store.state.language = 'EN')
+					: ($store.state.language = 'RU')
 			">
-			{{ $store.state.language }}
-		</p>
+			<img class="desktop-language" src="../assets/language-world.png" alt="language-world" />
+			<p class="desktop-language language">
+				{{ $store.state.language }}
+			</p>
+		</div>
 		<div class="mobile-language flex-row">
 			<img src="../assets/language-world.png" alt="language-world" />
 			<p
@@ -64,6 +69,11 @@ export default {
 	font-feature-settings: 'tnum' on, 'lnum' on;
 	color: #2fc1ff;
 }
+.header-language {
+	margin-right: 1rem;
+	justify-content: center;
+	align-items: center;
+}
 .desktop-language {
 	display: block;
 }
@@ -76,7 +86,7 @@ export default {
 }
 .language {
 	cursor: pointer;
-	margin: 0 1rem;
+	margin: 0 0.5rem;
 }
 @media (max-width: 980px) {
 	.header {
