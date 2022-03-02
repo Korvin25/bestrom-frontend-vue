@@ -59,7 +59,9 @@
 								</slide>
 							</carousel>
 						</div>
-						<div v-if="FILTERS.length > 0 && radioCatalogSelect !== ''" class="type-select flex-row">
+						<div
+							v-if="FILTERS.length > 0 && radioCatalogSelect !== ''"
+							class="type-select flex-row">
 							<app-catalog-type-select
 								v-for="filters in FILTERS.find((e) => e.name === radioCatalogSelect).Filters"
 								:key="filters.id"
@@ -157,7 +159,11 @@ export default {
 					for (const key in product) {
 						if (typeof product[key] === 'object') {
 							for (const item of product[key]) {
-								if (item.name && this.search && item.name.toLowerCase() === this.search.toLowerCase()) {
+								if (
+									item.name &&
+									this.search &&
+									item.name.toLowerCase() === this.search.toLowerCase()
+								) {
 									tempProduct.push(product)
 								}
 							}
@@ -165,7 +171,7 @@ export default {
 					}
 				}
 			}
-			tempProduct.sort((a, b) => a.name > b.name)
+			tempProduct.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1))
 			return tempProduct
 		},
 	},
@@ -200,8 +206,13 @@ export default {
 			this.$router.push(`/product/${path}`)
 		},
 		typeSelectFunc(filterName, filterSearch) {
-			this.typeSelect = filterName
-			this.search = filterSearch
+			if (this.typeSelect === filterName) {
+				this.typeSelect = ''
+				this.search = ''
+			} else {
+				this.typeSelect = filterName
+				this.search = filterSearch
+			}
 			setTimeout(() => {
 				this.showMobileFilter = false
 			}, 100)
