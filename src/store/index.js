@@ -12,7 +12,7 @@ import vacancy from './modules/vacancy'
 export default createStore({
 	state() {
 		return {
-			server: 'http://bestrom.adving.ru/',
+			server: 'http://bestrom.adving.ru/api/',
 			language: 'RU',
 		}
 	},
