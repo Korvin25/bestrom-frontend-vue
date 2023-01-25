@@ -31,7 +31,7 @@
 				<div class="flex-row second-row">
 					<img
 						:src="
-							$store.state.server.slice(0, -1) +
+							$store.state.server_media.slice(0, -1) +
 							PAGE_ID[0].blocks.find((e) => e.name === 'advanced-history').contents[1].file[0].file
 						"
 						:alt="PAGE_ID[0].blocks.find((e) => e.name === 'advanced-history').contents[1].file[0].alt" />

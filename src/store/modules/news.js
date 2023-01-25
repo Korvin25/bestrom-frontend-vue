@@ -34,10 +34,10 @@ export default {
 			content.sort((prev, next) => new Date(next.published) - new Date(prev.published))
 
 			for (const iterator of content) {
-				iterator.description = iterator.description.replaceAll('src="/', 'src="' + this.state.server)
+				iterator.description = iterator.description.replaceAll('src="/', 'src="' + this.state.server_media)
 				iterator.description_en = iterator.description_en.replaceAll(
 					'src="/',
-					'src="' + this.state.server,
+					'src="' + this.state.server_media,
 				)
 			}
 

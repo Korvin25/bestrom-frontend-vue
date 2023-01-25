@@ -113,7 +113,7 @@
 						:alt="PAGE_ID[0].blocks.find((e) => e.name === 'reasons').contents[0].file[0].alt"
 						class="image-world"
 						:src="
-							$store.state.server.slice(0, -1) +
+							$store.state.server_media.slice(0, -1) +
 							PAGE_ID[0].blocks.find((e) => e.name === 'reasons').contents[0].file[0].file
 						" />
 				</div>
