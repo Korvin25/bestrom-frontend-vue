@@ -99,10 +99,10 @@ export default {
 			CLIENTS: 'clients/CLIENTS',
 		}),
 		imageLogoComputed() {
-			if (this.image.includes(this.$store.state.server.slice(0, -1))) {
+			if (this.image.includes(this.$store.state.server_media.slice(0, -1))) {
 				return this.image
 			} else {
-				return this.$store.state.server.slice(0, -1) + this.image
+				return this.$store.state.server_media.slice(0, -1) + this.image
 			}
 		},
 	},

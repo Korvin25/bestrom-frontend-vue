@@ -36,10 +36,10 @@ export default {
 		imageComputed() {
 			if (this.image === 'no-image') {
 				return require('../assets/no-image.jpg')
-			} else if (this.image.includes(this.$store.state.server.slice(0, -1))) {
+			} else if (this.image.includes(this.$store.state.server_media.slice(0, -1))) {
 				return this.image
 			} else {
-				return this.$store.state.server.slice(0, -1) + this.image
+				return this.$store.state.server_media.slice(0, -1) + this.image
 			}
 		},
 	},

@@ -13,6 +13,7 @@ export default createStore({
 	state() {
 		return {
 			server: 'http://bestrom.adving.ru/api/',
+			server_media: 'http://bestrom.adving.ru/',
 			language: 'RU',
 		}
 	},

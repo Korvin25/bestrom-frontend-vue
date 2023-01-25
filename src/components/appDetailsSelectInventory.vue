@@ -8,7 +8,7 @@
 						@click="routerPush(item.id)">
 						<h4>{{ $store.state.language === 'RU' ? item.name : item.name_en }}</h4>
 						<img
-							:src="$store.state.server.slice(0, -1) + item.SliderProd[0].img"
+							:src="$store.state.server_media.slice(0, -1) + item.SliderProd[0].img"
 							:alt="item.SliderProd[0].alt" />
 						<app-hidden-item
 							:text="$store.state.language === 'RU' ? 'ПОДРОБНЕЕ' : 'READ MORE'"></app-hidden-item>

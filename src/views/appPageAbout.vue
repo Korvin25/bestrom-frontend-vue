@@ -133,7 +133,7 @@
 							.contents.find((e) => e.name === 'choice').file"
 						:key="item.id"
 						class="item-reason card-shadow">
-						<img :alt="item.alt" :src="$store.state.server.slice(0, -1) + item.file" />
+						<img :alt="item.alt" :src="$store.state.server_media.slice(0, -1) + item.file" />
 						<app-hidden-item :text="item.alt"></app-hidden-item>
 					</div>
 				</div>
@@ -152,7 +152,7 @@
 					class="director-item flex-column">
 					<img
 						:alt="item.file[0].alt"
-						:src="$store.state.server.slice(0, -1) + item.file[0].file" />
+						:src="$store.state.server_media.slice(0, -1) + item.file[0].file" />
 					<h5>{{ $store.state.language === 'RU' ? item.name : item.name_en }}</h5>
 					<p>{{ $store.state.language === 'RU' ? item.text : item.text_en }}</p>
 				</div>
@@ -203,7 +203,7 @@
 					<div class="director-item flex-column">
 						<img
 							:alt="slide.file[0].alt"
-							:src="$store.state.server.slice(0, -1) + slide.file[0].file" />
+							:src="$store.state.server_media.slice(0, -1) + slide.file[0].file" />
 						<h5>{{ $store.state.language === 'RU' ? slide.name : slide.name_en }}</h5>
 						<p>{{ $store.state.language === 'RU' ? slide.text : slide.text_en }}</p>
 					</div>

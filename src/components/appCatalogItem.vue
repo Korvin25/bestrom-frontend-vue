@@ -108,10 +108,10 @@ export default {
 			window.scrollTo(0, 0)
 		},
 		imageComputed(image) {
-			if (image.includes(this.$store.state.server.slice(0, -1))) {
+			if (image.includes(this.$store.state.server_media.slice(0, -1))) {
 				return image
 			} else {
-				return this.$store.state.server.slice(0, -1) + image
+				return this.$store.state.server_media.slice(0, -1) + image
 			}
 		},
 	},

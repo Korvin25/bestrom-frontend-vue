@@ -310,10 +310,10 @@ export default {
 			this.customers.showModal = true
 		},
 		imageComputed(image) {
-			if (image.includes(this.$store.state.server.slice(0, -1))) {
+			if (image.includes(this.$store.state.server_media.slice(0, -1))) {
 				return image
 			} else {
-				return this.$store.state.server.slice(0, -1) + image
+				return this.$store.state.server_media.slice(0, -1) + image
 			}
 		},
 		fetchData() {
