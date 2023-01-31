@@ -117,10 +117,7 @@ export default {
 				store.getters['page/PAGE_ID'].length > 0
 					? store.getters['page/PAGE_ID'][0].description
 					: 'description',
-			keywords:
-				store.getters['page/PAGE_ID'].length > 0
-					? store.getters['page/PAGE_ID'][0].keywords
-					: 'keywords',
+			
 		}))
 		useMeta(computedMeta)
 	},
