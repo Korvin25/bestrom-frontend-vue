@@ -89,7 +89,7 @@
 					:equipment="PRODUCT_ID.equipments"></app-details-select-inventory>
 				<app-details-select-packet
 					v-if="isSelected === 3"
-					:packets-items="PRODUCT_ID.Packet"></app-details-select-packet>
+					:packets-items="PRODUCT_ID.Packet" :packetsOptions-items="PRODUCT_ID.PacketsOptions"></app-details-select-packet>
 				<app-details-select-solution
 					v-if="isSelected === 4"
 					:complex-solution="PRODUCT_ID.Solution"></app-details-select-solution>

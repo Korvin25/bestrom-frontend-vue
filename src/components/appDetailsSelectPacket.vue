@@ -7,6 +7,23 @@
 				:text="$store.state.language === 'RU' ? 'ПОДРОБНЕЕ' : 'READ MORE'"></app-hidden-item>
 		</div>
 	</div>
+
+	<h2 class="title-brand title-padding">
+		{{
+			$store.state.language === 'RU'
+				? 'Дополнительные опции пакетов'
+				: 'Additional package options'
+		}}
+	</h2>
+
+	<div class="details-select-packet flex-row">
+		<div v-for="item in packetsOptionsItems" :key="item.id" class="details-select-packet-item card-shadow">
+			<h4>{{ $store.state.language === 'RU' ? item.name : item.name_en }}</h4>
+			<img :src="$store.state.server_media.slice(0, -1) + item.img" :alt="item.alt" />
+			<app-hidden-item
+				:text="$store.state.language === 'RU' ? 'ПОДРОБНЕЕ' : 'READ MORE'"></app-hidden-item>
+		</div>
+	</div>
 </template>
 
 <script>
@@ -22,11 +39,19 @@ export default {
 			type: Object,
 			default: new Object(),
 		},
+		packetsOptionsItems: {
+			type: Object,
+			default: new Object(),
+		},
 	},
 }
 </script>
 
 <style scoped>
+.title-padding {
+	padding: 0 1rem;
+	margin: 0;
+}
 .details-select-packet {
 	margin-top: 2rem;
 	flex-wrap: wrap;
