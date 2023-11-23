@@ -39,7 +39,7 @@
 					class="carousel"
 					:items-to-show="1"
 					:wrap-around="true">
-					<slide v-for="slide in product.SliderProd.slice(0, 4)" :key="slide.id">
+					<slide v-for="slide in product.SliderProd" :key="slide.id">
 						<img loading="lazy" class="content-image" :src="imageComputed(slide.img)" :alt="slide.alt" />
 					</slide>
 					<template #addons>
@@ -52,7 +52,7 @@
 			</section>
 			<section class="section">
 				<carousel class="carousel" :autoplay="4000" :items-to-show="1" :wrap-around="true">
-					<slide v-for="slide in product.ProductPropertyValue" :key="slide.id">
+					<slide v-for="slide in product.ProductPropertyValue.slice(0, 4)" :key="slide.id">
 						<div class="flex-column">
 							<h4>
 								{{
