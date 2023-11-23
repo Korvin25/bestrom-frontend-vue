@@ -40,7 +40,7 @@
 					:items-to-show="1"
 					:wrap-around="true">
 					<slide v-for="slide in product.SliderProd.slice(0, 4)" :key="slide.id">
-						<img class="content-image" :src="imageComputed(slide.img)" :alt="slide.alt" />
+						<img loading="lazy" class="content-image" :src="imageComputed(slide.img)" :alt="slide.alt" />
 					</slide>
 					<template #addons>
 						<Pagination />
