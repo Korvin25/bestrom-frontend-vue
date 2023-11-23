@@ -113,9 +113,6 @@
 				<a :href="content.find((e) => e.name === 'youtube').text" class="social-logo network">
 					<img style="width: 25px" src="../assets/youtube.png" alt="menu-item-img" />
 				</a>
-				<a :href="content.find((e) => e.name === 'instagram').text" class="social-logo network">
-					<img style="width: 30px" src="../assets/instagram.png" alt="menu-item-img" />
-				</a>
 			</div>
 
 			<h3>{{ $store.state.language === 'RU' ? 'Мессенджеры' : 'Messengers' }}</h3>

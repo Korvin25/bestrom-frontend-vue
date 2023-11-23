@@ -115,14 +115,6 @@
 				@mouseleave="hoverItem = 0">
 				<img style="width: 25px" src="../assets/youtube.png" alt="menu-item-img" />
 			</a>
-			<a
-				href="https://instagram.com"
-				:class="hoverItem === 14 ? 'logo-hover' : ''"
-				class="nav-item img logo"
-				@mouseenter="hoverItem = 14"
-				@mouseleave="hoverItem = 0">
-				<img style="width: 30px" src="../assets/instagram.png" alt="menu-item-img" />
-			</a>
 		</div>
 
 		<!-- Text items in menu  !!  !! -->
@@ -239,14 +231,6 @@
 				@mouseleave="hoverItem = 0">
 				<p>YouTube</p>
 			</a>
-			<a
-				href="https://instagram.com"
-				:class="hoverItem === 14 ? 'text-hover' : ''"
-				class="nav-item text"
-				@mouseenter="hoverItem = 14"
-				@mouseleave="hoverItem = 0">
-				<p>Instagram</p>
-			</a>
 		</div>
 	</nav>
 
@@ -277,9 +261,6 @@
 					</a>
 					<a href="https://youtube.com" class="nav-item img logo">
 						<img style="width: 25px" src="../assets/youtube.png" alt="menu-item-img" />
-					</a>
-					<a href="https://instagram.com" class="nav-item img logo">
-						<img style="width: 30px" src="../assets/instagram.png" alt="menu-item-img" />
 					</a>
 				</div>
 
