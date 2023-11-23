@@ -67,7 +67,9 @@
   margin: var(--vc-pgn-margin);
   width: var(--vc-pgn-width);
   height: var(--vc-pgn-height);
-  border-radius: 100%;
+  border-radius: 50%;
+  height: 10px;
+  width: 10px;
   border: 0;
   cursor: pointer;
   background-color: var(--vc-pgn-background-color);
