@@ -205,7 +205,8 @@ export default {
 			GET_PACKETS_SEAMS: 'packets/GET_PACKETS_SEAMS',
 		}),
 		routerPush(id) {
-			if (this.checkType !== 0 && this.checkOptions !== 0 && this.checkSeam !== 0) {
+			// if (this.checkType !== 0 && this.checkOptions !== 0 && this.checkSeam !== 0) {
+			if (this.checkType !== 0 && this.checkSeam !== 0) {
 				this.$router.push('/cutting/' + id)
 				window.scrollTo(0, 0)
 			} else if (this.checkType === 0) {
@@ -219,7 +220,8 @@ export default {
 					updateHistory: false,
 					offset: -50,
 				})
-			} else if (this.checkOptions === 0) {
+			// } else if (this.checkOptions === 0) {
+			} else if (false) {
 				this.modalAlert.text =
 					this.$store.state.language === 'RU'
 						? 'Сначала выберите дополнительные опции!!!'
@@ -276,7 +278,8 @@ export default {
 					updateHistory: false,
 					offset: -50,
 				})
-			} else if (this.checkType !== 0 && this.checkOptions === 0) {
+			// } else if (this.checkType !== 0 && this.checkOptions === 0) {
+			} else if (false) {
 				this.modalAlert.text =
 					this.$store.state.language === 'RU'
 						? 'Сначала выберите дополнительные опции!!!'
@@ -287,7 +290,8 @@ export default {
 					updateHistory: false,
 					offset: -50,
 				})
-			} else if (this.checkType !== 0 && this.checkOptions !== 0) {
+			// } else if (this.checkType !== 0 && this.checkOptions !== 0) {
+			} else if (this.checkType !== 0) {
 				this.checkSeam = id
 				this.$smoothScroll({
 					scrollTo: document.getElementById('packetSize'), // scrollTo is also allowed to be number

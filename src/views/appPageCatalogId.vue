@@ -97,7 +97,7 @@
 			<!-- /.details -->
 		</section>
 
-		<section class="section">
+		<!-- <section class="section">
 			<h2 class="title-brand">
 				{{
 					$store.state.language === 'RU'
@@ -119,7 +119,7 @@
 					</template>
 				</carousel>
 			</div>
-		</section>
+		</section> -->
 	</main>
 
 	<transition-group name="modal">
