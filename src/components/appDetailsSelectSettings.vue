@@ -27,7 +27,7 @@ export default {
 <style scoped>
 .details-select-settings {
 	margin: 2rem 1rem 0 1rem;
-	max-height: 25rem;
+	/* max-height: 25rem; */
 	flex-wrap: wrap;
 	justify-content: flex-start;
 	align-items: flex-start;

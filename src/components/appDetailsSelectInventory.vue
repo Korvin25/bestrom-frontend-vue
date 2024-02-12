@@ -15,8 +15,8 @@
 					</div>
 				</slide>
 				<template #addons="{ slidesCount }">
-					<navigation v-if="slidesCount > 3" />
-					<pagination v-if="slidesCount > 3" />
+					<navigation v-if="slidesCount > 1" />
+					<pagination v-if="slidesCount > 1" />
 				</template>
 			</carousel>
 		</div>
