@@ -1,5 +1,5 @@
 <template>
-	<div class="details-select-settings flex-column">
+	<div class="details-select-settings">
 		<div v-for="item in settings" :key="item.id" class="details-select-settings-item">
 			<h4>
 				{{
@@ -27,9 +27,9 @@ export default {
 <style scoped>
 .details-select-settings {
 	margin: 2rem 1rem 0 1rem;
-	/* max-height: 25rem; */
+	display: flex;
 	flex-wrap: wrap;
-	justify-content: flex-start;
+	justify-content: space-between;
 	align-items: flex-start;
 }
 .details-select-settings-item {
