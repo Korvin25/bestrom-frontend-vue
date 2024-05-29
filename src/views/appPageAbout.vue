@@ -225,7 +225,7 @@
 		<section class="clients-desktop section">
 			<h2>{{ $store.state.language === 'RU' ? 'Клиенты' : 'Clients' }}</h2>
 			<div class="slider-content card-shadow">
-				<carousel :breakpoints="breakpoints">
+				<carousel :breakpoints="breakpoints" :autoplay="3000" :wrap-around="true">
 					<slide v-for="client in CLIENTS" :key="client.id">
 						<app-partners-item
 							:alt="client.alt"
@@ -467,6 +467,11 @@ export default {
 	margin: 0;
 	padding-top: 0.5rem;
 	border-top: 1px solid #2fc1ff;
+}
+
+.director-item img {
+	box-shadow: 0 0 5px 3px rgba(0, 0, 0, 0.15);
+    border-radius: 5px;
 }
 
 .history-development {
