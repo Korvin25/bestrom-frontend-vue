@@ -173,7 +173,7 @@
 				<slide
 					v-for="slide in PAGE_ID[0].blocks.find((e) => e.name === 'we-create').contents"
 					:key="slide.id">
-					<div class="reason-mobile item-reason card-shadow">
+					<div class="reason-mobile item-reason card-shadow cursor-pinter" @click="typeSelectFuncAbout(item.name)">
 						<h5>{{ $store.state.language === 'RU' ? slide.name : slide.name_en }}</h5>
 					</div>
 				</slide>
@@ -184,7 +184,8 @@
 					<div
 						v-for="item in PAGE_ID[0].blocks.find((e) => e.name === 'we-create').contents"
 						:key="item.id"
-						class="item-reason card-shadow">
+						@click="typeSelectFuncAbout(item.name)"
+						class="item-reason card-shadow cursor-pinter">
 						<h5>{{ $store.state.language === 'RU' ? item.name : item.name_en }}</h5>
 					</div>
 				</div>
@@ -346,6 +347,7 @@ export default {
 	},
 	data() {
 		return {
+			typeSelect: '',
 			checkSlide: 0,
 			customers: {
 				showModal: false,
@@ -412,6 +414,10 @@ export default {
 				return { year: '', description: '', img: '' }
 			}
 		},
+		
+		typeSelectFuncAbout(filterName) {
+			this.$router.push({ path: '/catalog', query: { typeSelect: filterName.charAt(0).toUpperCase() + filterName.slice(1).toLowerCase() } });
+		},
 	},
 }
 </script>
@@ -452,6 +458,10 @@ export default {
 	-webkit-filter: blur(4px);
 	-ms-filter: blur(4px);
 	filter: blur(4px);
+}
+
+.cursor-pinter {
+	cursor: pointer;
 }
 
 .director-item {

@@ -59,7 +59,7 @@
 								</slide>
 							</carousel>
 						</div>
-						<div
+						1<div
 							v-if="FILTERS.length > 0 && radioCatalogSelect !== ''"
 							class="type-select flex-row">
 							<app-catalog-type-select
@@ -68,7 +68,7 @@
 								:class="typeSelect === filters.name ? 'type-select-checked' : ''"
 								:text="$store.state.language === 'RU' ? filters.name : filters.name_en"
 								@click="typeSelectFunc(filters.name, filters.search)"></app-catalog-type-select>
-						</div>
+						</div>2
 					</div>
 				</section>
 			</transition-group>
@@ -86,6 +86,7 @@
 
 <script>
 import { computed } from 'vue'
+import { mapState } from 'vuex';
 import { useMeta } from 'vue-meta'
 import { Carousel, Slide } from 'vue3-carousel'
 import { mapActions, mapGetters, useStore } from 'vuex'
@@ -134,6 +135,7 @@ export default {
 			PRODUCT: 'product/PRODUCT',
 			FILTERS: 'filters/FILTERS',
 			PAGE_ID: 'page/PAGE_ID',
+			GET_FILTER_NAME: 'storage/GET_FILTER_NAME'
 		}),
 		filterInit() {
 			if (this.FILTERS.length > 0) {
@@ -183,6 +185,10 @@ export default {
 		radioCatalogSelect() {
 			//this.typeSelect = this.FILTERS.find((e) => e.name === this.radioCatalogSelect).Filters[0].name
 			this.search = this.FILTERS.find((e) => e.name === this.radioCatalogSelect).Filters[0].search
+			if (this.$route.query.typeSelect){
+				this.search = this.$route.query.typeSelect;
+			}
+
 		},
 	},
 	mounted() {
@@ -191,6 +197,10 @@ export default {
 			this.radioCatalogSelect = this.filterInit
 		})
 		this.GET_PAGE_ID(4)
+		if (this.$route.query.typeSelect){
+			this.typeSelect = this.$route.query.typeSelect;
+			this.search = this.$route.query.typeSelect;
+		}
 	},
 	methods: {
 		...mapActions({
