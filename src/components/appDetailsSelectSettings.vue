@@ -31,9 +31,10 @@ export default {
 	flex-wrap: wrap;
 	justify-content: space-between;
 	align-items: flex-start;
+	flex-direction: column;
 }
 .details-select-settings-item {
-	width: 15rem;
+	width: 100%;
 }
 .details-select-settings-item h4 {
 	margin: 1rem 0;

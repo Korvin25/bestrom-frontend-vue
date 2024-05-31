@@ -6,6 +6,7 @@ export default {
 	state() {
 		return {
 			filters: [],
+			selectedFilter: null, // добавлено для хранения выбранного фильтра
 		}
 	},
 
@@ -13,11 +14,17 @@ export default {
 		FILTERS(state) {
 			return state.filters
 		},
+		SELECTED_FILTER(state) {
+			return state.selectedFilter
+		},
 	},
 
 	mutations: {
 		SET_FILTERS(state, content) {
 			state.filters = content.sort((prev, next) => prev.sort - next.sort)
+		},
+		SET_SELECTED_FILTER(state, filter) {
+			state.selectedFilter = filter
 		},
 	},
 
@@ -35,6 +42,9 @@ export default {
 					console.log(error)
 					return error
 				})
+		},
+		SET_FILTER({ commit }, filter) {
+			commit('SET_SELECTED_FILTER', filter)
 		},
 	},
 }

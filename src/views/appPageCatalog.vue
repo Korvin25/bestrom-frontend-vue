@@ -147,13 +147,13 @@ export default {
 			return 0
 		},
 		computedProducts() {
-			let tempProduct = new Array()
-			if (this.typeSelect === '') {
-				for (const product of this.PRODUCT) {
-					tempProduct.push(product)
-				}
-			} else {
-				for (const product of this.PRODUCT) {
+			let tempProduct = []
+			tempProduct = this.PRODUCT.slice()
+			// Если selectedFilter не пустой, фильтруем продукты по selectedFilter
+			if (this.$store.state.filters.selectedFilter) {
+				this.search = this.$store.state.filters.selectedFilter;
+				this.typeSelect = this.$store.state.filters.selectedFilter;
+				tempProduct = tempProduct.filter(product => {
 					for (const key in product) {
 						if (typeof product[key] === 'object') {
 							for (const item of product[key]) {
@@ -162,14 +162,38 @@ export default {
 									this.search &&
 									item.name.toLowerCase() === this.search.toLowerCase()
 								) {
-									tempProduct.push(product)
+									return true
 								}
 							}
 						}
 					}
-				}
+					return false
+				})
+
+				this.$store.dispatch('filters/SET_FILTER', null)
+				return tempProduct
+			} 
+
+			// Дополнительный фильтр по typeSelect и search
+			if (this.$store.state.filters.selectedFilter == null && this.typeSelect !== '' && this.search !== '') {
+				tempProduct = tempProduct.filter(product => {
+					for (const key in product) {
+						if (typeof product[key] === 'object') {
+							for (const item of product[key]) {
+								if (
+									item.name &&
+									this.search &&
+									item.name.toLowerCase() === this.search.toLowerCase()
+								) {
+									return true
+								}
+							}
+						}
+					}
+					return false
+				})
 			}
-			// tempProduct.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1))
+
 			return tempProduct
 		},
 	},
@@ -184,10 +208,6 @@ export default {
 		radioCatalogSelect() {
 			//this.typeSelect = this.FILTERS.find((e) => e.name === this.radioCatalogSelect).Filters[0].name
 			this.search = this.FILTERS.find((e) => e.name === this.radioCatalogSelect).Filters[0].search
-			// if (this.$route.query.typeSelect){
-			// 	this.search = this.$route.query.typeSelect;
-			// }
-
 		},
 	},
 	mounted() {
@@ -196,16 +216,13 @@ export default {
 			this.radioCatalogSelect = this.filterInit
 		})
 		this.GET_PAGE_ID(4)
-		// if (this.$route.query.typeSelect){
-		// 	this.typeSelect = this.$route.query.typeSelect;
-		// 	this.search = this.$route.query.typeSelect;
-		// }
 	},
 	methods: {
 		...mapActions({
 			GET_PRODUCT: 'product/GET_PRODUCT',
 			GET_FILTERS: 'filters/GET_FILTERS',
 			GET_PAGE_ID: 'page/GET_PAGE_ID',
+			SET_FILTER: 'filters/SET_FILTER',  // действие для установки выбранного фильтра
 		}),
 		routerPush(path) {
 			window.scrollTo(0, 0)
@@ -219,6 +236,7 @@ export default {
 				this.typeSelect = filterName
 				this.search = filterSearch
 			}
+
 			setTimeout(() => {
 				this.showMobileFilter = false
 			}, 100)

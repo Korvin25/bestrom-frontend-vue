@@ -341,7 +341,7 @@ export default {
 				store.getters['page/PAGE_ID'].length > 0
 					? store.getters['page/PAGE_ID'][0].description
 					: 'description',
-			
+
 		}))
 		useMeta(computedMeta)
 	},
@@ -373,6 +373,8 @@ export default {
 			CLIENTS: 'clients/CLIENTS',
 			HISTORY: 'history/HISTORY',
 			PAGE_ID: 'page/PAGE_ID',
+			FILTERS: 'filters/FILTERS',  // добавление геттера FILTERS
+			SELECTED_FILTER: 'filters/SELECTED_FILTER', // геттер для выбранного фильтра
 		}),
 	},
 	watch: {
@@ -391,12 +393,15 @@ export default {
 		this.GET_CLIENTS()
 		this.GET_HISTORY()
 		this.GET_PAGE_ID(2)
+		this.GET_FILTERS()  // вызов для получения фильтров
 	},
 	methods: {
 		...mapActions({
 			GET_CLIENTS: 'clients/GET_CLIENTS',
 			GET_HISTORY: 'history/GET_HISTORY',
 			GET_PAGE_ID: 'page/GET_PAGE_ID',
+			GET_FILTERS: 'filters/GET_FILTERS',  // действие для получения фильтров
+			SET_FILTER: 'filters/SET_FILTER',  // действие для установки выбранного фильтра
 		}),
 		routerPush(path) {
 			this.$router.push('/' + path)
@@ -414,10 +419,11 @@ export default {
 				return { year: '', description: '', img: '' }
 			}
 		},
-		
+
 		typeSelectFuncAbout(filterName) {
-			// this.$router.push({ path: '/catalog', query: { typeSelect: filterName.charAt(0).toUpperCase() + filterName.slice(1).toLowerCase() } });
-			this.$router.push({ path: '/catalog'});
+			const filter = filterName.charAt(0).toUpperCase() + filterName.slice(1).toLowerCase()
+			this.SET_FILTER(filter)  // установка выбранного фильтра в хранилище
+			this.$router.push({ path: '/catalog' })
 		},
 	},
 }
