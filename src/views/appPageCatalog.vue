@@ -150,32 +150,32 @@ export default {
 			let tempProduct = []
 			tempProduct = this.PRODUCT.slice()
 			// Если selectedFilter не пустой, фильтруем продукты по selectedFilter
-			if (this.$store.state.filters.selectedFilter) {
-				this.search = this.$store.state.filters.selectedFilter;
-				this.typeSelect = this.$store.state.filters.selectedFilter;
-				tempProduct = tempProduct.filter(product => {
-					for (const key in product) {
-						if (typeof product[key] === 'object') {
-							for (const item of product[key]) {
-								if (
-									item.name &&
-									this.search &&
-									item.name.toLowerCase() === this.search.toLowerCase()
-								) {
-									return true
-								}
-							}
-						}
-					}
-					return false
-				})
+			// if (this.$store.state.filters.selectedFilter) {
+			// 	this.search = this.$store.state.filters.selectedFilter;
+			// 	this.typeSelect = this.$store.state.filters.selectedFilter;
+			// 	tempProduct = tempProduct.filter(product => {
+			// 		for (const key in product) {
+			// 			if (typeof product[key] === 'object') {
+			// 				for (const item of product[key]) {
+			// 					if (
+			// 						item.name &&
+			// 						this.search &&
+			// 						item.name.toLowerCase() === this.search.toLowerCase()
+			// 					) {
+			// 						return true
+			// 					}
+			// 				}
+			// 			}
+			// 		}
+			// 		return false
+			// 	})
 
-				this.$store.dispatch('filters/SET_FILTER', null)
-				return tempProduct
-			} 
+			// 	this.$store.dispatch('filters/SET_FILTER', null)
+			// 	return tempProduct
+			// } 
 
 			// Дополнительный фильтр по typeSelect и search
-			if (this.$store.state.filters.selectedFilter == null && this.typeSelect !== '' && this.search !== '') {
+			if (this.typeSelect !== '' && this.search !== '') {
 				tempProduct = tempProduct.filter(product => {
 					for (const key in product) {
 						if (typeof product[key] === 'object') {
@@ -208,6 +208,18 @@ export default {
 		radioCatalogSelect() {
 			//this.typeSelect = this.FILTERS.find((e) => e.name === this.radioCatalogSelect).Filters[0].name
 			this.search = this.FILTERS.find((e) => e.name === this.radioCatalogSelect).Filters[0].search
+			console.log(this.$store.state.filters.selectedFilter, this.search);
+			if (this.$store.state.filters.selectedFilter && this.$store.state.filters.selectedFilter != 'Упаковочные машины вертикального типа') { 
+				this.search = this.$store.state.filters.selectedFilter
+				this.typeSelect = this.$store.state.filters.selectedFilter
+
+				this.$store.dispatch('filters/SET_FILTER', null)
+			} else if (this.$store.state.filters.selectedFilter) {
+				this.search = 'Упаковочная машина вертикального типа'
+				this.typeSelect = this.$store.state.filters.selectedFilter
+
+				this.$store.dispatch('filters/SET_FILTER', null)
+			}
 		},
 	},
 	mounted() {
