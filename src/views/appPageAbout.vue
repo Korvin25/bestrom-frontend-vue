@@ -416,7 +416,8 @@ export default {
 		},
 		
 		typeSelectFuncAbout(filterName) {
-			this.$router.push({ path: '/catalog', query: { typeSelect: filterName.charAt(0).toUpperCase() + filterName.slice(1).toLowerCase() } });
+			// this.$router.push({ path: '/catalog', query: { typeSelect: filterName.charAt(0).toUpperCase() + filterName.slice(1).toLowerCase() } });
+			this.$router.push({ path: '/catalog'});
 		},
 	},
 }

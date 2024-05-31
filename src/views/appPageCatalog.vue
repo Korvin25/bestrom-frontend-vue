@@ -135,7 +135,6 @@ export default {
 			PRODUCT: 'product/PRODUCT',
 			FILTERS: 'filters/FILTERS',
 			PAGE_ID: 'page/PAGE_ID',
-			GET_FILTER_NAME: 'storage/GET_FILTER_NAME'
 		}),
 		filterInit() {
 			if (this.FILTERS.length > 0) {
@@ -185,9 +184,9 @@ export default {
 		radioCatalogSelect() {
 			//this.typeSelect = this.FILTERS.find((e) => e.name === this.radioCatalogSelect).Filters[0].name
 			this.search = this.FILTERS.find((e) => e.name === this.radioCatalogSelect).Filters[0].search
-			if (this.$route.query.typeSelect){
-				this.search = this.$route.query.typeSelect;
-			}
+			// if (this.$route.query.typeSelect){
+			// 	this.search = this.$route.query.typeSelect;
+			// }
 
 		},
 	},
@@ -197,10 +196,10 @@ export default {
 			this.radioCatalogSelect = this.filterInit
 		})
 		this.GET_PAGE_ID(4)
-		if (this.$route.query.typeSelect){
-			this.typeSelect = this.$route.query.typeSelect;
-			this.search = this.$route.query.typeSelect;
-		}
+		// if (this.$route.query.typeSelect){
+		// 	this.typeSelect = this.$route.query.typeSelect;
+		// 	this.search = this.$route.query.typeSelect;
+		// }
 	},
 	methods: {
 		...mapActions({
