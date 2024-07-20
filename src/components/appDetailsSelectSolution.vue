@@ -1,5 +1,24 @@
 <template>
 	<div class="details-select-solution">
+		<section class="resheni-desktop">
+			<h2>
+				{{
+					$store.state.language === 'RU'
+						? PAGE_ID[0].blocks[0].contents[0].name
+						: PAGE_ID[0].blocks[0].contents[0].name_en
+				}}
+			</h2>
+			<div class="resheni-desktop-text card-shadow flex-column">
+				<h5>
+					{{
+						$store.state.language === 'RU'
+							? PAGE_ID[0].blocks[0].contents[0].text
+							: PAGE_ID[0].blocks[0].contents[0].text_en
+					}}
+				</h5>
+			</div>
+		</section>
+		
 		<div class="slider-content">
 			<carousel :breakpoints="breakpoints">
 				<slide v-for="item in complexSolution" :key="item.id">
@@ -23,6 +42,7 @@
 <script>
 import appHiddenItem from '../components/appHiddenItem.vue'
 import { Carousel, Slide, Navigation, Pagination } from 'vue3-carousel'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
 	name: 'AppDetailsSelectSolution',
@@ -57,12 +77,32 @@ export default {
 			},
 		}
 	},
+	computed: {
+		...mapGetters({
+			PAGE_ID: 'page/PAGE_ID',
+		}),
+	},
+	mounted() {
+		this.GET_PAGE_ID(11)
+	},
+	methods: {
+		...mapActions({
+			GET_PAGE_ID: 'page/GET_PAGE_ID',
+		}),
+	},
 }
 </script>
 
 <style scoped>
+.resheni-desktop-text {
+	padding: 1em;
+} 
+.resheni-desktop {
+	margin: 1em;
+}
 .details-select-solution {
 	margin: 2rem 0 1rem 0;
+	overflow: hidden;
 }
 .details-select-solution-item {
 	position: relative;

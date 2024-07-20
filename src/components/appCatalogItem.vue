@@ -10,7 +10,7 @@
 				{{ $store.state.language === 'RU' ? 'ПОДРОБНЕЕ' : 'READ MORE' }}
 			</button>
 		</div>
-		<section class="section">
+		<section class="section" @click="scrollToTop">
 			<carousel
 				v-if="product.SliderProd.length > 0"
 				class="carousel"
@@ -50,7 +50,7 @@
 					<img class="content-image" :src="require('../assets/no-image.jpg')" alt="no-image" />
 				</div>
 			</section>
-			<section class="section">
+			<section class="section" @click="scrollToTop">
 				<carousel class="carousel" :autoplay="4000" :items-to-show="1" :wrap-around="true">
 					<slide v-for="slide in product.ProductPropertyValue.slice(0, 4)" :key="slide.id">
 						<div class="flex-column">

@@ -6,7 +6,8 @@
 					$store.state.language === 'RU' ? item.product_property.name : item.product_property.name_en
 				}}
 			</h4>
-			<p>{{ $store.state.language === 'RU' ? item.name : item.name_en }}</p>
+			<!-- <p>{{ $store.state.language === 'RU' ? item.name : item.name_en }}</p> -->
+			<div v-html="$store.state.language === 'RU' ? item.name : item.name_en"></div>
 		</div>
 	</div>
 	<!-- /.details-select-settings -->

@@ -3,8 +3,8 @@
 		<div v-for="item in filteredPacketsItems" :key="item.id" class="details-select-packet-item card-shadow">
 			<h4>{{ $store.state.language === 'RU' ? item.name : item.name_en }}</h4>
 			<img :src="$store.state.server_media.slice(0, -1) + item.img" :alt="item.alt" />
-			<app-hidden-item
-				:text="$store.state.language === 'RU' ? 'ПОДРОБНЕЕ' : 'READ MORE'"></app-hidden-item>
+			<!-- <app-hidden-item
+				:text="$store.state.language === 'RU' ? 'ПОДРОБНЕЕ' : 'READ MORE'"></app-hidden-item> -->
 		</div>
 	</div>
 
@@ -20,8 +20,8 @@
 		<div v-for="item in packetsOptionsItems" :key="item.id" class="details-select-packet-item card-shadow">
 			<h4>{{ $store.state.language === 'RU' ? item.name : item.name_en }}</h4>
 			<img :src="$store.state.server_media.slice(0, -1) + item.img" :alt="item.alt" />
-			<app-hidden-item
-				:text="$store.state.language === 'RU' ? 'ПОДРОБНЕЕ' : 'READ MORE'"></app-hidden-item>
+			<!-- <app-hidden-item
+				:text="$store.state.language === 'RU' ? 'ПОДРОБНЕЕ' : 'READ MORE'"></app-hidden-item> -->
 		</div>
 	</div>
 </template>
@@ -74,14 +74,18 @@ export default {
 	flex-grow: 1;
 	margin: 1rem;
 }
-.details-select-packet-item:hover .hidden-item {
+/* .details-select-packet-item:hover .hidden-item {
 	opacity: 1;
-}
-.details-select-packet-item:hover img,
+} */
+/* .details-select-packet-item:hover img,
 .details-select-packet-item:hover h4 {
 	-webkit-filter: blur(3px);
 	-ms-filter: blur(3px);
 	filter: blur(3px);
+} */
+.details-select-packet-item:hover {
+	transition: all 0.5s;
+	filter: drop-shadow(0 0 12px #2fc1ff);
 }
 .details-select-packet-item h4 {
 	font-weight: normal;

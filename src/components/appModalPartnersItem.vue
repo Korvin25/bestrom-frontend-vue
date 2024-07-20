@@ -12,7 +12,7 @@
 				<p v-html="text"></p>
 			</div>
 
-			<section v-if="machines">
+			<!-- <section v-if="machines">
 				<h2>
 					{{
 						$store.state.language === 'RU'
@@ -35,7 +35,7 @@
 						</template>
 					</carousel>
 				</div>
-			</section>
+			</section> -->
 		</div>
 	</div>
 </template>
