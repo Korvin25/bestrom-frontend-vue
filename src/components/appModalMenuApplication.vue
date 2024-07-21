@@ -14,7 +14,7 @@
 					<button class="btn">{{ $store.state.language === 'RU' ? 'Позвонить' : 'Call' }}</button>
 				</a>
 				<a href="tel:+78005557457">
-					<h3>8-800-555-74-57</h3>
+					<h3>+7-800-555-74-57</h3>
 				</a>
 			</div>
 			<section class="form-call flex-column">

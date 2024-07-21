@@ -10,7 +10,7 @@
 			<div class="catalog-name flex-row">
 				<h2 class="catalog-name-item">{{ nameMachine }}</h2>
 				<a href="tel:+78005557457">
-					<h2 class="catalog-name-item">8-800-555-74-57</h2>
+					<h2 class="catalog-name-item">+7-800-555-74-57</h2>
 				</a>
 			</div>
 			<section class="form-call flex-column">
