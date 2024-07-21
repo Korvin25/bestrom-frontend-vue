@@ -118,10 +118,6 @@ export default {
 </script>
 
 <style scoped>
-.clients-footer {
-	position: absolute;
-	bottom: 0;
-}
 .desktop-section {
 	display: block;
 }
