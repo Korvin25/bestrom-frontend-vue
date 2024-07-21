@@ -1,22 +1,36 @@
 <template>
 	<div class="details-select-solution">
-		<section class="resheni-desktop">
-			<h2>
-				{{
-					$store.state.language === 'RU'
-						? PAGE_ID[0].blocks[0].contents[0].name
-						: PAGE_ID[0].blocks[0].contents[0].name_en
-				}}
-			</h2>
-			<div class="resheni-desktop-text card-shadow flex-column">
-				<h5>
-					{{
-						$store.state.language === 'RU'
-							? PAGE_ID[0].blocks[0].contents[0].text
-							: PAGE_ID[0].blocks[0].contents[0].text_en
-					}}
-				</h5>
+
+		<section class="section">
+
+			<div class="content flex-row card-shadow resheni-desktop">
+				<div class="about-content flex-column">
+					<h3>
+						{{
+							$store.state.language === 'RU'
+								? PAGE_ID[0].blocks[0].contents[0].name
+								: PAGE_ID[0].blocks[0].contents[0].name_en
+						}}
+					</h3>
+					<p class="text-about-content" style="padding: 1rem 0">
+						{{
+							$store.state.language === 'RU'
+								? PAGE_ID[0].blocks[0].contents[0].text
+								: PAGE_ID[0].blocks[0].contents[0].text_en
+						}}
+					</p>
+				</div>
+				<div class="image-content">
+					<img
+						:alt="PAGE_ID[0].blocks[0].contents[0].file[0].alt"
+						class="image-world"
+						:src="
+							$store.state.server_media.slice(0, -1) +
+							PAGE_ID[0].blocks[0].contents[0].file[0].file
+						" />
+				</div>
 			</div>
+			
 		</section>
 		
 		<div class="slider-content">
