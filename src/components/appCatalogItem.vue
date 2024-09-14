@@ -2,7 +2,7 @@
 	<div class="desktop-section catalog-item-product flex-row card-shadow">
 		<div class="about-content flex-column">
 			<h3>{{ $store.state.language === 'RU' ? product.name : product.name_en }}</h3>
-			<p>{{ property }}</p>
+			<div v-html="property"></div>
 			<p
 				class="text-about-content"
 				v-html="$store.state.language === 'RU' ? product.description : product.description_en"></p>

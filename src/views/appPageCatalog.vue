@@ -24,6 +24,7 @@
 						:key="filters.id"
 						:class="typeSelect === filters.name ? 'type-select-checked' : ''"
 						:text="$store.state.language === 'RU' ? filters.name : filters.name_en"
+						:img="filters.img"
 						@click="typeSelectFunc(filters.name, filters.search)"></app-catalog-type-select>
 				</div>
 			</div>
@@ -59,7 +60,7 @@
 								</slide>
 							</carousel>
 						</div>
-						1<div
+						<div
 							v-if="FILTERS.length > 0 && radioCatalogSelect !== ''"
 							class="type-select flex-row">
 							<app-catalog-type-select
@@ -68,7 +69,7 @@
 								:class="typeSelect === filters.name ? 'type-select-checked' : ''"
 								:text="$store.state.language === 'RU' ? filters.name : filters.name_en"
 								@click="typeSelectFunc(filters.name, filters.search)"></app-catalog-type-select>
-						</div>2
+						</div>
 					</div>
 				</section>
 			</transition-group>
@@ -208,7 +209,6 @@ export default {
 		radioCatalogSelect() {
 			//this.typeSelect = this.FILTERS.find((e) => e.name === this.radioCatalogSelect).Filters[0].name
 			this.search = this.FILTERS.find((e) => e.name === this.radioCatalogSelect).Filters[0].search
-			console.log(this.$store.state.filters.selectedFilter, this.search);
 			if (this.$store.state.filters.selectedFilter && this.$store.state.filters.selectedFilter != 'Упаковочные машины вертикального типа') { 
 				this.search = this.$store.state.filters.selectedFilter
 				this.typeSelect = this.$store.state.filters.selectedFilter
