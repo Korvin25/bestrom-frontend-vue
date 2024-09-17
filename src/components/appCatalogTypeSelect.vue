@@ -23,6 +23,7 @@ export default {
 
 <style scoped>
 .catalog-type-select {
+	width: 24%;
 	transition: all 0.5s;
 	display: flex;
 	align-items: center;
@@ -47,7 +48,7 @@ export default {
 }
 
 .filter-image {
-	height: 50px;
+	height: 100px;
 	margin-top: 10px;
 }
 
@@ -60,6 +61,7 @@ export default {
 }
 @media (max-width: 980px) {
 	.catalog-type-select {
+		width: auto;
 		font-size: 13px;
 	}
 }
