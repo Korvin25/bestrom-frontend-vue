@@ -70,7 +70,7 @@ export default {
 	align-items: center;
 	padding: 0.5rem 1rem;
 	text-align: center;
-	width: 25%;
+	width: 20%;
 	flex-grow: 1;
 	margin: 1rem;
 }
