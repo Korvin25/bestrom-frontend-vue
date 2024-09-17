@@ -271,7 +271,7 @@ export default {
 }
 .type-select {
 	margin: 1.5rem 0 1rem 0;
-	width: 80%;
+	width: 100%;
 	flex-wrap: wrap;
 	justify-content: flex-start;
 }
