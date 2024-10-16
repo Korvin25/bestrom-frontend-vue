@@ -523,6 +523,7 @@ export default {
 	align-items: center;
 	min-height: 600px;
 	background: transparent;
+	z-index: 9998;
 }
 .nav-logo-items {
 	justify-content: space-around;

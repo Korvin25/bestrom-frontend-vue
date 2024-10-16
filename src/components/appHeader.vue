@@ -49,7 +49,8 @@ export default {
 	z-index: 9997;
 	top: 0;
 	right: 100px;
-	left: calc(71px + 170px + 100px);
+	/* left: calc(71px + 170px + 100px); */
+	left: 170px;
 }
 .header-title {
 	width: 100%;

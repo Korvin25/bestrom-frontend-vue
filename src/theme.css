@@ -1,6 +1,7 @@
 body {
 	box-sizing: border-box;
-	margin: 0 100px 0 calc(71px + 170px + 100px);
+	/* margin: 0 100px 0 calc(71px + 170px + 100px); */
+	margin: 0 100px 0 170px;
 	font-family: Montserrat, sans-serif;
 	font-style: normal;
 	font-weight: normal;
