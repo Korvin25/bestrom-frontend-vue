@@ -2,6 +2,39 @@
 	<app-header></app-header>
 	<main v-if="PAGE_ID.length > 0" class="main-content flex-column">
 		<section class="section">
+			<h2 v-if="TITLE_NEWS.length !== 0">{{ $store.state.language === 'RU' ? 'Новости' : 'News' }}</h2>
+			<h2 v-else>{{ $store.state.language === 'RU' ? 'Новостей нет' : 'No news' }}</h2>
+
+			<carousel class="mobile-section" :items-to-show="1.5">
+				<slide v-for="item in mobileNews" :key="item.id">
+					<app-main-news-mobile
+						:alt="item.alt"
+						:title="$store.state.language === 'RU' ? item.name : item.name_en"
+						:image="item.img"></app-main-news-mobile>
+				</slide>
+				<template #addons="{ slidesCount }">
+					<pagination v-if="slidesCount > 2" />
+				</template>
+			</carousel>
+
+			<div v-if="TITLE_NEWS.length !== 0" class="news-items flex-row">
+				<app-main-news-big-item
+					:alt="TITLE_NEWS.alt"
+					:title="$store.state.language === 'RU' ? TITLE_NEWS.name : TITLE_NEWS.name_en"
+					:text="
+						$store.state.language === 'RU' ? TITLE_NEWS.mini_description : TITLE_NEWS.mini_description_en
+					"
+					:image="TITLE_NEWS.img"></app-main-news-big-item>
+				<app-main-news-small-item
+					v-for="item in secondNews"
+					:key="item.id"
+					:alt="item.alt"
+					:title="$store.state.language === 'RU' ? item.name : item.name_en"
+					:image="item.img"></app-main-news-small-item>
+			</div>
+		</section>
+		
+		<section class="section">
 			<h2 class="desktop-section">
 				{{
 					$store.state.language === 'RU'
@@ -87,39 +120,6 @@
 						<pagination v-if="slidesCount > 3" />
 					</template>
 				</carousel>
-			</div>
-		</section>
-
-		<section class="section">
-			<h2 v-if="TITLE_NEWS.length !== 0">{{ $store.state.language === 'RU' ? 'Новости' : 'News' }}</h2>
-			<h2 v-else>{{ $store.state.language === 'RU' ? 'Новостей нет' : 'No news' }}</h2>
-
-			<carousel class="mobile-section" :items-to-show="1.5">
-				<slide v-for="item in mobileNews" :key="item.id">
-					<app-main-news-mobile
-						:alt="item.alt"
-						:title="$store.state.language === 'RU' ? item.name : item.name_en"
-						:image="item.img"></app-main-news-mobile>
-				</slide>
-				<template #addons="{ slidesCount }">
-					<pagination v-if="slidesCount > 2" />
-				</template>
-			</carousel>
-
-			<div v-if="TITLE_NEWS.length !== 0" class="news-items flex-row">
-				<app-main-news-big-item
-					:alt="TITLE_NEWS.alt"
-					:title="$store.state.language === 'RU' ? TITLE_NEWS.name : TITLE_NEWS.name_en"
-					:text="
-						$store.state.language === 'RU' ? TITLE_NEWS.mini_description : TITLE_NEWS.mini_description_en
-					"
-					:image="TITLE_NEWS.img"></app-main-news-big-item>
-				<app-main-news-small-item
-					v-for="item in secondNews"
-					:key="item.id"
-					:alt="item.alt"
-					:title="$store.state.language === 'RU' ? item.name : item.name_en"
-					:image="item.img"></app-main-news-small-item>
 			</div>
 		</section>
 

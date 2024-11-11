@@ -4,6 +4,12 @@
 			<img class="logo-img" src="../assets/bestrom_logo.png" alt="bestrom logo" />
 			<h1>{{ $store.state.language === 'RU' ? 'БЕСТРОМ' : 'BESTROM' }}</h1>
 		</router-link>
+		<button class="btn" @click="showModalMenuContactsCall = true">
+			{{ $store.state.language === 'RU' ? 'ЗАКАЗАТЬ ЗВОНОК' : 'ORDER A CALL' }}
+		</button>
+		<button class="btn" @click="showModalMenuContactsQuestion = true">
+			{{ $store.state.language === 'RU' ? 'ЗАДАТЬ ВОПРОС' : 'ASK A QUESTION' }}
+		</button>
 		<div
 			class="header-language flex-row"
 			@click="
@@ -30,11 +36,66 @@
 			<!-- <img src="../assets/language-arrow.png" alt="language-arrow" /> -->
 		</div>
 	</header>
+		<transition-group name="modal">
+		<app-modal-menu-contacts-call
+			v-if="showModalMenuContactsCall"
+			@close="showModalMenuContactsCall = false"></app-modal-menu-contacts-call>
+		<app-modal-menu-contacts-question
+			v-if="showModalMenuContactsQuestion"
+			@close="showModalMenuContactsQuestion = false"></app-modal-menu-contacts-question>
+	</transition-group>
 </template>
 
 <script>
+import appModalMenuContactsCall from '../components/appModalMenuContactsCall.vue'
+import appModalMenuContactsQuestion from '../components/appModalMenuContactsQuestion.vue'
+
 export default {
 	name: 'AppHeader',
+	components: {
+		appModalMenuContactsCall,
+		appModalMenuContactsQuestion,
+	},
+	data() {
+		return {
+			showModalMenuContactsCall: false,
+			showModalMenuContactsQuestion: false,
+		}
+	},
+	watch: {
+		showModalMenuContactsCall() {
+			if (this.showModalMenuContactsCall) {
+				document.body.classList.add('modal-open')
+			} else {
+				document.body.classList.remove('modal-open')
+			}
+		},
+		showModalMenuContactsQuestion() {
+			if (this.showModalMenuContactsQuestion) {
+				document.body.classList.add('modal-open')
+			} else {
+				document.body.classList.remove('modal-open')
+			}
+		},
+	},
+	methods: {
+		showModalMenuContactsCallFunc() {
+			this.showModalMenuContactsCall = true
+			this.showModalMenuContacts = false
+		},
+		showModalMenuContactsQuestionFunc() {
+			this.showModalMenuContactsQuestion = true
+			this.showModalMenuContacts = false
+		},
+		showModalMenuContactsQuestionClick() {
+			this.showMobileMenu = false
+			this.showModalMenuContactsQuestion = true
+		},
+		showModalMenuContactsClick() {
+			this.showMobileMenu = false
+			this.showModalMenuContacts = true
+		},
+	},
 }
 </script>
 
@@ -89,7 +150,15 @@ export default {
 	cursor: pointer;
 	margin: 0 0.5rem;
 }
+.header .btn {
+	font-size: 14px;
+	width: 260px;
+	margin-right: 15px;
+}
 @media (max-width: 980px) {
+	.header .btn {
+		display: none;
+	}
 	.header {
 		right: 0;
 		left: 0;

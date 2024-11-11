@@ -115,6 +115,14 @@
 				@mouseleave="hoverItem = 0">
 				<img style="width: 25px" src="../assets/youtube.png" alt="menu-item-img" />
 			</a>
+			<a
+				href="https://rutube.ru/channel/38819375/"
+				:class="hoverItem === 14 ? 'logo-hover' : ''"
+				class="nav-item img logo"
+				@mouseenter="hoverItem = 14"
+				@mouseleave="hoverItem = 0">
+				<img style="width: 25px" src="../assets/rutube1.png" alt="menu-item-img" />
+			</a>
 		</div>
 
 		<!-- Text items in menu  !!  !! -->
@@ -230,6 +238,14 @@
 				@mouseenter="hoverItem = 13"
 				@mouseleave="hoverItem = 0">
 				<p>YouTube</p>
+			</a>
+			<a
+				href="https://rutube.ru/channel/38819375/"
+				:class="hoverItem === 14 ? 'text-hover' : ''"
+				class="nav-item text"
+				@mouseenter="hoverItem = 14"
+				@mouseleave="hoverItem = 0">
+				<p>RUTUBE</p>
 			</a>
 		</div>
 	</nav>

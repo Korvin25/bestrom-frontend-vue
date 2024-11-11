@@ -61,6 +61,16 @@
 					class="input"
 					:placeholder="$store.state.language === 'RU' ? 'БЕСТРОМ - 420С' : 'BESTROM-420S'" />
 
+				<label for="number-model">{{
+					$store.state.language === 'RU' ? 'Заводской номер' : 'Factory number'
+				}}</label>
+				<input
+					id="number-model"
+					v-model="inputSerialNumber"
+					type="text"
+					class="input"
+					placeholder="420С2801" />
+
 				<p>{{ $store.state.language === 'RU' ? 'Вид обслуживания' : 'Service type' }}</p>
 				<div class="__select" :data-state="active ? 'active' : ''" @click="active = !active">
 					<div :class="active ? 'active' : ''" class="__select__title">
@@ -430,6 +440,8 @@ export default {
 							this.inputCompany +
 							', Модель оборудования: ' +
 							this.inputModel +
+							', Заводской номер: ' +
+							this.inputSerialNumber +
 							', Вид обслуживания: ' +
 							this.inputServiceType +
 							', Желаемая дата прибытия специалиста: ' +
@@ -442,6 +454,7 @@ export default {
 						this.inputName = ''
 						this.inputEmail = ''
 						this.inputModel = ''
+						this.inputSerialNumber = ''
 						this.inputDate = ''
 					})
 					.catch((error) => {

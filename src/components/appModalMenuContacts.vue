@@ -113,6 +113,9 @@
 				<a :href="content.find((e) => e.name === 'youtube').text" class="social-logo network">
 					<img style="width: 25px" src="../assets/youtube.png" alt="menu-item-img" />
 				</a>
+				<a href="https://rutube.ru/channel/38819375/" class="social-logo network">
+					<img style="width: 25px" src="../assets/rutube1.png" alt="menu-item-img" />
+				</a>
 			</div>
 
 			<h3>{{ $store.state.language === 'RU' ? 'Мессенджеры' : 'Messengers' }}</h3>
