@@ -80,7 +80,12 @@ export default createRouter({
 			component: appPageCatalog,
 		},
 		{
-			path: '/catalog/:catalogId',
+			path: '/catalog/type/:radioId/:filtersId',
+			name: 'appPageCatalogType',
+			component: appPageCatalog,
+		},
+		{
+			path: '/catalog/machine/:catalogId',
 			name: 'appPageCatalogId',
 			component: appPageCatalogId,
 		},

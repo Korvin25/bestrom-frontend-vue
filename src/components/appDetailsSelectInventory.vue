@@ -64,7 +64,7 @@ export default {
 	methods: {
 		routerPush(path) {
 			window.scrollTo(0, 0)
-			this.$router.replace(`/catalog/${path}`)
+			this.$router.replace(`/catalog/machine/${path}`)
 		},
 	},
 }

@@ -12,7 +12,8 @@
 							name="radio-choice"
 							type="radio"
 							:value="category.name"
-							:checked="radioCatalogSelect === category.name" />
+							:checked="radioCatalogSelect === category.name" 
+							@click="typeRadioFunc()"/>
 						<label :for="category.id">{{
 							$store.state.language === 'RU' ? category.name : category.name_en
 						}}</label>
@@ -25,7 +26,7 @@
 						:class="typeSelect === filters.name ? 'type-select-checked' : ''"
 						:text="$store.state.language === 'RU' ? filters.name : filters.name_en"
 						:img="filters.img"
-						@click="typeSelectFunc(filters.name, filters.search)"></app-catalog-type-select>
+						@click="typeSelectFunc(filters.name, filters.search, filters.id)"></app-catalog-type-select>
 				</div>
 			</div>
 		</section>
@@ -68,7 +69,7 @@
 								:key="filters.id"
 								:class="typeSelect === filters.name ? 'type-select-checked' : ''"
 								:text="$store.state.language === 'RU' ? filters.name : filters.name_en"
-								@click="typeSelectFunc(filters.name, filters.search)"></app-catalog-type-select>
+								@click="typeSelectFunc(filters.name, filters.search, filters.id)"></app-catalog-type-select>
 						</div>
 					</div>
 				</section>
@@ -224,8 +225,26 @@ export default {
 	},
 	mounted() {
 		this.GET_PRODUCT()
+		// this.GET_FILTERS().then(() => {
+		// 	this.radioCatalogSelect = this.filterInit
+		// })
 		this.GET_FILTERS().then(() => {
 			this.radioCatalogSelect = this.filterInit
+			
+			const { radioId, filtersId } = this.$route.params;
+
+			// Установите radioCatalogSelect на основе radioId
+			const selectedCategory = this.FILTERS.find(category => category.id === Number(radioId));
+			if (selectedCategory) {
+				this.radioCatalogSelect = selectedCategory.name;
+			}
+
+			// Установите typeSelect на основе filtersId
+			const selectedFilter = selectedCategory.Filters.find(filter => filter.id === Number(filtersId));
+			if (selectedFilter) {
+				this.typeSelect = selectedFilter.name;
+				this.search = selectedFilter.search;
+			}
 		})
 		this.GET_PAGE_ID(4)
 	},
@@ -240,18 +259,24 @@ export default {
 			window.scrollTo(0, 0)
 			this.$router.push(`/product/${path}`)
 		},
-		typeSelectFunc(filterName, filterSearch) {
+		typeSelectFunc(filterName, filterSearch, filtersId) {
 			if (this.typeSelect === filterName) {
-				this.typeSelect = ''
-				this.search = ''
+				this.typeSelect = '';
+				this.search = '';
 			} else {
-				this.typeSelect = filterName
-				this.search = filterSearch
+				this.typeSelect = filterName;
+				this.search = filterSearch;
 			}
 
 			setTimeout(() => {
-				this.showMobileFilter = false
-			}, 100)
+				this.showMobileFilter = false;
+			}, 100);
+
+			const radioId = this.FILTERS.find(category => category.name === this.radioCatalogSelect).id;
+			this.$router.push(`/catalog/type/${radioId}/${filtersId}`);
+		},
+		typeRadioFunc() {
+			this.$router.push(`/catalog`)
 		},
 	},
 }

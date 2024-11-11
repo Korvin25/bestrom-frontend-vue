@@ -46,7 +46,7 @@ export default {
 	methods: {
 		pushToCatalog() {
 			this.$emit('close')
-			this.$router.push(`/catalog/${this.id}`)
+			this.$router.push(`/catalog/machine/${this.id}`)
 			window.scrollTo(0, 0)
 		},
 	},
