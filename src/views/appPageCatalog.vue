@@ -19,15 +19,23 @@
 						}}</label>
 					</div>
 				</div>
-				<div v-if="FILTERS.length > 0 && radioCatalogSelect !== ''" class="type-select flex-row">
-					<app-catalog-type-select
-						v-for="filters in FILTERS.find((e) => e.name === radioCatalogSelect).Filters"
-						:key="filters.id"
-						:class="typeSelect === filters.name ? 'type-select-checked' : ''"
-						:text="$store.state.language === 'RU' ? filters.name : filters.name_en"
-						:img="filters.img"
-						@click="typeSelectFunc(filters.name, filters.search, filters.id)"></app-catalog-type-select>
+				<div class="toggle-block">
+					<span class="toggle-filter" v-if="typeSelect">{{ $store.state.language === 'RU' ? 'Выбранный фильтр:' : 'Selected filter:' }} {{ $store.state.language === 'RU' ? typeSelect : typeSelectEn }}</span>
+					<span class="toggle-button" @click="toggle">{{ isOpen ? ($store.state.language === 'RU' ? 'Скрыть фильтры &#9650;' : 'Hide filters &#9650;') : ($store.state.language === 'RU' ? 'Показать фильтры &#9660;' : 'Show filters &#9660;') }}</span>
 				</div>
+				<transition name="fade">
+					<div v-if="isOpen">
+						<div v-if="FILTERS.length > 0 && radioCatalogSelect !== ''" class="type-select flex-row">
+							<app-catalog-type-select
+								v-for="filters in FILTERS.find((e) => e.name === radioCatalogSelect).Filters"
+								:key="filters.id"
+								:class="typeSelect === filters.name ? 'type-select-checked' : ''"
+								:text="$store.state.language === 'RU' ? filters.name : filters.name_en"
+								:img="filters.img"
+								@click="typeSelectFunc(filters.name, filters.search, filters.id)"></app-catalog-type-select>
+						</div>
+					</div>
+				 </transition>
 			</div>
 		</section>
 		<section class="mobile-section section">
@@ -127,8 +135,10 @@ export default {
 	data() {
 		return {
 			showMobileFilter: false,
-			radioCatalogSelect: '',
+			isOpen: true,
+			radioCatalogSelect: 'ПОДБОР ПО ТИПУ МАШИНЫ',
 			typeSelect: '',
+			typeSelectEn: '',
 			search: '',
 		}
 	},
@@ -151,31 +161,6 @@ export default {
 		computedProducts() {
 			let tempProduct = []
 			tempProduct = this.PRODUCT.slice()
-			// Если selectedFilter не пустой, фильтруем продукты по selectedFilter
-			// if (this.$store.state.filters.selectedFilter) {
-			// 	this.search = this.$store.state.filters.selectedFilter;
-			// 	this.typeSelect = this.$store.state.filters.selectedFilter;
-			// 	tempProduct = tempProduct.filter(product => {
-			// 		for (const key in product) {
-			// 			if (typeof product[key] === 'object') {
-			// 				for (const item of product[key]) {
-			// 					if (
-			// 						item.name &&
-			// 						this.search &&
-			// 						item.name.toLowerCase() === this.search.toLowerCase()
-			// 					) {
-			// 						return true
-			// 					}
-			// 				}
-			// 			}
-			// 		}
-			// 		return false
-			// 	})
-
-			// 	this.$store.dispatch('filters/SET_FILTER', null)
-			// 	return tempProduct
-			// } 
-
 			// Дополнительный фильтр по typeSelect и search
 			if (this.typeSelect !== '' && this.search !== '') {
 				tempProduct = tempProduct.filter(product => {
@@ -200,6 +185,14 @@ export default {
 		},
 	},
 	watch: {
+		'$route'(to) {
+			const regex = new RegExp(`^/catalog/type/(\\d+)/(\\d+)$`);
+			if (regex.test(to.fullPath)) {
+				this.isOpen = false;
+			} else {
+				this.isOpen = true;
+			}
+		},
 		showMobileFilter() {
 			if (this.showMobileFilter) {
 				document.body.classList.add('modal-open')
@@ -207,43 +200,29 @@ export default {
 				document.body.classList.remove('modal-open')
 			}
 		},
-		radioCatalogSelect() {
-			//this.typeSelect = this.FILTERS.find((e) => e.name === this.radioCatalogSelect).Filters[0].name
-			this.search = this.FILTERS.find((e) => e.name === this.radioCatalogSelect).Filters[0].search
-			if (this.$store.state.filters.selectedFilter && this.$store.state.filters.selectedFilter != 'Упаковочные машины вертикального типа') { 
-				this.search = this.$store.state.filters.selectedFilter
-				this.typeSelect = this.$store.state.filters.selectedFilter
-
-				this.$store.dispatch('filters/SET_FILTER', null)
-			} else if (this.$store.state.filters.selectedFilter) {
-				this.search = 'Упаковочная машина вертикального типа'
-				this.typeSelect = this.$store.state.filters.selectedFilter
-
-				this.$store.dispatch('filters/SET_FILTER', null)
-			}
-		},
 	},
 	mounted() {
 		this.GET_PRODUCT()
-		// this.GET_FILTERS().then(() => {
-		// 	this.radioCatalogSelect = this.filterInit
-		// })
 		this.GET_FILTERS().then(() => {
-			this.radioCatalogSelect = this.filterInit
 			
 			const { radioId, filtersId } = this.$route.params;
+
+			if (radioId && filtersId) {
+				this.isOpen = false;
+			}
 
 			// Установите radioCatalogSelect на основе radioId
 			const selectedCategory = this.FILTERS.find(category => category.id === Number(radioId));
 			if (selectedCategory) {
 				this.radioCatalogSelect = selectedCategory.name;
-			}
 
-			// Установите typeSelect на основе filtersId
-			const selectedFilter = selectedCategory.Filters.find(filter => filter.id === Number(filtersId));
-			if (selectedFilter) {
-				this.typeSelect = selectedFilter.name;
-				this.search = selectedFilter.search;
+				// Установите typeSelect на основе filtersId
+				const selectedFilter = selectedCategory.Filters.find(filter => filter.id === Number(filtersId));
+				if (selectedFilter) {
+					this.typeSelect = selectedFilter.name;
+					this.typeSelectEn = selectedFilter.name_en;
+					this.search = selectedFilter.search;
+				}
 			}
 		})
 		this.GET_PAGE_ID(4)
@@ -253,8 +232,11 @@ export default {
 			GET_PRODUCT: 'product/GET_PRODUCT',
 			GET_FILTERS: 'filters/GET_FILTERS',
 			GET_PAGE_ID: 'page/GET_PAGE_ID',
-			SET_FILTER: 'filters/SET_FILTER',  // действие для установки выбранного фильтра
+			SET_FILTER: 'filters/SET_FILTER',
 		}),
+		toggle() {
+			this.isOpen = !this.isOpen;
+		},
 		routerPush(path) {
 			window.scrollTo(0, 0)
 			this.$router.push(`/product/${path}`)
@@ -272,8 +254,12 @@ export default {
 				this.showMobileFilter = false;
 			}, 100);
 
-			const radioId = this.FILTERS.find(category => category.name === this.radioCatalogSelect).id;
-			this.$router.push(`/catalog/type/${radioId}/${filtersId}`);
+			const radio = this.FILTERS.find(category => category.name === this.radioCatalogSelect);
+			const selectedFilter = radio.Filters.find(filter => filter.id === Number(filtersId));
+			if (selectedFilter) {
+				this.typeSelectEn = selectedFilter.name_en;
+			}
+			this.$router.push(`/catalog/type/${radio.id}/${filtersId}`);
 		},
 		typeRadioFunc() {
 			this.$router.push(`/catalog`)
@@ -299,6 +285,7 @@ export default {
 	width: 100%;
 	flex-wrap: wrap;
 	justify-content: flex-start;
+	overflow: hidden; 
 }
 .type-select-checked {
 	color: #ffffff;
@@ -321,6 +308,24 @@ export default {
 	display: none;
 }
 
+.toggle-button {
+	color: #6a6a6a;
+	font-size: 16px;
+	font-weight: 600;
+	cursor: pointer;
+}
+.toggle-block {
+	margin-left: 0.5rem;
+	margin-right: 0.5rem;
+	margin-top: 1rem;
+	display: flex;
+	justify-content: space-between;
+}
+.toggle-filter {
+	color: #6a6a6a;
+	font-size: 16px;
+	font-weight: 600;
+}
 @media (max-width: 980px) {
 	.desktop-section {
 		display: none;
