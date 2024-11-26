@@ -14,6 +14,7 @@ export default createStore({
 		return {
 			server: 'http://bestrom.adving.ru/api/',
 			server_media: 'http://bestrom.adving.ru/',
+			server_raskroy: 'https://bestrom.ru/',
 			language: 'RU',
 		}
 	},

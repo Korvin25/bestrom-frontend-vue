@@ -3,99 +3,96 @@
 	<main class="main-content flex-column">
 		<div class="desktop-section section">
 			<h2 style="margin-bottom: 2rem">
-				{{ $store.state.language === 'RU' ? 'Рекомендуемый формат F150' : 'Recommended format F150' }}
+				{{ $store.state.language === 'RU' ? 'Пакет': 'Package' }} - "{{ $store.state.language === 'RU' ? objectType.name :  objectType.name_en }}"
 			</h2>
 			<h2 style="margin: 0">
-				{{ $store.state.language === 'RU' ? 'Пакет плоское дно.' : 'Flat bottom package.' }}
-			</h2>
-			<h2 style="margin: 3rem 0 0 0">
-				{{ $store.state.language === 'RU' ? 'ОСНОВНАЯ ИНФОРМАЦИЯ' : 'BASIC INFORMATION' }}
+				{{ $store.state.language === 'RU' ? 'Шов': 'Seam' }} - "{{ $store.state.language === 'RU' ?  objectSeam.name :  objectSeam.name_en }}"
 			</h2>
 		</div>
 		<section class="desktop-section section flex-column">
 			<div class="unique-packet flex-row">
 				<img
+					v-if="imgName"
 					class="unique-packet-scheme"
-					src="../assets/unique-packet-scheme.png"
+					:src="require(`../assets/${imgName}`)"
 					alt="unique-packet-scheme" />
-				<img
-					class="unique-packet-preview"
-					src="../assets/unique-packet-preview.png"
-					alt="unique-packet-preview" />
-			</div>
-			<div class="flex-row buttons">
-				<button class="cutting-btn btn">
-					{{ $store.state.language === 'RU' ? 'Напечатать' : 'Print' }}
-				</button>
-				<a href="../assets/unique-packet-preview.png" download>
-					<button class="cutting-btn btn">
-						{{ $store.state.language === 'RU' ? 'Сохранить' : 'Save' }}
-					</button>
-				</a>
 			</div>
 		</section>
 
-		<section class="mobile-section section flex-column">
-			<div class="mobile-preview flex-row">
-				<div class="mobile-information flex-column">
-					<h2>{{ $store.state.language === 'RU' ? 'Тип пакета' : 'Package type' }}</h2>
-					<h4>
-						{{ $store.state.language === 'RU' ? 'Рекомендуемый формат F150' : 'Recommended format F150'
-						}}<br />{{ $store.state.language === 'RU' ? 'Пакет плоское дно.' : 'Flat bottom package.' }}
-					</h4>
-					<h4>{{ $store.state.language === 'RU' ? 'ОСНОВНАЯ ИНФОРМАЦИЯ' : 'BASIC INFORMATION' }}</h4>
+
+		<!-- Packet size section -->
+		<section id="packetSize" class="section">
+			<h2>{{ $store.state.language === 'RU' ? 'Размеры пакета' : 'Package dimensions' }}</h2>
+			<div class="packet-size flex-row card-shadow">
+				<div class="packet-size-parameters">
+					<div class="packet-size-input">
+						<label class="card-shadow card-shadow_input">
+							{{ $store.state.language === 'RU' ? 'Ширина пакета (A), мм:' : 'Package width (A), mm:' }}<br>
+							<input class="input" type="number" name="w_pak" placeholder="100" step="10" v-model="w_pak" />
+						</label>
+						<label v-if="optionCheckType" class="card-shadow card-shadow_input">
+							{{ $store.state.language === 'RU' ? 'Глубина пакета (B), мм:' : 'Package depth (B), mm:' }}<br>
+							<input class="input" type="number" name="d_pak" placeholder="50" step="10" v-model="d_pak" />
+						</label>
+					
+
+						<div class="card-shadow card-shadow_input">{{ $store.state.language === 'RU' ? 'Ширина шва (S):': 'Seam width (S):' }}<br>
+							<div class="packet-size-input packet-size-input_mobile">
+								<label for="w_sh1">15{{ $store.state.language === 'RU' ? 'мм' : 'mm' }}<br>
+									<input id="w_sh1" type="radio" name="w_sh" value="15">
+								</label>
+								<label for="w_sh2">20{{ $store.state.language === 'RU' ? 'мм' : 'mm' }}<br>
+									<input id="w_sh2" type="radio" name="w_sh" value="20" checked>
+								</label>
+								<label for="w_sh3">25{{ $store.state.language === 'RU' ? 'мм' : 'mm' }}<br>
+									<input id="w_sh3" type="radio" name="w_sh" value="25">
+								</label>
+									<label for="w_sh4">30{{ $store.state.language === 'RU' ? 'мм' : 'mm' }}<br>
+									<input id="w_sh4" type="radio" name="w_sh" value="30">
+								</label>
+							</div>
+						</div>
+					</div>
+					<div class="packet-size-input">
+						<div v-if="optionCheckType" class="card-shadow card-shadow_input mr10">
+							{{ $store.state.language === 'RU' ? 'Глубина пакета' : 'Package depth' }}  <span><b>B</b></span>  —  {{ $store.state.language === 'RU' ? 'не более 110мм' : 'no more than 110mm' }}<br>      
+							{{ $store.state.language === 'RU' ? 'Сумма ширины и глубины' : 'Sum of width and depth' }}  <span><b>A + B</b></span>  —  {{ $store.state.language === 'RU' ? 'от 60мм до 600мм' : 'from 60mm to 600mm' }}<br>
+							{{ $store.state.language === 'RU' ? 'Соотношение ширины и глубины' : 'Width to depth ratio' }}   <span><b>A / B</b></span>  —  {{ $store.state.language === 'RU' ? 'от 1.2 до 4.45 ' : 'from 1.2 to 4.45' }}
+						</div>
+						<div v-else class="card-shadow card-shadow_input mr10 card-shadow_input_width">
+							{{ $store.state.language === 'RU' ? 'от 60мм до 600мм' : 'from 60mm to 600mm' }}
+						</div>
+						<div class="card-shadow card-shadow_input">
+							{{ $store.state.language === 'RU' ? 'Рекомендуемая ширина шва' : 'Recommended seam width' }}<br> 
+							{{ $store.state.language === 'RU' ? 'для форматов до F100 - 15мм' : 'for formats up to F100 - 15mm' }},<br>
+							{{ $store.state.language === 'RU' ? 'с F100 до F220 - 20мм' : 'from F100 to F220 - 20mm' }},<br>
+							{{ $store.state.language === 'RU' ? 'с F220 до F280 - 25мм' : 'from F220 to F280 - 25мм' }},<br> 
+							{{ $store.state.language === 'RU' ? 'с F280 и больше - 30мм' : 'with F280 and more - 30mm' }}
+						</div>
+					</div>
+					<div v-if="optionCheckType" class="card-shadow card-shadow_input result">
+						<span>B = <span :class="d_pak <= 110 ? 'blue' : 'red'">{{ d_pak }}</span></span>
+						<span>A + B = {{ $store.state.language === 'RU' ? 'Формат' : 'Format' }} <span :class="(60 <= d_pak + w_pak) && (d_pak + w_pak <= 600) ? 'blue' : 'red'">F{{ d_pak + w_pak }}</span></span>
+						<span>A / B = <span :class="(1.2 <= (w_pak / d_pak).toFixed(2)) && ((w_pak / d_pak).toFixed(2) <= 4.45) ? 'blue' : 'red'">{{ (w_pak / d_pak).toFixed(2) }}</span></span>
+					</div>
+					<div v-else class="card-shadow card-shadow_input result">
+						<span>A = {{ $store.state.language === 'RU' ? 'Формат' : 'Format' }} <span :class="(60 <= w_pak) && (w_pak <= 600)? 'blue' : 'red'">F{{ w_pak }}</span></span>
+					</div>
 				</div>
-				<div class="mobile-information flex-column">
-					<img
-						class="unique-packet-preview"
-						src="../assets/unique-packet-preview.png"
-						alt="unique-packet-preview" />
-				</div>
+				
 			</div>
-			<h2>
-				{{
-					$store.state.language === 'RU' ? 'Рекомендуемый раскрой пакета' : 'Recommended package size'
-				}}
-			</h2>
-			<img
-				class="unique-packet-scheme"
-				src="../assets/unique-packet-scheme.png"
-				alt="unique-packet-scheme" />
-			<div class="flex-row buttons">
-				<button class="cutting-btn btn">
-					{{ $store.state.language === 'RU' ? 'Напечатать' : 'Print' }}
+						<div class="flex-row buttons">
+				<button 
+					class="cutting-btn btn"
+					@click="routerBack()">
+					{{ $store.state.language === 'RU' ? 'Назад' : 'Back' }}
 				</button>
-				<a href="../assets/unique-packet-preview.png" download>
-					<button class="cutting-btn btn">
-						{{ $store.state.language === 'RU' ? 'Сохранить' : 'Save' }}
-					</button>
-				</a>
+				<button class="cutting-btn btn" @click="routerPushResult()">
+					{{ $store.state.language === 'RU' ? 'Дальше' : 'Next' }}
+				</button>
 			</div>
 		</section>
 
-		<section class="section">
-			<h2>
-				{{
-					$store.state.language === 'RU'
-						? 'Машины работающие с данным форматом'
-						: 'Machines working with this format'
-				}}
-			</h2>
-			<div class="slider-content card-shadow">
-				<carousel :breakpoints="breakpoints">
-					<slide v-for="slide in 3" :key="slide">
-						<app-machines-item
-							:title="$store.state.language === 'RU' ? 'Б-420' : 'B-420'"
-							image="content_image.png"></app-machines-item>
-					</slide>
-					<template #addons="{ slidesCount }">
-						<navigation v-if="slidesCount > 2" />
-						<pagination v-if="slidesCount > 2" />
-					</template>
-				</carousel>
-			</div>
-		</section>
-		<!-- ./mobile-section -->
 	</main>
 	<app-footer></app-footer>
 </template>
@@ -104,7 +101,10 @@
 import appHeader from '../components/appHeader.vue'
 import appFooter from '../components/appFooter.vue'
 import appMachinesItem from '../components/appMachinesItem.vue'
+import { mapActions, mapGetters, useStore } from 'vuex'
 import { Carousel, Slide, Navigation, Pagination } from 'vue3-carousel'
+import { computed } from 'vue'
+import { useMeta } from 'vue-meta'
 
 export default {
 	name: 'AppPageUniqueCutting',
@@ -116,6 +116,23 @@ export default {
 		Slide,
 		Navigation,
 		Pagination,
+	},
+	setup() {
+		const store = useStore()
+		const computedMeta = computed(() => ({
+			title:
+				store.getters['page/PAGE_ID'].length > 0
+					? store.state.language === 'RU'
+						? store.getters['page/PAGE_ID'][0].title
+						: store.getters['page/PAGE_ID'][0].title_en
+					: 'title',
+			description:
+				store.getters['page/PAGE_ID'].length > 0
+					? store.getters['page/PAGE_ID'][0].description
+					: 'description',
+			
+		}))
+		useMeta(computedMeta)
 	},
 	data() {
 		return {
@@ -133,15 +150,94 @@ export default {
 					wrapAround: true,
 				},
 			},
+			objectType: {},
+			objectSeam: {},
+			imgName: '',
+			optionCheckType: true,
+			d_pak: 50,
+			w_pak: 100,
 		}
 	},
+	computed: {
+		...mapGetters({
+			PAGE_ID: 'page/PAGE_ID',
+			PACKETS: 'packets/PACKETS',
+			PACKETS_SEAMS: 'packets/PACKETS_SEAMS',
+		}),
+	},
+	mounted() {
+		this.GET_PAGE_ID(5)
+
+		Promise.all([this.GET_PACKETS(), this.GET_PACKETS_SEAMS()]).then(() => {
+				this.updateCheck();
+			});
+	},
+	methods: {
+		...mapActions({
+			GET_PAGE_ID: 'page/GET_PAGE_ID',
+			GET_PACKETS: 'packets/GET_PACKETS',
+			GET_PACKETS_SEAMS: 'packets/GET_PACKETS_SEAMS',
+		}),
+		updateCheck() {
+			const { checkType,  checkSeam } = this.$route.params;
+			this.optionCheckType = this.contains([1, 3, 6, 8], checkType);
+			this.objectType = this.PACKETS.find((e) => e.essid == checkType);
+			this.objectSeam = this.PACKETS_SEAMS.find((e) => e.essid == checkSeam);
+			this.imgName = `p${checkType}h_${checkSeam}.png`;
+		},
+		routerBack() {
+			this.$router.push('/cutting')
+		},
+		routerPushResult() {
+			const { checkType,  checkSeam } = this.$route.params;
+			const radios = document.getElementsByName('w_sh');
+			let w_sh;
+
+			// Перебираем радиокнопки и ищем выбранную
+			for (const radio of radios) {
+				if (radio.checked) {
+					w_sh = radio.value;
+					break;
+				}
+			}
+			if (this.optionCheckType) {
+				this.$router.push(`/cutting/${checkType}/${checkSeam}/${this.w_pak}/${this.d_pak}/${w_sh}`);
+			} else {
+				this.$router.push(`/cutting/${checkType}/${checkSeam}/${this.w_pak}/d_pak/${w_sh}`);
+			}
+		},
+		contains(arr, elem) {
+			for (var i = 0; i < arr.length; i++) {
+				if (arr[i] == elem) {
+					return false;
+				}
+			}
+			return true;
+		}
+	}
+	
 }
 </script>
 
 <style scoped>
+.blue {
+	color: blue;
+}
+.red {
+	color: red;
+}
 .desktop-section {
 	display: block;
 }
+.desktop-section h2 {
+	display: flex;
+	justify-content: center;
+}
+
+#packetSize h2 {
+	text-align: center;
+}
+
 .mobile-section,
 .mobile-section-block {
 	display: none;
@@ -152,8 +248,6 @@ export default {
 	align-items: center;
 }
 .unique-packet-scheme {
-	width: 35rem;
-	height: 45rem;
 	margin-right: 2rem;
 }
 .unique-packet-preview {
@@ -176,7 +270,42 @@ export default {
 	justify-content: space-around;
 	flex-wrap: wrap;
 }
+.packet-size {
+	display: flex;
+	justify-content: center;
+}
+.packet-size-input{
+	display: flex;
+	justify-content: space-between;
+	margin-top: 15px;
+}
 
+.packet-size-parameters {
+	display: flex;
+	flex-direction: column;
+	padding: 10px;
+}
+
+.card-shadow_input{
+	padding: 15px;
+	margin-right: 10px;
+	text-align: center;
+}
+.packet-size-input label {
+	text-align: center;
+	margin-right: 5px;
+}
+.mr10 {
+	margin-right: 10px;
+}
+.result {
+	display: flex;
+	justify-content: space-around;
+	margin-top: 15px;
+}
+.card-shadow_input_width {
+	width: 35%;
+}
 @media (max-width: 980px) {
 	.desktop-section {
 		display: none;
@@ -243,6 +372,28 @@ export default {
 	}
 	.unique-packet-scheme {
 		width: 100%;
+	}
+	.packet-size-input {
+		flex-direction: column;
+	}
+	.card-shadow_input,
+	.packet-size-input,
+	.packet-size-input label {
+		margin-right: 0;
+		margin-bottom: 10px;
+	}
+	.packet-size-input {
+		margin-bottom: 0;
+		margin-top: 0;
+	}
+	.card-shadow_input {
+		margin-top: 0;
+	}
+	.packet-size-input_mobile {
+		flex-direction: inherit;
+	}
+	.card-shadow_input_width {
+		width: auto;
 	}
 }
 </style>

@@ -8,13 +8,14 @@
 
 			<div class="packet-mobile">
 				<carousel :items-to-show="1.4">
-					<slide v-for="packet in PACKETS" :key="packet.id">
+					<slide v-for="packet in PACKETS" :key="packet.essid">
 						<a
 							v-smooth-scroll="{ updateHistory: false, offset: -60 }"
-							:class="checkType === packet.id ? 'check-item' : ''"
+							:class="checkType === packet.essid ? 'check-item' : ''"
 							class="packet-type-item flex-column card-shadow"
-							href="#packetOptions"
-							@click="checkType = packet.id">
+							href="#packetSeam"
+							v-if="packet.active"
+							@click="checkType = packet.essid">
 							<div class="hidden-item"></div>
 							<img :src="packet.img" :alt="packet.alt" />
 							<p>{{ $store.state.language === 'RU' ? packet.name : packet.name_en }}</p>
@@ -27,52 +28,18 @@
 			</div>
 
 			<div class="packet-desktop packet-type flex-row">
-				<a
-					v-for="packet in PACKETS"
-					:key="packet.id"
-					v-smooth-scroll="{ updateHistory: false, offset: -50 }"
-					:class="checkType === packet.id ? 'check-item' : ''"
-					class="packet-type-item flex-column card-shadow"
-					href="#packetOptions"
-					@click="checkType = packet.id">
-					<h3>{{ $store.state.language === 'RU' ? packet.name : packet.name_en }}</h3>
-					<img :src="packet.img" :alt="packet.alt" />
-					<div class="hidden-item"></div>
-				</a>
-			</div>
-		</section>
-
-		<!-- Packet options section -->
-		<section v-if="PACKETS_OPTIONS.length > 0" id="packetOptions" class="section">
-			<h2>{{ $store.state.language === 'RU' ? 'Дополнительные опции' : 'Additional options' }}</h2>
-			<div class="packet-mobile">
-				<carousel :items-to-show="1.4">
-					<slide v-for="packetOptions in PACKETS_OPTIONS" :key="packetOptions.id">
-						<div
-							:class="checkOptions === packetOptions.id ? 'check-item' : ''"
-							class="packet-options-item flex-column card-shadow"
-							@click="checkOptionsFunc(packetOptions.id)">
-							<div class="hidden-item"></div>
-							<img :src="packetOptions.img" :alt="packetOptions.alt" />
-							<p>{{ $store.state.language === 'RU' ? packetOptions.name : packetOptions.name_en }}</p>
-						</div>
-					</slide>
-					<template #addons>
-						<pagination />
-					</template>
-				</carousel>
-			</div>
-
-			<div class="packet-desktop packet-options flex-row card-shadow">
-				<div
-					v-for="packetOptions in PACKETS_OPTIONS"
-					:key="packetOptions.id"
-					:class="checkOptions === packetOptions.id ? 'check-item' : ''"
-					class="packet-options-item flex-column card-shadow"
-					@click="checkOptionsFunc(packetOptions.id)">
-					<div class="hidden-item"></div>
-					<img :src="packetOptions.img" :alt="packetOptions.alt" />
-					<p>{{ $store.state.language === 'RU' ? packetOptions.name : packetOptions.name_en }}</p>
+				<div v-for="packet in PACKETS" :key="packet.essid"
+					:class="checkType === packet.essid ? 'check-item' : ''"
+					class="packet-type-item flex-column card-shadow">
+					<a
+						v-if="packet.active"
+						v-smooth-scroll="{ updateHistory: false, offset: -50 }"
+						href="#packetSeam"
+						@click="checkType = packet.essid">
+						<h3>{{ $store.state.language === 'RU' ? packet.name : packet.name_en }}</h3>
+						<img :src="packet.img" :alt="packet.alt" />
+						<div class="hidden-item"></div>
+					</a>
 				</div>
 			</div>
 		</section>
@@ -83,10 +50,10 @@
 			<div class="packets-seam flex-row card-shadow">
 				<div
 					v-for="packetSeams in PACKETS_SEAMS"
-					:key="packetSeams.id"
-					:class="checkSeam === packetSeams.id ? 'check-item' : ''"
+					:key="packetSeams.essid"
+					:class="checkSeam === packetSeams.essid ? 'check-item' : ''"
 					class="packets-seam-item flex-column card-shadow"
-					@click="checkSeamFunc(packetSeams.id)">
+					@click="checkSeamFunc(packetSeams.essid)">
 					<div class="hidden-item"></div>
 					<img :src="packetSeams.img" :alt="packetSeams.alt" />
 					<p>{{ $store.state.language === 'RU' ? packetSeams.name : packetSeams.name_en }}</p>
@@ -94,27 +61,8 @@
 			</div>
 		</section>
 
-		<!-- Packet size section -->
-		<section id="packetSize" class="section">
-			<h2>{{ $store.state.language === 'RU' ? 'Размеры пакета' : 'Package dimensions' }}</h2>
-			<div class="packet-size flex-row card-shadow">
-				<div class="packet-size-parameters flex-column">
-					<label>
-						<p>{{ $store.state.language === 'RU' ? 'Ширина пакета (A), мм:' : 'Bag width (A), mm:' }}</p>
-						<input class="input" type="text" placeholder="100" />
-					</label>
-					<label>
-						<p>
-							{{ $store.state.language === 'RU' ? 'Глубина пакета (B), мм:' : 'Package depth (B), mm:' }}
-						</p>
-						<input class="input" type="text" placeholder="100" />
-					</label>
-				</div>
-				<img src="../assets/packet-size.png" alt="packet-size" />
-			</div>
-		</section>
 		<div class="router-button">
-			<button class="cutting-btn btn" @click="routerPush(1)">
+			<button class="cutting-btn btn" @click="routerPush()">
 				{{ $store.state.language === 'RU' ? 'Подобрать' : 'Pick up' }}
 			</button>
 		</div>
@@ -181,7 +129,6 @@ export default {
 		...mapGetters({
 			PAGE_ID: 'page/PAGE_ID',
 			PACKETS: 'packets/PACKETS',
-			PACKETS_OPTIONS: 'packets/PACKETS_OPTIONS',
 			PACKETS_SEAMS: 'packets/PACKETS_SEAMS',
 		}),
 	},
@@ -189,9 +136,6 @@ export default {
 		this.GET_PAGE_ID(5)
 		if (this.PACKETS.length === 0) {
 			this.GET_PACKETS()
-		}
-		if (this.PACKETS_OPTIONS.length === 0) {
-			this.GET_PACKETS_OPTIONS()
 		}
 		if (this.PACKETS_SEAMS.length === 0) {
 			this.GET_PACKETS_SEAMS()
@@ -201,13 +145,11 @@ export default {
 		...mapActions({
 			GET_PAGE_ID: 'page/GET_PAGE_ID',
 			GET_PACKETS: 'packets/GET_PACKETS',
-			GET_PACKETS_OPTIONS: 'packets/GET_PACKETS_OPTIONS',
 			GET_PACKETS_SEAMS: 'packets/GET_PACKETS_SEAMS',
 		}),
-		routerPush(id) {
-			// if (this.checkType !== 0 && this.checkOptions !== 0 && this.checkSeam !== 0) {
+		routerPush() {
 			if (this.checkType !== 0 && this.checkSeam !== 0) {
-				this.$router.push('/cutting/' + id)
+				this.$router.push(`/cutting/${this.checkType}/${this.checkSeam}`)
 				window.scrollTo(0, 0)
 			} else if (this.checkType === 0) {
 				this.modalAlert.text =
@@ -217,18 +159,6 @@ export default {
 				this.modalAlert.show = true
 				this.$smoothScroll({
 					scrollTo: document.getElementById('packetType'), // scrollTo is also allowed to be number
-					updateHistory: false,
-					offset: -50,
-				})
-			// } else if (this.checkOptions === 0) {
-			} else if (false) {
-				this.modalAlert.text =
-					this.$store.state.language === 'RU'
-						? 'Сначала выберите дополнительные опции!!!'
-						: 'Please select additional options first !!!'
-				this.modalAlert.show = true
-				this.$smoothScroll({
-					scrollTo: document.getElementById('packetOptions'), // scrollTo is also allowed to be number
 					updateHistory: false,
 					offset: -50,
 				})
@@ -244,60 +174,21 @@ export default {
 					offset: -50,
 				})
 			}
-		},
-		checkOptionsFunc(id) {
-			if (this.checkType !== 0) {
-				this.checkOptions = id
+		}, 
+		checkSeamFunc(id) {
+			if (this.checkType === 0) {
+				this.modalAlert.text =
+					this.$store.state.language === 'RU'
+						? 'Сначала выберите тип пакета!!!'
+						: 'First select the type of package !!!'
+				this.modalAlert.show = true
 				this.$smoothScroll({
-					scrollTo: document.getElementById('packetSeam'), // scrollTo is also allowed to be number
+					scrollTo: document.getElementById('packetType'), // scrollTo is also allowed to be number
 					updateHistory: false,
 					offset: -50,
 				})
 			} else {
-				this.modalAlert.text =
-					this.$store.state.language === 'RU'
-						? 'Сначала выберите тип пакета!!!'
-						: 'First select the type of package !!!'
-				this.modalAlert.show = true
-				this.$smoothScroll({
-					scrollTo: document.getElementById('packetType'), // scrollTo is also allowed to be number
-					updateHistory: false,
-					offset: -50,
-				})
-			}
-		},
-		checkSeamFunc(id) {
-			if (this.checkType === 0 && this.checkOptions === 0) {
-				this.modalAlert.text =
-					this.$store.state.language === 'RU'
-						? 'Сначала выберите тип пакета!!!'
-						: 'First select the type of package !!!'
-				this.modalAlert.show = true
-				this.$smoothScroll({
-					scrollTo: document.getElementById('packetType'), // scrollTo is also allowed to be number
-					updateHistory: false,
-					offset: -50,
-				})
-			// } else if (this.checkType !== 0 && this.checkOptions === 0) {
-			} else if (false) {
-				this.modalAlert.text =
-					this.$store.state.language === 'RU'
-						? 'Сначала выберите дополнительные опции!!!'
-						: 'Please select additional options first !!!'
-				this.modalAlert.show = true
-				this.$smoothScroll({
-					scrollTo: document.getElementById('packetOptions'), // scrollTo is also allowed to be number
-					updateHistory: false,
-					offset: -50,
-				})
-			// } else if (this.checkType !== 0 && this.checkOptions !== 0) {
-			} else if (this.checkType !== 0) {
 				this.checkSeam = id
-				this.$smoothScroll({
-					scrollTo: document.getElementById('packetSize'), // scrollTo is also allowed to be number
-					updateHistory: false,
-					offset: -50,
-				})
 			}
 		},
 	},

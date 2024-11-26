@@ -13,6 +13,8 @@ import appPageNews from '../views/appPageNews'
 import appPageNewsId from '../views/appPageNewsId'
 import appPagePartners from '../views/appPagePartners'
 import appPageUniqueCutting from '../views/appPageUniqueCutting'
+import appPageResultCutting from '../views/appPageResultCutting'
+
 
 export default createRouter({
 	mode: 'history',
@@ -50,9 +52,14 @@ export default createRouter({
 			component: appPageCutting,
 		},
 		{
-			path: '/cutting/:packetId',
+			path: '/cutting/:checkType/:checkSeam',
 			name: 'appPageUniqueCutting',
 			component: appPageUniqueCutting,
+		},
+		{
+			path: '/cutting/:checkType/:checkSeam/:wPak/:dPak/:wSh',
+			name: 'appPageResultCutting',
+			component: appPageResultCutting,
 		},
 		{
 			path: '/jobs',
