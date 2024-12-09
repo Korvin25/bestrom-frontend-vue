@@ -73,6 +73,9 @@
 			v-if="modalAlert.show"
 			:text="modalAlert.text"
 			@close="modalAlert.show = false"></app-modal-cutting-alert>
+		<app-modal-cutting-pick-up
+			v-if="showModalCuttingPickUp"
+			@close="showModalCuttingPickUp = false"></app-modal-cutting-pick-up>
 	</transition-group>
 
 	<app-footer></app-footer>
@@ -82,6 +85,7 @@
 import appHeader from '../components/appHeader.vue'
 import appFooter from '../components/appFooter.vue'
 import AppModalCuttingAlert from '../components/appModalCuttingAlert.vue'
+import AppModalCuttingPickUp from '../components/appModalCuttingPickUp.vue'
 import { Carousel, Slide, Pagination } from 'vue3-carousel'
 import { mapActions, mapGetters, useStore } from 'vuex'
 import { computed } from 'vue'
@@ -93,6 +97,7 @@ export default {
 		appHeader,
 		appFooter,
 		AppModalCuttingAlert,
+		AppModalCuttingPickUp,
 		Carousel,
 		Slide,
 		Pagination,
@@ -123,6 +128,7 @@ export default {
 			checkType: 0,
 			checkOptions: 0,
 			checkSeam: 0,
+			showModalCuttingPickUp: false,
 		}
 	},
 	computed: {
@@ -141,6 +147,15 @@ export default {
 			this.GET_PACKETS_SEAMS()
 		}
 	},
+	watch: {
+		showModalCuttingPickUp() {
+			if (this.showModalCuttingPickUp) {
+				document.body.classList.add('modal-open')
+			} else {
+				document.body.classList.remove('modal-open')
+			}
+		},
+	},
 	methods: {
 		...mapActions({
 			GET_PAGE_ID: 'page/GET_PAGE_ID',
@@ -148,7 +163,9 @@ export default {
 			GET_PACKETS_SEAMS: 'packets/GET_PACKETS_SEAMS',
 		}),
 		routerPush() {
-			if (this.checkType !== 0 && this.checkSeam !== 0) {
+			if (this.checkType === null) {
+				this.showModalCuttingPickUp = true
+			} else if (this.checkType !== 0 && this.checkSeam !== 0) {
 				this.$router.push(`/cutting/${this.checkType}/${this.checkSeam}`)
 				window.scrollTo(0, 0)
 			} else if (this.checkType === 0) {
