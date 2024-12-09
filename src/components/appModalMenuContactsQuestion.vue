@@ -8,14 +8,7 @@
 			</div>
 			<h2>{{ $store.state.language === 'RU' ? 'Задать вопрос' : 'Ask a question' }}</h2>
 			<section class="form-call flex-column">
-				<label for="company">{{ $store.state.language === 'RU' ? 'Компания' : 'Company' }}</label>
-				<input
-					id="company"
-					v-model="inputCompany"
-					type="text"
-					class="input"
-					:placeholder="$store.state.language === 'RU' ? 'БЕСТРОМ' : 'BESTROM'" />
-				<label for="fio">{{ $store.state.language === 'RU' ? 'Ф.И.О' : 'Full name' }}</label>
+				<label for="fio">{{ $store.state.language === 'RU' ? 'Имя' : 'Full name' }}</label>
 				<input
 					id="fio"
 					v-model="inputName"
@@ -36,30 +29,7 @@
 					type="text"
 					class="input"
 					placeholder="partner@thedimension.com" />
-				<label for="product">{{ $store.state.language === 'RU' ? 'Продукт' : 'Product' }}</label>
-				<input
-					id="product"
-					v-model="inputProduct"
-					type="text"
-					class="input"
-					:placeholder="$store.state.language === 'RU' ? 'Фисташки' : 'Pistachio'" />
-				<label for="weight">{{ $store.state.language === 'RU' ? 'Дозировка' : 'Dosage' }}</label>
-				<input
-					id="weight"
-					v-model="inputDosage"
-					type="text"
-					class="input"
-					:placeholder="$store.state.language === 'RU' ? '100г' : '100g'" />
-				<label for="speed">{{
-					$store.state.language === 'RU' ? 'Требуемая производительность' : 'Required performance'
-				}}</label>
-				<input
-					id="speed"
-					v-model="inputPerformance"
-					type="text"
-					class="input"
-					:placeholder="$store.state.language === 'RU' ? '60 п/м' : '60 p/m'" />
-				<label for="comment">{{ $store.state.language === 'RU' ? 'Комментарий' : 'Comment' }}</label>
+				<label for="comment">{{ $store.state.language === 'RU' ? 'Вопрос' : 'Question' }}</label>
 				<textarea id="comment" v-model="inputComment" rows="5" class="textarea" />
 				<button class="call btn" @click="sendPost">
 					{{ $store.state.language === 'RU' ? 'ОТПРАВИТЬ' : 'TO SEND' }}
@@ -79,13 +49,9 @@ export default {
 	data() {
 		return {
 			statusSend: '',
-			inputCompany: '',
 			inputName: '',
 			inputTelephone: '',
 			inputEmail: '',
-			inputProduct: '',
-			inputDosage: '',
-			inputPerformance: '',
 			inputComment: '',
 		}
 	},
@@ -94,11 +60,7 @@ export default {
 			if (
 				(this.inputTelephone.length > 10 ||
 					(this.inputEmail.includes('@') && this.inputEmail.length > 6)) &&
-				this.inputName.length !== 0 &&
-				this.inputProduct.length !== 0 &&
-				this.inputCompany.length !== 0 &&
-				this.inputDosage.length !== 0 &&
-				this.inputPerformance.length !== 0
+				this.inputName.length !== 0
 			) {
 				axios
 					.post(this.$store.state.server + 'forms/', {
@@ -106,27 +68,13 @@ export default {
 						telephone: this.inputTelephone,
 						email: this.inputEmail,
 						name: this.inputName,
-						other:
-							'Компания: ' +
-							this.inputCompany +
-							', Продукт: ' +
-							this.inputProduct +
-							', Дозировка: ' +
-							this.inputDosage +
-							', Производительность: ' +
-							this.inputPerformance +
-							', Комментарий: ' +
-							this.inputComment,
+						other: 'Вопрос: ' + this.inputComment,
 					})
 					.then(() => {
 						this.statusSend = 'Заявка успешно отправлена!'
-						this.inputCompany = ''
 						this.inputTelephone = ''
 						this.inputName = ''
 						this.inputEmail = ''
-						this.inputProduct = ''
-						this.inputDosage = ''
-						this.inputPerformance = ''
 						this.inputComment = ''
 					})
 					.catch((error) => {
