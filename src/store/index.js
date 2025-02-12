@@ -12,9 +12,9 @@ import vacancy from './modules/vacancy'
 export default createStore({
 	state() {
 		return {
-			server: 'http://bestrom.adving.ru/api/',
-			server_media: 'http://bestrom.adving.ru/',
-			server_raskroy: 'https://bestrom.ru/',
+			server: 'https://bestrom.ru/api/',
+			server_media: 'https://bestrom.ru/',
+			server_raskroy: 'https://old.bestrom.ru/',
 			language: 'RU',
 		}
 	},
