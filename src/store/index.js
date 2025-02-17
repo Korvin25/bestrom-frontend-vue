@@ -14,7 +14,7 @@ export default createStore({
 		return {
 			server: 'https://bestrom.ru/api/',
 			server_media: 'https://bestrom.ru/',
-			server_raskroy: 'https://old.bestrom.ru/',
+			server_raskroy: 'https://bestrom.su/',
 			language: 'RU',
 		}
 	},
