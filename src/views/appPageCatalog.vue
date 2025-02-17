@@ -390,7 +390,6 @@ export default {
 				this.inputProduct.length !== 0 &&
 				this.inputCompany.length !== 0 &&
 				this.inputDosage.length !== 0 &&
-				this.inputCommunication.length !== 0 &&
 				this.inputPerformance.length !== 0
 			) {
 				axios

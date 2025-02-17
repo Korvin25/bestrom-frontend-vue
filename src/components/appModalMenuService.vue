@@ -314,10 +314,8 @@ export default {
 					(this.inputEmail.includes('@') && this.inputEmail.length > 6)) &&
 				this.inputName.length !== 0 &&
 				this.inputCompany.length !== 0 &&
-				this.inputFile.length !== 0 &&
 				this.inputModel.length !== 0 &&
-				this.inputSerialNumber.length !== 0 &&
-				this.inputsDetails.length !== 0
+				this.inputSerialNumber.length !== 0
 			) {
 				if (this.radioCatalogSelect === 'Самовывоз') {
 					const formData = new FormData()
@@ -344,8 +342,10 @@ export default {
 							', Комментарий: ' +
 							this.inputComment,
 					)
-					formData.append('file', this.inputFile)
-
+					if (this.inputFile) {
+						formData.append('file', this.inputFile)
+					}
+					
 					axios
 						.post(this.$store.state.server + 'forms/', formData)
 						.then(() => {
@@ -391,7 +391,9 @@ export default {
 								', Комментарий: ' +
 								this.inputComment,
 						)
-						formData.append('file', this.inputFile)
+						if (this.inputFile) {
+							formData.append('file', this.inputFile)
+						}
 
 						axios
 							.post(this.$store.state.server + 'forms/', formData)
