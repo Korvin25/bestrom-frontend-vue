@@ -100,7 +100,7 @@
 				<img src="../assets/mobile.png" alt="menu-item-img" />
 			</a>
 			<a
-				href="https://vk.com"
+				href="https://vk.com/bestrom_official"
 				:class="hoverItem === 12 ? 'logo-hover' : ''"
 				class="nav-item img logo"
 				@mouseenter="hoverItem = 12"
@@ -108,12 +108,12 @@
 				<img style="width: 33px" src="../assets/vk.png" alt="menu-item-img" />
 			</a>
 			<a
-				href="https://youtube.com"
+				href="https://t.me/bestrom_official"
 				:class="hoverItem === 13 ? 'logo-hover' : ''"
 				class="nav-item img logo"
 				@mouseenter="hoverItem = 13"
 				@mouseleave="hoverItem = 0">
-				<img style="width: 25px" src="../assets/youtube.png" alt="menu-item-img" />
+				<img style="width: 25px" src="../assets/telegram.png" alt="menu-item-img" />
 			</a>
 			<a
 				href="https://rutube.ru/channel/38819375/"
@@ -224,7 +224,7 @@
 				<p>{{ $store.state.language === 'RU' ? 'Оставить заявку' : 'Submit your application' }}</p>
 			</a>
 			<a
-				href="https://vk.com"
+				href="https://vk.com/bestrom_official"
 				:class="hoverItem === 12 ? 'text-hover' : ''"
 				class="nav-item text"
 				@mouseenter="hoverItem = 12"
@@ -232,12 +232,12 @@
 				<p>ВКонтакте</p>
 			</a>
 			<a
-				href="https://youtube.com"
+				href="https://t.me/bestrom_official"
 				:class="hoverItem === 13 ? 'text-hover' : ''"
 				class="nav-item text"
 				@mouseenter="hoverItem = 13"
 				@mouseleave="hoverItem = 0">
-				<p>YouTube</p>
+				<p>Telegram</p>
 			</a>
 			<a
 				href="https://rutube.ru/channel/38819375/"
@@ -272,11 +272,11 @@
 				<p class="mobile-menu-title">{{ $store.state.language === 'RU' ? 'Меню' : 'Menu' }}</p>
 
 				<div class="mobile-menu-logo flex-row">
-					<a href="https://vk.com" class="nav-item img logo">
+					<a href="https://vk.com/bestrom_official" class="nav-item img logo">
 						<img style="width: 33px" src="../assets/vk.png" alt="menu-item-img" />
 					</a>
-					<a href="https://youtube.com" class="nav-item img logo">
-						<img style="width: 25px" src="../assets/youtube.png" alt="menu-item-img" />
+					<a href="https://t.me/bestrom_official" class="nav-item img logo">
+						<img style="width: 25px" src="../assets/telegram.png" alt="menu-item-img" />
 					</a>
 					<a href="https://rutube.ru/channel/38819375/" class="nav-item img logo">
 						<img style="width: 25px" src="../assets/rutube1.png" alt="menu-item-img" />

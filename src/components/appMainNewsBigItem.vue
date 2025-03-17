@@ -17,6 +17,10 @@
 export default {
 	name: 'AppMainNewsBigItem',
 	props: {
+		newsid: {
+			type: Number,
+			default: '',
+		},
 		alt: {
 			type: String,
 			default: '',
@@ -36,7 +40,7 @@ export default {
 	},
 	methods: {
 		routerPush() {
-			this.$router.push(`/news/${this.alt}`)
+			this.$router.push(`/news/${this.newsid}`)
 			window.scrollTo(0, 0)
 		},
 	},

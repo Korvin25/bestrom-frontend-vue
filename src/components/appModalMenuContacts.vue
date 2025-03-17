@@ -110,8 +110,8 @@
 				<a :href="content.find((e) => e.name === 'vk').text" class="social-logo network">
 					<img style="width: 33px" src="../assets/vk.png" alt="menu-item-img" />
 				</a>
-				<a :href="content.find((e) => e.name === 'youtube').text" class="social-logo network">
-					<img style="width: 25px" src="../assets/youtube.png" alt="menu-item-img" />
+				<a :href="content.find((e) => e.name === 'telegram').text" class="social-logo network">
+					<img style="width: 25px" src="../assets/telegram.png" alt="menu-item-img" />
 				</a>
 				<a href="https://rutube.ru/channel/38819375/" class="social-logo network">
 					<img style="width: 25px" src="../assets/rutube1.png" alt="menu-item-img" />

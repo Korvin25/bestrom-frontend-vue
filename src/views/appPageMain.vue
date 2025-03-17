@@ -9,6 +9,7 @@
 				<slide v-for="item in mobileNews" :key="item.id">
 					<app-main-news-mobile
 						:alt="item.alt"
+						:newsid="item.id"
 						:title="$store.state.language === 'RU' ? item.name : item.name_en"
 						:image="item.img"></app-main-news-mobile>
 				</slide>
@@ -20,6 +21,7 @@
 			<div v-if="TITLE_NEWS.length !== 0" class="news-items flex-row">
 				<app-main-news-big-item
 					:alt="TITLE_NEWS.alt"
+					:newsid="TITLE_NEWS.id"
 					:title="$store.state.language === 'RU' ? TITLE_NEWS.name : TITLE_NEWS.name_en"
 					:text="
 						$store.state.language === 'RU' ? TITLE_NEWS.mini_description : TITLE_NEWS.mini_description_en
@@ -28,6 +30,7 @@
 				<app-main-news-small-item
 					v-for="item in secondNews"
 					:key="item.id"
+					:newsid="item.id"
 					:alt="item.alt"
 					:title="$store.state.language === 'RU' ? item.name : item.name_en"
 					:image="item.img"></app-main-news-small-item>
