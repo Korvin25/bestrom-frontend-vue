@@ -104,7 +104,7 @@ export default {
 	},
 	methods: {
 		scrollToTop() {
-			this.$router.push(`/catalog/machine/${this.product.id}`)
+			this.$router.push(`/catalog/machine/${this.product.slug}`)
 			window.scrollTo(0, 0)
 		},
 		imageComputed(image) {

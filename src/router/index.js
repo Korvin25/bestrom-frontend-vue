@@ -92,7 +92,7 @@ export default createRouter({
 			component: appPageCatalog,
 		},
 		{
-			path: '/catalog/machine/:catalogId',
+			path: '/catalog/machine/:catalogSlug',
 			name: 'appPageCatalogId',
 			component: appPageCatalogId,
 		},

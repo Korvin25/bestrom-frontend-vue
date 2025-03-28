@@ -159,7 +159,7 @@ import appModalPartnersItem from '../components/appModalPartnersItem.vue'
 import { Carousel, Slide, Navigation, Pagination } from 'vue3-carousel'
 import { useRoute } from 'vue-router'
 import { mapActions, mapGetters, useStore } from 'vuex'
-import { computed, onMounted } from 'vue'
+import { computed, onMounted, watch } from 'vue'
 import { useMeta } from 'vue-meta'
 
 export default {
@@ -183,27 +183,47 @@ export default {
 	},
 	setup() {
 		const store = useStore()
-		const routeId = useRoute().params.catalogId
+		const route = useRoute()
+		const { meta } = useMeta({
+			title: '',
+			description: ''
+		})
+
+		// Функция для обновления метаданных
+		const updateMeta = (product) => {
+			if (!product) {
+				meta.title = 'title'
+				meta.description = 'description'
+				return
+			}
+
+			if (store.state.language === 'RU') {
+				meta.title = product.seo_title || product.name
+				meta.description = product.seo_description || product.description || product.name
+			} else {
+				meta.title = product.seo_title_en || product.name_en || product.name
+				meta.description = product.seo_description_en || product.description_en || product.description || product.name_en || product.name
+			}
+		}
+
+		// Реактивно следим за изменением маршрута
+		watch(() => route.params.catalogSlug, (newSlug) => {
+			if (store.getters['product/PRODUCT'].length > 0) {
+				const productItem = store.getters['product/PRODUCT'].find(e => e.slug === newSlug)
+				updateMeta(productItem)
+			}
+		}, { immediate: true })
+
 		onMounted(() => {
 			if (store.getters['product/PRODUCT'].length === 0) {
 				store.dispatch('product/GET_PRODUCT')
 			}
 		})
-		const computedMeta = computed(() => ({
-			title:
-				store.getters['product/PRODUCT'].length > 0
-					? store.state.language === 'RU'
-						? store.getters['product/PRODUCT'].find((e) => e.id.toString() === routeId).name
-						: store.getters['product/PRODUCT'].find((e) => e.id.toString() === routeId).name_en
-					: 'title',
-			description:
-				store.getters['product/PRODUCT'].length > 0
-					? store.state.language === 'RU'
-						? store.getters['product/PRODUCT'].find((e) => e.id.toString() === routeId).name
-						: store.getters['product/PRODUCT'].find((e) => e.id.toString() === routeId).name_en
-					: 'description',
-		}))
-		useMeta(computedMeta)
+
+		return {
+			updateMeta,
+			meta
+		}
 	},
 	data() {
 		return {
@@ -297,6 +317,8 @@ export default {
 		this.GET_CLIENTS()
 		this.GET_PRODUCT().then(() => {
 			this.fetchData()
+			// Обновляем метаданные после загрузки продукта
+			this.updateMeta(this.PRODUCT_ID)
 		})
 	},
 	methods: {
@@ -317,7 +339,8 @@ export default {
 			}
 		},
 		fetchData() {
-			this.PRODUCT_ID = this.PRODUCT.find((e) => e.id.toString() === this.$route.params.catalogId)
+			this.PRODUCT_ID = this.PRODUCT.find((e) => e.slug === this.$route.params.catalogSlug)
+			this.updateMeta(this.PRODUCT_ID)
 		},
 	},
 }
