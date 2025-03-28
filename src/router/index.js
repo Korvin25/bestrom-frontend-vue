@@ -102,6 +102,10 @@ export default createRouter({
 			component: appPage404,
 		},
 		{
+            path: '/service/raskroy-paketov/',
+            redirect: '/cutting',
+        },
+		{
 			path: '/:pathMatch(.*)*',
 			redirect: '/404',
 		},
