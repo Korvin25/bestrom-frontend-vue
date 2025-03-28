@@ -32,7 +32,7 @@
 								:class="typeSelect === filters.name ? 'type-select-checked' : ''"
 								:text="$store.state.language === 'RU' ? filters.name : filters.name_en"
 								:img="filters.img"
-								@click="typeSelectFunc(filters.name, filters.search, filters.id)"></app-catalog-type-select>
+								@click="typeSelectFunc(filters.name, filters.search, filters.slug)"></app-catalog-type-select>
 						</div>
 					</div>
 				 </transition>
@@ -199,8 +199,8 @@
 
 <script>
 import axios from 'axios'
-import { computed } from 'vue'
-import { mapState } from 'vuex';
+import { computed, watch } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 import { useMeta } from 'vue-meta'
 import { Carousel, Slide } from 'vue3-carousel'
 import { mapActions, mapGetters, useStore } from 'vuex'
@@ -210,226 +210,301 @@ import appFooter from '../components/appFooter.vue'
 import appHeader from '../components/appHeader.vue'
 
 export default {
-	name: 'AppPageCatalog',
-	components: {
-		appHeader,
-		appFooter,
-		appCatalogTypeSelect,
-		appCatalogItem,
-		Carousel,
-		Slide,
-	},
-	setup() {
-		const store = useStore()
-		const computedMeta = computed(() => ({
-			title:
-				store.getters['page/PAGE_ID'].length > 0
-					? store.state.language === 'RU'
-						? store.getters['page/PAGE_ID'][0].title
-						: store.getters['page/PAGE_ID'][0].title_en
-					: 'title',
-			description:
-				store.getters['page/PAGE_ID'].length > 0
-					? store.getters['page/PAGE_ID'][0].description
-					: 'description',
-			
-		}))
-		useMeta(computedMeta)
-	},
-	data() {
-		return {
-			showMobileFilter: false,
-			isOpen: true,
-			notProducts: false,
-			radioCatalogSelect: 'ПОДБОР ПО ТИПУ МАШИНЫ',
-			typeSelect: '',
-			typeSelectEn: '',
-			search: '',
-			statusSend: '',
-			inputCompany: '',
-			inputName: '',
-			inputTelephone: '',
-			inputEmail: '',
-			inputProduct: '',
-			inputDosage: '',
-			inputPerformance: '',
-			inputCommunication: '',
+  name: 'AppPageCatalog',
+  components: {
+    appHeader,
+    appFooter,
+    appCatalogTypeSelect,
+    appCatalogItem,
+    Carousel,
+    Slide,
+  },
+  setup() {
+	const store = useStore()
+	const route = useRoute()
+	
+	// Инициализация с дефолтными значениями
+	const { meta } = useMeta({
+		title: 'Каталог оборудования | BESTROM',
+		description: 'Широкий выбор промышленного оборудования для пищевой промышленности'
+	})
+
+	// Функция для обновления метаданных
+	const updateMeta = (pageData, filterData = null) => {
+		const lang = store.state.language === 'RU' ? 'RU' : 'EN'
+		
+		// Дефолтные значения
+		const defaultTitle = 'Каталог оборудования | BESTROM'
+		const defaultDesc = 'Широкий выбор промышленного оборудования для пищевой промышленности'
+		
+		// Если нет данных страницы, используем дефолтные значения
+		if (!pageData) {
+		meta.title = defaultTitle
+		meta.description = defaultDesc
+		return
 		}
+
+		// Базовые значения из pageData или дефолтные
+		const baseTitle = pageData.seo_title || pageData.title || defaultTitle
+		const baseDesc = pageData.seo_description || pageData.description || defaultDesc
+
+		// Если есть фильтр - комбинируем, иначе используем базовые
+		if (filterData) {
+		const filterTitle = lang === 'RU' 
+			? filterData.seo_title || filterData.name 
+			: filterData.seo_title_en || filterData.name_en || filterData.name
+		const filterDesc = lang === 'RU'
+			? filterData.seo_description || filterData.name
+			: filterData.seo_description_en || filterData.name_en || filterData.name
+
+		meta.title = `${filterTitle} | ${baseTitle}`
+		meta.description = `${filterDesc}. ${baseDesc}`
+		} else {
+		// Если фильтр не выбран, используем дефолтные значения
+		meta.title = defaultTitle
+		meta.description = defaultDesc
+		}
+	}
+
+	// Реактивно следим за изменением маршрута
+	watch(() => route.params, (newParams) => {
+		const pageData = store.getters['page/PAGE_ID'][0] || {}
+		let filterData = null
+		
+		// Только если есть параметры фильтра, ищем соответствующий фильтр
+		if (newParams.filterSlug && store.getters['filters/FILTERS'].length > 0) {
+		const category = store.getters['filters/FILTERS'].find(c => c.slug === newParams.radioSlug)
+		if (category) {
+			filterData = category.Filters.find(f => f.slug === newParams.filterSlug)
+		}
+		}
+		
+		updateMeta(pageData, filterData)
+	}, { immediate: true })
+
+	return {
+		updateMeta,
+		meta
+	}
 	},
-	computed: {
-		...mapGetters({
-			PRODUCT: 'product/PRODUCT',
-			FILTERS: 'filters/FILTERS',
-			PAGE_ID: 'page/PAGE_ID',
-		}),
-		filterInit() {
-			if (this.FILTERS.length > 0) {
-				if (this.$route.query.category) {
-					return this.FILTERS.find((e) => e.id === Number(this.$route.query.category)).name
-				} else {
-					return this.FILTERS[0].name
-				}
-			}
-			return 0
-		},
-		computedProducts() {
-			let tempProduct = []
-			tempProduct = this.PRODUCT.slice()
-			// Дополнительный фильтр по typeSelect и search
-			if (this.typeSelect !== '' && this.search !== '') {
-				tempProduct = tempProduct.filter(product => {
-					for (const key in product) {
-						if (typeof product[key] === 'object') {
-							for (const item of product[key]) {
-								if (
-									item.name &&
-									this.search &&
-									item.name.toLowerCase() === this.search.toLowerCase()
-								) {
-									return true
-								}
-							}
-						}
-					}
-					return false
-				})
-			}
-			if (tempProduct.length == 0) {
-				this.notProducts = true
-			} else {
-				this.notProducts = false
-			}
-			return tempProduct
-		},
-	},
-	watch: {
-		'$route'(to) {
-			const regex = new RegExp(`^/catalog/type/(\\d+)/(\\d+)$`);
-			if (regex.test(to.fullPath)) {
-				this.isOpen = false;
-			} else {
-				this.isOpen = true;
-			}
-		},
-		showMobileFilter() {
-			if (this.showMobileFilter) {
-				document.body.classList.add('modal-open')
-			} else {
-				document.body.classList.remove('modal-open')
-			}
-		},
-	},
-	mounted() {
+  data() {
+    return {
+      showMobileFilter: false,
+      isOpen: true,
+      notProducts: false,
+      radioCatalogSelect: 'ПОДБОР ПО ТИПУ МАШИНЫ',
+      typeSelect: '',
+      typeSelectEn: '',
+      search: '',
+      statusSend: '',
+      inputCompany: '',
+      inputName: '',
+      inputTelephone: '',
+      inputEmail: '',
+      inputProduct: '',
+      inputDosage: '',
+      inputPerformance: '',
+      inputCommunication: '',
+    }
+  },
+  computed: {
+    ...mapGetters({
+      PRODUCT: 'product/PRODUCT',
+      FILTERS: 'filters/FILTERS',
+      PAGE_ID: 'page/PAGE_ID',
+    }),
+    filterInit() {
+      if (this.FILTERS.length > 0) {
+        if (this.$route.query.category) {
+          return this.FILTERS.find((e) => e.id === Number(this.$route.query.category)).name
+        } else {
+          return this.FILTERS[0].name
+        }
+      }
+      return 0
+    },
+    computedProducts() {
+      let tempProduct = []
+      tempProduct = this.PRODUCT.slice()
+      if (this.typeSelect !== '' && this.search !== '') {
+        tempProduct = tempProduct.filter(product => {
+          for (const key in product) {
+            if (typeof product[key] === 'object') {
+              for (const item of product[key]) {
+                if (
+                  item.name &&
+                  this.search &&
+                  item.name.toLowerCase() === this.search.toLowerCase()
+                ) {
+                  return true
+                }
+              }
+            }
+          }
+          return false
+        })
+      }
+      if (tempProduct.length == 0) {
+        this.notProducts = true
+      } else {
+        this.notProducts = false
+      }
+      return tempProduct
+    },
+  },
+  watch: {
+    '$route'(to) {
+		const regex = new RegExp(`^/catalog/type/(\\+)/(.+)$`);
+		if (regex.test(to.fullPath)) {
+			this.isOpen = false;
+		} else {
+			this.isOpen = true;
+		}
+    },
+    showMobileFilter() {
+      if (this.showMobileFilter) {
+        document.body.classList.add('modal-open')
+      } else {
+        document.body.classList.remove('modal-open')
+      }
+    },
+  },
+  mounted() {
+	// Загружаем данные последовательно
+	Promise.all([
+		this.GET_PAGE_ID(4),
+		this.GET_FILTERS(),
 		this.GET_PRODUCT()
-		this.GET_FILTERS().then(() => {
-			
-			const { radioId, filtersId } = this.$route.params;
-
-			if (radioId && filtersId) {
-				this.isOpen = false;
+	]).then(() => {
+		const { radioSlug, filterSlug } = this.$route.params
+		
+		if (radioSlug && filterSlug) {
+		this.isOpen = false
+		const category = this.FILTERS.find(c => c.slug === radioSlug)
+		if (category) {
+			const filter = category.Filters.find(f => f.slug === filterSlug)
+			if (filter) {
+			this.typeSelect = filter.name
+			this.typeSelectEn = filter.name_en
+			this.search = filter.search
 			}
-
-			// Установите radioCatalogSelect на основе radioId
-			const selectedCategory = this.FILTERS.find(category => category.id === Number(radioId));
-			if (selectedCategory) {
-				this.radioCatalogSelect = selectedCategory.name;
-
-				// Установите typeSelect на основе filtersId
-				const selectedFilter = selectedCategory.Filters.find(filter => filter.id === Number(filtersId));
-				if (selectedFilter) {
-					this.typeSelect = selectedFilter.name;
-					this.typeSelectEn = selectedFilter.name_en;
-					this.search = selectedFilter.search;
-				}
-			}
-		})
-		this.GET_PAGE_ID(4)
+		}
+		}
+		
+		// Обязательно обновляем метаданные после всех загрузок
+		this.updateMetaAfterLoad()
+	})
 	},
-	methods: {
-		...mapActions({
-			GET_PRODUCT: 'product/GET_PRODUCT',
-			GET_FILTERS: 'filters/GET_FILTERS',
-			GET_PAGE_ID: 'page/GET_PAGE_ID',
-			SET_FILTER: 'filters/SET_FILTER',
-		}),
-		toggle() {
-			this.isOpen = !this.isOpen;
-		},
-		routerPush(path) {
-			window.scrollTo(0, 0)
-			this.$router.push(`/product/${path}`)
-		},
-		typeSelectFunc(filterName, filterSearch, filtersId) {
-			if (this.typeSelect === filterName) {
-				this.typeSelect = '';
-				this.search = '';
-			} else {
-				this.typeSelect = filterName;
-				this.search = filterSearch;
-			}
-
-			setTimeout(() => {
-				this.showMobileFilter = false;
-			}, 100);
-
-			const radio = this.FILTERS.find(category => category.name === this.radioCatalogSelect);
-			const selectedFilter = radio.Filters.find(filter => filter.id === Number(filtersId));
-			if (selectedFilter) {
-				this.typeSelectEn = selectedFilter.name_en;
-			}
-			this.$router.push(`/catalog/type/${radio.id}/${filtersId}`);
-		},
-		typeRadioFunc() {
-			this.$router.push(`/catalog`)
-		},
-		sendPost() {
-			if (
-				(this.inputTelephone.length > 10 ||
-					(this.inputEmail.includes('@') && this.inputEmail.length > 6)) &&
-				this.inputName.length !== 0 &&
-				this.inputProduct.length !== 0 &&
-				this.inputCompany.length !== 0 &&
-				this.inputDosage.length !== 0 &&
-				this.inputPerformance.length !== 0
-			) {
-				axios
-					.post(this.$store.state.server + 'forms/', {
-						type: 'Заявка',
-						telephone: this.inputTelephone,
-						email: this.inputEmail,
-						name: this.inputName,
-						other:
-							'Компания: ' +
-							this.inputCompany +
-							', Продукт: ' +
-							this.inputProduct +
-							', Дозировка: ' +
-							this.inputDosage +
-							', Производительность: ' +
-							this.inputPerformance +
-							', Удобный способ связи: ' +
-							this.inputCommunication,
-					})
-					.then(() => {
-						this.inputCompany = ''
-						this.inputTelephone = ''
-						this.inputName = ''
-						this.inputEmail = ''
-						this.inputProduct = ''
-						this.inputDosage = ''
-						this.inputPerformance = ''
-						this.inputCommunication = ''
-						this.statusSend = 'Заявка успешно отправлена!'
-					})
-					.catch((error) => {
-						this.statusSend = 'Ошибка отправки заявки! Ошибка: ' + error
-						console.log(error)
-					})
-			} else {
-				alert('Проверьте правильность ввода всех полей!')
-			}
-		},
+  methods: {
+    ...mapActions({
+      GET_PRODUCT: 'product/GET_PRODUCT',
+      GET_FILTERS: 'filters/GET_FILTERS',
+      GET_PAGE_ID: 'page/GET_PAGE_ID',
+      SET_FILTER: 'filters/SET_FILTER',
+    }),
+	updateMetaAfterLoad() {
+		if (!this.PAGE_ID.length || !this.FILTERS.length) return
+		
+		const pageData = this.PAGE_ID[0]
+		let filterData = null
+		const { radioSlug, filterSlug } = this.$route.params
+		
+		if (radioSlug && filterSlug) {
+		const category = this.FILTERS.find(c => c.slug === radioSlug)
+		if (category) {
+			filterData = category.Filters.find(f => f.slug === filterSlug)
+		}
+		}
+		
+		this.updateMeta(pageData, filterData)
 	},
+    toggle() {
+      this.isOpen = !this.isOpen;
+    },
+    routerPush(path) {
+      window.scrollTo(0, 0)
+      this.$router.push(`/product/${path}`)
+    },
+    typeSelectFunc(filterName, filterSearch, filterSlug) {
+      if (this.typeSelect === filterName) {
+        this.typeSelect = '';
+        this.search = '';
+      } else {
+        this.typeSelect = filterName;
+        this.search = filterSearch;
+      }
+
+      setTimeout(() => {
+        this.showMobileFilter = false;
+      }, 100);
+
+      const radio = this.FILTERS.find(category => category.name === this.radioCatalogSelect);
+      const selectedFilter = radio.Filters.find(filter => filter.slug === filterSlug);
+      if (selectedFilter) {
+        this.typeSelectEn = selectedFilter.name_en;
+        
+        // Обновляем метаданные при выборе фильтра
+        if (this.PAGE_ID.length > 0) {
+          this.updateMeta(this.PAGE_ID[0], selectedFilter)
+        }
+      }
+      this.$router.push(`/catalog/type/${radio.slug}/${filterSlug}`);
+    },
+    typeRadioFunc() {
+      this.$router.push(`/catalog`)
+      // Обновляем метаданные при сбросе фильтров
+      if (this.PAGE_ID.length > 0) {
+        this.updateMeta(this.PAGE_ID[0])
+      }
+    },
+    sendPost() {
+      if (
+        (this.inputTelephone.length > 10 ||
+          (this.inputEmail.includes('@') && this.inputEmail.length > 6)) &&
+        this.inputName.length !== 0 &&
+        this.inputProduct.length !== 0 &&
+        this.inputCompany.length !== 0 &&
+        this.inputDosage.length !== 0 &&
+        this.inputPerformance.length !== 0
+      ) {
+        axios
+          .post(this.$store.state.server + 'forms/', {
+            type: 'Заявка',
+            telephone: this.inputTelephone,
+            email: this.inputEmail,
+            name: this.inputName,
+            other:
+              'Компания: ' +
+              this.inputCompany +
+              ', Продукт: ' +
+              this.inputProduct +
+              ', Дозировка: ' +
+              this.inputDosage +
+              ', Производительность: ' +
+              this.inputPerformance +
+              ', Удобный способ связи: ' +
+              this.inputCommunication,
+          })
+          .then(() => {
+            this.inputCompany = ''
+            this.inputTelephone = ''
+            this.inputName = ''
+            this.inputEmail = ''
+            this.inputProduct = ''
+            this.inputDosage = ''
+            this.inputPerformance = ''
+            this.inputCommunication = ''
+            this.statusSend = 'Заявка успешно отправлена!'
+          })
+          .catch((error) => {
+            this.statusSend = 'Ошибка отправки заявки! Ошибка: ' + error
+            console.log(error)
+          })
+      } else {
+        alert('Проверьте правильность ввода всех полей!')
+      }
+    },
+  }
 }
 </script>
 
