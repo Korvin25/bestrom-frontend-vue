@@ -39,82 +39,114 @@
 <script>
 import appHeader from '../components/appHeader.vue'
 import appFooter from '../components/appFooter.vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { mapActions, mapGetters, useStore } from 'vuex'
-import { computed } from 'vue'
+import { computed, watch } from 'vue'
 import { useMeta } from 'vue-meta'
 
 export default {
-	name: 'AppPageNewsId',
-	components: {
-		appHeader,
-		appFooter,
-	},
-	setup() {
-		const store = useStore()
-		const routeParam = useRoute().params.slug
-		const computedMeta = computed(() => ({
-			title:
-				store.getters['news/ALL_NEWS'].length > 0
-					? store.state.language === 'RU'
-						? store.getters['news/ALL_NEWS'].find((e) => e.slug == routeParam).name
-						: store.getters['news/ALL_NEWS'].find((e) => e.slug == routeParam).name_en
-					: 'title',
-			description:
-				store.getters['news/ALL_NEWS'].length > 0
-					? store.state.language === 'RU'
-						? store.getters['news/ALL_NEWS'].find((e) => e.slug == routeParam).mini_description
-						: store.getters['news/ALL_NEWS'].find((e) => e.slug == routeParam).mini_description_en
-					: 'description',
-		}))
-		useMeta(computedMeta)
-	},
-	data() {
-		return {
-			currentNews: {},
-			lastNews: [],
-		}
-	},
-	computed: {
-		...mapGetters({
-			ALL_NEWS: 'news/ALL_NEWS',
-		}),
-	},
-	watch: {
-		$route: 'fetchData',
-	},
-	mounted() {
-		this.GET_NEWS().then(() => {
-			this.fetchData()
-		})
-	},
-	methods: {
-		...mapActions({
-			GET_NEWS: 'news/GET_NEWS',
-		}),
-		routerPush(path) {
-			window.scrollTo(0, 0)
-			this.$router.replace(`/news/${path}`)
-		},
-		findCurrentNews() {
-			return this.ALL_NEWS.find((e) => e.slug == this.$route.params.slug)
-		},
-		findLastNews() {
-			const news = []
-			for (const item of this.ALL_NEWS) {
-				if (item.slug !== this.$route.params.slug) {
-					news.push(item)
-					if (news.length === 3) {
-						return news
-					}
-				}
-			}
-		},
-		fetchData() {
-			this.currentNews = this.findCurrentNews()
-			this.lastNews = this.findLastNews()
-		},
-	},
+  name: 'AppPageNewsId',
+  components: {
+    appHeader,
+    appFooter,
+  },
+  setup() {
+    const store = useStore()
+    const route = useRoute()
+    const router = useRouter()
+    
+    // Инициализируем vue-meta
+    const { meta } = useMeta({
+      title: '',
+      description: ''
+    })
+
+    // Функция для обновления метаданных
+    const updateMeta = (newsItem) => {
+      if (!newsItem) {
+        meta.title = 'title'
+        meta.description = 'description'
+        return
+      }
+
+      if (store.state.language === 'RU') {
+        meta.title = newsItem.seo_title || newsItem.name
+        meta.description = newsItem.seo_description || newsItem.mini_description
+      } else {
+        meta.title = newsItem.seo_title_en || newsItem.name_en || newsItem.name
+        meta.description = newsItem.seo_description_en || newsItem.mini_description_en || newsItem.mini_description
+      }
+    }
+
+    // Реактивно следим за изменением маршрута
+    watch(() => route.params.slug, (newSlug) => {
+      if (store.getters['news/ALL_NEWS'].length > 0) {
+        const newsItem = store.getters['news/ALL_NEWS'].find(e => e.slug === newSlug)
+        updateMeta(newsItem)
+      }
+    }, { immediate: true })
+
+    return {
+      updateMeta,
+      meta
+    }
+  },
+  data() {
+    return {
+      currentNews: {},
+      lastNews: [],
+    }
+  },
+  computed: {
+    ...mapGetters({
+      ALL_NEWS: 'news/ALL_NEWS',
+    }),
+  },
+  watch: {
+    $route: 'fetchData',
+  },
+  mounted() {
+    this.GET_NEWS().then(() => {
+      this.fetchData()
+      // Обновляем метаданные после загрузки новостей
+      this.updateMeta(this.currentNews)
+    })
+  },
+  methods: {
+    ...mapActions({
+      GET_NEWS: 'news/GET_NEWS',
+    }),
+    routerPush(path) {
+      // Находим новость перед переходом
+      const newsItem = this.ALL_NEWS.find(e => e.slug === path)
+      if (newsItem) {
+        this.updateMeta(newsItem)
+      }
+      
+      this.$router.push(`/news/${path}`)
+      window.scrollTo(0, 0)
+    },
+    findCurrentNews() {
+      return this.ALL_NEWS.find((e) => e.slug == this.$route.params.slug)
+    },
+    findLastNews() {
+      const news = []
+      for (const item of this.ALL_NEWS) {
+        if (item.slug !== this.$route.params.slug) {
+          news.push(item)
+          if (news.length === 3) {
+            return news
+          }
+        }
+      }
+      return news
+    },
+    fetchData() {
+      this.currentNews = this.findCurrentNews()
+      this.lastNews = this.findLastNews()
+      this.updateMeta(this.currentNews)
+    },
+  },
 }
 </script>
 
