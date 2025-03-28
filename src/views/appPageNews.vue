@@ -8,7 +8,7 @@
 			<h2 v-else>{{ $store.state.language === 'RU' ? 'Новостей нет' : 'There is no news' }}</h2>
 			<div class="title-news flex-row">
 				<div v-if="TITLE_NEWS.length !== 0" class="big-title-news flex-column">
-					<div class="image-news card-shadow" @click="routerPush(TITLE_NEWS.id)">
+					<div class="image-news card-shadow" @click="routerPush(TITLE_NEWS.slug)">
 						<img :src="TITLE_NEWS.img" :alt="TITLE_NEWS.alt" />
 						<div class="hidden-item">
 							<div class="hidden-text">
@@ -27,7 +27,7 @@
 					v-for="second_news in SECOND_NEWS"
 					:key="second_news.id"
 					class="small-title-news flex-column">
-					<div class="image-news card-shadow" @click="routerPush(second_news.id)">
+					<div class="image-news card-shadow" @click="routerPush(second_news.slug)">
 						<img :src="second_news.img" :alt="second_news.alt" />
 						<div class="hidden-item">
 							<div class="hidden-text">
@@ -50,7 +50,7 @@
 			<div class="other-news flex-row">
 				<app-news-other-item
 					v-for="other_news in OTHER_NEWS"
-					:id="other_news.alt"
+					:slug="other_news.slug"
 					:key="other_news.id"
 					:title="$store.state.language === 'RU' ? other_news.name : other_news.name_en"
 					:text="

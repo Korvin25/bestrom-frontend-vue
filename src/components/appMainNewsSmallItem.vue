@@ -15,11 +15,7 @@
 export default {
 	name: 'AppMainNewsSmallItem',
 	props: {
-		newsid: {
-			type: Number,
-			default: '',
-		},
-		alt: {
+		slug: {
 			type: String,
 			default: '',
 		},
@@ -34,7 +30,7 @@ export default {
 	},
 	methods: {
 		routerPush() {
-			this.$router.push(`/news/${this.newsid}`)
+			this.$router.push(`/news/${this.slug}`)
 			window.scrollTo(0, 0)
 		},
 	},

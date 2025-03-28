@@ -42,7 +42,7 @@ export default createRouter({
 			component: appPageNews,
 		},
 		{
-			path: '/news/:newsId',
+			path: '/news/:slug',
 			name: 'appPageNewsId',
 			component: appPageNewsId,
 		},

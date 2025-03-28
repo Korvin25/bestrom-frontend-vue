@@ -21,7 +21,7 @@
 						v-for="news in lastNews"
 						:key="news.id"
 						class="image-news card-shadow"
-						@click="routerPush(news.id)">
+						@click="routerPush(news.slug)">
 						<img :src="news.img" :alt="news.alt" />
 						<div class="hidden-item">
 							<div class="hidden-text">
@@ -52,19 +52,19 @@ export default {
 	},
 	setup() {
 		const store = useStore()
-		const routeParam = useRoute().params.newsId
+		const routeParam = useRoute().params.slug
 		const computedMeta = computed(() => ({
 			title:
 				store.getters['news/ALL_NEWS'].length > 0
 					? store.state.language === 'RU'
-						? store.getters['news/ALL_NEWS'].find((e) => e.id == routeParam).name
-						: store.getters['news/ALL_NEWS'].find((e) => e.id == routeParam).name_en
+						? store.getters['news/ALL_NEWS'].find((e) => e.slug == routeParam).name
+						: store.getters['news/ALL_NEWS'].find((e) => e.slug == routeParam).name_en
 					: 'title',
 			description:
 				store.getters['news/ALL_NEWS'].length > 0
 					? store.state.language === 'RU'
-						? store.getters['news/ALL_NEWS'].find((e) => e.id == routeParam).mini_description
-						: store.getters['news/ALL_NEWS'].find((e) => e.id == routeParam).mini_description_en
+						? store.getters['news/ALL_NEWS'].find((e) => e.slug == routeParam).mini_description
+						: store.getters['news/ALL_NEWS'].find((e) => e.slug == routeParam).mini_description_en
 					: 'description',
 		}))
 		useMeta(computedMeta)
@@ -97,12 +97,12 @@ export default {
 			this.$router.replace(`/news/${path}`)
 		},
 		findCurrentNews() {
-			return this.ALL_NEWS.find((e) => e.id == this.$route.params.newsId)
+			return this.ALL_NEWS.find((e) => e.slug == this.$route.params.slug)
 		},
 		findLastNews() {
 			const news = []
 			for (const item of this.ALL_NEWS) {
-				if (item.id !== this.$route.params.newsId) {
+				if (item.slug !== this.$route.params.slug) {
 					news.push(item)
 					if (news.length === 3) {
 						return news
