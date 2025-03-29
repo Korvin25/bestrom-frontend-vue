@@ -32,7 +32,7 @@
 								:class="typeSelect === filters.name ? 'type-select-checked' : ''"
 								:text="$store.state.language === 'RU' ? filters.name : filters.name_en"
 								:img="filters.img"
-								@click="typeSelectFunc(filters.name, filters.search, filters.slug)"></app-catalog-type-select>
+								@click="typeSelectFunc(filters.slug)"></app-catalog-type-select>
 						</div>
 					</div>
 				 </transition>
@@ -77,7 +77,7 @@
 								:key="filters.id"
 								:class="typeSelect === filters.name ? 'type-select-checked' : ''"
 								:text="$store.state.language === 'RU' ? filters.name : filters.name_en"
-								@click="typeSelectFunc(filters.name, filters.search, filters.slug)"></app-catalog-type-select>
+								@click="typeSelectFunc(filters.slug)"></app-catalog-type-select>
 						</div>
 					</div>
 				</section>
@@ -224,6 +224,7 @@ export default {
 	const route = useRoute()
 	
 	const radioCatalogSelect = ref(route.params.radioSlug || 'podbor-po-tipu-mashiny')
+	const filterSlugSelect = ref(route.params.filterSlug || '')
 
 	// Инициализация с дефолтными значениями
 	const { meta } = useMeta({
@@ -273,6 +274,10 @@ export default {
 		const pageData = store.getters['page/PAGE_ID'][0] || {}
 		let filterData = null
 		
+		// Обновляем реактивные переменные
+		radioCatalogSelect.value = newParams.radioSlug || 'podbor-po-tipu-mashiny'
+		filterSlugSelect.value = newParams.filterSlug || ''
+		
 		// Только если есть параметры фильтра, ищем соответствующий фильтр
 		if (newParams.filterSlug && store.getters['filters/FILTERS'].length > 0) {
 			const category = store.getters['filters/FILTERS'].find(c => c.slug === newParams.radioSlug)
@@ -287,7 +292,8 @@ export default {
 	return {
 		updateMeta,
 		meta,
-		radioCatalogSelect
+		radioCatalogSelect,
+		filterSlugSelect 
 	}
 	},
   data() {
@@ -297,7 +303,6 @@ export default {
       notProducts: false,
       typeSelect: '',
       typeSelectEn: '',
-      search: '',
       statusSend: '',
       inputCompany: '',
       inputName: '',
@@ -326,42 +331,33 @@ export default {
       return 0
     },
     computedProducts() {
-      let tempProduct = []
-      tempProduct = this.PRODUCT.slice()
-      if (this.typeSelect !== '' && this.search !== '') {
-        tempProduct = tempProduct.filter(product => {
-          for (const key in product) {
-            if (typeof product[key] === 'object') {
-              for (const item of product[key]) {
-                if (
-                  item.name &&
-                  this.search &&
-                  item.name.toLowerCase() === this.search.toLowerCase()
-                ) {
-                  return true
-                }
-              }
-            }
-          }
-          return false
-        })
-      }
-      if (tempProduct.length == 0) {
-        this.notProducts = true
-      } else {
-        this.notProducts = false
-      }
-      return tempProduct
-    },
+		let tempProduct = this.PRODUCT.slice();
+		
+		if (this.filterSlugSelect !== '') {
+			tempProduct = tempProduct.filter(product => {
+
+			if (product.category_filters && Array.isArray(product.category_filters)) {
+				// Ищем совпадение slug с filterSlugSelect
+				const hasMatch = product.category_filters.some(
+					filter => filter.slug === this.filterSlugSelect
+				);
+				
+				if (hasMatch) {
+					return true;
+				}
+			}
+
+			return false;
+			});
+		}
+		
+		this.notProducts = tempProduct.length === 0;
+		return tempProduct;
+	},
   },
   watch: {
     '$route'(to) {
-		const regex = new RegExp(`^/catalog/type/(\\+)/(.+)$`);
-		if (regex.test(to.fullPath)) {
-			this.isOpen = false;
-		} else {
-			this.isOpen = true;
-		}
+		this.isOpen = !(to.params.radioSlug && to.params.filterSlug);
     },
     showMobileFilter() {
       if (this.showMobileFilter) {
@@ -382,6 +378,7 @@ export default {
 		
 		if (radioSlug && filterSlug) {
 			this.radioCatalogSelect = radioSlug
+			this.filterSlugSelect = filterSlug
 			this.isOpen = false
 			const category = this.FILTERS.find(c => c.slug === radioSlug)
 			if (category) {
@@ -389,7 +386,6 @@ export default {
 				if (filter) {
 				this.typeSelect = filter.name
 				this.typeSelectEn = filter.name_en
-				this.search = filter.search
 				}
 			}
 		}
@@ -428,15 +424,8 @@ export default {
       window.scrollTo(0, 0)
       this.$router.push(`/product/${path}`)
     },
-    typeSelectFunc(filterName, filterSearch, filterSlug) {
-      if (this.typeSelect === filterName) {
-        this.typeSelect = '';
-        this.search = '';
-      } else {
-        this.typeSelect = filterName;
-        this.search = filterSearch;
-      }
-
+    typeSelectFunc(filterSlug) {
+	
       setTimeout(() => {
         this.showMobileFilter = false;
       }, 100);
@@ -445,7 +434,11 @@ export default {
       const selectedFilter = radio.Filters.find(filter => filter.slug === filterSlug);
       if (selectedFilter) {
         this.typeSelectEn = selectedFilter.name_en;
+        this.typeSelect = selectedFilter.name;
         
+		// Обновляем filterSlugSelect через .value, так как это ref
+		this.filterSlugSelect = filterSlug;
+
         // Обновляем метаданные при выборе фильтра
         if (this.PAGE_ID.length > 0) {
           this.updateMeta(this.PAGE_ID[0], selectedFilter)
@@ -455,6 +448,7 @@ export default {
     },
     typeRadioFunc() {
       this.$router.push(`/catalog`)
+	  this.filterSlugSelect = ''; // Сбрасываем фильтр
       // Обновляем метаданные при сбросе фильтров
       if (this.PAGE_ID.length > 0) {
         this.updateMeta(this.PAGE_ID[0])
