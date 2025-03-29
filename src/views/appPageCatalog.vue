@@ -11,8 +11,8 @@
 							class="custom-radio"
 							name="radio-choice"
 							type="radio"
-							:value="category.name"
-							:checked="radioCatalogSelect === category.name" 
+							:value="category.slug"
+							:checked="radioCatalogSelect === category.slug" 
 							@click="typeRadioFunc()"/>
 						<label :for="category.id">{{
 							$store.state.language === 'RU' ? category.name : category.name_en
@@ -27,7 +27,7 @@
 					<div v-if="isOpen">
 						<div v-if="FILTERS.length > 0 && radioCatalogSelect !== ''" class="type-select flex-row">
 							<app-catalog-type-select
-								v-for="filters in FILTERS.find((e) => e.name === radioCatalogSelect).Filters"
+								v-for="filters in FILTERS.find((e) => e.slug === radioCatalogSelect).Filters"
 								:key="filters.id"
 								:class="typeSelect === filters.name ? 'type-select-checked' : ''"
 								:text="$store.state.language === 'RU' ? filters.name : filters.name_en"
@@ -43,8 +43,8 @@
 				<h2 v-if="FILTERS.length > 0 && radioCatalogSelect">
 					{{
 						$store.state.language === 'RU'
-							? FILTERS.find((e) => e.name === radioCatalogSelect).name
-							: FILTERS.find((e) => e.name === radioCatalogSelect).name_en
+							? FILTERS.find((e) => e.slug === radioCatalogSelect).name
+							: FILTERS.find((e) => e.slug === radioCatalogSelect).name_en
 					}}
 				</h2>
 			</div>
@@ -62,8 +62,8 @@
 								<slide v-for="category in FILTERS" :key="category.id">
 									<p
 										class="mobile-select-filter"
-										:class="radioCatalogSelect === category.name ? 'choice' : ''"
-										@click="radioCatalogSelect = category.name">
+										:class="radioCatalogSelect === category.slug ? 'choice' : ''"
+										@click="radioCatalogSelect = category.slug">
 										{{ $store.state.language === 'RU' ? category.name : category.name_en }}
 									</p>
 								</slide>
@@ -73,11 +73,11 @@
 							v-if="FILTERS.length > 0 && radioCatalogSelect !== ''"
 							class="type-select flex-row">
 							<app-catalog-type-select
-								v-for="filters in FILTERS.find((e) => e.name === radioCatalogSelect).Filters"
+								v-for="filters in FILTERS.find((e) => e.slug === radioCatalogSelect).Filters"
 								:key="filters.id"
 								:class="typeSelect === filters.name ? 'type-select-checked' : ''"
 								:text="$store.state.language === 'RU' ? filters.name : filters.name_en"
-								@click="typeSelectFunc(filters.name, filters.search, filters.id)"></app-catalog-type-select>
+								@click="typeSelectFunc(filters.name, filters.search, filters.slug)"></app-catalog-type-select>
 						</div>
 					</div>
 				</section>
@@ -199,7 +199,7 @@
 
 <script>
 import axios from 'axios'
-import { computed, watch } from 'vue'
+import { computed, watch, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useMeta } from 'vue-meta'
 import { Carousel, Slide } from 'vue3-carousel'
@@ -223,6 +223,8 @@ export default {
 	const store = useStore()
 	const route = useRoute()
 	
+	const radioCatalogSelect = ref(route.params.radioSlug || 'podbor-po-tipu-mashiny')
+
 	// Инициализация с дефолтными значениями
 	const { meta } = useMeta({
 		title: 'Каталог оборудования | BESTROM',
@@ -239,9 +241,9 @@ export default {
 		
 		// Если нет данных страницы, используем дефолтные значения
 		if (!pageData) {
-		meta.title = defaultTitle
-		meta.description = defaultDesc
-		return
+			meta.title = defaultTitle
+			meta.description = defaultDesc
+			return
 		}
 
 		// Базовые значения из pageData или дефолтные
@@ -250,19 +252,19 @@ export default {
 
 		// Если есть фильтр - комбинируем, иначе используем базовые
 		if (filterData) {
-		const filterTitle = lang === 'RU' 
-			? filterData.seo_title || filterData.name 
-			: filterData.seo_title_en || filterData.name_en || filterData.name
-		const filterDesc = lang === 'RU'
-			? filterData.seo_description || filterData.name
-			: filterData.seo_description_en || filterData.name_en || filterData.name
+			const filterTitle = lang === 'RU' 
+				? filterData.seo_title || filterData.name 
+				: filterData.seo_title_en || filterData.name_en || filterData.name
+			const filterDesc = lang === 'RU'
+				? filterData.seo_description || filterData.name
+				: filterData.seo_description_en || filterData.name_en || filterData.name
 
-		meta.title = `${filterTitle} | ${baseTitle}`
-		meta.description = `${filterDesc}. ${baseDesc}`
+			meta.title = `${filterTitle} | ${baseTitle}`
+			meta.description = `${filterDesc}. ${baseDesc}`
 		} else {
-		// Если фильтр не выбран, используем дефолтные значения
-		meta.title = defaultTitle
-		meta.description = defaultDesc
+			// Если фильтр не выбран, используем дефолтные значения
+			meta.title = defaultTitle
+			meta.description = defaultDesc
 		}
 	}
 
@@ -273,10 +275,10 @@ export default {
 		
 		// Только если есть параметры фильтра, ищем соответствующий фильтр
 		if (newParams.filterSlug && store.getters['filters/FILTERS'].length > 0) {
-		const category = store.getters['filters/FILTERS'].find(c => c.slug === newParams.radioSlug)
-		if (category) {
-			filterData = category.Filters.find(f => f.slug === newParams.filterSlug)
-		}
+			const category = store.getters['filters/FILTERS'].find(c => c.slug === newParams.radioSlug)
+			if (category) {
+				filterData = category.Filters.find(f => f.slug === newParams.filterSlug)
+			}
 		}
 		
 		updateMeta(pageData, filterData)
@@ -284,7 +286,8 @@ export default {
 
 	return {
 		updateMeta,
-		meta
+		meta,
+		radioCatalogSelect
 	}
 	},
   data() {
@@ -292,7 +295,6 @@ export default {
       showMobileFilter: false,
       isOpen: true,
       notProducts: false,
-      radioCatalogSelect: 'ПОДБОР ПО ТИПУ МАШИНЫ',
       typeSelect: '',
       typeSelectEn: '',
       search: '',
@@ -379,16 +381,17 @@ export default {
 		const { radioSlug, filterSlug } = this.$route.params
 		
 		if (radioSlug && filterSlug) {
-		this.isOpen = false
-		const category = this.FILTERS.find(c => c.slug === radioSlug)
-		if (category) {
-			const filter = category.Filters.find(f => f.slug === filterSlug)
-			if (filter) {
-			this.typeSelect = filter.name
-			this.typeSelectEn = filter.name_en
-			this.search = filter.search
+			this.radioCatalogSelect = radioSlug
+			this.isOpen = false
+			const category = this.FILTERS.find(c => c.slug === radioSlug)
+			if (category) {
+				const filter = category.Filters.find(f => f.slug === filterSlug)
+				if (filter) {
+				this.typeSelect = filter.name
+				this.typeSelectEn = filter.name_en
+				this.search = filter.search
+				}
 			}
-		}
 		}
 		
 		// Обязательно обновляем метаданные после всех загрузок
@@ -438,7 +441,7 @@ export default {
         this.showMobileFilter = false;
       }, 100);
 
-      const radio = this.FILTERS.find(category => category.name === this.radioCatalogSelect);
+      const radio = this.FILTERS.find(category => category.slug === this.radioCatalogSelect);
       const selectedFilter = radio.Filters.find(filter => filter.slug === filterSlug);
       if (selectedFilter) {
         this.typeSelectEn = selectedFilter.name_en;
