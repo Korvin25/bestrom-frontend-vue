@@ -106,6 +106,10 @@ export default createRouter({
             redirect: '/cutting',
         },
 		{
+            path: '/service/3/',
+            redirect: '/catalog',
+        },
+		{
 			path: '/:pathMatch(.*)*',
 			redirect: '/404',
 		},
