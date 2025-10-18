@@ -20,12 +20,30 @@
 						}}
 					</p>
 					<YouTube
+						v-if="
+							PAGE_ID[0].blocks
+								.find((e) => e.name === 'youtube')
+								.contents[0].text.includes('youtube.com')
+						"
 						ref="youtube"
-						color="white"
 						class="video-player"
 						width="100%"
 						height="100%"
 						:src="PAGE_ID[0].blocks.find((e) => e.name === 'youtube').contents[0].text" />
+					<iframe
+						v-else
+						class="video-player"
+						width="100%"
+						height="100%"
+						:src="
+							'https://rutube.ru/play/embed/' +
+							PAGE_ID[0].blocks.find((e) => e.name === 'youtube').contents[0].text
+						"
+						frameborder="0"
+						allow="clipboard-write; autoplay"
+						webkitallowfullscreen
+						mozallowfullscreen
+						allowfullscreen></iframe>
 				</div>
 
 				<div class="flex-row second-row">
@@ -50,12 +68,12 @@
 </template>
 
 <script>
-import appHeader from '../components/appHeader.vue'
-import appFooter from '../components/appFooter.vue'
-import YouTube from 'vue3-youtube'
-import { mapActions, mapGetters, useStore } from 'vuex'
 import { computed } from 'vue'
 import { useMeta } from 'vue-meta'
+import YouTube from 'vue3-youtube'
+import { mapActions, mapGetters, useStore } from 'vuex'
+import appFooter from '../components/appFooter.vue'
+import appHeader from '../components/appHeader.vue'
 
 export default {
 	name: 'AppPageAboutHistory',

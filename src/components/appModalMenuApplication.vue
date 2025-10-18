@@ -80,7 +80,7 @@
 					type="text"
 					class="input"
 					:placeholder="$store.state.language === 'RU' ? '60 п/м' : '60 p/m'" />
-				<p>
+				<!-- <p>
 					{{
 						$store.state.language === 'RU' ? 'Удобный способ связи' : 'Convenient way of communication'
 					}}
@@ -116,7 +116,7 @@
 						@click="inputCommunication = 'Telephone'">
 						<img src="../assets/mobile.png" alt="menu-item-img" />
 					</div>
-				</div>
+				</div> -->
 				<button class="call btn" @click="sendPost">
 					{{ $store.state.language === 'RU' ? 'ОТПРАВИТЬ ЗАЯВКУ' : 'SEND AN APPLICATION' }}
 				</button>
@@ -257,7 +257,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from 'axios';
 
 export default {
 	name: 'AppModalMenuApplication',
@@ -281,7 +281,7 @@ export default {
 			inputProduct: '',
 			inputDosage: '',
 			inputPerformance: '',
-			inputCommunication: '',
+			// inputCommunication: '',
 			
 			// Данные для формы запчастей
 			inputCompanyParts: '',
@@ -306,7 +306,7 @@ export default {
 				this.inputProduct.length !== 0 &&
 				this.inputCompany.length !== 0 &&
 				this.inputDosage.length !== 0 &&
-				this.inputCommunication.length !== 0 &&
+				// this.inputCommunication.length !== 0 &&
 				this.inputPerformance.length !== 0
 			) {
 				axios
@@ -323,9 +323,9 @@ export default {
 							', Дозировка: ' +
 							this.inputDosage +
 							', Производительность: ' +
-							this.inputPerformance +
-							', Удобный способ связи: ' +
-							this.inputCommunication,
+							this.inputPerformance
+							// ', Удобный способ связи: ' +
+							// this.inputCommunication,
 					})
 					.then(() => {
 						this.inputCompany = ''
@@ -335,7 +335,7 @@ export default {
 						this.inputProduct = ''
 						this.inputDosage = ''
 						this.inputPerformance = ''
-						this.inputCommunication = ''
+						// this.inputCommunication = ''
 						this.statusSend = 'Заявка успешно отправлена!'
 					})
 					.catch((error) => {

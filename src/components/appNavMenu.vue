@@ -97,7 +97,7 @@
 				@mouseenter="hoverItem = 11"
 				@mouseleave="hoverItem = 0"
 				@click="showModalMenuApplication = true">
-				<img src="../assets/mobile.png" alt="menu-item-img" />
+				<img src="../assets/email.png" alt="menu-item-img" />
 			</a>
 			<a
 				href="https://vk.com/bestrom_official"
@@ -424,10 +424,10 @@
 
 <script>
 import appModalMenuApplication from '../components/appModalMenuApplication.vue'
-import appModalMenuService from '../components/appModalMenuService.vue'
 import appModalMenuContacts from '../components/appModalMenuContacts.vue'
 import appModalMenuContactsCall from '../components/appModalMenuContactsCall.vue'
 import appModalMenuContactsQuestion from '../components/appModalMenuContactsQuestion.vue'
+import appModalMenuService from '../components/appModalMenuService.vue'
 
 export default {
 	name: 'AppNavMenu',

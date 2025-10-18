@@ -118,7 +118,7 @@
 				</a>
 			</div>
 
-			<h3>{{ $store.state.language === 'RU' ? 'Мессенджеры' : 'Messengers' }}</h3>
+			<h3>{{ $store.state.language === 'RU' ? ' Напишите нам' : 'Write to us' }}</h3>
 			<div v-if="content.length > 0" style="border: none" class="social flex-row">
 				<a :href="content.find((e) => e.name === 'whatsapp').text" class="social-logo messenger">
 					<img src="../assets/whatsapp.png" alt="whatsapp" />
@@ -149,9 +149,7 @@
 </template>
 
 <script>
-import { computed } from 'vue'
-import { useMeta } from 'vue-meta'
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
 	name: 'AppModalMenuContacts',

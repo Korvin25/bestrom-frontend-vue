@@ -8,7 +8,7 @@
 			}}
 		</p>
 		<p><a href="tel:+78005557457">+7-800-555-74-57</a></p>
-		<p>{{ $store.state.language === 'RU' ? 'ПРЕСС-ЦЕНТР' : 'PRESS CENTER' }}</p>
+		<!-- <p>{{ $store.state.language === 'RU' ? 'ПРЕСС-ЦЕНТР' : 'PRESS CENTER' }}</p> -->
 	</footer>
 	<!-- /.footer -->
 </template>

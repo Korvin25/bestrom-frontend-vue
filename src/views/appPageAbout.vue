@@ -24,11 +24,30 @@
 					</button>
 				</div>
 				<YouTube
+					v-if="
+						PAGE_ID[0].blocks
+							.find((e) => e.name === 'youtube')
+							.contents[0].text.includes('youtube.com')
+					"
 					ref="youtube"
 					class="video-player"
 					width="100%"
 					height="100%"
 					:src="PAGE_ID[0].blocks.find((e) => e.name === 'youtube').contents[0].text" />
+				<iframe
+					v-else
+					class="video-player"
+					width="100%"
+					height="100%"
+					:src="
+						'https://rutube.ru/play/embed/' +
+						PAGE_ID[0].blocks.find((e) => e.name === 'youtube').contents[0].text
+					"
+					frameborder="0"
+					allow="clipboard-write; autoplay"
+					webkitallowfullscreen
+					mozallowfullscreen
+					allowfullscreen></iframe>
 			</div>
 		</section>
 		<!-- /.section -->
