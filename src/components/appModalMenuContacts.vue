@@ -106,7 +106,7 @@
 			</div>
 
 			<h3>{{ $store.state.language === 'RU' ? 'Социальные сети' : 'Social network' }}</h3>
-			<div v-if="content.length > 0" class="social flex-row">
+			<div v-if="content.length > 0" class="social flex-row"  style="border: none">
 				<a :href="content.find((e) => e.name === 'vk').text" class="social-logo network">
 					<img style="width: 33px" src="../assets/vk.png" alt="menu-item-img" />
 				</a>
@@ -118,7 +118,7 @@
 				</a>
 			</div>
 
-			<h3>{{ $store.state.language === 'RU' ? ' Напишите нам' : 'Write to us' }}</h3>
+			<!-- <h3>{{ $store.state.language === 'RU' ? ' Напишите нам' : 'Write to us' }}</h3>
 			<div v-if="content.length > 0" style="border: none" class="social flex-row">
 				<a :href="content.find((e) => e.name === 'whatsapp').text" class="social-logo messenger">
 					<img src="../assets/whatsapp.png" alt="whatsapp" />
@@ -134,7 +134,7 @@
 					class="social-logo messenger">
 					<img src="../assets/email.png" alt="email" />
 				</a>
-			</div>
+			</div> -->
 
 			<div class="call-buttons flex-row">
 				<button class="btn" @click="$emit('call')">

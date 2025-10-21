@@ -8,7 +8,7 @@
 					v-for="partner in PARTNERS"
 					:key="partner.id"
 					:image="partner.logo"
-					@click="showPartner(partner.alt)"></app-partners-item>
+					@click="showPartner(partner.id)"></app-partners-item>
 			</div>
 		</section>
 
@@ -19,7 +19,7 @@
 					<app-partners-item
 						:image="partner.logo"
 						:alt="partner.alt"
-						@click="showPartner(partner.alt)"></app-partners-item>
+						@click="showPartner(partner.id)"></app-partners-item>
 					<p>{{ partner.name }}</p>
 				</div>
 			</div>
@@ -40,13 +40,13 @@
 </template>
 
 <script>
-import appHeader from '../components/appHeader.vue'
-import appFooter from '../components/appFooter.vue'
-import appPartnersItem from '../components/appPartnersItem.vue'
-import appModalPartnersItem from '../components/appModalPartnersItem.vue'
-import { mapActions, mapGetters, useStore } from 'vuex'
 import { computed } from 'vue'
 import { useMeta } from 'vue-meta'
+import { mapActions, mapGetters, useStore } from 'vuex'
+import appFooter from '../components/appFooter.vue'
+import appHeader from '../components/appHeader.vue'
+import appModalPartnersItem from '../components/appModalPartnersItem.vue'
+import appPartnersItem from '../components/appPartnersItem.vue'
 
 export default {
 	name: 'AppPagePartners',
@@ -107,8 +107,8 @@ export default {
 			GET_PARTNERS: 'partners/GET_PARTNERS',
 			GET_PAGE_ID: 'page/GET_PAGE_ID',
 		}),
-		showPartner(partner) {
-			this.customers = this.PARTNERS.find((e) => e.alt === partner)
+		showPartner(id) {
+			this.customers = this.PARTNERS.find((e) => e.id === id)
 			this.customers.machines = false
 			this.customers.showModal = true
 		},

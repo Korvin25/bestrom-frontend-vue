@@ -264,7 +264,15 @@
 							: 'Krasnogorsk, Ilyinskoe highway, 15'
 					" />
 				<label for="comment">{{ $store.state.language === 'RU' ? 'Комментарий' : 'Comment' }}</label>
-				<div id="comment" class="textarea" contenteditable="true"></div>
+				<textarea
+					id="comment"
+					v-model="inputComment"
+					class="textarea"
+					:placeholder="
+						$store.state.language === 'RU'
+							? 'Комментарий к заказу'
+							: 'Comment on the order'
+					"></textarea>
 				<button class="call btn" @click="sendPostParts">
 					{{ $store.state.language === 'RU' ? 'ОТПРАВИТЬ' : 'SEND' }}
 				</button>
@@ -275,7 +283,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from 'axios';
 
 export default {
 	name: 'AppModalMenuService',
@@ -317,107 +325,62 @@ export default {
 				this.inputModel.length !== 0 &&
 				this.inputSerialNumber.length !== 0
 			) {
-				if (this.radioCatalogSelect === 'Самовывоз') {
-					const formData = new FormData()
-					formData.append('type', 'Заказ запчастей')
-					formData.append('telephone', this.inputTelephone)
-					formData.append('email', this.inputEmail)
-					formData.append('name', this.inputName)
-					formData.append(
-						'other',
-						'Компания: ' +
-							this.inputCompany +
-							', Модель оборудования: ' +
-							this.inputModel +
-							', Заводской номер: ' +
-							this.inputSerialNumber +
-							', Наименование запчастей: ' +
-							this.inputsDetails
-								.map(function (item) {
-									return item.content
-								})
-								.join(' ') +
-							', ' +
-							this.radioCatalogSelect +
-							', Комментарий: ' +
-							this.inputComment,
-					)
-					if (this.inputFile) {
-						formData.append('file', this.inputFile)
-					}
-					
-					axios
-						.post(this.$store.state.server + 'forms/', formData)
-						.then(() => {
-							this.statusSendParts = 'Заявка успешно отправлена!'
-							this.inputCompany = ''
-							this.inputTelephone = ''
-							this.inputName = ''
-							this.inputEmail = ''
-							this.inputFile = ''
-							this.inputModel = ''
-							this.inputSerialNumber = ''
-							this.inputsDetails = []
-							this.inputComment = ''
-						})
-						.catch((error) => {
-							this.statusSend = 'Ошибка отправки заявки! Ошибка: ' + error
-							console.log(error)
-						})
-				} else {
-					if (this.inputAddress.length !== 0) {
-						const formData = new FormData()
-						formData.append('type', 'Заказ запчастей')
-						formData.append('telephone', this.inputTelephone)
-						formData.append('email', this.inputEmail)
-						formData.append('name', this.inputName)
-						formData.append(
-							'other',
-							'Компания: ' +
-								this.inputCompany +
-								', Модель оборудования: ' +
-								this.inputModel +
-								', Заводской номер: ' +
-								this.inputSerialNumber +
-								', Наименование запчастей: ' +
-								this.inputsDetails
-									.map(function (item) {
-										return item.content
-									})
-									.join(' ') +
-								', ' +
-								this.radioCatalogSelect +
-								this.inputAddress +
-								', Комментарий: ' +
-								this.inputComment,
-						)
-						if (this.inputFile) {
-							formData.append('file', this.inputFile)
-						}
-
-						axios
-							.post(this.$store.state.server + 'forms/', formData)
-							.then(() => {
-								this.statusSendParts = 'Заявка успешно отправлена!'
-								this.inputCompany = ''
-								this.inputTelephone = ''
-								this.inputName = ''
-								this.inputEmail = ''
-								this.inputFile = ''
-								this.inputModel = ''
-								this.inputSerialNumber = ''
-								this.inputsDetails = []
-								this.inputAddress = ''
-								this.inputComment = ''
-							})
-							.catch((error) => {
-								this.statusSend = 'Ошибка отправки заявки! Ошибка: ' + error
-								console.log(error)
-							})
-					} else {
-						alert('Введите адрес доставки!')
-					}
+				if (this.radioCatalogSelect === 'Доставка' && this.inputAddress.length === 0) {
+					alert('Введите адрес доставки!')
+					return
 				}
+
+				const formData = new FormData()
+				formData.append('type', 'Заказ запчастей')
+				formData.append('telephone', this.inputTelephone)
+				formData.append('email', this.inputEmail)
+				formData.append('name', this.inputName)
+
+				let other =
+					'Компания: ' +
+					this.inputCompany +
+					', Модель оборудования: ' +
+					this.inputModel +
+					', Заводской номер: ' +
+					this.inputSerialNumber +
+					', Наименование запчастей: ' +
+					this.inputsDetails
+						.map(function (item) {
+							return item.content
+						})
+						.join(' ') +
+					', ' +
+					this.radioCatalogSelect
+				if (this.radioCatalogSelect === 'Доставка') {
+					other += this.inputAddress
+				}
+				other += ', Комментарий: ' + this.inputComment
+
+				formData.append('other', other)
+
+				if (this.inputFile) {
+					formData.append('file', this.inputFile)
+				}
+
+				axios
+					.post(this.$store.state.server + 'forms/', formData)
+					.then(() => {
+						this.statusSendParts = 'Заявка успешно отправлена!'
+						this.inputCompany = ''
+						this.inputTelephone = ''
+						this.inputName = ''
+						this.inputEmail = ''
+						this.inputFile = ''
+						this.inputModel = ''
+						this.inputSerialNumber = ''
+						this.inputsDetails = []
+						this.inputAddress = ''
+						this.inputComment = ''
+					})
+					.catch((error) => {
+						this.statusSend = 'Ошибка отправки заявки! Ошибка: ' + error
+						console.log(error)
+					})
 			} else {
 				alert('Проверьте правильность ввода всех полей!')
 			}
@@ -431,24 +394,27 @@ export default {
 				this.inputModel.length !== 0 &&
 				this.inputDate.length !== 0
 			) {
+				const formData = new FormData()
+				formData.append('type', 'Вызов специалиста')
+				formData.append('telephone', this.inputTelephone)
+				formData.append('email', this.inputEmail)
+				formData.append('name', this.inputName)
+
+				const other =
+					'Компания: ' +
+					this.inputCompany +
+					', Модель оборудования: ' +
+					this.inputModel +
+					', Заводской номер: ' +
+					this.inputSerialNumber +
+					', Вид обслуживания: ' +
+					this.inputServiceType +
+					', Желаемая дата прибытия специалиста: ' +
+					this.inputDate
+				formData.append('other', other)
+
 				axios
-					.post(this.$store.state.server + 'forms/', {
-						type: 'Вызов специалиста',
-						telephone: this.inputTelephone,
-						email: this.inputEmail,
-						name: this.inputName,
-						other:
-							'Компания: ' +
-							this.inputCompany +
-							', Модель оборудования: ' +
-							this.inputModel +
-							', Заводской номер: ' +
-							this.inputSerialNumber +
-							', Вид обслуживания: ' +
-							this.inputServiceType +
-							', Желаемая дата прибытия специалиста: ' +
-							this.inputDate,
-					})
+					.post(this.$store.state.server + 'forms/', formData)
 					.then(() => {
 						this.statusSendSpecialist = 'Заявка успешно отправлена!'
 						this.inputCompany = ''

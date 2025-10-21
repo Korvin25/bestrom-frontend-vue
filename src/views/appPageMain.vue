@@ -95,7 +95,7 @@
 						<app-partners-item
 							:image="partner.logo"
 							:alt="partner.alt"
-							@click="showPartner(partner.alt)"></app-partners-item>
+							@click="showPartner(partner.id)"></app-partners-item>
 					</slide>
 					<template #addons="{ slidesCount }">
 						<navigation v-if="slidesCount > 3" />
@@ -113,7 +113,7 @@
 						<app-partners-item
 							:image="client.logo"
 							:alt="client.alt"
-							@click="showClient(client.alt)"></app-partners-item>
+							@click="showClient(client.id)"></app-partners-item>
 					</slide>
 					<template #addons="{ slidesCount }">
 						<navigation v-if="slidesCount > 3" />
@@ -138,19 +138,19 @@
 </template>
 
 <script>
-import appHeader from '../components/appHeader.vue'
-import appFooter from '../components/appFooter.vue'
-import appPartnersItem from '../components/appPartnersItem.vue'
-import appBlockContent from '../components/appBlockContent.vue'
-import appMainNewsBigItem from '../components/appMainNewsBigItem.vue'
-import appMainNewsSmallItem from '../components/appMainNewsSmallItem.vue'
-import appHiddenItem from '../components/appHiddenItem.vue'
-import appMainNewsMobile from '../components/appMainNewsMobile.vue'
-import appModalPartnersItem from '../components/appModalPartnersItem.vue'
-import { Carousel, Slide, Navigation, Pagination } from 'vue3-carousel'
-import { mapActions, mapGetters, useStore } from 'vuex'
 import { computed } from 'vue'
 import { useMeta } from 'vue-meta'
+import { Carousel, Navigation, Pagination, Slide } from 'vue3-carousel'
+import { mapActions, mapGetters, useStore } from 'vuex'
+import appBlockContent from '../components/appBlockContent.vue'
+import appFooter from '../components/appFooter.vue'
+import appHeader from '../components/appHeader.vue'
+import appHiddenItem from '../components/appHiddenItem.vue'
+import appMainNewsBigItem from '../components/appMainNewsBigItem.vue'
+import appMainNewsMobile from '../components/appMainNewsMobile.vue'
+import appMainNewsSmallItem from '../components/appMainNewsSmallItem.vue'
+import appModalPartnersItem from '../components/appModalPartnersItem.vue'
+import appPartnersItem from '../components/appPartnersItem.vue'
 
 export default {
 	components: {
@@ -253,13 +253,13 @@ export default {
 			this.$router.push({ path: 'catalog', query: { category: category } })
 			window.scrollTo(0, 0)
 		},
-		showClient(client) {
-			this.customers = this.CLIENTS.find((e) => e.alt === client)
+		showClient(id) {
+			this.customers = this.CLIENTS.find((e) => e.id === id)
 			this.customers.machines = true
 			this.customers.showModal = true
 		},
-		showPartner(partner) {
-			this.customers = this.PARTNERS.find((e) => e.alt === partner)
+		showPartner(id) {
+			this.customers = this.PARTNERS.find((e) => e.id === id)
 			this.customers.machines = false
 			this.customers.showModal = true
 		},

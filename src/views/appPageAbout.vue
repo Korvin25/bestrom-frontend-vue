@@ -250,7 +250,7 @@
 						<app-partners-item
 							:alt="client.alt"
 							:image="client.logo"
-							@click="showClient(client.alt)"></app-partners-item>
+							@click="showClient(client.id)"></app-partners-item>
 					</slide>
 					<template #addons="{ slidesCount }">
 						<navigation v-if="slidesCount > 3" />
@@ -426,8 +426,8 @@ export default {
 			this.$router.push('/' + path)
 			window.scrollTo(0, 0)
 		},
-		showClient(client) {
-			this.customers = this.CLIENTS.find((e) => e.alt === client)
+		showClient(id) {
+			this.customers = this.CLIENTS.find((e) => e.id === id)
 			this.customers.machines = true
 			this.customers.showModal = true
 		},

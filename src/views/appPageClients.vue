@@ -9,7 +9,7 @@
 					:key="client.id"
 					:image="client.logo"
 					:alt="client.alt"
-					@click="showClient(client.alt)"></app-partners-item>
+					@click="showClient(client.id)"></app-partners-item>
 			</div>
 		</section>
 
@@ -20,7 +20,7 @@
 					<app-partners-item
 						:image="client.logo"
 						:alt="client.alt"
-						@click="showClient(client.alt)"></app-partners-item>
+						@click="showClient(client.id)"></app-partners-item>
 					<p>{{ client.name }}</p>
 				</div>
 			</div>
@@ -41,13 +41,13 @@
 </template>
 
 <script>
-import appHeader from '../components/appHeader.vue'
-import appFooter from '../components/appFooter.vue'
-import appPartnersItem from '../components/appPartnersItem.vue'
-import appModalPartnersItem from '../components/appModalPartnersItem.vue'
-import { mapActions, mapGetters, useStore } from 'vuex'
 import { computed } from 'vue'
 import { useMeta } from 'vue-meta'
+import { mapActions, mapGetters, useStore } from 'vuex'
+import appFooter from '../components/appFooter.vue'
+import appHeader from '../components/appHeader.vue'
+import appModalPartnersItem from '../components/appModalPartnersItem.vue'
+import appPartnersItem from '../components/appPartnersItem.vue'
 
 export default {
 	name: 'AppPageClients',
@@ -108,8 +108,8 @@ export default {
 			GET_CLIENTS: 'clients/GET_CLIENTS',
 			GET_PAGE_ID: 'page/GET_PAGE_ID',
 		}),
-		showClient(client) {
-			this.customers = this.CLIENTS.find((e) => e.alt === client)
+		showClient(id) {
+			this.customers = this.CLIENTS.find((e) => e.id === id)
 			this.customers.machines = true
 			this.customers.showModal = true
 		},

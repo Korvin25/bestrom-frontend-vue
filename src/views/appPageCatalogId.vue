@@ -111,7 +111,7 @@
 						<app-partners-item
 							:image="client.logo"
 							:alt="client.alt"
-							@click="showClient(client.alt)"></app-partners-item>
+							@click="showClient(client.id)"></app-partners-item>
 					</slide>
 					<template #addons="{ slidesCount }">
 						<navigation v-if="slidesCount > 3" />
@@ -145,22 +145,22 @@
 </template>
 
 <script>
-import appHeader from '../components/appHeader.vue'
-import appFooter from '../components/appFooter.vue'
-import appDetailsSelectSettings from '../components/appDetailsSelectSettings.vue'
-import appDetailsSelectProducts from '../components/appDetailsSelectProducts.vue'
+import { onMounted, watch } from 'vue'
+import { useMeta } from 'vue-meta'
+import { useRoute } from 'vue-router'
+import { Carousel, Navigation, Pagination, Slide } from 'vue3-carousel'
+import { mapActions, mapGetters, useStore } from 'vuex'
 import appDetailsSelectInventory from '../components/appDetailsSelectInventory.vue'
 import appDetailsSelectPacket from '../components/appDetailsSelectPacket.vue'
+import appDetailsSelectProducts from '../components/appDetailsSelectProducts.vue'
+import appDetailsSelectSettings from '../components/appDetailsSelectSettings.vue'
 import appDetailsSelectSolution from '../components/appDetailsSelectSolution.vue'
-import appPartnersItem from '../components/appPartnersItem.vue'
-import appModalCatalogCall from '../components/appModalCatalogCall.vue'
+import appFooter from '../components/appFooter.vue'
+import appHeader from '../components/appHeader.vue'
 import appModalCatalogApplication from '../components/appModalCatalogApplication.vue'
+import appModalCatalogCall from '../components/appModalCatalogCall.vue'
 import appModalPartnersItem from '../components/appModalPartnersItem.vue'
-import { Carousel, Slide, Navigation, Pagination } from 'vue3-carousel'
-import { useRoute } from 'vue-router'
-import { mapActions, mapGetters, useStore } from 'vuex'
-import { computed, onMounted, watch } from 'vue'
-import { useMeta } from 'vue-meta'
+import appPartnersItem from '../components/appPartnersItem.vue'
 
 export default {
 	name: 'AppPageCatalogId',
@@ -326,8 +326,8 @@ export default {
 			GET_CLIENTS: 'clients/GET_CLIENTS',
 			GET_PRODUCT: 'product/GET_PRODUCT',
 		}),
-		showClient(client) {
-			this.customers = this.CLIENTS.find((e) => e.alt === client)
+		showClient(id) {
+			this.customers = this.CLIENTS.find((e) => e.id === id)
 			this.customers.machines = true
 			this.customers.showModal = true
 		},
