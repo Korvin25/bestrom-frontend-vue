@@ -81,17 +81,20 @@
 				<app-details-select-settings
 					v-if="isSelected === 0"
 					:settings="PRODUCT_ID.ProductPropertyValue"></app-details-select-settings>
-				<app-details-select-products
+				<app-details-select-video
 					v-if="isSelected === 1"
+					:videos="PRODUCT_ID.VideoProduct"></app-details-select-video>
+				<app-details-select-products
+					v-if="isSelected === 2"
 					:product-items="PRODUCT_ID.Items"></app-details-select-products>
 				<app-details-select-inventory
-					v-if="isSelected === 2"
+					v-if="isSelected === 3"
 					:equipment="PRODUCT_ID.equipments"></app-details-select-inventory>
 				<app-details-select-packet
-					v-if="isSelected === 3"
+					v-if="isSelected === 4"
 					:packets-items="PRODUCT_ID.Packet" :packetsOptions-items="PRODUCT_ID.PacketsOptions"></app-details-select-packet>
 				<app-details-select-solution
-					v-if="isSelected === 4"
+					v-if="isSelected === 5"
 					:complex-solution="PRODUCT_ID.Solution"></app-details-select-solution>
 			</div>
 			<!-- /.details -->
@@ -155,6 +158,7 @@ import appDetailsSelectPacket from '../components/appDetailsSelectPacket.vue'
 import appDetailsSelectProducts from '../components/appDetailsSelectProducts.vue'
 import appDetailsSelectSettings from '../components/appDetailsSelectSettings.vue'
 import appDetailsSelectSolution from '../components/appDetailsSelectSolution.vue'
+import appDetailsSelectVideo from '../components/appDetailsSelectVideo.vue'
 import appFooter from '../components/appFooter.vue'
 import appHeader from '../components/appHeader.vue'
 import appModalCatalogApplication from '../components/appModalCatalogApplication.vue'
@@ -168,6 +172,7 @@ export default {
 		appHeader,
 		appFooter,
 		appDetailsSelectSettings,
+		appDetailsSelectVideo,
 		appDetailsSelectProducts,
 		appDetailsSelectInventory,
 		appDetailsSelectPacket,
@@ -249,6 +254,12 @@ export default {
 					activeImage: 'catalog-details-settings-active.png',
 					title: 'технические характеристики',
 					title_en: 'specifications',
+				},
+				{
+					disableImage: 'catalog-details-video.png',
+					activeImage: 'catalog-details-video-active.png',
+					title: 'видео',
+					title_en: 'video',
 				},
 				{
 					disableImage: 'catalog-details-products.png',
