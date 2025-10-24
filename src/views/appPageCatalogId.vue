@@ -381,7 +381,7 @@ export default {
 	padding: 0.5rem 1rem;
 	align-items: center;
 	margin: 0 1rem;
-	width: 100px;
+	width: 220px;
 }
 .details-select-item:hover {
 	transition: all 0.5s;
