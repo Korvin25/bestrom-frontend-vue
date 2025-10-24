@@ -383,6 +383,10 @@ export default {
 	margin: 0 1rem;
 	width: 220px;
 }
+.details-select-item img {
+	width: 48px;
+	height: 48px;
+}
 .details-select-item:hover {
 	transition: all 0.5s;
 	background: rgba(0, 0, 0, 0.1);
