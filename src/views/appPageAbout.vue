@@ -185,7 +185,9 @@
 				<slide
 					v-for="slide in PAGE_ID[0].blocks.find((e) => e.name === 'we-create').contents"
 					:key="slide.id">
-					<div class="reason-mobile item-reason card-shadow cursor-pinter" @click="typeSelectFuncAbout(item.name)">
+					<div
+						class="reason-mobile item-reason card-shadow cursor-pinter"
+						@click="typeSelectFuncAbout(slide)">
 						<h5>{{ $store.state.language === 'RU' ? slide.name : slide.name_en }}</h5>
 					</div>
 				</slide>
@@ -196,7 +198,7 @@
 					<div
 						v-for="item in PAGE_ID[0].blocks.find((e) => e.name === 'we-create').contents"
 						:key="item.id"
-						@click="typeSelectFuncAbout(item.name)"
+						@click="typeSelectFuncAbout(item)"
 						class="item-reason card-shadow cursor-pinter">
 						<h5>{{ $store.state.language === 'RU' ? item.name : item.name_en }}</h5>
 					</div>
@@ -432,10 +434,31 @@ export default {
 			}
 		},
 
-		typeSelectFuncAbout(filterName) {
-			const filter = filterName.charAt(0).toUpperCase() + filterName.slice(1).toLowerCase()
-			this.SET_FILTER(filter)  // установка выбранного фильтра в хранилище
-			this.$router.push({ path: '/catalog' })
+		typeSelectFuncAbout(item) {
+			let radioSlug = null;
+			let filterSlug = null;
+
+			// Ищем совпадение по имени в фильтрах
+			for (const category of this.FILTERS) {
+				if (category.Filters) {
+					const foundFilter = category.Filters.find(filter => filter.name === item.name || filter.name_en === item.name_en);
+					if (foundFilter) {
+						radioSlug = category.slug;
+						filterSlug = foundFilter.slug;
+						break;
+					}
+				}
+			}
+
+			if (radioSlug && filterSlug) {
+				this.$router.push({
+					name: 'appPageCatalogType',
+					params: { radioSlug, filterSlug },
+				});
+			} else {
+				// Если ничего не найдено, просто переходим в каталог
+				this.$router.push({ path: '/catalog' });
+			}
 		},
 	},
 }
