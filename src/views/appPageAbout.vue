@@ -102,29 +102,22 @@
 								: PAGE_ID[0].blocks.find((e) => e.name === 'reasons').contents[0].name_en
 						}}
 					</h3>
-					<p class="text-about-content" style="padding: 1rem 0">
-						{{
+					<div
+						class="text-about-content"
+						style="padding: 1rem 0"
+						v-html="
 							$store.state.language === 'RU'
-								? PAGE_ID[0].blocks.find((e) => e.name === 'reasons').contents[0].text.split('/')[0]
+								? PAGE_ID[0].blocks.find((e) => e.name === 'reasons').contents[0].text
 								: PAGE_ID[0].blocks
 										.find((e) => e.name === 'reasons')
-										.contents[0].text_en.split('/')[0]
-						}}
-					</p>
+										.contents[0].text_en
+						"></div>
 					<button
 						class="content-btn btn"
 						@click="
-							routerPush(
-								$store.state.language === 'RU'
-									? PAGE_ID[0].blocks
-											.find((e) => e.name === 'reasons')
-											.contents[0].text.split('/')[1]
-									: PAGE_ID[0].blocks
-											.find((e) => e.name === 'reasons')
-											.contents[0].text_en.split('/')[1]
-							)
+							routerPush('catalog')
 						">
-						{{ $store.state.language === 'RU' ? 'ПОДРОБНЕЕ' : 'READ MORE' }}
+						{{ $store.state.language === 'RU' ? 'КАТАЛОГ' : 'CATALOG' }}
 					</button>
 				</div>
 				<div class="image-content">
