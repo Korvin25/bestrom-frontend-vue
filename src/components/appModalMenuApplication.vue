@@ -538,9 +538,12 @@ export default {
 	margin: 0.5rem 0;
 }
 .call {
-	margin: 2rem 0 1rem 0;
+	margin: 1rem 0 1rem 0;
 	flex-grow: 1;
 	width: 100%;
+}
+.checkbox-container a {
+	color: #2fc1ff;
 }
 .call-method {
 	justify-content: flex-start;

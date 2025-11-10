@@ -19,7 +19,10 @@ export default {
 				clickable: true,
 				dynamicBullets: true,
 				renderBullet: function (index, className) {
-					return '<span class="' + className + '">' + history.value[index].year + '</span>'
+					if (history.value[index]) {
+						return '<span class="' + className + '">' + history.value[index].year + '</span>'
+					}
+					return '<span class="' + className + '"></span>'
 				},
 			},
 			modules: [Pagination, Mousewheel],

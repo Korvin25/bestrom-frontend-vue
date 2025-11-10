@@ -89,6 +89,7 @@
 
 <script>
 import axios from 'axios';
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
 	name: 'AppModalJobRespond',
@@ -108,9 +109,21 @@ export default {
 			inputEmail: '',
 			inputCommunication: '',
 			inputFile: '',
+			agreement: false,
 		}
 	},
+	computed: {
+		...mapGetters({
+			PAGE_ID: 'page/PAGE_ID',
+		}),
+	},
+	mounted() {
+		this.GET_PAGE_ID(1)
+	},
 	methods: {
+		...mapActions({
+			GET_PAGE_ID: 'page/GET_PAGE_ID',
+		}),
 		handleFileUpload() {
 			this.inputFile = this.$refs.file.files[0]
 		},
@@ -171,7 +184,7 @@ export default {
 	margin: 0.5rem 0;
 }
 .call {
-	margin: 2rem 0 1rem 0;
+	margin: 1rem 0 1rem 0;
 	flex-grow: 1;
 	width: 100%;
 }
@@ -201,6 +214,9 @@ export default {
 .send-status {
 	margin: 0;
 	font-weight: normal;
+}
+.checkbox-container {
+	margin-top: 10px;
 }
 .checkbox-container a {
 	color: #2fc1ff;
