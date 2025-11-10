@@ -95,7 +95,7 @@ export default {
 			inputDosage: '',
 			inputPerformance: '',
 			inputComment: '',
-			agreement: false,
+			agreement: true,
 		}
 	},
 	computed: {

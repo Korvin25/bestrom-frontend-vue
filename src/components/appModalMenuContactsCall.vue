@@ -50,7 +50,7 @@ export default {
 			statusSend: '',
 			inputName: '',
 			inputTelephone: '',
-			agreement: false,
+			agreement: true,
 		}
 	},
 	computed: {

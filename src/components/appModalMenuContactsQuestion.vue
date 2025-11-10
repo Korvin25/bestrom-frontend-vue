@@ -61,7 +61,7 @@ export default {
 			inputTelephone: '',
 			inputEmail: '',
 			inputComment: '',
-			agreement: false,
+			agreement: true,
 		}
 	},
 	computed: {

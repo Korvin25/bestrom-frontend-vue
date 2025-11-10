@@ -325,7 +325,7 @@ export default {
 			inputComment: '',
 			inputSerialNumber: '',
 			inputAddress: '',
-			agreement: false,
+			agreement: true,
 			agreementParts: false,
 		}
 	},

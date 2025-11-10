@@ -109,7 +109,7 @@ export default {
 			inputEmail: '',
 			inputCommunication: '',
 			inputFile: '',
-			agreement: false,
+			agreement: true,
 		}
 	},
 	computed: {
