@@ -232,7 +232,7 @@
 			</h2>
 
 			<div class="history-development card-shadow">
-				<appSwiper />
+				<appSwiper :HISTORY="HISTORY" />
 			</div>
 		</section>
 		<!-- /.section -->

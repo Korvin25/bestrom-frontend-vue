@@ -3,24 +3,28 @@ import { Mousewheel, Pagination } from 'swiper'
 import 'swiper/modules/pagination/pagination.scss'
 import 'swiper/swiper.scss'
 import { Swiper, SwiperSlide } from 'swiper/vue/swiper-vue'
-import { ref } from 'vue'
-import { mapActions, mapGetters, useStore } from 'vuex'
-
+import { toRefs } from 'vue'
+import { mapActions, mapGetters } from 'vuex'
 export default {
 	components: {
 		Swiper,
 		SwiperSlide,
 	},
-	setup() {
-		const history = ref(useStore().getters['history/HISTORY'])
-
+	props: {
+		HISTORY: {
+			type: Array,
+			default: () => [],
+		},
+	},
+	setup(props) {
+		const { HISTORY } = toRefs(props)
 		return {
 			pagination: {
 				clickable: true,
 				dynamicBullets: true,
 				renderBullet: function (index, className) {
-					if (history.value[index]) {
-						return '<span class="' + className + '">' + history.value[index].year + '</span>'
+					if (HISTORY.value[index]) {
+						return '<span class="' + className + '">' + HISTORY.value[index].year + '</span>'
 					}
 					return '<span class="' + className + '"></span>'
 				},
