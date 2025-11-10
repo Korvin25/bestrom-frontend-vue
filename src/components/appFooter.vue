@@ -9,8 +9,8 @@
 		</p>
 		<p><a href="tel:+78005557457">+7-800-555-74-57</a></p>
 		<!-- <p>{{ $store.state.language === 'RU' ? 'ПРЕСС-ЦЕНТР' : 'PRESS CENTER' }}</p> -->
-		<p class="politic" v-if="PAGE_ID[0] && PAGE_ID[0].link ">
-			<a :href="PAGE_ID[0].politic_filr" target="_blank">{{
+		<p class="politic" v-if="PAGE_ID[0] && PAGE_ID[0].politic_filr ">
+			<a download :href="PAGE_ID[0].politic_filr" target="_blank">{{
 				$store.state.language === 'RU' ? 'Политика конфиденциальности' : 'Privacy policy'
 			}}</a>
 		</p>

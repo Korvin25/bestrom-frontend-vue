@@ -121,7 +121,7 @@
 					<input type="checkbox" id="agreement" v-model="agreement" />
 					<label for="agreement">
 						{{ $store.state.language === 'RU' ? 'Согласен на ' : 'I agree to the ' }}
-						<a :href="PAGE_ID[0] ? PAGE_ID[0].politic_filr : ''" target="_blank">{{ $store.state.language === 'RU' ? 'обработку персональных данных' : 'processing of personal data' }}</a>
+						<a download :href="PAGE_ID[0] ? PAGE_ID[0].politic_filr : ''" target="_blank">{{ $store.state.language === 'RU' ? 'обработку персональных данных' : 'processing of personal data' }}</a>
 					</label>
 				</div>
 				<button class="call btn" @click="sendPost" :disabled="!agreement">
@@ -258,7 +258,7 @@
 					<input type="checkbox" id="agreementParts" v-model="agreementParts" />
 					<label for="agreementParts">
 						{{ $store.state.language === 'RU' ? 'Согласен на ' : 'I agree to the ' }}
-						<a :href="PAGE_ID[0] ? PAGE_ID[0].politic_filr : ''" target="_blank">{{ $store.state.language === 'RU' ? 'обработку персональных данных' : 'processing of personal data' }}</a>
+						<a download :href="PAGE_ID[0] ? PAGE_ID[0].politic_filr : ''" target="_blank">{{ $store.state.language === 'RU' ? 'обработку персональных данных' : 'processing of personal data' }}</a>
 					</label>
 				</div>
 				<button class="call btn" @click="sendPostParts" :disabled="!agreementParts">
