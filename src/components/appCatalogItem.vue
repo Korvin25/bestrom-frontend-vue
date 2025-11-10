@@ -61,7 +61,7 @@
 										: slide.product_property.name_en
 								}}
 							</h4>
-							<p>{{ $store.state.language === 'RU' ? slide.name : slide.name_en }}</p>
+							<div v-html="$store.state.language === 'RU' ? slide.name : slide.name_en"></div>
 						</div>
 					</slide>
 					<template #addons>
@@ -79,7 +79,7 @@
 </template>
 
 <script>
-import { Carousel, Slide, Pagination } from 'vue3-carousel'
+import { Carousel, Pagination, Slide } from 'vue3-carousel';
 
 export default {
 	name: 'AppCatalogItem',
