@@ -61,7 +61,14 @@
 					:placeholder="$store.state.language === 'RU' ? '60 п/м' : '60 p/m'" />
 				<label for="comment">{{ $store.state.language === 'RU' ? 'Комментарий' : 'Comment' }}</label>
 				<textarea id="comment" v-model="inputComment" rows="5" class="textarea" />
-				<button class="call btn" @click="sendPost">
+				<div class="checkbox-container">
+					<input type="checkbox" id="agreement" v-model="agreement" />
+					<label for="agreement">
+						{{ $store.state.language === 'RU' ? 'Согласен на ' : 'I agree to the ' }}
+						<a :href="PAGE_ID[0] ? PAGE_ID[0].politic_filr : ''" target="_blank">{{ $store.state.language === 'RU' ? 'обработку персональных данных' : 'processing of personal data' }}</a>
+					</label>
+				</div>
+				<button class="call btn" @click="sendPost" :disabled="!agreement">
 					{{ $store.state.language === 'RU' ? 'ОТПРАВИТЬ' : 'TO SEND' }}
 				</button>
 				<h4 v-if="statusSend.length > 0" class="send-status">{{ statusSend }}</h4>
@@ -71,7 +78,8 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from 'axios';
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
 	name: 'AppModalCuttingPickUp',
@@ -87,9 +95,21 @@ export default {
 			inputDosage: '',
 			inputPerformance: '',
 			inputComment: '',
+			agreement: false,
 		}
 	},
+	computed: {
+		...mapGetters({
+			PAGE_ID: 'page/PAGE_ID',
+		}),
+	},
+	mounted() {
+		this.GET_PAGE_ID(1)
+	},
 	methods: {
+		...mapActions({
+			GET_PAGE_ID: 'page/GET_PAGE_ID',
+		}),
 		sendPost() {
 			if (
 				(this.inputTelephone.length > 10 ||
@@ -159,8 +179,8 @@ export default {
 	flex-grow: 1;
 	width: 100%;
 }
-.call.btn {
-	margin: 0;
+.checkbox-container a {
+	color: #2fc1ff;
 }
 @media (max-width: 980px) {
 	h2 {

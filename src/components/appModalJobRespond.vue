@@ -71,8 +71,15 @@
 				</div>
 				<p>{{ $store.state.language === 'RU' ? 'Прикрепить резюме' : 'Attach resume' }}</p>
 				<input id="file" ref="file" type="file" name="file" @change="handleFileUpload" />
-				<button class="call btn" @click="sendPost">
-					{{ $store.state.language === 'RU' ? 'ЗАКАЗАТЬ ЗВОНОК' : 'REQUEST A CALL' }}
+				<div class="checkbox-container">
+					<input type="checkbox" id="agreement" v-model="agreement" />
+					<label for="agreement">
+						{{ $store.state.language === 'RU' ? 'Согласен на ' : 'I agree to the ' }}
+						<a :href="PAGE_ID[0] ? PAGE_ID[0].politic_filr : ''" target="_blank">{{ $store.state.language === 'RU' ? 'обработку персональных данных' : 'processing of personal data' }}</a>
+					</label>
+				</div>
+				<button class="call btn" @click="sendPost" :disabled="!agreement">
+					{{ $store.state.language === 'RU' ? 'Откликнуться' : 'Respond' }}
 				</button>
 				<h4 v-if="statusSend.length > 0" class="send-status">{{ statusSend }}</h4>
 			</section>
@@ -81,7 +88,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from 'axios';
 
 export default {
 	name: 'AppModalJobRespond',
@@ -194,6 +201,9 @@ export default {
 .send-status {
 	margin: 0;
 	font-weight: normal;
+}
+.checkbox-container a {
+	color: #2fc1ff;
 }
 @media (max-width: 980px) {
 	h2 {

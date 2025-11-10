@@ -139,7 +139,14 @@
 					type="text"
 					class="input"
 					:placeholder="$store.state.language === 'RU' ? 'Сегодня' : 'Today'" />
-				<button class="call btn" @click="sendPostSpecialist">
+				<div class="checkbox-container">
+					<input type="checkbox" id="agreement" v-model="agreement" />
+					<label for="agreement">
+						{{ $store.state.language === 'RU' ? 'Согласен на ' : 'I agree to the ' }}
+						<a :href="PAGE_ID[0] ? PAGE_ID[0].politic_filr : ''" target="_blank">{{ $store.state.language === 'RU' ? 'обработку персональных данных' : 'processing of personal data' }}</a>
+					</label>
+				</div>
+				<button class="call btn" @click="sendPostSpecialist" :disabled="!agreement">
 					{{ $store.state.language === 'RU' ? 'ОТПРАВИТЬ' : 'SEND' }}
 				</button>
 				<h4 v-if="statusSendSpecialist.length > 0" class="send-status">{{ statusSendSpecialist }}</h4>
@@ -273,7 +280,14 @@
 							? 'Комментарий к заказу'
 							: 'Comment on the order'
 					"></textarea>
-				<button class="call btn" @click="sendPostParts">
+				<div class="checkbox-container">
+					<input type="checkbox" id="agreementParts" v-model="agreementParts" />
+					<label for="agreementParts">
+						{{ $store.state.language === 'RU' ? 'Согласен на ' : 'I agree to the ' }}
+						<a :href="PAGE_ID[0] ? PAGE_ID[0].politic_filr : ''" target="_blank">{{ $store.state.language === 'RU' ? 'обработку персональных данных' : 'processing of personal data' }}</a>
+					</label>
+				</div>
+				<button class="call btn" @click="sendPostParts" :disabled="!agreementParts">
 					{{ $store.state.language === 'RU' ? 'ОТПРАВИТЬ' : 'SEND' }}
 				</button>
 				<h4 v-if="statusSendParts.length > 0" class="send-status">{{ statusSendParts }}</h4>
@@ -284,6 +298,7 @@
 
 <script>
 import axios from 'axios';
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
 	name: 'AppModalMenuService',
@@ -310,9 +325,22 @@ export default {
 			inputComment: '',
 			inputSerialNumber: '',
 			inputAddress: '',
+			agreement: false,
+			agreementParts: false,
 		}
 	},
+	computed: {
+		...mapGetters({
+			PAGE_ID: 'page/PAGE_ID',
+		}),
+	},
+	mounted() {
+		this.GET_PAGE_ID(1)
+	},
 	methods: {
+		...mapActions({
+			GET_PAGE_ID: 'page/GET_PAGE_ID',
+		}),
 		handleFileUpload() {
 			this.inputFile = this.$refs.file.files[0]
 		},
@@ -647,6 +675,9 @@ export default {
 	color: #ffffff;
 }
 
+.checkbox-container a {
+	color: #2fc1ff;
+}
 @media (max-width: 980px) {
 	h2 {
 		align-self: center;

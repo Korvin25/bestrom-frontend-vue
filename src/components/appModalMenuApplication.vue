@@ -117,7 +117,14 @@
 						<img src="../assets/mobile.png" alt="menu-item-img" />
 					</div>
 				</div> -->
-				<button class="call btn" @click="sendPost">
+				<div class="checkbox-container">
+					<input type="checkbox" id="agreement" v-model="agreement" />
+					<label for="agreement">
+						{{ $store.state.language === 'RU' ? 'Согласен на ' : 'I agree to the ' }}
+						<a :href="PAGE_ID[0] ? PAGE_ID[0].politic_filr : ''" target="_blank">{{ $store.state.language === 'RU' ? 'обработку персональных данных' : 'processing of personal data' }}</a>
+					</label>
+				</div>
+				<button class="call btn" @click="sendPost" :disabled="!agreement">
 					{{ $store.state.language === 'RU' ? 'ОТПРАВИТЬ ЗАЯВКУ' : 'SEND AN APPLICATION' }}
 				</button>
 				<h4 v-if="statusSend.length > 0" class="send-status">{{ statusSend }}</h4>
@@ -247,7 +254,14 @@
 					v-model="inputComment"
 					class="textarea"
 					contenteditable="true"></textarea>
-				<button class="call btn" @click="sendPostParts">
+				<div class="checkbox-container">
+					<input type="checkbox" id="agreementParts" v-model="agreementParts" />
+					<label for="agreementParts">
+						{{ $store.state.language === 'RU' ? 'Согласен на ' : 'I agree to the ' }}
+						<a :href="PAGE_ID[0] ? PAGE_ID[0].politic_filr : ''" target="_blank">{{ $store.state.language === 'RU' ? 'обработку персональных данных' : 'processing of personal data' }}</a>
+					</label>
+				</div>
+				<button class="call btn" @click="sendPostParts" :disabled="!agreementParts">
 					{{ $store.state.language === 'RU' ? 'ОТПРАВИТЬ' : 'SEND' }}
 				</button>
 				<h4 v-if="statusSendParts.length > 0" class="send-status">{{ statusSendParts }}</h4>
@@ -258,6 +272,7 @@
 
 <script>
 import axios from 'axios';
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
 	name: 'AppModalMenuApplication',
@@ -291,10 +306,23 @@ export default {
 			inputModelParts: '',
 			inputSerialNumberParts: '',
 			inputAddress: '',
-			inputComment: ''
+			inputComment: '',
+			agreement: false,
+			agreementParts: false,
 		}
 	},
+	computed: {
+		...mapGetters({
+			PAGE_ID: 'page/PAGE_ID',
+		}),
+	},
+	mounted() {
+		this.GET_PAGE_ID(1)
+	},
 	methods: {
+		...mapActions({
+			GET_PAGE_ID: 'page/GET_PAGE_ID',
+		}),
 		handleFileUpload() {
 			this.inputFile = this.$refs.file.files[0]
 		},
