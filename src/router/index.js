@@ -12,8 +12,9 @@ import appPageMain from '../views/appPageMain'
 import appPageNews from '../views/appPageNews'
 import appPageNewsId from '../views/appPageNewsId'
 import appPagePartners from '../views/appPagePartners'
-import appPageUniqueCutting from '../views/appPageUniqueCutting'
+import appPagePolitic from '../views/appPagePolitic'
 import appPageResultCutting from '../views/appPageResultCutting'
+import appPageUniqueCutting from '../views/appPageUniqueCutting'
 
 
 export default createRouter({
@@ -87,6 +88,11 @@ export default createRouter({
 			component: appPageCatalog,
 		},
 		{
+			path: '/politic',
+			name: 'appPagePolitic',
+			component: appPagePolitic,
+		},
+		{
 			path: '/catalog/type/:radioSlug/:filterSlug',
 			name: 'appPageCatalogType',
 			component: appPageCatalog,
@@ -102,13 +108,13 @@ export default createRouter({
 			component: appPage404,
 		},
 		{
-            path: '/service/raskroy-paketov/',
-            redirect: '/cutting',
-        },
+			path: '/service/raskroy-paketov/',
+			redirect: '/cutting',
+		},
 		{
-            path: '/service/3/',
-            redirect: '/catalog',
-        },
+			path: '/service/3/',
+			redirect: '/catalog',
+		},
 		{
 			path: '/:pathMatch(.*)*',
 			redirect: '/404',
