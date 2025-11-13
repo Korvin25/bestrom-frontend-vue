@@ -11,7 +11,7 @@
 		<!-- <p>{{ $store.state.language === 'RU' ? 'ПРЕСС-ЦЕНТР' : 'PRESS CENTER' }}</p> -->
 		<p class="politic">
 			<a href="/politic" target="_blank">
-				{{ $store.state.language === 'RU' ? 'обработку персональных данных' : 'processing of personal data' }}
+				{{ $store.state.language === 'RU' ? 'Политика конфиденциальности' : 'Privacy policy' }}
 			</a>
 		</p>
 	</footer>
