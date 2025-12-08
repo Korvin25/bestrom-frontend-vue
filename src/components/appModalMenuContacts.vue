@@ -82,6 +82,14 @@
 						<h5>E-mail:</h5>
 						<p>{{ content.find((e) => e.name === 'E-mail').text }}</p>
 					</div>
+					<div>
+						<h5>{{ $store.state.language === 'RU' ? 'Реквизиты' : 'Requisites' }}:</h5>
+						<p>
+							<a href="/requisites" target="_blank">
+								{{ $store.state.language === 'RU' ? 'Посмотреть реквизиты' : 'View Requisites' }}
+							</a>
+						</p>
+					</div>
 				</div>
 			</div>
 

@@ -3,10 +3,16 @@
 		<p>
 			{{
 				$store.state.language === 'RU'
-					? '© ЗАО "Бестром" 2021, упаковочное оборудование'
-					: '© ZAO "Bestrom" 2021, packaging equipment'
+					? `© ЗАО "Бестром" ${new Date().getFullYear()}, упаковочное оборудование`
+					: `© ZAO "Bestrom" ${new Date().getFullYear()}, packaging equipment`
 			}}
 		</p>
+		<p>
+			<a href="/requisites" target="_blank">
+				{{ $store.state.language === 'RU' ? 'Реквизиты организации' : 'Organization Requisites' }}
+			</a>
+		</p>
+		
 		<p><a href="tel:+78005557457">+7-800-555-74-57</a></p>
 		<!-- <p>{{ $store.state.language === 'RU' ? 'ПРЕСС-ЦЕНТР' : 'PRESS CENTER' }}</p> -->
 		<p class="politic">
@@ -48,3 +54,4 @@ export default {
 	}
 }
 </style>
+

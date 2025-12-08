@@ -13,6 +13,7 @@ import appPageNews from '../views/appPageNews'
 import appPageNewsId from '../views/appPageNewsId'
 import appPagePartners from '../views/appPagePartners'
 import appPagePolitic from '../views/appPagePolitic'
+import appPageRequisites from '../views/appPageRequisites'
 import appPageResultCutting from '../views/appPageResultCutting'
 import appPageUniqueCutting from '../views/appPageUniqueCutting'
 
@@ -91,6 +92,11 @@ export default createRouter({
 			path: '/politic',
 			name: 'appPagePolitic',
 			component: appPagePolitic,
+		},
+		{
+			path: '/requisites',
+			name: 'appPageRequisites',
+			component: appPageRequisites,
 		},
 		{
 			path: '/catalog/type/:radioSlug/:filterSlug',
