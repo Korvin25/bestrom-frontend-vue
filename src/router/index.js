@@ -99,7 +99,7 @@ export default createRouter({
 			component: appPageRequisites,
 		},
 		{
-			path: '/catalog/type/:radioSlug/:filterSlug',
+			path: '/catalog/type/:radioSlug/:filterSlug?',
 			name: 'appPageCatalogType',
 			component: appPageCatalog,
 		},
@@ -120,6 +120,22 @@ export default createRouter({
 		{
 			path: '/service/3/',
 			redirect: '/catalog',
+		},
+		{
+			path: '/product/:pathMatch(.*)*',
+			redirect: '/catalog'
+		},
+		{
+			path: '/by_package/:pathMatch(.*)*',
+			redirect: '/catalog/type/podbor-po-tipu-upakovki/'
+		},
+		{
+			path: '/by_product/:pathMatch(.*)*',
+			redirect: '/catalog/type/podbor-po-tipu-produkta/'
+		},
+		{
+			path: '/by_type/:pathMatch(.*)*',
+			redirect: '/catalog/type/podbor-po-tipu-mashiny/'
 		},
 		{
 			path: '/:pathMatch(.*)*',

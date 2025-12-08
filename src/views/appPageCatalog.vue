@@ -12,8 +12,7 @@
 							name="radio-choice"
 							type="radio"
 							:value="category.slug"
-							:checked="radioCatalogSelect === category.slug" 
-							@click="typeRadioFunc()"/>
+							@change="typeRadioFunc(category.slug)"/>
 						<label :for="category.id">{{
 							$store.state.language === 'RU' ? category.name : category.name_en
 						}}</label>
@@ -199,9 +198,9 @@
 
 <script>
 import axios from 'axios'
-import { computed, watch, ref } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
+import { ref, watch } from 'vue'
 import { useMeta } from 'vue-meta'
+import { useRoute } from 'vue-router'
 import { Carousel, Slide } from 'vue3-carousel'
 import { mapActions, mapGetters, useStore } from 'vuex'
 import appCatalogItem from '../components/appCatalogItem.vue'
@@ -225,6 +224,7 @@ export default {
 	
 	const radioCatalogSelect = ref(route.params.radioSlug || 'podbor-po-tipu-mashiny')
 	const filterSlugSelect = ref(route.params.filterSlug || '')
+	radioCatalogSelect.value = route.params.radioSlug || 'podbor-po-tipu-mashiny'
 
 	// Инициализация с дефолтными значениями
 	const { meta } = useMeta({
@@ -331,25 +331,25 @@ export default {
       return 0
     },
     computedProducts() {
-		let tempProduct = this.PRODUCT.slice();
-		
-		if (this.filterSlugSelect !== '') {
-			tempProduct = tempProduct.filter(product => {
+  let tempProduct = this.PRODUCT.slice();
+  
+  if (this.filterSlugSelect && this.filterSlugSelect !== 'all') {
+   tempProduct = tempProduct.filter(product => {
 
-			if (product.category_filters && Array.isArray(product.category_filters)) {
-				// Ищем совпадение slug с filterSlugSelect
-				const hasMatch = product.category_filters.some(
-					filter => filter.slug === this.filterSlugSelect
-				);
-				
-				if (hasMatch) {
-					return true;
-				}
-			}
+   if (product.category_filters && Array.isArray(product.category_filters)) {
+    // Ищем совпадение slug с filterSlugSelect
+    const hasMatch = product.category_filters.some(
+    	filter => filter.slug === this.filterSlugSelect
+    );
+    
+    if (hasMatch) {
+    	return true;
+    }
+   }
 
-			return false;
-			});
-		}
+   return false;
+   });
+  }
 		
 		this.notProducts = tempProduct.length === 0;
 		return tempProduct;
@@ -446,9 +446,9 @@ export default {
       }
       this.$router.push(`/catalog/type/${radio.slug}/${filterSlug}`);
     },
-    typeRadioFunc() {
-      this.$router.push(`/catalog`)
-	  this.filterSlugSelect = ''; // Сбрасываем фильтр
+    typeRadioFunc(slug) {
+      this.$router.push(`/catalog/type/${slug}`)
+   this.filterSlugSelect = ''; // Сбрасываем фильтр
       // Обновляем метаданные при сбросе фильтров
       if (this.PAGE_ID.length > 0) {
         this.updateMeta(this.PAGE_ID[0])
