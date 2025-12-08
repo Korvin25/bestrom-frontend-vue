@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import appSitemap from '../components/appSitemap'
 import appPage404 from '../views/appPage404'
 import appPageAbout from '../views/appPageAbout'
 import appPageAboutHistory from '../views/appPageAboutHistory'
@@ -16,7 +17,6 @@ import appPagePolitic from '../views/appPagePolitic'
 import appPageRequisites from '../views/appPageRequisites'
 import appPageResultCutting from '../views/appPageResultCutting'
 import appPageUniqueCutting from '../views/appPageUniqueCutting'
-
 
 export default createRouter({
 	mode: 'history',
@@ -97,6 +97,11 @@ export default createRouter({
 			path: '/requisites',
 			name: 'appPageRequisites',
 			component: appPageRequisites,
+		},
+		{
+			path: '/sitemap',
+			name: 'appSitemap',
+			component: appSitemap,
 		},
 		{
 			path: '/catalog/type/:radioSlug/:filterSlug?',
