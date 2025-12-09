@@ -4,7 +4,7 @@
 			<h4>{{ title }}</h4>
 			<p class="text-about-content" v-html="text"></p>
 		</div>
-		<img class="news-item-big-image" :src="image" alt="news image" />
+		<img class="news-item-big-image" :src="'https://bestrom.ru/' + image" alt="news image" />
 		<div class="hidden-item">
 			<div class="hidden-text">
 				<img src="../assets/eye.png" alt="show eye" />
@@ -53,7 +53,7 @@ export default {
 }
 .news-item-big-image {
 	max-width: 100%;
-	max-height: 10rem;
+	max-height: 15rem;
 }
 .hidden-item img {
 	max-width: 398px;
@@ -92,3 +92,4 @@ export default {
 	height: 100%;
 }
 </style>
+
