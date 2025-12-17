@@ -1,6 +1,6 @@
 <template>
 	<div class="details-select-packet flex-row">
-		<div v-for="item in filteredPacketsItems" :key="item.id" class="details-select-packet-item card-shadow">
+		<div v-for="item in packetsItems" :key="item.id" class="details-select-packet-item card-shadow">
 			<h4>{{ $store.state.language === 'RU' ? item.name : item.name_en }}</h4>
 			<img :src="$store.state.server_media.slice(0, -1) + item.img" :alt="item.alt" />
 			<!-- <app-hidden-item
@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import appHiddenItem from '../components/appHiddenItem.vue'
+import appHiddenItem from '../components/appHiddenItem.vue';
 
 export default {
 	name: 'AppDetailsSelectPacket',
