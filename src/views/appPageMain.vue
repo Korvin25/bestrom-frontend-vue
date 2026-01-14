@@ -2,6 +2,39 @@
 	<app-header></app-header>
 	<main v-if="PAGE_ID.length > 0" class="main-content flex-column">
 		<section class="section">
+			<h2 class="desktop-section">
+				{{
+					$store.state.language === 'RU'
+						? 'Деятельность компании БЕСТРОМ'
+						: 'Activities of the company BESTROM'
+				}}
+			</h2>
+			<h2 class="mobile-section">
+				{{ $store.state.language === 'RU' ? 'Деятельность компании' : 'Activities of the company' }}
+			</h2>
+			<div
+				v-if="PAGE_ID[0].blocks.find((e) => e.name === 'activity')"
+				class="main-slider-content card-shadow">
+				<carousel :items-to-show="1" :snap-align="'start'" :wrap-around="true">
+					<slide
+						v-for="content in PAGE_ID[0].blocks.find((e) => e.name === 'activity').contents"
+						:key="content.id">
+						<app-block-content
+							:id="content.id"
+							:title="$store.state.language === 'RU' ? content.name : content.name_en"
+							:text="$store.state.language === 'RU' ? content.text : content.text_en"
+							:image="content.file"></app-block-content>
+					</slide>
+					<template #addons="{ slidesCount }">
+						<navigation v-if="slidesCount > 1" />
+						<pagination v-if="slidesCount > 1" />
+					</template>
+				</carousel>
+			</div>
+		</section>
+		<!-- /.section -->
+		 
+		<section class="section">
 			<h2 v-if="TITLE_NEWS.length !== 0">{{ $store.state.language === 'RU' ? 'Новости' : 'News' }}</h2>
 			<h2 v-else>{{ $store.state.language === 'RU' ? 'Новостей нет' : 'No news' }}</h2>
 
@@ -34,39 +67,6 @@
 			</div>
 		</section>
 		
-		<section class="section">
-			<h2 class="desktop-section">
-				{{
-					$store.state.language === 'RU'
-						? 'Деятельность компании БЕСТРОМ'
-						: 'Activities of the company BESTROM'
-				}}
-			</h2>
-			<h2 class="mobile-section">
-				{{ $store.state.language === 'RU' ? 'Деятельность компании' : 'Activities of the company' }}
-			</h2>
-			<div
-				v-if="PAGE_ID[0].blocks.find((e) => e.name === 'activity')"
-				class="main-slider-content card-shadow">
-				<carousel :items-to-show="1" :snap-align="'start'" :wrap-around="true">
-					<slide
-						v-for="content in PAGE_ID[0].blocks.find((e) => e.name === 'activity').contents"
-						:key="content.id">
-						<app-block-content
-							:id="content.id"
-							:title="$store.state.language === 'RU' ? content.name : content.name_en"
-							:text="$store.state.language === 'RU' ? content.text : content.text_en"
-							:image="content.file"></app-block-content>
-					</slide>
-					<template #addons="{ slidesCount }">
-						<navigation v-if="slidesCount > 1" />
-						<pagination v-if="slidesCount > 1" />
-					</template>
-				</carousel>
-			</div>
-		</section>
-		<!-- /.section -->
-
 		<section class="section">
 			<h2>{{ $store.state.language === 'RU' ? 'Подбор оборудования' : 'Equipment selection' }}</h2>
 			<div v-if="FILTERS.length > 0" class="inventory-mobile flex-row">
