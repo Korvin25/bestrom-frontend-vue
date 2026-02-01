@@ -1,0 +1,34 @@
+<template>
+	<div v-if="page" class="page-base">
+		<section class="hero card-shadow">
+			<h2>{{ language === 'RU' ? page.title : page.title_en || page.title }}</h2>
+			<p>{{ language === 'RU' ? page.description : page.description_en || page.description }}</p>
+		</section>
+		<PageBlocks v-if="page.blocks?.length" :blocks="page.blocks" :language="language" :media-base="mediaBase" />
+	</div>
+</template>
+
+<script setup lang="ts" async>
+import { storeToRefs } from 'pinia'
+import { useAppStore } from '~/stores/app'
+import { useSeoFromPage } from '~/composables/useSeoFromPage'
+
+const props = defineProps<{ pageId: number }>()
+
+const appStore = useAppStore()
+const { language, serverMedia } = storeToRefs(appStore)
+const config = useRuntimeConfig()
+
+const { data: pageData } = await useFetch(`${config.public.apiBase}page/${props.pageId}/`)
+const page = computed(() => (pageData.value?.length ? pageData.value[0] : null))
+useSeoFromPage(page, language)
+
+const mediaBase = computed(() => serverMedia.value || config.public.mediaBase)
+</script>
+
+<style scoped>
+.hero {
+	padding: 2rem;
+	margin-bottom: 2rem;
+}
+</style>
