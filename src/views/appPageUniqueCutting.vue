@@ -38,17 +38,17 @@
 
 						<div class="card-shadow card-shadow_input">{{ $store.state.language === 'RU' ? 'Ширина шва (S):': 'Seam width (S):' }}<br>
 							<div class="packet-size-input packet-size-input_mobile">
-								<label for="w_sh1">15{{ $store.state.language === 'RU' ? 'мм' : 'mm' }}<br>
-									<input id="w_sh1" type="radio" name="w_sh" value="15">
-								</label>
-								<label for="w_sh2">20{{ $store.state.language === 'RU' ? 'мм' : 'mm' }}<br>
-									<input id="w_sh2" type="radio" name="w_sh" value="20" checked>
-								</label>
-								<label for="w_sh3">25{{ $store.state.language === 'RU' ? 'мм' : 'mm' }}<br>
-									<input id="w_sh3" type="radio" name="w_sh" value="25">
-								</label>
-									<label for="w_sh4">30{{ $store.state.language === 'RU' ? 'мм' : 'mm' }}<br>
-									<input id="w_sh4" type="radio" name="w_sh" value="30">
+								<label
+									v-for="(option, index) in seamWidthOptions"
+									:key="option.value"
+									:for="`w_sh${index + 1}`">
+									{{ $store.state.language === 'RU' ? option.labelRu : option.labelEn }}{{ $store.state.language === 'RU' ? 'мм' : 'mm' }}<br>
+									<input
+										:id="`w_sh${index + 1}`"
+										type="radio"
+										name="w_sh"
+										:value="option.value"
+										:checked="option.value === defaultSeamWidth">
 								</label>
 							</div>
 						</div>
@@ -156,6 +156,7 @@ export default {
 			optionCheckType: true,
 			d_pak: 50,
 			w_pak: 100,
+			defaultSeamWidth: '20',
 		}
 	},
 	computed: {
@@ -164,6 +165,26 @@ export default {
 			PACKETS: 'packets/PACKETS',
 			PACKETS_SEAMS: 'packets/PACKETS_SEAMS',
 		}),
+		seamWidthOptions() {
+			const checkSeam = String(this.$route.params?.checkSeam || '').toLowerCase()
+			const isPlPr = ['pl', 'pr'].includes(checkSeam)
+
+			if (isPlPr) {
+				return [
+					{ value: '12.5', labelRu: '12,5', labelEn: '12.5' },
+					{ value: '15', labelRu: '15', labelEn: '15' },
+					{ value: '20', labelRu: '20', labelEn: '20' },
+					{ value: '25', labelRu: '25', labelEn: '25' },
+				]
+			}
+
+			return [
+				{ value: '15', labelRu: '15', labelEn: '15' },
+				{ value: '20', labelRu: '20', labelEn: '20' },
+				{ value: '25', labelRu: '25', labelEn: '25' },
+				{ value: '30', labelRu: '30', labelEn: '30' },
+			]
+		},
 	},
 	mounted() {
 		this.GET_PAGE_ID(5)
