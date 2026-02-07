@@ -63,12 +63,11 @@
 							{{ $store.state.language === 'RU' ? 'от 60мм до 600мм' : 'from 60mm to 600mm' }}
 						</div>
 						<div class="card-shadow card-shadow_input">
-							{{ $store.state.language === 'RU' ? 'Рекомендуемая ширина шва' : 'Recommended seam width' }}<br> 
-							{{ $store.state.language === 'RU' ? 'для форматов до F100 - 15мм' : 'for formats up to F100 - 15mm' }},<br>
-							{{ $store.state.language === 'RU' ? 'с F100 до F220 - 20мм' : 'from F100 to F220 - 20mm' }},<br>
-							{{ $store.state.language === 'RU' ? 'с F220 до F280 - 25мм' : 'from F220 to F280 - 25мм' }},<br> 
-							{{ $store.state.language === 'RU' ? 'с F280 и больше - 30мм' : 'with F280 and more - 30mm' }}
-						</div>
+						{{ recommendedSeamText.title }}<br>
+						<span v-for="(range, index) in recommendedSeamText.ranges" :key="index">
+							{{ $store.state.language === 'RU' ? range.ru : range.en }}<span v-if="index < recommendedSeamText.ranges.length - 1">,</span><br>
+						</span>
+					</div>
 					</div>
 					<div v-if="optionCheckType" class="card-shadow card-shadow_input result">
 						<span>B = <span :class="d_pak <= 110 ? 'blue' : 'red'">{{ d_pak }}</span></span>
@@ -98,13 +97,13 @@
 </template>
 
 <script>
-import appHeader from '../components/appHeader.vue'
-import appFooter from '../components/appFooter.vue'
-import appMachinesItem from '../components/appMachinesItem.vue'
-import { mapActions, mapGetters, useStore } from 'vuex'
-import { Carousel, Slide, Navigation, Pagination } from 'vue3-carousel'
 import { computed } from 'vue'
 import { useMeta } from 'vue-meta'
+import { Carousel, Navigation, Pagination, Slide } from 'vue3-carousel'
+import { mapActions, mapGetters, useStore } from 'vuex'
+import appFooter from '../components/appFooter.vue'
+import appHeader from '../components/appHeader.vue'
+import appMachinesItem from '../components/appMachinesItem.vue'
 
 export default {
 	name: 'AppPageUniqueCutting',
@@ -184,6 +183,36 @@ export default {
 				{ value: '25', labelRu: '25', labelEn: '25' },
 				{ value: '30', labelRu: '30', labelEn: '30' },
 			]
+		},
+		// Текст рекомендаций в зависимости от типа шва
+		recommendedSeamText() {
+			const checkSeam = String(this.$route.params?.checkSeam || '').toLowerCase()
+			const isPlPr = ['pl', 'pr'].includes(checkSeam)
+			const lang = this.$store.state.language
+			
+			if (isPlPr) {
+				// Для pl/pr швов
+				return {
+					title: lang === 'RU' ? 'Рекомендуемая ширина шва' : 'Recommended seam width',
+					ranges: [
+						{ ru: 'для форматов до F100 - 12,5мм', en: 'for formats up to F100 - 12.5mm' },
+						{ ru: 'с F100 до F220 - 15мм', en: 'from F100 to F220 - 15mm' },
+						{ ru: 'с F220 до F280 - 20мм', en: 'from F220 to F280 - 20mm' },
+						{ ru: 'с F280 и больше - 25мм', en: 'with F280 and more - 25mm' }
+					]
+				}
+			}
+			
+			// Для остальных швов
+			return {
+				title: lang === 'RU' ? 'Рекомендуемая ширина шва' : 'Recommended seam width',
+				ranges: [
+					{ ru: 'для форматов до F100 - 15мм', en: 'for formats up to F100 - 15mm' },
+					{ ru: 'с F100 до F220 - 20мм', en: 'from F100 to F220 - 20mm' },
+					{ ru: 'с F220 до F280 - 25мм', en: 'from F220 to F280 - 25mm' },
+					{ ru: 'с F280 и больше - 30мм', en: 'with F280 and more - 30mm' }
+				]
+			}
 		},
 	},
 	mounted() {
