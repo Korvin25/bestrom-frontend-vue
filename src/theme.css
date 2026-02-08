@@ -18,6 +18,7 @@ body {
 	flex-direction: column;
 	justify-content: center;
 }
+
 .flex-row {
 	display: flex;
 	flex-direction: row;
@@ -90,13 +91,16 @@ h5 {
 	font-feature-settings: 'tnum' on, 'lnum' on;
 	color: #ffffff;
 }
+
 .btn:hover {
 	cursor: pointer;
 	background: rgba(47, 193, 255, 0.85);
 }
+
 .btn:active {
 	box-shadow: inset 1px 1px 1px rgba(0, 0, 0, 0.3);
 }
+
 .btn:disabled {
 	background: #b8b8b8;
 }
@@ -125,6 +129,7 @@ h5 {
 	outline: rgba(47, 193, 255, 0.82) solid 0.2rem;
 	border-radius: 6px;
 }
+
 .input::placeholder,
 .textarea::placeholder {
 	color: #c4c4c4;
@@ -136,13 +141,16 @@ h5 {
 .modal-enter-active {
 	animation: modal-in 0.4s;
 }
+
 .modal-leave-active {
 	animation: modal-in 0.4s reverse;
 }
+
 @keyframes modal-in {
 	0% {
 		opacity: 0;
 	}
+
 	100% {
 		opacity: 1;
 	}
@@ -160,6 +168,7 @@ h5 {
 	justify-content: center;
 	align-items: center;
 }
+
 .close {
 	display: flex;
 	justify-content: center;
@@ -175,12 +184,15 @@ h5 {
 	filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.2));
 	border-radius: 50%;
 }
+
 .close-desktop {
 	display: block;
 }
+
 .close-mobile {
 	display: none;
 }
+
 .close-background {
 	position: fixed;
 	top: 0;
@@ -188,6 +200,7 @@ h5 {
 	width: 100%;
 	height: 100%;
 }
+
 .modal-window {
 	position: relative;
 	padding: 1rem 2rem;
@@ -196,9 +209,11 @@ h5 {
 	max-height: 90%;
 	overflow: auto;
 }
+
 .modal-window h2 {
 	margin: 1rem 0;
 }
+
 /* ---------------------------------------------------- */
 
 /* для элемента input c type="radio" */
@@ -207,8 +222,9 @@ h5 {
 	z-index: -1;
 	opacity: 0;
 }
+
 /* для элемента label связанного с .custom-radio */
-.custom-radio + label {
+.custom-radio+label {
 	display: inline-flex;
 	align-items: center;
 	user-select: none;
@@ -217,11 +233,13 @@ h5 {
 	color: #b8b8b8;
 	margin-right: 1rem;
 }
+
 label:hover {
 	cursor: pointer;
 }
+
 /* создание в label псевдоэлемента  before со следующими стилями */
-.custom-radio + label::before {
+.custom-radio+label::before {
 	transition: all 0.5s;
 	content: '';
 	display: inline-block;
@@ -236,31 +254,36 @@ label:hover {
 	background-position: center center;
 	background-size: 50% 50%;
 }
+
 /* стили при наведении курсора на радио */
-.custom-radio:not(:disabled):not(:checked) + label:hover::before {
+.custom-radio:not(:disabled):not(:checked)+label:hover::before {
 	transition: all 0.5s;
 	cursor: pointer;
 	border-color: #b3d7ff;
 }
+
 /* стили для активной радиокнопки (при нажатии на неё) */
-.custom-radio:not(:disabled):active + label::before {
+.custom-radio:not(:disabled):active+label::before {
 	transition: all 0.5s;
 	background-color: #b3d7ff;
 	border-color: #b3d7ff;
 }
+
 /* стили для радиокнопки, находящейся в состоянии checked */
-.custom-radio:checked + label::before {
+.custom-radio:checked+label::before {
 	transition: all 0.5s;
 	border-color: #2fc1ff;
 	background-color: #2fc1ff;
 	background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff'/%3e%3c/svg%3e");
 }
-.custom-radio:checked + label {
+
+.custom-radio:checked+label {
 	transition: all 0.5s;
 	color: #6a6a6a;
 }
+
 /* стили для радиокнопки, находящейся в состоянии disabled */
-.custom-radio:disabled + label::before {
+.custom-radio:disabled+label::before {
 	transition: all 0.5s;
 	background-color: #e9ecef;
 }
@@ -270,10 +293,12 @@ label:hover {
 	padding: 1rem 4rem;
 	align-items: center;
 }
+
 .partners {
 	justify-content: space-between;
 	flex-wrap: wrap;
 }
+
 /* ---------------------------------------------------- */
 
 .content {
@@ -281,21 +306,25 @@ label:hover {
 	margin-bottom: 0.5rem;
 	align-items: center;
 }
+
 .logo {
 	margin: 0 0.5rem;
 	width: 2rem;
 	height: 2rem;
 }
+
 .image-content {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	width: 60%;
 }
+
 .about-content {
 	margin: 2rem;
 	width: 45%;
 }
+
 .text-about-content {
 	padding: 26px 0 75px 0;
 	border-top: 1px solid #2fc1ff;
@@ -307,22 +336,26 @@ label:hover {
 	border-radius: 6px;
 }
 
-.carousel__slide > .carousel__item {
+.carousel__slide>.carousel__item {
 	transform: scale(1);
 	opacity: 0.5;
 	transition: 0.5s;
 }
-.carousel__slide--visible > .carousel__item {
+
+.carousel__slide--visible>.carousel__item {
 	opacity: 1;
 	transform: rotateY(0);
 }
-.carousel__slide--next > .carousel__item {
+
+.carousel__slide--next>.carousel__item {
 	transform: scale(0.5) translate(-10px);
 }
-.carousel__slide--prev > .carousel__item {
+
+.carousel__slide--prev>.carousel__item {
 	transform: scale(0.5) translate(10px);
 }
-.carousel__slide--active > .carousel__item {
+
+.carousel__slide--active>.carousel__item {
 	transform: scale(1.5);
 }
 
@@ -341,29 +374,36 @@ body.modal-open {
 	body {
 		margin: 0;
 	}
+
 	.main-content {
 		margin: 4.5rem 1rem 0 1rem;
 	}
+
 	.section {
 		margin: 0;
 		width: 100%;
 	}
+
 	h1 {
 		font-size: 20px;
 	}
+
 	h2 {
 		font-size: 18px;
 		margin: 0.5rem 0 1rem 0;
 	}
+
 	h3 {
 		font-size: 16px;
 	}
+
 	.modal-window {
 		padding: 1rem 2rem;
 		margin: 1.5rem 0.5rem;
 		width: 100%;
 		align-self: baseline;
 	}
+
 	.close {
 		border: none;
 		filter: none;
@@ -372,12 +412,15 @@ body.modal-open {
 		right: 1rem;
 		z-index: 2800;
 	}
+
 	.close-desktop {
 		display: none;
 	}
+
 	.close-mobile {
 		display: block;
 	}
+
 	.content {
 		flex-direction: column;
 		justify-content: center;
@@ -385,13 +428,16 @@ body.modal-open {
 		margin-bottom: 0.5rem;
 		align-items: center;
 	}
+
 	.video {
 		height: 10rem;
 		margin: 0;
 	}
+
 	.video-play {
 		background: rgba(106, 106, 106, 0.4);
 	}
+
 	.video-play img {
 		width: 4rem;
 		height: 4rem;

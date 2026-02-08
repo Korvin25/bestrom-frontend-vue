@@ -22,7 +22,10 @@
 							<h4 v-if="shouldShowContentTitle(block, content)">{{ contentTitle(content) }}</h4>
 							<p v-html="contentText(content)" />
 						</div>
-						<div v-if="contentFiles(content).length" class="page-block-media">
+						<div
+							v-if="contentFiles(content).length"
+							class="page-block-media"
+							:class="{ 'page-block-media--single': contentFiles(content).length === 1 }">
 							<NuxtImg
 								v-if="contentFiles(content).length === 1 && firstContentFile(content)"
 								class="page-block-image"
@@ -165,12 +168,17 @@ const firstContentFile = (content: any) => contentFiles(content)[0] || null
 	justify-content: center;
 	align-items: center;
 }
+.page-block-media--single {
+	border-radius: 12px;
+	overflow: hidden;
+}
 .page-block-image {
 	width: 100%;
 	max-height: 360px;
 	height: auto;
 	border-radius: 12px;
-	object-fit: contain;
+	object-fit: cover;
+	display: block;
 }
 .page-block-gallery {
 	display: grid;
@@ -203,6 +211,12 @@ const firstContentFile = (content: any) => contentFiles(content)[0] || null
 @media (max-width: 980px) {
 	.page-block-content {
 		grid-template-columns: 1fr;
+	}
+	.page-block-media--single {
+		justify-content: stretch;
+	}
+	.page-block-image {
+		max-height: none;
 	}
 }
 </style>
