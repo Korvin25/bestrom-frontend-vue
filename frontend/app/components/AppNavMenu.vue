@@ -435,32 +435,50 @@ const showModalMenuContactsClick = () => {
 		z-index: 9998;
 		position: fixed;
 		bottom: 1rem;
-		left: 0;
-		right: 0;
+		left: 1rem;
+		right: 1rem;
 		display: flex;
 		flex-direction: row;
-		justify-content: space-around;
+		justify-content: space-between;
 		align-items: center;
-		gap: 1rem;
-		padding: 0 1rem;
+		gap: 0.75rem;
+		padding: 0.5rem;
+		background: rgba(255, 255, 255, 0.9);
+		border: 1px solid rgba(15, 23, 42, 0.08);
+		border-radius: 999px;
+		box-shadow: 0 14px 28px rgba(15, 23, 42, 0.16);
+		-webkit-backdrop-filter: blur(12px);
+		backdrop-filter: blur(12px);
 	}
 	.mobile-nav-buttons-item {
-		flex-grow: 1;
+		flex: 1;
 		display: flex;
 		justify-content: center;
 		align-items: center;
 		gap: 0.5rem;
-		background: linear-gradient(0deg, #2fc1ff -40%, #7dd8ff 100%);
-		border: 3px solid #ffffff;
-		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
-		border-radius: 30px;
-		padding: 0.8rem 1rem;
+		background: linear-gradient(0deg, #24b5ff 0%, #6be1ff 52%, #b0f0ff 100%);
+		border: none;
+		box-shadow: 0 10px 20px rgba(47, 193, 255, 0.35);
+		border-radius: 999px;
+		padding: 0.7rem 1rem;
 		color: #ffffff;
 		font-weight: 600;
+		font-size: 14px;
+		letter-spacing: 0.02em;
+		transition: transform 0.16s ease, box-shadow 0.16s ease, background 0.16s ease;
+	}
+	.mobile-nav-buttons-item:active {
+		transform: translateY(1px);
+		box-shadow: 0 6px 12px rgba(47, 193, 255, 0.25);
+	}
+	.mobile-nav-buttons-item:focus-visible {
+		outline: 3px solid rgba(47, 193, 255, 0.5);
+		outline-offset: 2px;
 	}
 .mobile-icon {
 	width: 20px;
 	height: 20px;
+	filter: drop-shadow(0 2px 6px rgba(15, 23, 42, 0.2));
 }
 	.mobile-nav-elements {
 		overflow: hidden;
