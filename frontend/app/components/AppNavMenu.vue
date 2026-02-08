@@ -2,10 +2,10 @@
 	<nav class="nav flex-row">
 		<div class="nav-logo-items flex-column">
 			<NuxtLink
-				:class="hoverItem === 1 || isActive(mainLinks[0]) ? 'img-hover' : ''"
+				:class="hoverItem === mainLink.id || isActive(mainLink) ? 'img-hover' : ''"
 				class="nav-item img"
 				to="/"
-				@mouseenter="hoverItem = 1"
+				@mouseenter="hoverItem = mainLink.id"
 				@mouseleave="hoverItem = 0"
 				@click="scrollToTop">
 				<img class="logo-bestrom" src="/assets/bestrom_logo.png" alt="bestrom logo" />
@@ -67,10 +67,10 @@
 
 		<div class="nav-text-items flex-column">
 			<NuxtLink
-				:class="hoverItem === 1 || isActive(mainLinks[0]) ? 'text-hover' : ''"
+				:class="hoverItem === mainLink.id || isActive(mainLink) ? 'text-hover' : ''"
 				class="nav-item text"
 				to="/"
-				@mouseenter="hoverItem = 1"
+				@mouseenter="hoverItem = mainLink.id"
 				@mouseleave="hoverItem = 0"
 				@click="scrollToTop">
 				<p>{{ language === 'RU' ? 'Главная' : 'Main page' }}</p>
@@ -153,7 +153,7 @@
 					<NuxtLink
 						v-for="item in linkItems"
 						:key="item.id"
-						class="nav-mobile-item"
+						:class="['nav-mobile-item', isActive(item) ? 'nav-mobile-item--active' : '']"
 						:to="item.path"
 						@click="scrollToTop">
 						<img class="nav-icon" :src="item.icon" :alt="item.labelRu" />
@@ -240,6 +240,9 @@ const mainLinks = [
 	{ id: 7, path: '/clients', labelRu: 'Клиенты', labelEn: 'Clients', icon: '/assets/menu-item-5,8.png' },
 	{ id: 8, path: '/jobs', labelRu: 'Вакансии', labelEn: 'Vacancies', icon: '/assets/menu-item-10.png' },
 ]
+
+const mainLink = mainLinks[0] as (typeof mainLinks)[number]
+const linkItems = computed(() => mainLinks)
 
 const isActive = (item: { path: string }) => route.path === item.path || route.path.startsWith(item.path + '/')
 
@@ -434,7 +437,7 @@ const showModalMenuContactsClick = () => {
 	.mobile-nav-buttons {
 		z-index: 9998;
 		position: fixed;
-		bottom: 1rem;
+		bottom: 0.75rem;
 		left: 1rem;
 		right: 1rem;
 		display: flex;
@@ -442,7 +445,7 @@ const showModalMenuContactsClick = () => {
 		justify-content: space-between;
 		align-items: center;
 		gap: 0.75rem;
-		padding: 0.5rem;
+		padding: 0.35rem;
 		background: rgba(255, 255, 255, 0.9);
 		border: 1px solid rgba(15, 23, 42, 0.08);
 		border-radius: 999px;
@@ -460,7 +463,7 @@ const showModalMenuContactsClick = () => {
 		border: none;
 		box-shadow: 0 10px 20px rgba(47, 193, 255, 0.35);
 		border-radius: 999px;
-		padding: 0.7rem 1rem;
+		padding: 0.6rem 1rem;
 		color: #ffffff;
 		font-weight: 600;
 		font-size: 14px;
@@ -505,21 +508,43 @@ const showModalMenuContactsClick = () => {
 	}
 	.mobile-menu-nav-items {
 		margin-top: 1.5rem;
-		gap: 0.5rem;
+		gap: 0.75rem;
 	}
 	.nav-mobile-item {
 		display: flex;
-	align-items: center;
-	gap: 0.75rem;
-		padding: 0.75rem 0.5rem;
-		border-bottom: 1px solid rgba(47, 193, 255, 0.2);
+		align-items: center;
+		gap: 0.75rem;
+		padding: 0.85rem 1rem;
 		text-align: left;
-		background: none;
-		border-left: none;
-		border-right: none;
-		border-top: none;
+		background: #f8fafc;
+		border: 1px solid rgba(15, 23, 42, 0.08);
+		border-radius: 16px;
+		box-shadow: 0 6px 16px rgba(15, 23, 42, 0.08);
 		color: inherit;
 		font-size: 16px;
+		transition: transform 0.16s ease, box-shadow 0.16s ease, border-color 0.16s ease;
+	}
+	.nav-mobile-item--active {
+		border-color: rgba(47, 193, 255, 0.45);
+		box-shadow: 0 10px 22px rgba(47, 193, 255, 0.18);
+		background: linear-gradient(90deg, rgba(47, 193, 255, 0.14), rgba(47, 193, 255, 0.04));
+	}
+	.nav-mobile-item--active .nav-icon {
+		border-color: rgba(47, 193, 255, 0.45);
+		box-shadow: 0 8px 18px rgba(47, 193, 255, 0.2);
+	}
+	.nav-mobile-item:active {
+		transform: translateY(1px);
+		box-shadow: 0 4px 10px rgba(15, 23, 42, 0.08);
+	}
+	.nav-icon {
+		width: 24px;
+		height: 24px;
+		background: #ffffff;
+		border: 1px solid rgba(15, 23, 42, 0.08);
+		border-radius: 12px;
+		padding: 0.35rem;
+		box-shadow: 0 6px 14px rgba(15, 23, 42, 0.1);
 	}
 	.mobile-menu-footer {
 		margin-top: auto;
