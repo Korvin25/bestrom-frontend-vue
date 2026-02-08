@@ -55,10 +55,11 @@ const resolveMedia = (src: unknown) => {
 	background: rgba(15, 23, 42, 0.45);
 	backdrop-filter: blur(6px);
 	display: flex;
-	align-items: center;
+	align-items: flex-start;
 	justify-content: center;
 	padding: 5rem 1.5rem 2.5rem;
-	overflow: hidden;
+	overflow-y: auto;
+	overflow-x: hidden;
 	z-index: 1000;
 }
 .close-background {
@@ -69,19 +70,19 @@ const resolveMedia = (src: unknown) => {
 	position: relative;
 	z-index: 2;
 	width: min(920px, 95vw);
-	max-height: calc(100vh - 7.5rem);
-	overflow: auto;
+	max-height: none;
+	overflow: visible;
 	padding: 2.5rem 2rem;
 	border-radius: 24px;
 	background: #ffffff;
 	box-shadow: 0 30px 60px rgba(15, 23, 42, 0.25);
 	margin: 2rem 0;
 }
-.modal-window::-webkit-scrollbar {
+.modal-background::-webkit-scrollbar {
 	width: 0;
 	height: 0;
 }
-.modal-window {
+.modal-background {
 	scrollbar-width: none;
 }
 .close {
