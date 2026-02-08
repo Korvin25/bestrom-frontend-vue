@@ -35,9 +35,11 @@ const { language } = storeToRefs(appStore)
 }
 .footer {
 	justify-content: flex-start;
-	padding: 1rem 0 2rem 0;
+	width: 100%;
+	max-width: 1280px;
+	margin: 2rem auto 0;
+	padding: 1rem 24px 2rem;
 	border-top: 1px solid rgba(47, 193, 255, 0.2);
-	margin-top: 2rem;
 }
 .footer p {
 	margin-right: 4rem;
@@ -49,7 +51,7 @@ const { language } = storeToRefs(appStore)
 		text-align: center;
 		align-items: center;
 		padding: 1rem;
-		margin: 1rem 0 5rem 0;
+		margin: 1rem auto 5rem;
 	}
 	.footer p {
 		margin: 0 0 1rem 0;

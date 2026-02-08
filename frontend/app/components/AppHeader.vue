@@ -1,20 +1,22 @@
 <template>
-	<header class="header flex-row">
-		<NuxtLink class="header-title" to="/">
-			<img class="logo-img" src="/assets/bestrom_logo.png" alt="bestrom logo" />
-			<h1>{{ language === 'RU' ? 'БЕСТРОМ' : 'BESTROM' }}</h1>
-		</NuxtLink>
-		<div class="header-actions flex-row">
-			<button class="call btn" @click="showModalMenuContactsCall = true">
-				{{ language === 'RU' ? 'ЗАКАЗАТЬ ЗВОНОК' : 'ORDER A CALL' }}
-			</button>
-			<button class="call btn" @click="showModalMenuContactsQuestion = true">
-				{{ language === 'RU' ? 'ЗАДАТЬ ВОПРОС' : 'ASK A QUESTION' }}
-			</button>
-			<button class="lang-toggle" type="button" @click="toggleLanguage">
-				<img class="lang-icon" src="/assets/language-world.png" alt="language" />
-				<span>{{ language }}</span>
-			</button>
+	<header class="header">
+		<div class="header-container flex-row">
+			<NuxtLink class="header-title" to="/">
+				<img class="logo-img" src="/assets/bestrom_logo.png" alt="bestrom logo" />
+				<h1>{{ language === 'RU' ? 'БЕСТРОМ' : 'BESTROM' }}</h1>
+			</NuxtLink>
+			<div class="header-actions flex-row">
+				<button class="call btn" @click="showModalMenuContactsCall = true">
+					{{ language === 'RU' ? 'ЗАКАЗАТЬ ЗВОНОК' : 'ORDER A CALL' }}
+				</button>
+				<button class="call btn" @click="showModalMenuContactsQuestion = true">
+					{{ language === 'RU' ? 'ЗАДАТЬ ВОПРОС' : 'ASK A QUESTION' }}
+				</button>
+				<button class="lang-toggle" type="button" @click="toggleLanguage">
+					<img class="lang-icon" src="/assets/language-world.png" alt="language" />
+					<span>{{ language }}</span>
+				</button>
+			</div>
 		</div>
 	</header>
 	<transition-group name="modal">
@@ -52,20 +54,16 @@ watch(showModalMenuContactsQuestion, (val) => lockBody(val))
 
 <style scoped>
 .header {
-	display: flex;
-	justify-content: flex-end;
-	align-items: center;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 9997;
 	background: rgba(255, 255, 255, 0.7);
 	border: 1px solid rgba(15, 23, 42, 0.08);
 	box-shadow: 0 18px 36px rgba(15, 23, 42, 0.12);
 	border-radius: 0;
-	position: fixed;
 	overflow: hidden;
-	z-index: 9997;
-	top: 0;
-	right: 0;
-	left: 0;
-	padding: 0.65rem 100px 0.65rem 170px;
 }
 .header::before {
 	content: '';
@@ -76,9 +74,16 @@ watch(showModalMenuContactsQuestion, (val) => lockBody(val))
 	backdrop-filter: blur(16px);
 	z-index: 0;
 }
-.header > * {
+.header-container {
 	position: relative;
 	z-index: 1;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	width: 100%;
+	max-width: 1280px;
+	margin: 0 auto;
+	padding: 0.65rem 24px;
 }
 .header-title {
 	display: flex;
@@ -153,7 +158,7 @@ watch(showModalMenuContactsQuestion, (val) => lockBody(val))
 	.header .btn {
 		display: none;
 	}
-	.header {
+	.header-container {
 		padding: 0.65rem 1rem;
 		border-radius: 0;
 	}
