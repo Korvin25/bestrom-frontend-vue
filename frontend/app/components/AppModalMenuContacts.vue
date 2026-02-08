@@ -177,6 +177,22 @@ onMounted(() => {
 	align-items: center;
 	justify-content: center;
 	margin-top: 1rem;
+	padding: 0.6rem 1.4rem;
+	border-radius: 999px;
+	background: #f8fbff;
+	border: 1px solid rgba(14, 165, 233, 0.2);
+	box-shadow: 0 8px 18px rgba(56, 189, 248, 0.16);
+	transition: transform 0.16s ease, box-shadow 0.16s ease, background 0.16s ease;
+}
+.yandex-href:hover {
+	transform: translateY(-1px);
+	background: #ffffff;
+	box-shadow: 0 12px 24px rgba(56, 189, 248, 0.2);
+}
+.yandex-href p {
+	margin: 0;
+	font-weight: 600;
+	color: #2fc1ff;
 }
 .main-contacts-card {
 	width: 30%;
@@ -207,23 +223,40 @@ onMounted(() => {
 	padding-bottom: 1rem;
 	border-bottom: 2px solid #6a6a6a;
 	gap: 0.75rem;
+	padding-left: 1rem;
 }
 
 .social-logo {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	width: 3rem;
-	height: 3rem;
-	background: #6a6a6a;
-	color: #ffffff;
-	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
-	border-radius: 50%;
+	width: 2.4rem;
+	height: 2.4rem;
+	background: #ffffff;
+	border: 1px solid rgba(15, 23, 42, 0.12);
+	color: #6a6a6a;
+	box-shadow: 0 6px 16px rgba(15, 23, 42, 0.06);
+	border-radius: 12px;
 	font-weight: 600;
+	transition: transform 0.16s ease, box-shadow 0.16s ease, border-color 0.16s ease, background 0.16s ease;
 }
 .social-logo img {
+	width: 20px;
+	height: 20px;
+}
+.social-logo:nth-child(3) img {
 	width: 24px;
 	height: 24px;
+}
+.social-logo:nth-child(1) img,
+.social-logo:nth-child(3) img {
+	filter: brightness(0.3) contrast(1.1);
+}
+.social-logo:hover {
+	transform: translateY(-1px);
+	border-color: rgba(14, 165, 233, 0.35);
+	box-shadow: 0 10px 20px rgba(56, 189, 248, 0.2);
+	background: #ffffff;
 }
 .call-buttons {
 	margin: 0 -1rem 1rem -1rem;

@@ -498,7 +498,7 @@ const removeInput = (id: number) => {
 	height: 2rem;
 	margin-left: 1rem;
 	color: #ffffff;
-	border-radius: 6px;
+	border-radius: 999px;
 }
 .add-btn {
 	background-color: #4cc4ff;

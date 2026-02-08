@@ -32,7 +32,7 @@
 			</button>
 			<button
 				:class="hoverItem === 10 ? 'img-hover' : ''"
-				class="nav-item img"
+				class="nav-item img contact-icon"
 				type="button"
 				@mouseenter="hoverItem = 10"
 				@mouseleave="hoverItem = 0"
@@ -42,26 +42,26 @@
 			<a
 				href="https://vk.com/bestrom_official"
 				:class="hoverItem === 11 ? 'logo-hover' : ''"
-				class="nav-item img logo"
+				class="nav-item img logo contact-icon"
 				@mouseenter="hoverItem = 11"
 				@mouseleave="hoverItem = 0">
-				<img style="width: 33px" src="/assets/vk.png" alt="VK" />
+				<img class="nav-contact-icon nav-contact-icon--dark" src="/assets/vk.png" alt="VK" />
 			</a>
 			<a
 				href="https://t.me/bestrom_official"
 				:class="hoverItem === 12 ? 'logo-hover' : ''"
-				class="nav-item img logo"
+				class="nav-item img logo contact-icon"
 				@mouseenter="hoverItem = 12"
 				@mouseleave="hoverItem = 0">
-				<img style="width: 25px" src="/assets/telegram.png" alt="Telegram" />
+				<img class="nav-contact-icon" src="/assets/telegram.png" alt="Telegram" />
 			</a>
 			<a
 				href="https://rutube.ru/channel/38819375/"
 				:class="hoverItem === 13 ? 'logo-hover' : ''"
-				class="nav-item img logo"
+				class="nav-item img logo contact-icon"
 				@mouseenter="hoverItem = 13"
 				@mouseleave="hoverItem = 0">
-				<img style="width: 25px" src="/assets/rutube1.png" alt="Rutube" />
+				<img class="nav-contact-icon nav-contact-icon--dark" src="/assets/rutube1.png" alt="Rutube" />
 			</a>
 		</div>
 
@@ -308,7 +308,8 @@ const showModalMenuContactsClick = () => {
 	height: 100%;
 	padding: 0 0.5rem;
 	background: #ffffff;
-	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+	box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+	border-radius: 18px;
 }
 .nav-logo-items:hover + .nav-text-items {
 	transform: scaleX(1);
@@ -319,8 +320,9 @@ const showModalMenuContactsClick = () => {
 	padding: 0 2rem 0 0;
 	height: 100%;
 	background: #ffffff;
-	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
-	transition: all 0.3s;
+	box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+	border-radius: 0 18px 18px 0;
+	transition: transform 0.2s ease, box-shadow 0.2s ease;
 	transform: scaleX(0);
 	transform-origin: 0 0;
 }
@@ -334,42 +336,71 @@ const showModalMenuContactsClick = () => {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	background: #ffffff;
-	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
-	border-radius: 6px;
-	border: none;
+	background: #f8fafc;
+	box-shadow: 0 6px 16px rgba(15, 23, 42, 0.06);
+	border-radius: 14px;
+	border: 1px solid rgba(15, 23, 42, 0.08);
+	transition: transform 0.16s ease, box-shadow 0.16s ease, background 0.16s ease;
 }
 .nav-item.text {
 	margin-left: 1rem;
 	text-decoration: none;
-	background: linear-gradient(currentColor, currentColor) no-repeat 0 100%;
-	background-size: 0 2px;
-	transition: background-size 0.3s ease;
-	border-radius: 0;
-	padding: 0.25rem 0;
+	background: transparent;
+	border-radius: 12px;
+	padding: 0.35rem 0.5rem;
 }
 .nav-item.text.text-hover {
-	transform: scale(1.04);
-	background-size: 100% 2px;
+	transform: translateX(2px);
+	background: rgba(47, 193, 255, 0.12);
 }
 .nav-item:hover {
 	cursor: pointer;
 }
 .nav-item.img {
-	width: 2.5rem;
-	height: 2.5rem;
+	width: 2.6rem;
+	height: 2.6rem;
 }
 .nav-item.img.img-hover {
-	transition: all 0.5s;
-	background: rgba(47, 193, 255, 0.3);
+	background: rgba(47, 193, 255, 0.18);
+	border-color: rgba(14, 165, 233, 0.35);
+	transform: translateY(-1px);
+	box-shadow: 0 10px 20px rgba(56, 189, 248, 0.2);
+}
+.nav-item.img:not(.logo) img {
+	filter: drop-shadow(0 2px 6px rgba(15, 23, 42, 0.18));
+}
+.nav-item.img:not(.contact-icon):hover {
+	background: #ffffff;
+	border-color: rgba(14, 165, 233, 0.25);
+	box-shadow: 0 12px 22px rgba(56, 189, 248, 0.22);
 }
 .nav-item.img.logo {
-	background: #6a6a6a;
-	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
 	border-radius: 50%;
 }
-.nav-item.img.logo.logo-hover {
-	background: rgba(47, 193, 255, 0.9);
+.nav-item.img.contact-icon {
+	background: #ffffff;
+	border: 1px solid rgba(15, 23, 42, 0.12);
+	box-shadow: 0 6px 16px rgba(15, 23, 42, 0.06);
+	width: 2.4rem;
+	height: 2.4rem;
+}
+.nav-item.img.contact-icon:hover {
+	border-color: rgba(14, 165, 233, 0.35);
+	box-shadow: 0 10px 20px rgba(56, 189, 248, 0.2);
+}
+.nav-item.img.contact-icon .nav-contact-icon {
+	width: 20px;
+	height: 20px;
+}
+.nav-item.img.contact-icon .nav-contact-icon--dark {
+	width: 24px;
+	height: 24px;
+}
+.nav-item.img.logo.contact-icon {
+	border-radius: 12px;
+}
+.nav-contact-icon--dark {
+	filter: brightness(0.3) contrast(1.1);
 }
 .nav-item p {
 	font-size: 16px;
