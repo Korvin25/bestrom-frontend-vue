@@ -27,8 +27,16 @@ const appStore = useAppStore()
 const { language, serverMedia } = storeToRefs(appStore)
 const config = useRuntimeConfig()
 
-const { data: pageData } = await useFetch(`${config.public.apiBase}page/${props.pageId}/`)
-const page = computed(() => (pageData.value?.length ? pageData.value[0] : null))
+type PageBaseData = {
+	title?: string
+	title_en?: string
+	description?: string
+	description_en?: string
+	blocks?: any[]
+}
+
+const { data: pageData } = await useFetch<PageBaseData[]>(`${config.public.apiBase}page/${props.pageId}/`)
+const page = computed<PageBaseData | null>(() => pageData.value?.[0] ?? null)
 useSeoFromPage(page, language)
 
 const mediaBase = computed(() => serverMedia.value || config.public.mediaBase)

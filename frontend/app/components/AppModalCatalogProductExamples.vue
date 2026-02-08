@@ -57,10 +57,9 @@ const resolveMedia = (src: unknown) => {
 	display: flex;
 	align-items: flex-start;
 	justify-content: center;
-	padding: 5rem 1.5rem 2.5rem;
 	overflow-y: auto;
 	overflow-x: hidden;
-	z-index: 1000;
+	z-index: 10000;
 }
 .close-background {
 	position: absolute;

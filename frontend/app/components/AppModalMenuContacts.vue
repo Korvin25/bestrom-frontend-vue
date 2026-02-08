@@ -18,8 +18,8 @@
 				<p v-if="content.length > 0">
 					{{
 						language === 'RU'
-							? content.find((e) => e.name === 'Головной офис')?.text
-							: content.find((e) => e.name === 'Головной офис')?.text_en
+							? findContent('Головной офис')?.text
+							: findContent('Головной офис')?.text_en
 					}}
 				</p>
 			</div>
@@ -41,41 +41,41 @@
 				<div class="main-contacts-card flex-column">
 					<div>
 						<h5>{{ language === 'RU' ? 'Общий:' : 'General:' }}</h5>
-						<p>{{ content.find((e) => e.name === 'Общий')?.text }}</p>
+						<p>{{ findContent('Общий')?.text }}</p>
 					</div>
 					<div>
 						<h5>{{ language === 'RU' ? 'Сервисная служба:' : 'Customer Service:' }}</h5>
-						<p>{{ content.find((e) => e.name === 'Сервисная служба')?.text }}</p>
+						<p>{{ findContent('Сервисная служба')?.text }}</p>
 					</div>
 					<div>
 						<h5>{{ language === 'RU' ? 'Отдел запчастей:' : 'Spare Parts Department:' }}</h5>
-						<p>{{ content.find((e) => e.name === 'Отдел запчастей')?.text }}</p>
+						<p>{{ findContent('Отдел запчастей')?.text }}</p>
 					</div>
 				</div>
 				<div class="main-contacts-card flex-column">
 					<div>
 						<h5>{{ language === 'RU' ? 'Секретарь:' : 'Secretary:' }}</h5>
-						<p>{{ content.find((e) => e.name === 'Секретарь')?.text }}</p>
+						<p>{{ findContent('Секретарь')?.text }}</p>
 					</div>
 					<div>
 						<h5>
 							{{ language === 'RU' ? 'Коммерческий отдел и отдел продаж:' : 'Commercial and Sales Department:' }}
 						</h5>
-						<p>{{ content.find((e) => e.name === 'Коммерческий отдел и отдел продаж')?.text }}</p>
+						<p>{{ findContent('Коммерческий отдел и отдел продаж')?.text }}</p>
 					</div>
 					<div>
 						<h5>{{ language === 'RU' ? 'Отдел снабжения:' : 'Supply Department:' }}</h5>
-						<p>{{ content.find((e) => e.name === 'Отдел снабжения')?.text }}</p>
+						<p>{{ findContent('Отдел снабжения')?.text }}</p>
 					</div>
 				</div>
 				<div class="main-contacts-card flex-column">
 					<div>
 						<h5>{{ language === 'RU' ? 'Бухгалтерия:' : 'Accounting:' }}</h5>
-						<p>{{ content.find((e) => e.name === 'Бухгалтерия')?.text }}</p>
+						<p>{{ findContent('Бухгалтерия')?.text }}</p>
 					</div>
 					<div>
 						<h5>E-mail:</h5>
-						<p>{{ content.find((e) => e.name === 'E-mail')?.text }}</p>
+						<p>{{ findContent('E-mail')?.text }}</p>
 					</div>
 					<div>
 						<h5>{{ language === 'RU' ? 'Реквизиты' : 'Requisites' }}:</h5>
@@ -100,11 +100,11 @@
 
 			<h3>{{ language === 'RU' ? 'Социальные сети' : 'Social network' }}</h3>
 			<div v-if="content.length > 0" class="social flex-row">
-				<a :href="content.find((e) => e.name === 'vk')?.text || 'https://vk.com/bestrom_official'" class="social-logo">
+				<a :href="findContent('vk')?.text || 'https://vk.com/bestrom_official'" class="social-logo">
 					<img src="/assets/vk.png" alt="VK" />
 				</a>
 				<a
-					:href="content.find((e) => e.name === 'telegram')?.text || 'https://t.me/bestrom_official'"
+					:href="findContent('telegram')?.text || 'https://t.me/bestrom_official'"
 					class="social-logo">
 					<img src="/assets/telegram.png" alt="Telegram" />
 				</a>
@@ -136,10 +136,20 @@ const appStore = useAppStore()
 const pageStore = usePageStore()
 const { language } = storeToRefs(appStore)
 
-const content = computed(() => pageStore.pageId?.[0]?.blocks?.find((e) => e.name === 'contacts')?.contents || [])
+type ContentItem = {
+	name?: string
+	text?: string
+	text_en?: string
+}
+
+const content = computed<ContentItem[]>(
+	() => pageStore.pageId?.[0]?.blocks?.find((block: ContentItem) => block.name === 'contacts')?.contents || [],
+)
+
+const findContent = (name: string) => content.value.find((item: ContentItem) => item.name === name)
 
 const dealersRu = (ruName: string, enName: string) => {
-	const block = content.value.find((e: any) => e.name === ruName)
+	const block = findContent(ruName)
 	const text = language.value === 'RU' ? block?.text : block?.text_en
 	return (text || '').replaceAll('\n', '<br />')
 }

@@ -92,7 +92,7 @@ import { usePageStore } from '~/stores/page'
 
 defineEmits(['close'])
 
-defineProps({
+const props = defineProps({
 	nameMachine: {
 		type: String,
 		default: '',
@@ -131,7 +131,7 @@ const sendPost = async () => {
 			await $fetch(`${appStore.server}forms/`, {
 				method: 'POST',
 				body: {
-					type: `Заявка на машину ${nameMachine}`,
+					type: `Заявка на машину ${props.nameMachine}`,
 					telephone: inputTelephone.value,
 					email: inputEmail.value,
 					name: inputName.value,
@@ -166,10 +166,9 @@ const sendPost = async () => {
 	display: flex;
 	align-items: flex-start;
 	justify-content: center;
-	padding: 5rem 1.5rem 2.5rem;
 	overflow-y: auto;
 	overflow-x: hidden;
-	z-index: 1000;
+	z-index: 10000;
 }
 .close-background {
 	position: absolute;
