@@ -1,5 +1,5 @@
 <template>
-	<PageBase :page-id="3" />
+	<PageBase :page-id="3" :show-hero="false" />
 </template>
 
 <script setup lang="ts">
