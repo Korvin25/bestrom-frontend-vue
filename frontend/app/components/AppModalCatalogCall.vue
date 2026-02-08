@@ -164,9 +164,10 @@ const sendPost = async () => {
 	background: rgba(15, 23, 42, 0.45);
 	backdrop-filter: blur(6px);
 	display: flex;
-	align-items: center;
+	align-items: flex-start;
 	justify-content: center;
 	padding: 5rem 1.5rem 2.5rem;
+	overflow: auto;
 	z-index: 1000;
 }
 .close-background {
@@ -177,13 +178,18 @@ const sendPost = async () => {
 	position: relative;
 	z-index: 2;
 	width: min(720px, 92vw);
-	max-height: 90vh;
-	overflow: auto;
 	padding: 2.5rem 2rem;
 	border-radius: 24px;
 	background: #ffffff;
 	box-shadow: 0 30px 60px rgba(15, 23, 42, 0.25);
 	margin: 2rem 0;
+}
+.modal-background::-webkit-scrollbar {
+	width: 0;
+	height: 0;
+}
+.modal-background {
+	scrollbar-width: none;
 }
 .close {
 	position: absolute;

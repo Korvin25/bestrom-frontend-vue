@@ -353,20 +353,6 @@ const videoEmbedSrc = (src: string) => {
 	return `https://rutube.ru/play/embed/${src}`
 }
 
-watch(
-	() => showModalCall.value || showModalApplication.value || showModalProductExamples.value,
-	(isOpen) => {
-		if (process.client) {
-			document.body.classList.toggle('modal-open', isOpen)
-		}
-	},
-)
-
-onBeforeUnmount(() => {
-	if (process.client) {
-		document.body.classList.remove('modal-open')
-	}
-})
 
 useSeoMeta({
 	title: computed(() =>
@@ -383,6 +369,21 @@ useSeoMeta({
 				: product.value.seo_description_en || product.value.description_en || product.value.description || product.value.name_en || product.value.name
 			: '',
 	),
+})
+
+watch(
+	() => showModalCall.value || showModalApplication.value || showModalProductExamples.value,
+	(isOpen) => {
+		if (process.client) {
+			document.body.classList.toggle('modal-open', isOpen)
+		}
+	},
+)
+
+onBeforeUnmount(() => {
+	if (process.client) {
+		document.body.classList.remove('modal-open')
+	}
 })
 </script>
 
