@@ -52,22 +52,47 @@ watch(showModalMenuContactsQuestion, (val) => lockBody(val))
 
 <style scoped>
 .header {
-	justify-content: space-between;
+	display: flex;
+	justify-content: flex-end;
 	align-items: center;
-	background-color: white;
-	box-shadow: 0 0 9px rgba(0, 0, 0, 0.1);
-	border-radius: 16px;
+	background: rgba(255, 255, 255, 0.7);
+	border: 1px solid rgba(15, 23, 42, 0.08);
+	box-shadow: 0 18px 36px rgba(15, 23, 42, 0.12);
+	border-radius: 0;
 	position: fixed;
+	overflow: hidden;
 	z-index: 9997;
 	top: 0;
-	right: 100px;
-	left: 170px;
-	padding: 0.5rem 1rem;
+	right: 0;
+	left: 0;
+	padding: 0.65rem 100px 0.65rem 170px;
+}
+.header::before {
+	content: '';
+	position: absolute;
+	inset: 0;
+	background: rgba(255, 255, 255, 0.65);
+	-webkit-backdrop-filter: blur(16px);
+	backdrop-filter: blur(16px);
+	z-index: 0;
+}
+.header > * {
+	position: relative;
+	z-index: 1;
 }
 .header-title {
 	display: flex;
 	align-items: center;
 	gap: 0.75rem;
+	text-decoration: none;
+	color: inherit;
+	position: static;
+}
+.header-title h1 {
+	margin: 0;
+	font-size: 1.25rem;
+	letter-spacing: 0.08em;
+	color: #0f172a;
 }
 .logo-img {
 	width: 36px;
@@ -75,24 +100,50 @@ watch(showModalMenuContactsQuestion, (val) => lockBody(val))
 }
 .header-actions {
 	align-items: center;
-	gap: 0.75rem;
+	gap: 0.6rem;
+	margin-left: auto;
 }
 .header .btn {
-	font-size: 14px;
-	width: 220px;
+	font-size: 13px;
+	width: 200px;
+	height: 40px;
+	border-radius: 999px;
+	background: linear-gradient(135deg, #2fc1ff 0%, #4dd4ff 100%);
+	box-shadow: 0 10px 20px rgba(47, 193, 255, 0.35);
+	transition: transform 0.16s ease, box-shadow 0.16s ease, background 0.16s ease;
+}
+.header .btn:hover {
+	transform: translateY(-1px);
+	box-shadow: 0 14px 26px rgba(47, 193, 255, 0.4);
+	background: linear-gradient(135deg, #22b2ee 0%, #2fc1ff 100%);
+}
+.header .btn:focus-visible {
+	outline: 3px solid rgba(47, 193, 255, 0.5);
+	outline-offset: 3px;
 }
 .lang-toggle {
 	display: inline-flex;
 	align-items: center;
 	gap: 0.5rem;
-	border: 1px solid rgba(47, 193, 255, 0.3);
-	background: #ffffff;
+	border: 1px solid rgba(47, 193, 255, 0.35);
+	background: rgba(255, 255, 255, 0.9);
 	padding: 0.4rem 0.75rem;
-	height: 48px;
+	height: 40px;
 	border-radius: 999px;
 	cursor: pointer;
 	font-weight: 600;
 	color: #2fc1ff;
+	transition: transform 0.16s ease, box-shadow 0.16s ease, border-color 0.16s ease;
+	box-shadow: 0 8px 16px rgba(15, 23, 42, 0.08);
+}
+.lang-toggle:hover {
+	transform: translateY(-1px);
+	border-color: rgba(47, 193, 255, 0.6);
+	box-shadow: 0 12px 22px rgba(15, 23, 42, 0.12);
+}
+.lang-toggle:focus-visible {
+	outline: 3px solid rgba(47, 193, 255, 0.45);
+	outline-offset: 3px;
 }
 .lang-icon {
 	width: 20px;
@@ -103,9 +154,8 @@ watch(showModalMenuContactsQuestion, (val) => lockBody(val))
 		display: none;
 	}
 	.header {
-		right: 0;
-		left: 0;
-		border-radius: 0 0 24px 24px;
+		padding: 0.65rem 1rem;
+		border-radius: 0;
 	}
 }
 </style>

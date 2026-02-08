@@ -209,12 +209,12 @@
 
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
-import { useAppStore } from '~/stores/app'
 import AppModalMenuApplication from '~/components/AppModalMenuApplication.vue'
 import AppModalMenuContacts from '~/components/AppModalMenuContacts.vue'
 import AppModalMenuContactsCall from '~/components/AppModalMenuContactsCall.vue'
 import AppModalMenuContactsQuestion from '~/components/AppModalMenuContactsQuestion.vue'
 import AppModalMenuService from '~/components/AppModalMenuService.vue'
+import { useAppStore } from '~/stores/app'
 
 const appStore = useAppStore()
 const { language } = storeToRefs(appStore)
@@ -295,12 +295,12 @@ const showModalMenuContactsClick = () => {
 .nav {
 	position: fixed;
 	left: 0;
-	top: 0;
+	top: 70px;
 	bottom: 0;
 	align-items: center;
 	min-height: 600px;
 	background: transparent;
-	z-index: 9998;
+	z-index: 9996;
 }
 .nav-logo-items {
 	justify-content: space-around;
@@ -309,7 +309,6 @@ const showModalMenuContactsClick = () => {
 	padding: 0 0.5rem;
 	background: #ffffff;
 	box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
-	border-radius: 18px;
 }
 .nav-logo-items:hover + .nav-text-items {
 	width: 12rem;
@@ -326,7 +325,6 @@ const showModalMenuContactsClick = () => {
 	overflow: hidden;
 	background: #ffffff;
 	box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
-	border-radius: 0 18px 18px 0;
 	transition: transform 0.2s ease, box-shadow 0.2s ease;
 	transform: scaleX(0);
 	transform-origin: 0 0;
