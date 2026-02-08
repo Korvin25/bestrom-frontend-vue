@@ -51,6 +51,10 @@
 				<div class="catalog-card-body">
 					<div class="catalog-card-text">
 						<h3>{{ language === 'RU' ? product.name : product.name_en || product.name }}</h3>
+						<div
+							v-if="getProductType(product)"
+							class="catalog-card-type"
+							v-html="getProductType(product)" />
 						<div class="catalog-card-divider"></div>
 						<div
 							class="catalog-card-description"
@@ -228,6 +232,15 @@ type Product = {
 	img?: string | null;
 	category_filters?: FilterOption[];
 	SliderProd?: ProductSlide[];
+	ProductPropertyValue?: Array<{
+		id?: number | string;
+		name?: string;
+		name_en?: string;
+		product_property?: {
+			name?: string;
+			name_en?: string;
+		};
+	}>;
 };
 
 type PageItem = {
@@ -438,6 +451,18 @@ watch(
 
 const toggleFilters = () => {
 	isFiltersExpanded.value = !isFiltersExpanded.value
+}
+
+const getProductType = (product: Product) => {
+	const properties = product?.ProductPropertyValue
+	if (!Array.isArray(properties)) return ''
+	const typeProperty = properties.find(
+		(item) => item?.product_property?.name === 'Тип машины' || item?.product_property?.name_en === 'Machine type'
+	)
+	if (!typeProperty) return ''
+	return language.value === 'RU'
+		? typeProperty.name || ''
+		: typeProperty.name_en || typeProperty.name || ''
 }
 
 const mediaBase = computed(() => serverMedia.value || config.public.mediaBase)
