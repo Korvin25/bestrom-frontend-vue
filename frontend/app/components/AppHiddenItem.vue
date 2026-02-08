@@ -25,15 +25,17 @@ defineProps({
 	bottom: 0;
 	padding: 1rem;
 	cursor: pointer;
-	background: rgba(47, 193, 255, 0.8);
-	box-shadow: 0 1px 4px 1px rgba(0, 0, 0, 0.25);
-	border-radius: 6px;
-	transition: opacity 0.5s;
+	background: linear-gradient(135deg, rgba(14, 165, 233, 0.9), rgba(59, 130, 246, 0.9));
+	backdrop-filter: blur(2px);
+	box-shadow: 0 8px 24px rgba(15, 23, 42, 0.2);
+	border-radius: 16px;
+	transition: opacity 0.25s ease, transform 0.25s ease;
 	opacity: 0;
+	transform: translateY(6px);
 }
 .hidden-text {
-	font-weight: bold;
-	font-size: 1.2rem;
+	font-weight: 700;
+	font-size: 1rem;
 	color: #ffffff;
 	display: flex;
 	text-align: center;
@@ -41,5 +43,6 @@ defineProps({
 	justify-content: center;
 	align-items: center;
 	height: 100%;
+	letter-spacing: 0.02em;
 }
 </style>

@@ -49,12 +49,73 @@ const resolveMedia = (src: unknown) => {
 </script>
 
 <style scoped>
+.modal-background {
+	position: fixed;
+	inset: 0;
+	background: rgba(15, 23, 42, 0.45);
+	backdrop-filter: blur(6px);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 5rem 1.5rem 2.5rem;
+	z-index: 1000;
+}
+.close-background {
+	position: absolute;
+	inset: 0;
+}
+.modal-window {
+	position: relative;
+	z-index: 2;
+	width: min(920px, 95vw);
+	max-height: 90vh;
+	overflow: auto;
+	padding: 2.5rem 2rem;
+	border-radius: 24px;
+	background: #ffffff;
+	box-shadow: 0 30px 60px rgba(15, 23, 42, 0.25);
+	margin: 2rem 0;
+}
+.close {
+	position: absolute;
+	top: 16px;
+	right: 16px;
+	width: 36px;
+	height: 36px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 999px;
+	background: #f1f5f9;
+	box-shadow: 0 6px 16px rgba(15, 23, 42, 0.15);
+	cursor: pointer;
+	transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.close:hover {
+	transform: translateY(-1px);
+	box-shadow: 0 10px 20px rgba(15, 23, 42, 0.2);
+}
+.close img {
+	width: 16px;
+	height: 16px;
+}
+.close-mobile {
+	display: none;
+}
+.close-desktop {
+	display: block;
+}
 h2 {
 	text-align: center;
+	font-weight: 700;
+	color: #0f172a;
+	margin: 0 0 1rem 0;
 }
 .details-select-products {
-	margin-top: 2rem;
-	flex-wrap: wrap;
+	margin-top: 1.5rem;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+	gap: 1rem;
 }
 .details-select-products-item {
 	position: relative;
@@ -62,45 +123,53 @@ h2 {
 	flex-direction: column;
 	justify-content: space-between;
 	align-items: center;
-	flex-grow: 1;
-	padding: 0.5rem 1rem;
+	padding: 1rem;
 	text-align: center;
-	width: 20%;
-	margin: 1rem;
+	border-radius: 18px;
+	background: #ffffff;
+	box-shadow: 0 12px 28px rgba(15, 23, 42, 0.12);
+	transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.details-select-products-item:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 18px 34px rgba(15, 23, 42, 0.18);
 }
 .details-select-products-item:hover .hidden-item {
 	opacity: 1;
+	transform: translateY(0);
 }
 .details-select-products-item img {
 	align-self: center;
 	max-width: 10rem;
 	width: 100%;
 }
-.details-select-products-item:hover img,
-.details-select-products-item:hover h4 {
-	-webkit-filter: blur(3px);
-	-ms-filter: blur(3px);
-	filter: blur(3px);
-}
 .details-select-products-item h4 {
-	font-weight: normal;
-	margin-top: 0;
+	font-weight: 600;
+	margin: 0 0 0.5rem 0;
+	color: #0f172a;
 }
 @media (max-width: 980px) {
 	h2 {
-		color: #6a6a6a;
+		color: #0f172a;
+	}
+	.modal-background {
+		padding: 6rem 1rem 2rem;
+	}
+	.modal-window {
+		margin: 1.5rem 0;
+		padding: 2rem 1.5rem;
+	}
+	.close-mobile {
+		display: block;
+	}
+	.close-desktop {
+		display: none;
 	}
 	.details-select-products {
-		height: auto;
-		margin: 0;
-		gap: 1rem 1rem;
-	}
-	.details-select-products-item {
-		margin: 0.5rem 0;
-		width: 30%;
+		grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+		gap: 0.75rem;
 	}
 	.details-select-products-item h4 {
-		font-weight: 600;
 		font-size: 12px;
 	}
 }
