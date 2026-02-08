@@ -1,21 +1,34 @@
 <template>
 	<div class="page-blocks">
 		<section v-for="block in blocks" :key="block.id || block.name" class="page-block card-shadow">
-			<h3>{{ language === 'RU' ? block.title || block.name : block.title_en || block.name_en || block.name }}</h3>
+			<h3>{{ blockTitle(block) }}</h3>
 			<div class="page-block-contents">
 				<div v-for="content in block.contents || []" :key="content.id" class="page-block-content">
 					<div class="page-block-text">
-						<h4>{{ language === 'RU' ? content.name : content.name_en || content.name }}</h4>
-						<p v-html="language === 'RU' ? content.text : content.text_en || content.text" />
+						<h4 v-if="shouldShowContentTitle(block, content)">{{ contentTitle(content) }}</h4>
+						<p v-html="contentText(content)" />
 					</div>
-					<NuxtImg
-						v-if="content.file"
-						class="page-block-image"
-						:src="resolveImage(content.file)"
-						:alt="language === 'RU' ? content.name : content.name_en || content.name"
-						width="640"
-						height="420"
-						loading="lazy" />
+					<div v-if="contentFiles(content).length" class="page-block-media">
+						<NuxtImg
+							v-if="contentFiles(content).length === 1"
+							class="page-block-image"
+							:src="contentFiles(content)[0].src"
+							:alt="contentFiles(content)[0].alt || contentTitle(content)"
+							width="640"
+							height="420"
+							loading="lazy" />
+						<div v-else class="page-block-gallery">
+							<NuxtImg
+								v-for="fileItem in contentFiles(content)"
+								:key="fileItem.src"
+								class="page-block-gallery-image"
+								:src="fileItem.src"
+								:alt="fileItem.alt || contentTitle(content)"
+								width="140"
+								height="140"
+								loading="lazy" />
+						</div>
+					</div>
 				</div>
 			</div>
 		</section>
@@ -29,10 +42,55 @@ const props = defineProps<{
 	mediaBase: string
 }>()
 
+type FileSource = string | { file?: string; alt?: string } | Array<string | { file?: string; alt?: string }>
+
 const resolveImage = (src: unknown) => {
 	if (!src || typeof src !== 'string') return ''
 	if (src.startsWith('http')) return src
 	return `${props.mediaBase}${src.replace(/^\//, '')}`
+}
+
+const blockTitle = (block: any) => {
+	if (props.language === 'RU') {
+		return block.verbose_name || block.title || block.name || ''
+	}
+	return block.verbose_name_en || block.title_en || block.name_en || block.title || block.name || block.verbose_name || ''
+}
+
+const contentTitle = (content: any) => {
+	if (props.language === 'RU') return content.name || ''
+	return content.name_en || content.name || ''
+}
+
+const shouldShowContentTitle = (block: any, content: any) => {
+	const title = contentTitle(content).trim()
+	const blockLabel = blockTitle(block).trim()
+	if (!title) return false
+	return title.toLowerCase() !== blockLabel.toLowerCase()
+}
+
+const contentText = (content: any) => {
+	const raw = props.language === 'RU' ? content.text : content.text_en || content.text
+	return typeof raw === 'string' ? raw : ''
+}
+
+const contentFiles = (content: any) => {
+	const file = content?.file as FileSource | undefined
+	if (!file) return []
+	const filesArray = Array.isArray(file) ? file : [file]
+	return filesArray
+		.map((entry) => {
+			if (typeof entry === 'string') {
+				const src = resolveImage(entry)
+				return src ? { src, alt: '' } : null
+			}
+			if (entry && typeof entry === 'object' && 'file' in entry) {
+				const src = resolveImage(entry.file)
+				return src ? { src, alt: entry.alt || '' } : null
+			}
+			return null
+		})
+		.filter(Boolean) as Array<{ src: string; alt: string }>
 }
 </script>
 
@@ -41,6 +99,7 @@ const resolveImage = (src: unknown) => {
 	display: flex;
 	flex-direction: column;
 	gap: 1.5rem;
+	margin-top: 2rem;
 }
 .page-block {
 	padding: 1.5rem;
@@ -56,10 +115,32 @@ const resolveImage = (src: unknown) => {
 	gap: 1.5rem;
 	align-items: center;
 }
+.page-block-media {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
 .page-block-image {
 	width: 100%;
+	max-height: 360px;
 	height: auto;
 	border-radius: 12px;
+	object-fit: contain;
+}
+.page-block-gallery {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+	gap: 1rem;
+	align-items: center;
+}
+.page-block-gallery-image {
+	width: 100%;
+	max-height: 140px;
+	height: auto;
+	border-radius: 12px;
+	object-fit: contain;
+	background: #fff;
 }
 @media (max-width: 980px) {
 	.page-block-content {

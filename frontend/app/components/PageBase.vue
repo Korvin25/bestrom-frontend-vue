@@ -1,6 +1,6 @@
 <template>
 	<div v-if="page" class="page-base">
-		<section class="hero card-shadow">
+		<section v-if="showHero" class="hero card-shadow">
 			<h2>{{ language === 'RU' ? page.title : page.title_en || page.title }}</h2>
 			<p>{{ language === 'RU' ? page.description : page.description_en || page.description }}</p>
 		</section>
@@ -13,7 +13,15 @@ import { storeToRefs } from 'pinia'
 import { useAppStore } from '~/stores/app'
 import { useSeoFromPage } from '~/composables/useSeoFromPage'
 
-const props = defineProps<{ pageId: number }>()
+const props = withDefaults(
+	defineProps<{
+		pageId: number
+		showHero?: boolean
+	}>(),
+	{
+		showHero: true,
+	},
+)
 
 const appStore = useAppStore()
 const { language, serverMedia } = storeToRefs(appStore)

@@ -695,7 +695,7 @@ const activityImage = computed(() => {
 .slider-dots {
 	position: absolute;
 	left: 50%;
-	bottom: 0.5rem;
+	bottom: 1rem;
 	transform: translateX(-50%);
 	display: flex;
 	gap: 0.5rem;
