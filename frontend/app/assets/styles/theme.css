@@ -112,16 +112,17 @@ h5 {
 
 .input,
 .textarea {
+	padding: 0.55rem 1rem;
+	border: 1px solid rgba(15, 23, 42, 0.12);
+	border-radius: 14px;
+	font-size: 0.95rem;
 	background: #ffffff;
-	box-shadow: inset 0 0 10px -4px rgba(0, 0, 0, 0.5);
-	border-radius: 6px;
-	border: none;
-	padding: 0.5rem 1rem;
-	margin: 1rem 0;
+	box-shadow: 0 6px 16px rgba(15, 23, 42, 0.06);
+	transition: border-color 0.16s ease, box-shadow 0.16s ease, transform 0.16s ease;
+	margin: 0;
 	font-family: Montserrat, sans-serif;
 	font-style: normal;
 	font-weight: normal;
-	font-size: 12px;
 	line-height: 142%;
 	letter-spacing: 0.005em;
 	font-feature-settings: 'tnum' on, 'lnum' on;
@@ -131,12 +132,86 @@ h5 {
 
 .input:focus,
 .textarea:focus {
-	outline: rgba(47, 193, 255, 0.82) solid 0.2rem;
-	border-radius: 6px;
+	outline: none;
+	border-color: rgba(14, 165, 233, 0.7);
+	background: #ffffff;
+	transform: translateY(0);
 }
 .input::placeholder,
 .textarea::placeholder {
-	color: #c4c4c4;
+	color: rgba(15, 23, 42, 0.35);
+}
+
+.catalog-empty-card {
+	padding: 2rem 2.5rem;
+	display: flex;
+	flex-direction: column;
+	gap: 1.25rem;
+	border-radius: 18px;
+	border: 1px solid rgba(15, 23, 42, 0.08);
+	box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+}
+.form-call {
+	display: flex;
+	flex-direction: column;
+	gap: 0.75rem;
+}
+.form-call .input,
+.form-call .textarea {
+	margin: 0;
+}
+.form-call .call.btn {
+	align-self: flex-start;
+}
+.call.btn {
+	padding: 0.55rem 1.4rem;
+	height: 40px;
+	border-radius: 999px;
+	background: #38bdf8;
+	color: #ffffff;
+	font-weight: 600;
+	font-size: 0.85rem;
+	box-shadow: 0 6px 16px rgba(56, 189, 248, 0.35);
+	border: none;
+	cursor: pointer;
+	transition: transform 0.16s ease, box-shadow 0.16s ease, background 0.16s ease;
+}
+.call.btn:hover {
+	transform: translateY(-1px);
+	box-shadow: 0 10px 20px rgba(56, 189, 248, 0.4);
+	background: #2fc1ff;
+}
+.call-method {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.6rem;
+	justify-content: flex-start;
+}
+.contact-icon {
+	border: 1px solid rgba(15, 23, 42, 0.12);
+	background: #ffffff;
+	width: 40px;
+	height: 40px;
+	border-radius: 12px;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	transition: transform 0.16s ease, box-shadow 0.16s ease, border-color 0.16s ease;
+}
+.contact-icon img {
+	width: 22px;
+	height: 22px;
+	object-fit: contain;
+}
+.contact-icon.active {
+	border-color: rgba(14, 165, 233, 0.5);
+	box-shadow: 0 6px 16px rgba(14, 165, 233, 0.18);
+	transform: translateY(-1px);
+}
+.contact-icon:hover {
+	border-color: rgba(15, 23, 42, 0.2);
+	box-shadow: 0 6px 14px rgba(15, 23, 42, 0.1);
 }
 
 .modal-enter-active {

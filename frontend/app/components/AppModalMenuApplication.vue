@@ -413,36 +413,50 @@ const removeInput = (id: number) => {
 	margin: 1rem -1rem;
 }
 .service-buttons .btn {
-	transition: all 0.3s;
 	flex-grow: 1;
 	width: 100%;
 	margin: 0 1rem;
-	box-shadow: inset 0 1px 10px 1px rgba(0, 0, 0, 0.25);
-	min-height: 3.5rem;
+	padding: 0.6rem 1.4rem;
+	min-height: 3.2rem;
+	border-radius: 999px;
+	background: #38bdf8;
+	color: #ffffff;
+	font-weight: 600;
+	font-size: 0.95rem;
+	box-shadow: 0 8px 20px rgba(56, 189, 248, 0.35);
+	border: none;
+	transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+}
+.service-buttons .btn:hover {
+	transform: translateY(-1px);
+	box-shadow: 0 12px 24px rgba(56, 189, 248, 0.45);
+	background: #2fc1ff;
 }
 .btn-disabled {
 	flex-grow: 1;
 	width: 100%;
 	margin: 0 1rem;
-	transition: all 0.3s;
-	background: #b8b8b8;
-	min-height: 3.5rem;
-	box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+	padding: 0.6rem 1.4rem;
+	min-height: 3.2rem;
+	background: #e2e8f0;
+	box-shadow: 0 6px 16px rgba(148, 163, 184, 0.35);
 	border: none;
-	border-radius: 6px;
+	border-radius: 999px;
 	font-family: Montserrat, sans-serif;
 	font-style: normal;
-	font-weight: bold;
-	font-size: 18px;
+	font-weight: 600;
+	font-size: 0.95rem;
 	line-height: 142%;
 	letter-spacing: 0.005em;
 	font-feature-settings: 'tnum' on, 'lnum' on;
-	color: #ffffff;
+	color: #64748b;
+	cursor: pointer;
+	transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
 }
 .btn-disabled:hover {
-	cursor: pointer;
-	transition: all 0.3s;
-	background: rgba(47, 193, 255, 0.5);
+	transform: translateY(-1px);
+	background: #cbd5f5;
+	box-shadow: 0 10px 20px rgba(148, 163, 184, 0.45);
 }
 .form-call p {
 	margin: 0;

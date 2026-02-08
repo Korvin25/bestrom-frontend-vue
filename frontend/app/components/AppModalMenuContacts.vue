@@ -114,10 +114,10 @@
 			</div>
 
 			<div class="call-buttons flex-row">
-				<button class="btn" @click="$emit('call')">
+				<button class="call btn" @click="$emit('call')">
 					{{ language === 'RU' ? 'ЗАКАЗАТЬ ЗВОНОК' : 'ORDER A CALL' }}
 				</button>
-				<button class="btn" @click="$emit('question')">
+				<button class="call btn" @click="$emit('question')">
 					{{ language === 'RU' ? 'ЗАДАТЬ ВОПРОС' : 'ASK A QUESTION' }}
 				</button>
 			</div>

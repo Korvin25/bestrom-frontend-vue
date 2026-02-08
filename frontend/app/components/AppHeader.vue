@@ -5,10 +5,10 @@
 			<h1>{{ language === 'RU' ? 'БЕСТРОМ' : 'BESTROM' }}</h1>
 		</NuxtLink>
 		<div class="header-actions flex-row">
-			<button class="btn" @click="showModalMenuContactsCall = true">
+			<button class="call btn" @click="showModalMenuContactsCall = true">
 				{{ language === 'RU' ? 'ЗАКАЗАТЬ ЗВОНОК' : 'ORDER A CALL' }}
 			</button>
-			<button class="btn" @click="showModalMenuContactsQuestion = true">
+			<button class="call btn" @click="showModalMenuContactsQuestion = true">
 				{{ language === 'RU' ? 'ЗАДАТЬ ВОПРОС' : 'ASK A QUESTION' }}
 			</button>
 			<button class="lang-toggle" type="button" @click="toggleLanguage">
@@ -29,9 +29,9 @@
 
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
-import { useAppStore } from '~/stores/app'
 import AppModalMenuContactsCall from '~/components/AppModalMenuContactsCall.vue'
 import AppModalMenuContactsQuestion from '~/components/AppModalMenuContactsQuestion.vue'
+import { useAppStore } from '~/stores/app'
 
 const appStore = useAppStore()
 const { language } = storeToRefs(appStore)
@@ -88,6 +88,7 @@ watch(showModalMenuContactsQuestion, (val) => lockBody(val))
 	border: 1px solid rgba(47, 193, 255, 0.3);
 	background: #ffffff;
 	padding: 0.4rem 0.75rem;
+	height: 48px;
 	border-radius: 999px;
 	cursor: pointer;
 	font-weight: 600;
