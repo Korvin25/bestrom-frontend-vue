@@ -312,22 +312,31 @@ const showModalMenuContactsClick = () => {
 	border-radius: 18px;
 }
 .nav-logo-items:hover + .nav-text-items {
+	width: 12rem;
+	padding: 0 2rem 0 0;
 	transform: scaleX(1);
+	pointer-events: auto;
 }
 .nav-text-items {
 	align-items: flex-start;
 	justify-content: space-around;
-	padding: 0 2rem 0 0;
 	height: 100%;
+	width: 0;
+	padding: 0;
+	overflow: hidden;
 	background: #ffffff;
 	box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
 	border-radius: 0 18px 18px 0;
 	transition: transform 0.2s ease, box-shadow 0.2s ease;
 	transform: scaleX(0);
 	transform-origin: 0 0;
+	pointer-events: none;
 }
 .nav-text-items:hover {
+	width: 12rem;
+	padding: 0 2rem 0 0;
 	transform: scaleX(1);
+	pointer-events: auto;
 }
 .nav-text-items .nav-item {
 	box-shadow: none;
