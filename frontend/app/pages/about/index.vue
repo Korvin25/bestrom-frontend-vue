@@ -469,6 +469,29 @@ const otherBlocks = computed<any[]>(() => {
 	padding: 1rem 0;
 	text-align: left;
 }
+.content-btn {
+	align-self: flex-start;
+	width: auto;
+	min-width: 160px;
+	height: 40px;
+	padding: 0.55rem 1.4rem;
+	border-radius: 999px;
+	background: #2fc1ff;
+	color: #ffffff;
+	font-size: 0.9rem;
+	font-weight: 600;
+	box-shadow: 0 6px 16px rgba(47, 193, 255, 0.35);
+	transition: transform 0.16s ease, box-shadow 0.16s ease, background 0.16s ease;
+}
+.content-btn:hover {
+	background: #22b2ee;
+	transform: translateY(-1px);
+	box-shadow: 0 10px 22px rgba(47, 193, 255, 0.4);
+}
+.content-btn:focus-visible {
+	outline: 3px solid rgba(47, 193, 255, 0.45);
+	outline-offset: 3px;
+}
 .video-player {
 	width: 100%;
 	min-height: 320px;
