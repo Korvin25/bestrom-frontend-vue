@@ -186,6 +186,55 @@ import { storeToRefs } from 'pinia';
 import { onBeforeUnmount, onMounted, ref, watch } from 'vue';
 import { useAppStore } from '~/stores/app';
 
+type FilterOption = {
+	id: number | string;
+	slug: string;
+	name: string;
+	name_en?: string;
+	preview_img?: string | null;
+	img?: string | null;
+	image?: string | null;
+	alt?: string | null;
+};
+
+type FilterCategory = {
+	id: number | string;
+	slug: string;
+	name: string;
+	name_en?: string;
+	Filters?: FilterOption[];
+};
+
+type Slide = {
+	id?: number | string;
+	img?: string | null;
+	preview_img?: string | null;
+	image?: string | null;
+	alt?: string | null;
+};
+
+type ProductSlide = Slide | string;
+
+type Product = {
+	id: number | string;
+	slug: string;
+	name: string;
+	name_en?: string;
+	mini_description?: string;
+	mini_description_en?: string;
+	description?: string;
+	description_en?: string;
+	preview_img?: string | null;
+	img?: string | null;
+	category_filters?: FilterOption[];
+	SliderProd?: ProductSlide[];
+};
+
+type PageItem = {
+	id?: number | string;
+	slug?: string;
+};
+
 const props = defineProps<{ radioSlug?: string; filterSlug?: string }>()
 
 const appStore = useAppStore()
@@ -193,21 +242,21 @@ const { language, serverMedia } = storeToRefs(appStore)
 const config = useRuntimeConfig()
 const router = useRouter()
 
-const { data: pageData } = await useFetch(`${config.public.apiBase}page/4/`)
-const { data: filtersData } = await useFetch(`${config.public.apiBase}filters/`)
-const { data: productsData } = await useFetch(`${config.public.apiBase}product/`)
+const { data: pageData } = await useFetch<PageItem[]>(`${config.public.apiBase}page/4/`)
+const { data: filtersData } = await useFetch<FilterCategory[]>(`${config.public.apiBase}filters/`)
+const { data: productsData } = await useFetch<Product[]>(`${config.public.apiBase}product/`)
 
 const page = computed(() => (pageData.value?.length ? pageData.value[0] : null))
 
-const filters = computed(() => filtersData.value || [])
-const products = computed(() => productsData.value || [])
+const filters = computed<FilterCategory[]>(() => filtersData.value || [])
+const products = computed<Product[]>(() => productsData.value || [])
 
 const selectedCategory = computed(() => props.radioSlug || filters.value?.[0]?.slug || '')
 const selectedFilter = computed(() => props.filterSlug || '')
 const isFiltersExpanded = ref(!selectedFilter.value)
 
-const selectedFilters = computed(() => {
-	const category = filters.value.find((item: any) => item.slug === selectedCategory.value)
+const selectedFilters = computed<FilterOption[]>(() => {
+	const category = filters.value.find((item) => item.slug === selectedCategory.value)
 	return category?.Filters || []
 })
 const selectedFilterLabel = computed(() => {
@@ -234,12 +283,12 @@ useSeoMeta({
 	ogDescription: seoDescription,
 })
 
-const computedProducts = computed(() => {
+const computedProducts = computed<Product[]>(() => {
 	let tempProducts = products.value.slice()
 	if (selectedFilter.value) {
-		tempProducts = tempProducts.filter((product: any) => {
+		tempProducts = tempProducts.filter((product) => {
 			if (Array.isArray(product.category_filters)) {
-				return product.category_filters.some((filter: any) => filter.slug === selectedFilter.value)
+				return product.category_filters.some((filter) => filter.slug === selectedFilter.value)
 			}
 			return false
 		})
@@ -301,9 +350,12 @@ const sendPost = async () => {
 const sliderIndexes = ref<Record<string, number>>({})
 const sliderIntervalId = ref<number | null>(null)
 
-const getProductSlides = (product: any) => {
+const normalizeSlide = (slide: ProductSlide): Slide =>
+	typeof slide === 'string' ? { img: slide } : slide
+
+const getProductSlides = (product: Product): Slide[] => {
 	if (Array.isArray(product?.SliderProd) && product.SliderProd.length > 0) {
-		return product.SliderProd
+		return product.SliderProd.map(normalizeSlide)
 	}
 	if (product?.preview_img || product?.img) {
 		return [{ id: `single-${product.id}`, img: product.preview_img || product.img }]
@@ -311,18 +363,17 @@ const getProductSlides = (product: any) => {
 	return []
 }
 
-const getSlideImage = (slide: any) => {
+const getSlideImage = (slide: Slide) => {
 	if (!slide) return ''
-	if (typeof slide === 'string') return slide
 	return slide.img || slide.preview_img || slide.image || ''
 }
 
-const getSlideAlt = (product: any, slide: any) => {
-	if (slide?.alt) return slide.alt
+const getSlideAlt = (product: Product, slide: Slide) => {
+	if (slide.alt) return slide.alt
 	return language.value === 'RU' ? product?.name : product?.name_en || product?.name || ''
 }
 
-const getProductSlideIndex = (product: any) => {
+const getProductSlideIndex = (product: Product) => {
 	const key = String(product?.id ?? '')
 	return sliderIndexes.value[key] ?? 0
 }
@@ -331,7 +382,7 @@ const tickProductSlides = () => {
 	if (!computedProducts.value?.length) return
 	const nextIndexes: Record<string, number> = { ...sliderIndexes.value }
 
-	computedProducts.value.forEach((product: any) => {
+	computedProducts.value.forEach((product) => {
 		const slides = product?.SliderProd
 		if (Array.isArray(slides) && slides.length > 1) {
 			const key = String(product.id)
@@ -347,7 +398,7 @@ watch(
 	computedProducts,
 	(items) => {
 		const nextIndexes: Record<string, number> = {}
-		items.forEach((product: any) => {
+		items.forEach((product) => {
 			const key = String(product?.id ?? '')
 			if (!key) return
 			nextIndexes[key] = sliderIndexes.value[key] ?? 0
