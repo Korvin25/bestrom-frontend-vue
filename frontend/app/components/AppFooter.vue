@@ -37,6 +37,7 @@ const { language } = storeToRefs(appStore)
 	justify-content: flex-start;
 	padding: 1rem 0 2rem 0;
 	border-top: 1px solid rgba(47, 193, 255, 0.2);
+	margin-top: 2rem;
 }
 .footer p {
 	margin-right: 4rem;

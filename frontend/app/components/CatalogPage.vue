@@ -81,6 +81,103 @@
 				</div>
 			</NuxtLink>
 		</section>
+		<section v-if="showNoProductsForm" class="section catalog-empty">
+			<div class="catalog-empty-card card-shadow">
+				<h2>{{ language === 'RU' ? 'Отправьте нам вашу заявку' : 'Send us your application' }}</h2>
+				<section class="form-call flex-column">
+					<label for="company">{{ language === 'RU' ? 'Компания' : 'Company' }}</label>
+					<input
+						id="company"
+						v-model="inputCompany"
+						type="text"
+						class="input"
+						:placeholder="language === 'RU' ? 'БЕСТРОМ' : 'BESTROM'" />
+					<label for="fio">{{ language === 'RU' ? 'Ф.И.О' : 'Full name' }}</label>
+					<input
+						id="fio"
+						v-model="inputName"
+						type="text"
+						class="input"
+						:placeholder="language === 'RU' ? 'Иван Иванович' : 'Ivan Ivanovich'" />
+					<label for="telephone">{{ language === 'RU' ? 'Телефон' : 'Telephone' }}</label>
+					<input
+						id="telephone"
+						v-model="inputTelephone"
+						type="text"
+						class="input"
+						placeholder="89199966203" />
+					<label for="email">E-mail</label>
+					<input
+						id="email"
+						v-model="inputEmail"
+						type="text"
+						class="input"
+						placeholder="partner@thedimension.com" />
+					<label for="product">{{ language === 'RU' ? 'Продукт' : 'Product' }}</label>
+					<input
+						id="product"
+						v-model="inputProduct"
+						type="text"
+						class="input"
+						:placeholder="language === 'RU' ? 'Фисташки' : 'Pistachio'" />
+					<label for="weight">{{ language === 'RU' ? 'Дозировка' : 'Dosage' }}</label>
+					<input
+						id="weight"
+						v-model="inputDosage"
+						type="text"
+						class="input"
+						:placeholder="language === 'RU' ? '100г' : '100g'" />
+					<label for="speed">
+						{{ language === 'RU' ? 'Требуемая производительность' : 'Required performance' }}
+					</label>
+					<input
+						id="speed"
+						v-model="inputPerformance"
+						type="text"
+						class="input"
+						:placeholder="language === 'RU' ? '60 п/м' : '60 p/m'" />
+					<p>{{ language === 'RU' ? 'Удобный способ связи' : 'Convenient way of communication' }}</p>
+					<div class="call-method flex-row">
+						<button
+							type="button"
+							class="contact-icon"
+							:class="inputCommunication === 'WhatsApp' ? 'active' : ''"
+							aria-label="WhatsApp"
+							@click="inputCommunication = 'WhatsApp'">
+							<img src="/assets/whatsapp.png" alt="WhatsApp" />
+						</button>
+						<button
+							type="button"
+							class="contact-icon"
+							:class="inputCommunication === 'Telegram' ? 'active' : ''"
+							aria-label="Telegram"
+							@click="inputCommunication = 'Telegram'">
+							<img src="/assets/telegram.png" alt="Telegram" />
+						</button>
+						<button
+							type="button"
+							class="contact-icon"
+							:class="inputCommunication === 'Viber' ? 'active' : ''"
+							aria-label="Viber"
+							@click="inputCommunication = 'Viber'">
+							<img src="/assets/viber.png" alt="Viber" />
+						</button>
+						<button
+							type="button"
+							class="contact-icon"
+							:class="inputCommunication === 'E-Mail' ? 'active' : ''"
+							aria-label="E-Mail"
+							@click="inputCommunication = 'E-Mail'">
+							<img src="/assets/email.png" alt="E-Mail" />
+						</button>
+					</div>
+					<button class="call btn" @click="sendPost">
+						{{ language === 'RU' ? 'ОТПРАВИТЬ ЗАЯВКУ' : 'SEND AN APPLICATION' }}
+					</button>
+					<h4 v-if="statusSend.length > 0" class="send-status">{{ statusSend }}</h4>
+				</section>
+			</div>
+		</section>
 	</div>
 </template>
 
@@ -149,6 +246,57 @@ const computedProducts = computed(() => {
 	}
 	return tempProducts
 })
+const showNoProductsForm = computed(
+	() => Array.isArray(productsData.value) && computedProducts.value.length === 0
+)
+
+const inputCompany = ref('')
+const inputName = ref('')
+const inputTelephone = ref('')
+const inputEmail = ref('')
+const inputProduct = ref('')
+const inputDosage = ref('')
+const inputPerformance = ref('')
+const inputCommunication = ref('')
+const statusSend = ref('')
+
+const sendPost = async () => {
+	if (
+		(inputTelephone.value.length > 10 || (inputEmail.value.includes('@') && inputEmail.value.length > 6)) &&
+		inputName.value.length > 0 &&
+		inputProduct.value.length > 0 &&
+		inputCompany.value.length > 0 &&
+		inputDosage.value.length > 0 &&
+		inputPerformance.value.length > 0
+	) {
+		try {
+			await $fetch(`${appStore.server}forms/`, {
+				method: 'POST',
+				body: {
+					type: 'Заявка',
+					telephone: inputTelephone.value,
+					email: inputEmail.value,
+					name: inputName.value,
+					other: `Компания: ${inputCompany.value}, Продукт: ${inputProduct.value}, Дозировка: ${inputDosage.value}, Производительность: ${inputPerformance.value}, Удобный способ связи: ${inputCommunication.value}`,
+				},
+			})
+			inputCompany.value = ''
+			inputTelephone.value = ''
+			inputName.value = ''
+			inputEmail.value = ''
+			inputProduct.value = ''
+			inputDosage.value = ''
+			inputPerformance.value = ''
+			inputCommunication.value = ''
+			statusSend.value = language.value === 'RU' ? 'Заявка успешно отправлена!' : 'Request sent!'
+		} catch (error: any) {
+			statusSend.value = `${language.value === 'RU' ? 'Ошибка отправки заявки!' : 'Send error!'} ${error}`
+			console.error(error)
+		}
+	} else {
+		alert(language.value === 'RU' ? 'Проверьте правильность ввода всех полей!' : 'Check all fields!')
+	}
+}
 
 const sliderIndexes = ref<Record<string, number>>({})
 const sliderIntervalId = ref<number | null>(null)
@@ -513,6 +661,83 @@ const resolveImage = (src: unknown) => {
 .catalog-card-image.active {
 	opacity: 1;
 	transform: translateY(0) scale(1);
+}
+.catalog-empty {
+	margin-top: 2rem;
+}
+.catalog-empty-card {
+	padding: 2rem 2.5rem;
+	display: flex;
+	flex-direction: column;
+	gap: 1.25rem;
+	border-radius: 18px;
+	border: 1px solid rgba(15, 23, 42, 0.08);
+	box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+}
+.form-call {
+	display: flex;
+	flex-direction: column;
+	gap: 0.75rem;
+}
+.form-call .input {
+	padding: 0.55rem 1rem;
+	border: 1px solid rgba(15, 23, 42, 0.12);
+	border-radius: 14px;
+	font-size: 0.95rem;
+	background: #ffffff;
+	box-shadow: 0 6px 16px rgba(15, 23, 42, 0.06);
+	transition: border-color 0.16s ease, box-shadow 0.16s ease, transform 0.16s ease;
+	margin: 0;
+}
+.form-call .input:focus {
+	outline: none;
+	border-color: rgba(14, 165, 233, 0.7);
+	background: #ffffff;
+	transform: translateY(0);
+}
+.call-method {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.6rem;
+	justify-content: flex-start;
+}
+.contact-icon {
+	border: 1px solid rgba(15, 23, 42, 0.12);
+	background: #ffffff;
+	width: 40px;
+	height: 40px;
+	border-radius: 12px;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	transition: transform 0.16s ease, box-shadow 0.16s ease, border-color 0.16s ease;
+}
+.contact-icon img {
+	width: 22px;
+	height: 22px;
+	object-fit: contain;
+}
+.contact-icon.active {
+	border-color: rgba(14, 165, 233, 0.5);
+	box-shadow: 0 6px 16px rgba(14, 165, 233, 0.18);
+	transform: translateY(-1px);
+}
+.contact-icon:hover {
+	border-color: rgba(15, 23, 42, 0.2);
+	box-shadow: 0 6px 14px rgba(15, 23, 42, 0.1);
+}
+.catalog-empty .call.btn {
+	align-self: flex-start;
+	padding: 0.55rem 1.4rem;
+	border-radius: 999px;
+	background: #38bdf8;
+	color: #ffffff;
+	font-weight: 600;
+	font-size: 0.85rem;
+	box-shadow: 0 6px 16px rgba(56, 189, 248, 0.35);
+	border: none;
+	cursor: pointer;
 }
 @media (max-width: 900px) {
 	.catalog-card-body {
