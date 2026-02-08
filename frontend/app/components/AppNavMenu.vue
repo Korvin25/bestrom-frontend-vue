@@ -148,6 +148,17 @@
 					<img src="/assets/close-mobile-menu.png" alt="close" />
 				</button>
 				<p class="mobile-menu-title">{{ language === 'RU' ? 'Меню' : 'Menu' }}</p>
+				<div class="mobile-menu-footer">
+					<a href="https://vk.com/bestrom_official">
+						<img class="social-icon" src="/assets/vk.png" alt="VK" />
+					</a>
+					<a href="https://t.me/bestrom_official">
+						<img class="social-icon" src="/assets/telegram.png" alt="Telegram" />
+					</a>
+					<a href="https://rutube.ru/channel/38819375/">
+						<img class="social-icon" src="/assets/rutube1.png" alt="Rutube" />
+					</a>
+				</div>
 
 				<div class="mobile-menu-nav-items flex-column">
 					<NuxtLink
@@ -173,16 +184,19 @@
 					</button>
 				</div>
 
-				<div class="mobile-menu-footer">
-					<a href="https://vk.com/bestrom_official">
-						<img class="social-icon" src="/assets/vk.png" alt="VK" />
-					</a>
-					<a href="https://t.me/bestrom_official">
-						<img class="social-icon" src="/assets/telegram.png" alt="Telegram" />
-					</a>
-					<a href="https://rutube.ru/channel/38819375/">
-						<img class="social-icon" src="/assets/rutube1.png" alt="Rutube" />
-					</a>
+				<div class="mobile-menu-nav-bottom">
+					<button class="mobile-menu-nav-bottom-item" type="button" @click="showModalMenuApplicationClick">
+						<img src="/assets/menu-mobile-call.png" alt="application" />
+						<span>{{ language === 'RU' ? 'Заявка' : 'Application' }}</span>
+					</button>
+					<button class="mobile-menu-nav-bottom-item" type="button" @click="showModalMenuContactsQuestionFunc">
+						<img src="/assets/menu-mobile-message.png" alt="message" />
+						<span>{{ language === 'RU' ? 'Написать' : 'Write a message' }}</span>
+					</button>
+					<button class="mobile-menu-nav-bottom-item" type="button" @click="showModalMenuContactsClick">
+						<img src="/assets/menu-mobile-contacts.png" alt="contacts" />
+						<span>{{ language === 'RU' ? 'Контакты' : 'Contacts' }}</span>
+					</button>
 				</div>
 			</nav>
 		</transition-group>
@@ -507,7 +521,7 @@ const showModalMenuContactsClick = () => {
 		line-height: 142%;
 	}
 	.mobile-menu-nav-items {
-		margin-top: 1.5rem;
+		margin-top: 1rem;
 		gap: 0.75rem;
 	}
 	.nav-mobile-item {
@@ -546,12 +560,63 @@ const showModalMenuContactsClick = () => {
 		padding: 0.35rem;
 		box-shadow: 0 6px 14px rgba(15, 23, 42, 0.1);
 	}
-	.mobile-menu-footer {
+	.mobile-menu-nav-bottom {
 		margin-top: auto;
+		padding-bottom: 1rem;
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 0.75rem;
+	}
+	.mobile-menu-nav-bottom-item {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		gap: 0.5rem;
+		padding: 0.75rem 0.5rem;
+		background: #ffffff;
+		border: 1px solid rgba(15, 23, 42, 0.08);
+		border-radius: 16px;
+		box-shadow: 0 8px 18px rgba(15, 23, 42, 0.08);
+		font-size: 12px;
+		font-weight: 600;
+		color: #334155;
+		transition: transform 0.16s ease, box-shadow 0.16s ease, border-color 0.16s ease;
+	}
+	.mobile-menu-nav-bottom-item:active {
+		transform: translateY(1px);
+		box-shadow: 0 6px 12px rgba(15, 23, 42, 0.08);
+	}
+	.mobile-menu-nav-bottom-item img {
+		width: 24px;
+		height: 24px;
+	}
+	.mobile-menu-footer {
 		display: flex;
 		justify-content: center;
-		gap: 1.5rem;
-		padding-top: 1.5rem;
+		gap: 0.75rem;
+		padding: 1.25rem 0 0;
+	}
+	.mobile-menu-footer a {
+		width: 44px;
+		height: 44px;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		border-radius: 14px;
+		background: #ffffff;
+		border: 1px solid rgba(15, 23, 42, 0.08);
+		box-shadow: 0 8px 18px rgba(15, 23, 42, 0.12);
+		transition: transform 0.16s ease, box-shadow 0.16s ease, border-color 0.16s ease;
+	}
+	.mobile-menu-footer a:active {
+		transform: translateY(1px);
+		box-shadow: 0 6px 12px rgba(15, 23, 42, 0.1);
+	}
+	.social-icon {
+		width: 22px;
+		height: 22px;
+		filter: brightness(0.45) contrast(1.2);
 	}
 	.mobile-menu-modal-enter-active {
 		animation: mobile-menu-modal-in 0.4s;
