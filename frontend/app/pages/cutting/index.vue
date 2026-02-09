@@ -102,9 +102,9 @@
 
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
+import { useSeoFromPage } from '~/composables/useSeoFromPage'
 import { useAppStore } from '~/stores/app'
 import { usePacketsStore } from '~/stores/packets'
-import { useSeoFromPage } from '~/composables/useSeoFromPage'
 
 // --- Типы ---
 interface PacketItem {
@@ -302,8 +302,7 @@ const routerPush = () => {
 .packet-card.active {
 	background: #ffffff;
 	border-color: #38bdf8;
-	border-width: 2px;
-	box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15), 0 8px 40px rgba(56, 189, 248, 0.2);
+	border-width: 1px;
 	transform: translateY(-3px);
 }
 .packet-card.active:hover {
@@ -361,8 +360,7 @@ const routerPush = () => {
 .seam-card.active {
 	background: #ffffff;
 	border-color: #38bdf8;
-	border-width: 2px;
-	box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15), 0 8px 40px rgba(56, 189, 248, 0.2);
+	border-width: 1px;
 	transform: translateY(-3px);
 }
 .seam-card.active:hover {
