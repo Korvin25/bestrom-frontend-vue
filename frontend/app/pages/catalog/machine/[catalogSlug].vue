@@ -754,6 +754,11 @@ onBeforeUnmount(() => {
 	font-size: 11px;
 	font-weight: 600;
 }
+.main-swiper :deep(.swiper-button-next svg),
+.main-swiper :deep(.swiper-button-prev svg) {
+	width: 50%;
+	height: 50%;
+}
 
 @media (max-width: 1220px) {
 	.desktop-section.details-select {
