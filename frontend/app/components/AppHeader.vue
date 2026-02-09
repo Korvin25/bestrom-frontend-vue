@@ -84,6 +84,7 @@ watch(showModalMenuContactsQuestion, (val) => lockBody(val))
 	max-width: 1280px;
 	margin: 0 auto;
 	padding: 0.65rem 24px;
+	box-sizing: border-box;
 }
 .header-title {
 	display: flex;
@@ -153,6 +154,12 @@ watch(showModalMenuContactsQuestion, (val) => lockBody(val))
 .lang-icon {
 	width: 20px;
 	height: 20px;
+}
+@media (max-width: 1360px) {
+	.header-container {
+		padding-left: calc(24px + 72px);
+		padding-right: 24px;
+	}
 }
 @media (max-width: 980px) {
 	.header .btn {
