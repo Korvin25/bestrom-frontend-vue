@@ -2,63 +2,78 @@
 	<div v-if="page" class="cutting-page">
 		<!-- Тип пакета -->
 		<section v-if="packets.length > 0" id="packetType" class="section">
-			<h2>{{ language === 'RU' ? 'Тип пакета' : 'Package type' }}</h2>
+			<h2 class="section-title">{{ language === 'RU' ? 'Тип пакета' : 'Package type' }}</h2>
 
 			<!-- Мобильный слайдер -->
 			<div class="packet-mobile">
-				<div class="packet-slider">
-					<div ref="packetTrack" class="packet-track">
-						<template v-for="packet in activePackets" :key="packet.essid">
-							<a
-								:class="{ 'check-item': checkType === packet.essid }"
-								class="packet-type-item flex-column card-shadow"
-								href="#packetSeam"
-								@click.prevent="selectType(packet.essid)">
-								<div class="hidden-overlay" />
-								<img :src="resolveImage(packet.img)" :alt="packet.alt" />
-								<p>{{ language === 'RU' ? packet.name : packet.name_en }}</p>
-							</a>
-						</template>
+				<div class="packet-track">
+					<div
+						v-for="packet in activePackets"
+						:key="packet.essid"
+						:class="{ active: checkType === packet.essid }"
+						class="packet-card"
+						@click="selectType(packet.essid)">
+						<NuxtImg
+							:src="resolveImage(packet.img)"
+							:alt="packet.alt"
+							fit="contain"
+							background="ffffff"
+							width="160"
+							height="120" />
+						<p class="packet-card-name">{{ language === 'RU' ? packet.name : packet.name_en }}</p>
 					</div>
 				</div>
 			</div>
 
 			<!-- Десктопная сетка -->
-			<div class="packet-desktop packet-type flex-row">
-				<div
-					v-for="packet in activePackets"
-					:key="packet.essid"
-					:class="{ 'check-item': checkType === packet.essid }"
-					class="packet-type-item flex-column card-shadow">
-					<a href="#packetSeam" @click.prevent="selectType(packet.essid)">
-						<h3>{{ language === 'RU' ? packet.name : packet.name_en }}</h3>
-						<img :src="resolveImage(packet.img)" :alt="packet.alt" />
-						<div class="hidden-overlay" />
-					</a>
+			<div class="packet-desktop">
+				<div class="packet-grid">
+					<div
+						v-for="packet in activePackets"
+						:key="packet.essid"
+						:class="{ active: checkType === packet.essid }"
+						class="packet-card"
+						@click="selectType(packet.essid)">
+						<h3 class="packet-card-title">{{ language === 'RU' ? packet.name : packet.name_en }}</h3>
+						<NuxtImg
+							class="packet-card-image"
+							:src="resolveImage(packet.img)"
+							:alt="packet.alt"
+							fit="contain"
+							background="ffffff"
+							width="160"
+							height="120" />
+					</div>
 				</div>
 			</div>
 		</section>
 
 		<!-- Тип шва -->
 		<section v-if="packetsSeams.length > 0" id="packetSeam" class="section">
-			<h2>{{ language === 'RU' ? 'Тип шва' : 'Seam type' }}</h2>
-			<div class="packets-seam flex-row card-shadow">
+			<h2 class="section-title">{{ language === 'RU' ? 'Тип шва' : 'Seam type' }}</h2>
+			<div class="seam-grid">
 				<div
 					v-for="seam in packetsSeams"
 					:key="seam.essid"
-					:class="{ 'check-item': checkSeam === seam.essid }"
-					class="packets-seam-item flex-column card-shadow"
+					:class="{ active: checkSeam === seam.essid }"
+					class="seam-card"
 					@click="selectSeam(seam.essid)">
-					<div class="hidden-overlay" />
-					<img :src="resolveImage(seam.img)" :alt="seam.alt" />
-					<p>{{ language === 'RU' ? seam.name : seam.name_en }}</p>
+					<NuxtImg
+						class="seam-card-image"
+						:src="resolveImage(seam.img)"
+						:alt="seam.alt"
+						fit="contain"
+						background="ffffff"
+						width="140"
+						height="100" />
+					<p class="seam-card-name">{{ language === 'RU' ? seam.name : seam.name_en }}</p>
 				</div>
 			</div>
 		</section>
 
 		<!-- Кнопка подбора -->
-		<div class="router-button">
-			<button class="cutting-btn btn" type="button" @click="routerPush">
+		<div class="action-row">
+			<button class="action-btn btn" type="button" @click="routerPush">
 				{{ language === 'RU' ? 'Подобрать' : 'Pick up' }}
 			</button>
 		</div>
@@ -180,7 +195,8 @@ const smoothScrollTo = (elementId: string) => {
 	if (!import.meta.client) return
 	const el = document.getElementById(elementId)
 	if (el) {
-		el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+		const top = el.getBoundingClientRect().top + window.scrollY - 80
+		window.scrollTo({ top, behavior: 'smooth' })
 	}
 }
 
@@ -207,10 +223,8 @@ const selectSeam = (essid: number) => {
 // --- Навигация с валидацией ---
 const routerPush = () => {
 	if (checkType.value === null) {
-		// Открыть форму «Подобрать раскрой»
 		showModalCuttingPickUp.value = true
 	} else if (checkType.value !== 0 && checkSeam.value !== 0) {
-		// Перейти к расчёту
 		router.push(`/cutting/${checkType.value}/${checkSeam.value}`)
 		if (import.meta.client) {
 			window.scrollTo(0, 0)
@@ -236,202 +250,229 @@ const routerPush = () => {
 <style scoped>
 .cutting-page {
 	width: 100%;
+	gap: 1.5rem;
+	display: flex;
+	flex-direction: column;
 }
-.hero {
-	padding: 2rem;
-	margin-bottom: 2rem;
+
+/* --- Секции: отступ для фиксированной шапки при скролле --- */
+#packetType,
+#packetSeam {
+	scroll-margin-top: 6rem;
+	padding-top: 1rem;
 }
-.packet-type {
-	flex-wrap: wrap;
-	margin: 0 -1rem;
+
+/* --- Заголовки секций --- */
+.section-title {
+	font-weight: 700;
+	font-size: clamp(1.5rem, 1rem + 1.2vw, 2.2rem);
+	letter-spacing: 0.01em;
+	color: #0f172a;
+	margin: 0 0 1.25rem 0;
 }
-.packet-type-item {
+
+/* --- Сетка типов пакетов (десктоп) --- */
+.packet-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+	gap: 1rem;
+}
+
+/* --- Карточка пакета --- */
+.packet-card {
 	position: relative;
-	width: 11rem;
-	flex-grow: 1;
-	margin: 1rem;
-	text-align: center;
-	justify-content: space-between;
-	align-items: center;
-	padding: 1rem;
-	cursor: pointer;
-	border-radius: 16px;
-	border: 1px solid rgba(0, 0, 0, 0.04);
-	transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
-}
-.packet-type-item:hover {
-	transform: translateY(-4px);
-	border-color: rgba(47, 193, 255, 0.35);
-	box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
-}
-.packet-type-item a {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	text-decoration: none;
-	color: inherit;
-	width: 100%;
-}
-.packet-type-item h3 {
-	margin-bottom: 1rem;
-	align-self: normal;
-}
-.packet-type-item img,
-.packets-seam-item img {
-	max-width: 10rem;
-}
-.packets-seam {
-	padding: 1rem;
-	flex-wrap: wrap;
-}
-.packets-seam-item {
-	position: relative;
-	margin: 1rem;
-	width: 8rem;
-	flex-grow: 1;
-	text-align: center;
 	justify-content: space-between;
-	align-items: center;
-	padding: 1rem;
-	cursor: pointer;
-	border-radius: 16px;
-	border: 1px solid rgba(0, 0, 0, 0.04);
-	transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
-}
-.packets-seam-item:hover {
-	transform: translateY(-4px);
-	border-color: rgba(47, 193, 255, 0.35);
-	box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
-}
-.packets-seam-item p {
-	font-size: 1.2rem;
-	margin: 2rem 0 1rem 0;
-}
-.cutting-btn {
-	width: auto;
-	height: auto;
-	padding: 0.75rem 2.5rem;
-	font-size: 1.5rem;
-	border-radius: 999px;
-	background: linear-gradient(135deg, #38bdf8, #2fc1ff);
-	box-shadow: 0 12px 24px rgba(56, 189, 248, 0.35);
-	transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-.cutting-btn:hover {
-	transform: translateY(-2px);
-	box-shadow: 0 16px 30px rgba(56, 189, 248, 0.45);
-}
-.router-button {
-	margin: 2rem 0;
-	align-self: center;
-	display: flex;
-	justify-content: center;
-}
-.check-item {
-	transition: all 0.3s ease;
+	text-align: center;
+	padding: 1.25rem 1rem;
+	border-radius: 18px;
 	background: #ffffff;
-	box-shadow: 0 4px 16px 4px rgba(47, 193, 255, 0.5);
-	border-color: rgba(47, 193, 255, 0.6);
-	border-radius: 16px;
-}
-.hidden-overlay {
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
+	border: 1px solid rgba(15, 23, 42, 0.06);
+	box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
 	cursor: pointer;
-	background: linear-gradient(135deg, rgba(14, 165, 233, 0.7), rgba(59, 130, 246, 0.7));
-	border-radius: 16px;
-	transition: opacity 0.25s ease;
-	opacity: 0;
-	z-index: 1;
+	transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, background 0.2s ease;
 }
-.packet-type-item:hover .hidden-overlay,
-.packets-seam-item:hover .hidden-overlay {
-	opacity: 1;
+.packet-card:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 16px 28px rgba(15, 23, 42, 0.14);
+	border-color: rgba(56, 189, 248, 0.25);
+}
+.packet-card.active {
+	background: #ffffff;
+	border-color: #38bdf8;
+	border-width: 2px;
+	box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15), 0 8px 40px rgba(56, 189, 248, 0.2);
+	transform: translateY(-3px);
+}
+.packet-card.active:hover {
+	box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2), 0 12px 50px rgba(56, 189, 248, 0.25);
+}
+.packet-card-title {
+	font-weight: 600;
+	font-size: 0.95rem;
+	color: #0f172a;
+	margin: 0 0 0.75rem 0;
+	line-height: 1.3;
+}
+.packet-card-image {
+	max-width: 100%;
+	height: auto;
+	object-fit: contain;
+	display: block;
+}
+.packet-card-name {
+	font-weight: 600;
+	font-size: 0.85rem;
+	color: #475569;
+	margin: 0.75rem 0 0 0;
+	line-height: 1.3;
 }
 
-/* Мобильный слайдер */
-.packet-slider {
-	position: relative;
+/* --- Сетка типов швов --- */
+.seam-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+	gap: 1rem;
 }
+
+/* --- Карточка шва --- */
+.seam-card {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
+	text-align: center;
+	padding: 1.25rem 1rem;
+	border-radius: 18px;
+	background: #ffffff;
+	border: 1px solid rgba(15, 23, 42, 0.06);
+	box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
+	cursor: pointer;
+	transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+.seam-card:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 16px 28px rgba(15, 23, 42, 0.14);
+	border-color: rgba(56, 189, 248, 0.25);
+}
+.seam-card.active {
+	background: #ffffff;
+	border-color: #38bdf8;
+	border-width: 2px;
+	box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15), 0 8px 40px rgba(56, 189, 248, 0.2);
+	transform: translateY(-3px);
+}
+.seam-card.active:hover {
+	box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2), 0 12px 50px rgba(56, 189, 248, 0.25);
+}
+.seam-card-image {
+	max-width: 100%;
+	height: auto;
+	object-fit: contain;
+	display: block;
+}
+.seam-card-name {
+	font-weight: 600;
+	font-size: 0.85rem;
+	color: #475569;
+	margin: 0.75rem 0 0 0;
+	line-height: 1.3;
+}
+
+/* --- Кнопка действия --- */
+.action-row {
+	display: flex;
+	justify-content: center;
+	padding: 0.5rem 0;
+}
+.action-btn {
+	padding: 0.9rem 2.5rem;
+	border-radius: 999px;
+	border: none;
+	font-weight: 600;
+	font-size: 1.1rem;
+	letter-spacing: 0.02em;
+	color: #ffffff;
+	background: linear-gradient(135deg, #38bdf8, #2fc1ff);
+	box-shadow: 0 10px 24px rgba(56, 189, 248, 0.35);
+	transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
+}
+.action-btn:hover {
+	transform: translateY(-1px);
+	box-shadow: 0 14px 30px rgba(56, 189, 248, 0.45);
+	filter: brightness(1.03);
+}
+
+/* --- Мобильный слайдер --- */
 .packet-track {
 	display: flex;
-	gap: 1rem;
+	gap: 0.75rem;
 	overflow-x: auto;
 	scroll-snap-type: x mandatory;
 	scroll-behavior: smooth;
-	padding: 1rem 0;
+	padding: 0.5rem 0 1rem;
 	scrollbar-width: none;
 }
 .packet-track::-webkit-scrollbar {
 	display: none;
 }
-.packet-track .packet-type-item {
-	flex: 0 0 70%;
+.packet-track .packet-card {
+	flex: 0 0 60%;
 	scroll-snap-align: center;
-	margin: 0;
 }
 
-/* Десктоп / мобайл переключение */
+/* --- Десктоп / мобайл переключение --- */
 .packet-desktop {
-	display: flex;
+	display: block;
 }
 .packet-mobile {
 	display: none;
 }
 
 @media (max-width: 980px) {
+	.cutting-page {
+		gap: 1rem;
+	}
 	.packet-desktop {
 		display: none;
 	}
 	.packet-mobile {
 		display: block;
 	}
-	h2 {
-		margin-bottom: 0;
+	.section-title {
+		margin: 0 0 0.75rem 0;
 	}
-	.flex-row {
-		flex-wrap: wrap;
+	.seam-grid {
+		grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+		gap: 0.75rem;
 	}
-	.packet-type-item {
-		align-self: stretch;
-		margin: 0.5rem;
+	.packet-card,
+	.seam-card {
+		padding: 1rem 0.75rem;
 	}
-	.packets-seam {
-		padding: 0;
-		box-shadow: none;
-	}
-	.packets-seam-item {
-		margin: 0.5rem;
-		align-items: center;
-		width: 40%;
-		flex-grow: 1;
-	}
-	.router-button {
+	.action-btn {
 		width: 100%;
-	}
-	.cutting-btn {
-		font-size: 20px;
-		width: 90%;
-	}
-	.packet-type-item:hover .hidden-overlay,
-	.packets-seam-item:hover .hidden-overlay {
-		opacity: 0;
+		font-size: 1rem;
 	}
 }
 
 @media (max-width: 675px) {
-	.packet-type-item img,
-	.packets-seam-item img {
-		width: 4rem;
+	.seam-grid {
+		grid-template-columns: repeat(3, 1fr);
+		gap: 0.5rem;
 	}
-	.packets-seam-item {
-		width: 30%;
+	.packet-card-name,
+	.seam-card-name {
+		font-size: 0.75rem;
 	}
-	.packets-seam-item p {
-		font-size: 14px;
+	.packet-card-title {
+		font-size: 0.8rem;
+	}
+	.packet-track .packet-card {
+		flex: 0 0 55%;
 	}
 }
 </style>
