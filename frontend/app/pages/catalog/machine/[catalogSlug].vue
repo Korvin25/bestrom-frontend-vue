@@ -3,26 +3,42 @@
 		<section class="section">
 			<h2>{{ productTitle }}</h2>
 
-			<div class="slider-content card-shadow">
-				<Swiper
-					v-if="sliderItems.length"
-					:modules="swiperModules"
-					:slides-per-view="1"
-					:space-between="16"
-					:loop="sliderItems.length > 1"
-					:navigation="sliderItems.length > 1"
-					:pagination="sliderItems.length > 1 ? { clickable: true } : false">
-					<SwiperSlide v-for="slide in sliderItems" :key="slide.id || slide.img">
+		<div class="slider-content card-shadow">
+			<Swiper
+				v-if="sliderItems.length"
+				class="main-swiper"
+				:modules="[Navigation]"
+				:slides-per-view="1"
+				:space-between="16"
+				:navigation="sliderItems.length > 1"
+				@swiper="onMainSwiper"
+				@slideChange="onSlideChange">
+				<SwiperSlide v-for="slide in sliderItems" :key="slide.id || slide.img">
+					<div class="slide-center">
 						<img
 							class="catalog-item-card-image"
 							:src="resolveMedia(slide.img)"
 							:alt="slide.alt || productTitle" />
-					</SwiperSlide>
-				</Swiper>
-				<div v-else class="flex-row else-flex">
-					<img class="catalog-item-card-image" src="/assets/no-image.jpg" alt="no-image" />
+					</div>
+				</SwiperSlide>
+			</Swiper>
+			<div v-else class="flex-row else-flex">
+				<img class="catalog-item-card-image" src="/assets/no-image.jpg" alt="no-image" />
+			</div>
+
+			<div v-if="sliderItems.length > 1" class="thumbs-row">
+				<div
+					v-for="(slide, index) in sliderItems"
+					:key="`thumb-${slide.id || slide.img}`"
+					:class="['thumb-item', { active: index === activeSlide }]"
+					@click="goToSlide(Number(index))">
+					<img
+						class="thumb-image"
+						:src="resolveMedia(slide.img)"
+						:alt="slide.alt || productTitle" />
 				</div>
 			</div>
+		</div>
 
 			<div class="buttons-section catalog-ig-buttons flex-row">
 				<button class="btn" type="button" @click="showModalCall = true">
@@ -263,6 +279,20 @@ const resolveMedia = (src: unknown) => {
 
 const sliderItems = computed(() => product.value?.SliderProd || [])
 const swiperModules = [Navigation, Pagination]
+const mainSwiper = ref<any>(null)
+const activeSlide = ref(0)
+
+const onMainSwiper = (swiper: any) => {
+	mainSwiper.value = swiper
+}
+const onSlideChange = (swiper: any) => {
+	activeSlide.value = swiper.realIndex
+}
+const goToSlide = (index: number) => {
+	if (mainSwiper.value) {
+		mainSwiper.value.slideTo(index)
+	}
+}
 
 const aboutItems = [
 	{
@@ -394,22 +424,64 @@ onBeforeUnmount(() => {
 }
 .slider-content {
 	margin: 1.75rem 0 1rem 0;
-	padding: 1rem;
+	padding: 1.5rem 1rem 1rem;
 	border-radius: 20px;
 	background: #ffffff;
 	box-shadow: 0 12px 40px rgba(15, 23, 42, 0.08);
 }
+.main-swiper {
+	border-radius: 16px;
+}
+.slide-center {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 20rem;
+	padding: 1rem 2.5rem;
+}
 .catalog-item-card-image {
 	max-width: 26rem;
+	max-height: 22rem;
 	width: 100%;
-	border-radius: 16px;
-	align-self: center;
+	border-radius: 12px;
 	object-fit: contain;
+	display: block;
 }
 .else-flex {
 	align-items: center;
 	justify-content: center;
 	min-height: 18rem;
+}
+.thumbs-row {
+	display: flex;
+	gap: 0.5rem;
+	margin-top: 0.75rem;
+	justify-content: center;
+	flex-wrap: wrap;
+}
+.thumb-item {
+	cursor: pointer;
+	border: 2px solid transparent;
+	border-radius: 10px;
+	overflow: hidden;
+	opacity: 0.45;
+	transition: opacity 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.thumb-item.active {
+	opacity: 1;
+	border-color: #38bdf8;
+	box-shadow: 0 4px 12px rgba(56, 189, 248, 0.25);
+}
+.thumb-item:hover {
+	opacity: 0.8;
+}
+.thumb-image {
+	width: 5.5rem;
+	height: 4rem;
+	object-fit: contain;
+	display: block;
+	background: #f8fafc;
+	padding: 0.25rem;
 }
 
 .catalog-ig-buttons {
@@ -660,26 +732,27 @@ onBeforeUnmount(() => {
 	color: #0f172a;
 }
 
-:deep(.swiper-pagination-bullet) {
-	background: #94a3b8;
-	opacity: 0.4;
-}
-:deep(.swiper-pagination-bullet-active) {
-	background: #38bdf8;
-	opacity: 1;
-}
-:deep(.swiper-button-next),
-:deep(.swiper-button-prev) {
-	color: #0f172a;
-	background: #ffffff;
-	width: 40px;
-	height: 40px;
+.main-swiper :deep(.swiper-button-next),
+.main-swiper :deep(.swiper-button-prev) {
+	color: #38bdf8;
+	background: rgba(255, 255, 255, 0.95);
+	width: 32px;
+	height: 32px;
 	border-radius: 999px;
-	box-shadow: 0 8px 20px rgba(15, 23, 42, 0.12);
+	border: 1px solid rgba(56, 189, 248, 0.25);
+	box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+	transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
 }
-:deep(.swiper-button-next::after),
-:deep(.swiper-button-prev::after) {
-	font-size: 16px;
+.main-swiper :deep(.swiper-button-next:hover),
+.main-swiper :deep(.swiper-button-prev:hover) {
+	background: #ffffff;
+	transform: scale(1.06);
+	box-shadow: 0 6px 16px rgba(56, 189, 248, 0.18);
+}
+.main-swiper :deep(.swiper-button-next::after),
+.main-swiper :deep(.swiper-button-prev::after) {
+	font-size: 11px;
+	font-weight: 600;
 }
 
 @media (max-width: 1220px) {
@@ -700,8 +773,20 @@ onBeforeUnmount(() => {
 		padding: 0.75rem;
 		margin: 0 0 1rem 0;
 	}
+	.slide-center {
+		min-height: 12rem;
+		padding: 0.5rem 2rem;
+	}
 	.catalog-item-card-image {
 		max-width: 16rem;
+		max-height: 14rem;
+	}
+	.thumb-image {
+		width: 4rem;
+		height: 3rem;
+	}
+	.thumbs-row {
+		gap: 0.35rem;
 	}
 	.buttons-section.catalog-ig-buttons {
 		margin: 0.75rem -0.25rem;
