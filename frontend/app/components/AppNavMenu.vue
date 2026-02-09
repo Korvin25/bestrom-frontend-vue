@@ -22,6 +22,15 @@
 				<img :src="item.icon" :alt="item.labelRu" />
 			</NuxtLink>
 			<button
+				:class="hoverItem === 5 ? 'img-hover' : ''"
+				class="nav-item img"
+				type="button"
+				@mouseenter="hoverItem = 5"
+				@mouseleave="hoverItem = 0"
+				@click="showModalMenuService = true">
+				<img src="/assets/menu-item-5,8.png" alt="service" />
+			</button>
+			<button
 				:class="hoverItem === 9 ? 'img-hover' : ''"
 				class="nav-item img"
 				type="button"
@@ -86,6 +95,15 @@
 				@click="scrollToTop">
 				<p>{{ language === 'RU' ? item.labelRu : item.labelEn }}</p>
 			</NuxtLink>
+			<button
+				:class="hoverItem === 5 ? 'text-hover' : ''"
+				class="nav-item text"
+				type="button"
+				@mouseenter="hoverItem = 5"
+				@mouseleave="hoverItem = 0"
+				@click="showModalMenuService = true">
+				<p>{{ language === 'RU' ? 'Сервис' : 'Service' }}</p>
+			</button>
 			<button
 				:class="hoverItem === 9 ? 'text-hover' : ''"
 				class="nav-item text"
