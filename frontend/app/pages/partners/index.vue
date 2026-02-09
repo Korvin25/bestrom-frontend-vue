@@ -28,13 +28,13 @@
 		</section>
 
 		<!-- Модалка партнера -->
-		<PartnerModal v-model="isModalOpen" :partner="selectedPartner" />
+		<EntityModal v-model="isModalOpen" :entity="selectedPartner" />
 	</div>
 </template>
 
 <script setup lang="ts" async>
 import { storeToRefs } from 'pinia'
-import PartnerModal from '~/components/PartnerModal.vue'
+import EntityModal from '~/components/EntityModal.vue'
 import { useSeoFromPage } from '~/composables/useSeoFromPage'
 import { useAppStore } from '~/stores/app'
 

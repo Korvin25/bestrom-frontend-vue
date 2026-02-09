@@ -131,26 +131,8 @@
 			</div>
 		</section>
 
-		<div v-if="selectedCustomer" class="modal-background" @click.self="closeCustomer">
-			<div class="modal-window customer-modal card-shadow">
-				<div class="close" @click="closeCustomer">
-					<span aria-hidden="true">×</span>
-				</div>
-				<h3 class="customer-modal-title">{{ modalTitle }}</h3>
-				<div class="customer-modal-body">
-					<NuxtImg
-						v-if="selectedCustomer.logo"
-						class="customer-modal-logo"
-						:src="resolveImage(selectedCustomer.logo)"
-						:alt="selectedCustomer.alt || selectedCustomer.name"
-						fit="contain"
-						background="ffffff"
-						width="180"
-						height="120" />
-					<div class="customer-modal-text" v-html="modalDescription" />
-				</div>
-			</div>
-		</div>
+		<!-- Модалка для партнеров и клиентов -->
+	<EntityModal v-model="isModalOpen" :entity="selectedCustomer" />
 
 		<PageBlocks
 			v-if="page.blocks?.length"
@@ -306,22 +288,10 @@ const partnersTrack = ref<HTMLElement | null>(null)
 const clientsTrack = ref<HTMLElement | null>(null)
 const partnersIndex = ref(0)
 const clientsIndex = ref(0)
-const selectedCustomer = ref<PartnerItem | ClientItem | null>(null)
-
-const modalTitle = computed(() => {
-	if (!selectedCustomer.value) return ''
-	const current = selectedCustomer.value
-	return language.value === 'RU'
-		? current.name || ''
-		: current.name_en || current.name || ''
-})
-
-const modalDescription = computed(() => {
-	if (!selectedCustomer.value) return ''
-	const current = selectedCustomer.value
-	return language.value === 'RU'
-		? current.description || ''
-		: current.description_en || current.description || ''
+const isModalOpen = ref(false)
+const selectedCustomer = ref<PartnerItem | ClientItem>({
+	id: 0,
+	name: '',
 })
 const scrollPartners = (direction: 1 | -1) => {
 	const track = partnersTrack.value
@@ -342,10 +312,7 @@ const scrollClients = (direction: 1 | -1) => {
 
 const openCustomer = (item: PartnerItem | ClientItem) => {
 	selectedCustomer.value = item
-}
-
-const closeCustomer = () => {
-	selectedCustomer.value = null
+	isModalOpen.value = true
 }
 
 const getTrackStep = (track: HTMLElement | null) => {
@@ -711,31 +678,7 @@ const activityImage = computed(() => {
 	background: #2fc1ff;
 	transform: scale(1.2);
 }
-.customer-modal {
-	max-width: 760px;
-	width: 100%;
-	padding: 2rem;
-}
-.customer-modal-title {
-	margin: 0 0 1rem 0;
-	text-align: center;
-}
-.customer-modal-body {
-	display: grid;
-	grid-template-columns: 180px 1fr;
-	gap: 1.5rem;
-	align-items: center;
-}
-.customer-modal-logo {
-	width: 100%;
-	height: auto;
-}
-.customer-modal-text :deep(p) {
-	margin: 0 0 0.75rem 0;
-}
-.customer-modal-text :deep(a) {
-	color: #2fc1ff;
-}
+
 .logo-grid {
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
@@ -754,9 +697,6 @@ const activityImage = computed(() => {
 	.activity-image, .activity-image-frame {
 		display: none;
 	}
-	.customer-modal-body {
-		grid-template-columns: 1fr;
-		text-align: center;
-	}
+
 }
 </style>

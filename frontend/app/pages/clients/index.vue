@@ -28,13 +28,13 @@
 		</section>
 
 		<!-- Модалка клиента -->
-		<ClientModal v-model="isModalOpen" :client="selectedClient" />
+		<EntityModal v-model="isModalOpen" :entity="selectedClient" />
 	</div>
 </template>
 
 <script setup lang="ts" async>
 import { storeToRefs } from 'pinia'
-import ClientModal from '~/components/ClientModal.vue'
+import EntityModal from '~/components/EntityModal.vue'
 import { useSeoFromPage } from '~/composables/useSeoFromPage'
 import { useAppStore } from '~/stores/app'
 

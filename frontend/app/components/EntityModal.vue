@@ -11,23 +11,23 @@
 					</button>
 
 					<!-- Заголовок -->
-					<h2 class="modal-title">{{ client.name }}</h2>
+					<h2 class="modal-title">{{ modalTitle }}</h2>
 
 					<!-- Контент модалки -->
 					<div class="modal-content">
-						<!-- Логотип клиента -->
-						<div v-if="client.logo" class="modal-logo">
+						<!-- Логотип -->
+						<div v-if="entity.logo" class="modal-logo">
 							<NuxtImg
-								:src="resolveImage(client.logo)"
-								:alt="client.alt || client.name"
+								:src="resolveImage(entity.logo)"
+								:alt="entity.alt || modalTitle"
 								fit="contain"
 								background="ffffff"
 								width="200"
 								height="120" />
 						</div>
 
-						<!-- Описание клиента -->
-						<div v-if="client.description || client.description_en" class="modal-description" v-html="language === 'RU' ? client.description : client.description_en || client.description"></div>
+						<!-- Описание -->
+						<div v-if="modalDescription" class="modal-description" v-html="modalDescription"></div>
 					</div>
 				</div>
 			</div>
@@ -39,10 +39,10 @@
 import { storeToRefs } from 'pinia'
 import { useAppStore } from '~/stores/app'
 
-// Типы
-interface Client {
+// Универсальный тип для партнеров и клиентов
+interface Entity {
 	id: number | string
-	name: string
+	name?: string
 	name_en?: string
 	logo?: string
 	alt?: string
@@ -53,7 +53,7 @@ interface Client {
 // Props и emits
 const props = defineProps<{
 	modelValue: boolean
-	client: Client
+	entity: Entity
 }>()
 
 const emit = defineEmits<{
@@ -70,6 +70,19 @@ const resolveImage = (src: unknown) => {
 	if (src.startsWith('http')) return src
 	return `${mediaBase.value}${src.replace(/^\//, '')}`
 }
+
+// Вычисляемые свойства для заголовка и описания
+const modalTitle = computed(() => {
+	return language.value === 'RU'
+		? props.entity.name || ''
+		: props.entity.name_en || props.entity.name || ''
+})
+
+const modalDescription = computed(() => {
+	return language.value === 'RU'
+		? props.entity.description || ''
+		: props.entity.description_en || props.entity.description || ''
+})
 
 const closeModal = () => {
 	emit('update:modelValue', false)
