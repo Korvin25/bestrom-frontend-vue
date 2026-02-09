@@ -498,7 +498,9 @@ const showModalMenuContactsClick = () => {
 	filter: drop-shadow(0 2px 6px rgba(15, 23, 42, 0.2));
 }
 	.mobile-nav-elements {
-		overflow: hidden;
+		overflow-y: auto;
+		overflow-x: hidden;
+		-webkit-overflow-scrolling: touch;
 		position: fixed;
 		top: 0;
 		left: 0;
@@ -507,7 +509,7 @@ const showModalMenuContactsClick = () => {
 		z-index: 9999;
 		justify-content: flex-start;
 		background-color: #ffffff;
-		padding: 2.5rem 1.5rem 1rem;
+		padding: 2.5rem 1.5rem 1.5rem;
 	}
 	.mobile-close {
 		border: none;
@@ -561,7 +563,7 @@ const showModalMenuContactsClick = () => {
 		box-shadow: 0 6px 14px rgba(15, 23, 42, 0.1);
 	}
 	.mobile-menu-nav-bottom {
-		margin-top: auto;
+		margin-top: clamp(1rem, 3vh, 2rem);
 		padding-bottom: 1rem;
 		display: grid;
 		grid-template-columns: repeat(3, minmax(0, 1fr));

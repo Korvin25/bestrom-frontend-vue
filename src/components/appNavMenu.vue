@@ -739,7 +739,7 @@ export default {
 		background: rgba(47, 193, 255, 0.2);
 	}
 	.mobile-menu-nav-bottom {
-		margin: 0 0.5rem;
+		margin: 1rem 0.5rem 0;
 	}
 	.mobile-menu-nav-bottom-item {
 		justify-content: center;
