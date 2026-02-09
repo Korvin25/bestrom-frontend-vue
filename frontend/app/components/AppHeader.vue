@@ -159,8 +159,49 @@ watch(showModalMenuContactsQuestion, (val) => lockBody(val))
 		display: none;
 	}
 	.header-container {
-		padding: 0.65rem 1rem;
+		padding: 0.5rem max(0.5rem, env(safe-area-inset-right)) 0.5rem
+			max(0.5rem, env(safe-area-inset-left));
 		border-radius: 0;
+		justify-content: space-between;
+		box-sizing: border-box;
+	}
+	.header-title {
+		min-width: 0;
+		gap: 0.5rem;
+	}
+	.header-title h1 {
+		font-size: 1rem;
+		letter-spacing: 0.05em;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+	.header-actions {
+		margin-left: 0;
+		flex-shrink: 0;
+		gap: 0.35rem;
+		margin-right: 0.25rem;
+	}
+	.lang-toggle {
+		padding: 0.3rem 0.5rem;
+		height: 34px;
+	}
+	.lang-icon {
+		width: 16px;
+		height: 16px;
+	}
+}
+@media (max-width: 520px) {
+	.header-title h1 {
+		display: none;
+	}
+	.header-container {
+		padding: 0.4rem max(0.4rem, env(safe-area-inset-right)) 0.4rem
+			max(0.4rem, env(safe-area-inset-left));
+	}
+	.lang-toggle {
+		padding: 0.25rem 0.45rem;
+		height: 32px;
 	}
 }
 </style>

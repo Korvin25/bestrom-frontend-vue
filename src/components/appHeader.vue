@@ -162,11 +162,22 @@ export default {
 	.header {
 		right: 0;
 		left: 0;
+		padding: 0.5rem max(0.5rem, env(safe-area-inset-right)) 0.5rem
+			max(0.5rem, env(safe-area-inset-left));
+		box-sizing: border-box;
 	}
 	.header-title {
 		width: auto;
 		justify-content: space-between;
-		margin-left: 1rem;
+		margin-left: 0.5rem;
+		min-width: 0;
+		flex: 1;
+	}
+	.header-title h1 {
+		font-size: 18px;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
 	}
 	.desktop-language {
 		display: none;
@@ -174,7 +185,7 @@ export default {
 	.mobile-language {
 		display: flex;
 		align-items: center;
-		margin-right: 2rem;
+		margin-right: 0.25rem;
 	}
 	.header {
 		justify-content: space-between;
@@ -185,6 +196,21 @@ export default {
 		color: #2fc1ff;
 		font-weight: bold;
 		margin: 0 0.4rem;
+	}
+}
+@media (max-width: 520px) {
+	.header-title h1 {
+		display: none;
+	}
+	.header-title {
+		margin-left: 0.4rem;
+	}
+	.mobile-language {
+		margin-right: 0.25rem;
+	}
+	.header {
+		padding: 0.4rem max(0.4rem, env(safe-area-inset-right)) 0.4rem
+			max(0.4rem, env(safe-area-inset-left));
 	}
 }
 </style>
