@@ -77,17 +77,18 @@
 			<div class="history-vertical card-shadow" @wheel.prevent="onHistoryWheel">
 				<div class="history-years">
 					<ClientOnly>
-						<Swiper
-							class="history-swiper"
-							direction="vertical"
-							:modules="[Mousewheel]"
-							:slides-per-view="5"
-							:centered-slides="true"
-							:space-between="12"
-							:mousewheel="{ forceToAxis: true, releaseOnEdges: false, sensitivity: 1 }"
-							:initial-slide="historyIndex"
-							@swiper="onHistorySwiper"
-							@slideChange="onHistorySlideChange">
+					<Swiper
+						:key="swiperDirection"
+						class="history-swiper"
+						:direction="swiperDirection"
+						:modules="[Mousewheel]"
+						:slides-per-view="swiperSlidesPerView"
+						:centered-slides="true"
+						:space-between="12"
+						:mousewheel="{ forceToAxis: true, releaseOnEdges: false, sensitivity: 1 }"
+						:initial-slide="historyIndex"
+						@swiper="onHistorySwiper"
+						@slideChange="onHistorySlideChange">
 							<SwiperSlide v-for="(item, index) in historyItems" :key="item.id || item.year">
 								<button
 									type="button"
@@ -270,6 +271,21 @@ const historyIndex = ref(0)
 const currentHistory = computed(() => historyItems.value[historyIndex.value])
 const historySwiper = ref<any | null>(null)
 const historyDirection = ref<'up' | 'down'>('down')
+
+// Адаптивное направление свайпера: горизонтальное на мобилке
+const isMobile = ref(false)
+const updateIsMobile = () => {
+	isMobile.value = window.innerWidth <= 980
+}
+onMounted(() => {
+	updateIsMobile()
+	window.addEventListener('resize', updateIsMobile)
+})
+onBeforeUnmount(() => {
+	window.removeEventListener('resize', updateIsMobile)
+})
+const swiperDirection = computed(() => (isMobile.value ? 'horizontal' : 'vertical') as 'horizontal' | 'vertical')
+const swiperSlidesPerView = computed(() => (isMobile.value ? 5 : 5))
 
 const videoSrc = computed(() => {
 	const raw = contentText(youtubeContent.value)
@@ -666,6 +682,8 @@ const otherBlocks = computed<any[]>(() => {
 	flex-direction: column;
 	align-items: center;
 	gap: 1rem;
+	width: 100%;
+	min-width: 0;
 }
 .history-logo {
 	width: 96px;
@@ -677,6 +695,8 @@ const otherBlocks = computed<any[]>(() => {
 	color: rgba(47, 193, 255, 0.8);
 	font-size: 16px;
 	line-height: 1.5;
+	word-wrap: break-word;
+	overflow-wrap: break-word;
 }
 .history-slide-up-enter-active,
 .history-slide-up-leave-active,
@@ -841,6 +861,46 @@ const otherBlocks = computed<any[]>(() => {
 	}
 	.history-vertical {
 		grid-template-columns: 1fr;
+		padding: 1rem;
+		min-height: auto;
+		gap: 0.75rem;
+		overflow: visible;
+	}
+	.history-years {
+		height: auto;
+		width: 100%;
+		overflow: hidden;
+	}
+	.history-swiper {
+		height: auto;
+		width: 100%;
+	}
+	.history-swiper :deep(.swiper-slide) {
+		justify-content: center;
+	}
+	.history-year {
+		text-align: center;
+		font-size: 14px;
+		white-space: nowrap;
+	}
+	.history-year.active {
+		font-size: 22px;
+	}
+	.history-detail {
+		min-height: auto;
+		overflow: hidden;
+	}
+	.history-detail-inner {
+		width: 100%;
+	}
+	.history-logo {
+		width: 72px;
+		height: 72px;
+	}
+	.history-text {
+		font-size: 14px;
+		word-wrap: break-word;
+		overflow-wrap: break-word;
 	}
 	.customer-modal-body {
 		grid-template-columns: 1fr;
