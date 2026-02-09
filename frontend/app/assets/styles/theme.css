@@ -1,5 +1,10 @@
-body {
+*,
+*::before,
+*::after {
 	box-sizing: border-box;
+}
+
+body {
 	margin: 0;
 	font-family: Montserrat, sans-serif;
 	font-style: normal;
@@ -37,7 +42,7 @@ body {
 	box-sizing: border-box;
 }
 
-@media (max-width: 1360px) {
+@media (min-width: 981px) and (max-width: 1360px) {
 	.main-content {
 		padding-left: calc(24px + 72px);
 	}
@@ -314,10 +319,14 @@ body.modal-open {
 @media (max-width: 980px) {
 	body {
 		margin: 0;
+		overflow-x: hidden;
 	}
 	.main-content {
-		margin: 4.5rem auto 0;
+		margin: 3.5rem auto 0;
 		padding: 0 1rem;
+		width: 100%;
+		max-width: 100%;
+		box-sizing: border-box;
 	}
 	.section {
 		margin: 0;

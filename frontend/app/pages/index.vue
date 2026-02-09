@@ -751,7 +751,7 @@ const activityImage = computed(() => {
 	.activity-card {
 		grid-template-columns: 1fr;
 	}
-	.activity-image {
+	.activity-image, .activity-image-frame {
 		display: none;
 	}
 	.customer-modal-body {

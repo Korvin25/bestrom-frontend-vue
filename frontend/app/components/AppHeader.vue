@@ -155,7 +155,7 @@ watch(showModalMenuContactsQuestion, (val) => lockBody(val))
 	width: 20px;
 	height: 20px;
 }
-@media (max-width: 1360px) {
+@media (min-width: 981px) and (max-width: 1360px) {
 	.header-container {
 		padding-left: calc(24px + 72px);
 		padding-right: 24px;

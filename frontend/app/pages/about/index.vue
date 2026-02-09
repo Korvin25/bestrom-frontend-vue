@@ -1,5 +1,5 @@
 <template>
-	<div v-if="page" class="page-base main-content flex-column">
+	<div v-if="page" class="page-base flex-column">
 		<section v-if="historyContent" class="section">
 			<h2>{{ language === 'RU' ? 'О компании' : 'About company' }}</h2>
 			<div class="content flex-row card-shadow">
@@ -820,8 +820,21 @@ const otherBlocks = computed<any[]>(() => {
 	.about-content {
 		width: 100%;
 	}
-	.image-world {
+	.image-content {
 		display: none;
+	}
+	.we-create-grid {
+		grid-template-columns: repeat(2, 1fr);
+		gap: 0.5rem;
+	}
+	.we-create-item {
+		padding: 0.75rem;
+		min-height: auto;
+		border-radius: 12px;
+	}
+	.we-create-item h5 {
+		font-size: 13px;
+		margin: 0;
 	}
 	.item-reason {
 		min-height: 6rem;

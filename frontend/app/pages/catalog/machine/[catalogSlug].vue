@@ -1,5 +1,5 @@
 <template>
-	<div v-if="product" class="main-content flex-column catalog-detail">
+	<div v-if="product" class="flex-column catalog-detail">
 		<section class="section">
 			<h2>{{ productTitle }}</h2>
 
@@ -49,24 +49,19 @@
 				</div>
 
 				<div class="mobile-section details-select">
-					<Swiper
-						:modules="swiperModules"
-						:slides-per-view="1.6"
-						:centered-slides="true"
-						:space-between="12"
-						:pagination="{ clickable: true }">
-						<SwiperSlide v-for="(item, index) in aboutItems" :key="item.id">
-							<div
-								:class="isSelected === index ? 'details-select-item-choice' : ''"
-								class="details-select-item flex-column card-shadow"
-								@click="isSelected = index">
-								<img
-									:src="isSelected === index ? item.activeImage : item.disableImage"
-									:alt="item.title" />
-								<p>{{ language === 'RU' ? item.title : item.title_en }}</p>
-							</div>
-						</SwiperSlide>
-					</Swiper>
+					<div class="details-select-mobile-grid">
+						<div
+							v-for="(item, index) in aboutItems"
+							:key="item.id"
+							:class="isSelected === index ? 'details-select-item-choice' : ''"
+							class="details-select-item flex-column card-shadow"
+							@click="isSelected = index">
+							<img
+								:src="isSelected === index ? item.activeImage : item.disableImage"
+								:alt="item.title" />
+							<p>{{ language === 'RU' ? item.title : item.title_en }}</p>
+						</div>
+					</div>
 				</div>
 
 				<div v-if="isSelected === 0" class="details-select-settings">
@@ -702,14 +697,14 @@ onBeforeUnmount(() => {
 		display: flex;
 	}
 	.details {
-		padding: 1rem;
+		padding: 0.75rem;
 		margin: 0 0 1rem 0;
 	}
 	.catalog-item-card-image {
 		max-width: 16rem;
 	}
 	.buttons-section.catalog-ig-buttons {
-		margin: 1rem -0.25rem;
+		margin: 0.75rem -0.25rem;
 	}
 	.buttons-section.catalog-ig-buttons .btn {
 		padding: 0.75rem 0.5rem;
@@ -721,10 +716,25 @@ onBeforeUnmount(() => {
 		display: block;
 		margin: 0;
 	}
+	.details-select-mobile-grid {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 0.5rem;
+		margin: 0;
+	}
 	.mobile-section .details-select-item {
 		width: 100%;
 		align-self: stretch;
-		margin: 0.5rem;
+		margin: 0;
+		padding: 0.5rem 0.5rem;
+		box-sizing: border-box;
+	}
+	.mobile-section .details-select-item p {
+		font-size: 12px;
+		line-height: 1.2;
+	}
+	.mobile-section .details-select-item img {
+		display: none;
 	}
 	.title-brand {
 		margin: 0;
@@ -791,6 +801,11 @@ onBeforeUnmount(() => {
 	.details-select-solution-item img {
 		max-width: 10rem;
 		width: 100%;
+	}
+}
+@media (max-width: 420px) {
+	.details-select-mobile-grid {
+		grid-template-columns: 1fr;
 	}
 }
 </style>
