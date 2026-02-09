@@ -160,9 +160,6 @@ h2 {
 	h2 {
 		color: #0f172a;
 	}
-	.modal-background {
-		padding: 6rem 1rem 2rem;
-	}
 	.modal-window {
 		margin: 1.5rem 0;
 		padding: 2rem 1.5rem;

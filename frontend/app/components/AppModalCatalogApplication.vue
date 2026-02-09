@@ -293,9 +293,6 @@ a .catalog-name-item {
 		color: #0f172a;
 		text-align: center;
 	}
-	.modal-background {
-		padding: 6rem 1rem 2rem;
-	}
 	.modal-window {
 		margin: 1.5rem 0;
 		padding: 2rem 1.5rem;
