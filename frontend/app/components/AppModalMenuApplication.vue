@@ -2,8 +2,10 @@
 	<div class="modal-background">
 		<div class="close-background" @click="$emit('close')" />
 		<div class="modal-window card-shadow flex-column">
-			<button class="close" type="button" @click="$emit('close')">
-				<img src="/assets/close-image.png" alt="close" />
+			<button class="close-button" type="button" aria-label="Закрыть" @click="$emit('close')">
+				<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+				</svg>
 			</button>
 			<div class="title-block">
 				<h2 v-if="switchContent">
@@ -373,6 +375,35 @@ const removeInput = (id: number) => {
 </script>
 
 <style scoped>
+/* Кнопка закрытия */
+.close-button {
+	position: absolute;
+	top: 1rem;
+	right: 1rem;
+	width: 40px;
+	height: 40px;
+	border: none;
+	background: rgba(15, 23, 42, 0.05);
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	color: #475569;
+	transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+	z-index: 10;
+}
+
+.close-button:hover {
+	background: rgba(14, 165, 233, 0.1);
+	color: #0ea5e9;
+	transform: rotate(90deg);
+}
+
+.close-button:active {
+	transform: rotate(90deg) scale(0.95);
+}
+
 .send-status {
 	margin: 0;
 	font-weight: normal;

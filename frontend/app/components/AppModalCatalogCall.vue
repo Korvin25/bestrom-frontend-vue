@@ -2,10 +2,11 @@
 	<div class="modal-background">
 		<div class="close-background" @click="$emit('close')" />
 		<div class="modal-window card-shadow flex-column">
-			<div class="close" @click="$emit('close')">
-				<img class="close-desktop" src="/assets/close-image.png" alt="close" />
-				<img class="close-mobile" src="/assets/close-mobile-menu.png" alt="close" />
-			</div>
+			<button class="close-button" type="button" aria-label="Закрыть" @click="$emit('close')">
+				<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+				</svg>
+			</button>
 			<h2>{{ language === 'RU' ? 'Заказать звонок' : 'Request a call' }}</h2>
 			<div class="catalog-name flex-row">
 				<h2 class="catalog-name-item">{{ nameMachine }}</h2>
@@ -193,35 +194,34 @@ const sendPost = async () => {
 .modal-background {
 	scrollbar-width: none;
 }
-.close {
+.close-button {
 	position: absolute;
 	top: 16px;
 	right: 16px;
-	width: 36px;
-	height: 36px;
+	width: 40px;
+	height: 40px;
+	border: none;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	border-radius: 999px;
-	background: #f1f5f9;
-	box-shadow: 0 6px 16px rgba(15, 23, 42, 0.15);
+	border-radius: 50%;
+	background: rgba(15, 23, 42, 0.05);
 	cursor: pointer;
-	transition: transform 0.2s ease, box-shadow 0.2s ease;
+	color: #475569;
+	transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+	z-index: 10;
 }
-.close:hover {
-	transform: translateY(-1px);
-	box-shadow: 0 10px 20px rgba(15, 23, 42, 0.2);
+
+.close-button:hover {
+	background: rgba(14, 165, 233, 0.1);
+	color: #0ea5e9;
+	transform: rotate(90deg);
 }
-.close img {
-	width: 16px;
-	height: 16px;
+
+.close-button:active {
+	transform: rotate(90deg) scale(0.95);
 }
-.close-mobile {
-	display: none;
-}
-.close-desktop {
-	display: block;
-}
+
 .send-status {
 	margin: 0;
 	font-weight: 600;

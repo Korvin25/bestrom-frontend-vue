@@ -15,6 +15,8 @@
 							class="news-card-image"
 							:src="resolveImage(item.img)"
 							:alt="language === 'RU' ? item.name : item.name_en || item.name"
+							fit="contain"
+							background="ffffff"
 							width="420"
 							height="260" />
 					</div>
@@ -143,7 +145,7 @@ const resolveImage = (src: unknown) => {
 .news-card-image {
 	width: 100%;
 	height: 100%;
-	object-fit: cover;
+	object-fit: contain;
 	transition: transform 0.3s ease;
 }
 

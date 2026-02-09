@@ -14,6 +14,8 @@
 				class="news-image"
 				:src="resolveImage(newsItem.img)"
 				:alt="language === 'RU' ? newsItem.name : newsItem.name_en || newsItem.name"
+				fit="contain"
+				background="ffffff"
 				width="920"
 				height="520" />
 		</div>
@@ -38,6 +40,8 @@
 							class="latest-news-image"
 							:src="resolveImage(item.img)"
 							:alt="language === 'RU' ? item.name : item.name_en || item.name"
+							fit="contain"
+							background="ffffff"
 							width="360"
 							height="220" />
 					</div>
@@ -187,7 +191,7 @@ useSeoMeta({
 	width: 100%;
 	height: auto;
 	display: block;
-	object-fit: cover;
+	object-fit: contain;
 }
 
 /* Карточка контента */
@@ -354,7 +358,7 @@ useSeoMeta({
 	.latest-news-image {
 		width: 100%;
 		height: 100%;
-		object-fit: cover;
+		object-fit: contain;
 		transition: transform 0.3s ease;
 	}
 
