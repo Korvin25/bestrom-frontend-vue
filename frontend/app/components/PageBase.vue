@@ -1,17 +1,16 @@
 <template>
 	<div v-if="page" class="page-base">
-		<section v-if="showHero" class="hero card-shadow">
-			<h2>{{ language === 'RU' ? page.title : page.title_en || page.title }}</h2>
-			<p>{{ language === 'RU' ? page.description : page.description_en || page.description }}</p>
+		<section v-if="showHero" class="page-header">
+			<h1 class="page-title">{{ language === 'RU' ? page.title : page.title_en || page.title }}</h1>
 		</section>
 		<PageBlocks v-if="page.blocks?.length" :blocks="page.blocks" :language="language" :media-base="mediaBase" />
 	</div>
 </template>
 
 <script setup lang="ts" async>
-import { storeToRefs } from 'pinia'
-import { useAppStore } from '~/stores/app'
-import { useSeoFromPage } from '~/composables/useSeoFromPage'
+import { storeToRefs } from 'pinia';
+import { useSeoFromPage } from '~/composables/useSeoFromPage';
+import { useAppStore } from '~/stores/app';
 
 const props = withDefaults(
 	defineProps<{
@@ -43,8 +42,22 @@ const mediaBase = computed(() => serverMedia.value || config.public.mediaBase)
 </script>
 
 <style scoped>
-.hero {
-	padding: 2rem;
+.page-header {
+	margin-top: 1rem;
 	margin-bottom: 2rem;
+}
+
+.page-title {
+	margin: 0;
+	font-size: 2.5rem;
+	font-weight: 700;
+	color: #0f172a;
+	line-height: 1.2;
+}
+
+@media (max-width: 768px) {
+	.page-title {
+		font-size: 2rem;
+	}
 }
 </style>

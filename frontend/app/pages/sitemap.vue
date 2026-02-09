@@ -1,25 +1,27 @@
 <template>
-	<section class="hero card-shadow">
-		<h2>{{ language === 'RU' ? 'Карта сайта' : 'Sitemap' }}</h2>
-	</section>
-	<div class="sitemap card-shadow">
-		<ul>
-			<li v-for="route in staticRoutes" :key="route.path">
-				<NuxtLink :to="route.path">{{ language === 'RU' ? route.labelRu : route.labelEn }}</NuxtLink>
-			</li>
-		</ul>
-		<h3>{{ language === 'RU' ? 'Новости' : 'News' }}</h3>
-		<ul>
-			<li v-for="item in news" :key="item.id">
-				<NuxtLink :to="`/news/${item.slug}`">{{ language === 'RU' ? item.name : item.name_en || item.name }}</NuxtLink>
-			</li>
-		</ul>
-		<h3>{{ language === 'RU' ? 'Каталог' : 'Catalog' }}</h3>
-		<ul>
-			<li v-for="item in products" :key="item.id">
-				<NuxtLink :to="`/catalog/machine/${item.slug}`">{{ language === 'RU' ? item.name : item.name_en || item.name }}</NuxtLink>
-			</li>
-		</ul>
+	<div class="sitemap-page">
+		<section class="page-header">
+			<h1 class="page-title">{{ language === 'RU' ? 'Карта сайта' : 'Sitemap' }}</h1>
+		</section>
+		<div class="sitemap card-shadow">
+			<ul>
+				<li v-for="route in staticRoutes" :key="route.path">
+					<NuxtLink :to="route.path">{{ language === 'RU' ? route.labelRu : route.labelEn }}</NuxtLink>
+				</li>
+			</ul>
+			<h3>{{ language === 'RU' ? 'Новости' : 'News' }}</h3>
+			<ul>
+				<li v-for="item in news" :key="item.id">
+					<NuxtLink :to="`/news/${item.slug}`">{{ language === 'RU' ? item.name : item.name_en || item.name }}</NuxtLink>
+				</li>
+			</ul>
+			<h3>{{ language === 'RU' ? 'Каталог' : 'Catalog' }}</h3>
+			<ul>
+				<li v-for="item in products" :key="item.id">
+					<NuxtLink :to="`/catalog/machine/${item.slug}`">{{ language === 'RU' ? item.name : item.name_en || item.name }}</NuxtLink>
+				</li>
+			</ul>
+		</div>
 	</div>
 </template>
 
@@ -58,15 +60,59 @@ useSeoMeta({
 </script>
 
 <style scoped>
-.hero {
-	padding: 2rem;
-	margin-bottom: 1.5rem;
+.page-header {
+	margin-top: 1rem;
+	margin-bottom: 2rem;
 }
+
+.page-title {
+	margin: 0;
+	font-size: 2.5rem;
+	font-weight: 700;
+	color: #0f172a;
+	line-height: 1.2;
+}
+
+@media (max-width: 768px) {
+	.page-title {
+		font-size: 2rem;
+	}
+}
+
 .sitemap {
 	padding: 1.5rem;
 }
 .sitemap ul {
 	margin: 0 0 1.5rem 0;
-	padding-left: 1.25rem;
+	padding-left: 0; /* Убираем дефолтный отступ */
+	list-style: none; /* Убираем дефолтные маркеры */
+}
+
+.sitemap li {
+	margin-bottom: 0.5rem;
+}
+
+.sitemap a {
+	color: #0ea5e9; /* Основной цвет ссылок (sky-500) */
+	text-decoration: none;
+	font-weight: 500;
+	transition: all 0.2s ease;
+	display: inline-block;
+}
+
+.sitemap a:hover {
+	color: #0284c7; /* Цвет при наведении (sky-700) */
+	text-decoration: underline;
+	transform: translateX(4px); /* Небольшой сдвиг вправо для эффекта */
+}
+
+.sitemap h3 {
+	margin-top: 2rem;
+	margin-bottom: 1rem;
+	font-size: 1.5rem;
+	font-weight: 600;
+	color: #0f172a;
+	border-bottom: 1px solid #e2e8f0;
+	padding-bottom: 0.5rem;
 }
 </style>
