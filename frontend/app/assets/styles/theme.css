@@ -22,6 +22,7 @@ body {
 	flex-direction: column;
 	justify-content: center;
 }
+
 .flex-row {
 	display: flex;
 	flex-direction: row;
@@ -114,13 +115,16 @@ h5 {
 	font-feature-settings: 'tnum' on, 'lnum' on;
 	color: #ffffff;
 }
+
 .btn:hover {
 	cursor: pointer;
 	background: rgba(47, 193, 255, 0.85);
 }
+
 .btn:active {
 	box-shadow: inset 1px 1px 1px rgba(0, 0, 0, 0.3);
 }
+
 .btn:disabled {
 	background: #b8b8b8;
 }
@@ -152,6 +156,7 @@ h5 {
 	background: #ffffff;
 	transform: translateY(0);
 }
+
 .input::placeholder,
 .textarea::placeholder {
 	color: rgba(15, 23, 42, 0.35);
@@ -166,18 +171,22 @@ h5 {
 	border: 1px solid rgba(15, 23, 42, 0.08);
 	box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
 }
+
 .form-call {
 	display: flex;
 	flex-direction: column;
 	gap: 0.75rem;
 }
+
 .form-call .input,
 .form-call .textarea {
 	margin: 0;
 }
+
 .form-call .call.btn {
 	align-self: flex-start;
 }
+
 .call.btn {
 	padding: 0.55rem 1.4rem;
 	height: 40px;
@@ -191,17 +200,20 @@ h5 {
 	cursor: pointer;
 	transition: transform 0.16s ease, box-shadow 0.16s ease, background 0.16s ease;
 }
+
 .call.btn:hover {
 	transform: translateY(-1px);
 	box-shadow: 0 10px 20px rgba(56, 189, 248, 0.4);
 	background: #2fc1ff;
 }
+
 .call-method {
 	display: flex;
 	flex-wrap: wrap;
 	gap: 0.6rem;
 	justify-content: flex-start;
 }
+
 .contact-icon {
 	border: 1px solid rgba(15, 23, 42, 0.12);
 	background: #ffffff;
@@ -214,16 +226,19 @@ h5 {
 	cursor: pointer;
 	transition: transform 0.16s ease, box-shadow 0.16s ease, border-color 0.16s ease;
 }
+
 .contact-icon img {
 	width: 22px;
 	height: 22px;
 	object-fit: contain;
 }
+
 .contact-icon.active {
 	border-color: rgba(14, 165, 233, 0.5);
 	box-shadow: 0 6px 16px rgba(14, 165, 233, 0.18);
 	transform: translateY(-1px);
 }
+
 .contact-icon:hover {
 	border-color: rgba(15, 23, 42, 0.2);
 	box-shadow: 0 6px 14px rgba(15, 23, 42, 0.1);
@@ -232,13 +247,16 @@ h5 {
 .modal-enter-active {
 	animation: modal-in 0.4s;
 }
+
 .modal-leave-active {
 	animation: modal-in 0.4s reverse;
 }
+
 @keyframes modal-in {
 	0% {
 		opacity: 0;
 	}
+
 	100% {
 		opacity: 1;
 	}
@@ -256,6 +274,7 @@ h5 {
 	justify-content: center;
 	align-items: center;
 }
+
 .close {
 	display: flex;
 	justify-content: center;
@@ -273,16 +292,19 @@ h5 {
 	background: #ffffff;
 	transition: transform 0.16s ease, box-shadow 0.16s ease, border-color 0.16s ease, background 0.16s ease;
 }
+
 .close:hover {
 	transform: translateY(-1px);
 	border-color: rgba(14, 165, 233, 0.3);
 	box-shadow: 0 10px 20px rgba(56, 189, 248, 0.16);
 	background: #f8fbff;
 }
+
 .close img {
 	width: 16px;
 	height: 16px;
 }
+
 .close-background {
 	position: fixed;
 	top: 0;
@@ -290,6 +312,7 @@ h5 {
 	width: 100%;
 	height: 100%;
 }
+
 .modal-window {
 	position: relative;
 	padding: 1rem 2rem;
@@ -321,6 +344,7 @@ body.modal-open {
 		margin: 0;
 		overflow-x: hidden;
 	}
+
 	.main-content {
 		margin: 3.5rem auto 0;
 		padding: 0 1rem;
@@ -328,20 +352,25 @@ body.modal-open {
 		max-width: 100%;
 		box-sizing: border-box;
 	}
+
 	.section {
 		margin: 0;
 		width: 100%;
 	}
+
 	h1 {
 		font-size: 20px;
 	}
+
 	h2 {
 		font-size: 18px;
 		margin: 0.5rem 0 1rem 0;
 	}
+
 	h3 {
 		font-size: 16px;
 	}
+
 	.modal-window {
 		padding: 1rem 1.5rem;
 		margin: 0 0.75rem;
@@ -349,9 +378,17 @@ body.modal-open {
 		align-self: center;
 		max-height: 85vh;
 	}
+
 	.close {
 		position: absolute;
 		top: 0.5rem;
 		right: 0.5rem;
 	}
+}
+
+/* Переопределение размера SVG-иконок в кнопках Swiper */
+.details-select-inventory .swiper-button-prev svg,
+.details-select-inventory .swiper-button-next svg {
+	width: 50%;
+	height: 50%;
 }

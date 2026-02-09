@@ -15,7 +15,7 @@
 				@slideChange="onSlideChange">
 				<SwiperSlide v-for="slide in sliderItems" :key="slide.id || slide.img">
 					<div class="slide-center">
-						<img
+						<NuxtImg
 							class="catalog-item-card-image"
 							:src="resolveMedia(slide.img)"
 							:alt="slide.alt || productTitle" />
@@ -23,7 +23,7 @@
 				</SwiperSlide>
 			</Swiper>
 			<div v-else class="flex-row else-flex">
-				<img class="catalog-item-card-image" src="/assets/no-image.jpg" alt="no-image" />
+				<NuxtImg class="catalog-item-card-image" src="/assets/no-image.jpg" alt="no-image" />
 			</div>
 
 			<div v-if="sliderItems.length > 1" class="thumbs-row">
@@ -32,7 +32,7 @@
 					:key="`thumb-${slide.id || slide.img}`"
 					:class="['thumb-item', { active: index === activeSlide }]"
 					@click="goToSlide(Number(index))">
-					<img
+					<NuxtImg
 						class="thumb-image"
 						:src="resolveMedia(slide.img)"
 						:alt="slide.alt || productTitle" />
@@ -57,7 +57,7 @@
 						:class="isSelected === index ? 'details-select-item-choice' : ''"
 						class="details-select-item flex-column card-shadow"
 						@click="isSelected = index">
-						<img
+						<NuxtImg
 							:src="isSelected === index ? item.activeImage : item.disableImage"
 							:alt="item.title" />
 						<p>{{ language === 'RU' ? item.title : item.title_en }}</p>
@@ -72,7 +72,7 @@
 							:class="isSelected === index ? 'details-select-item-choice' : ''"
 							class="details-select-item flex-column card-shadow"
 							@click="isSelected = index">
-							<img
+							<NuxtImg
 								:src="isSelected === index ? item.activeImage : item.disableImage"
 								:alt="item.title" />
 							<p>{{ language === 'RU' ? item.title : item.title_en }}</p>
@@ -117,7 +117,7 @@
 						class="details-select-products-item card-shadow"
 						@click="openProductExamples(item)">
 						<h4>{{ language === 'RU' ? item.name : item.name_en }}</h4>
-						<img :src="resolveMedia(item.img)" :alt="item.alt" />
+						<NuxtImg :src="resolveMedia(item.img)" :alt="item.alt" />
 						<AppHiddenItem :text="language === 'RU' ? 'ПОДРОБНЕЕ' : 'READ MORE'" />
 					</div>
 				</div>
@@ -137,7 +137,7 @@
 									class="details-select-inventory-item flex-column card-shadow"
 									@click="openEquipment(item)">
 									<h4>{{ language === 'RU' ? item.name : item.name_en }}</h4>
-									<img
+									<NuxtImg
 										:src="resolveMedia(item.SliderProd?.[0]?.img)"
 										:alt="item.SliderProd?.[0]?.alt || item.name" />
 									<AppHiddenItem :text="language === 'RU' ? 'ПОДРОБНЕЕ' : 'READ MORE'" />
@@ -151,7 +151,7 @@
 					<div class="details-select-packet flex-row">
 						<div v-for="item in product.Packet || []" :key="item.id" class="details-select-packet-item card-shadow">
 							<h4>{{ language === 'RU' ? item.name : item.name_en }}</h4>
-							<img :src="resolveMedia(item.img)" :alt="item.alt" />
+							<NuxtImg :src="resolveMedia(item.img)" :alt="item.alt" />
 						</div>
 					</div>
 
@@ -165,30 +165,25 @@
 							:key="item.id"
 							class="details-select-packet-item card-shadow">
 							<h4>{{ language === 'RU' ? item.name : item.name_en }}</h4>
-							<img :src="resolveMedia(item.img)" :alt="item.alt" />
+							<NuxtImg :src="resolveMedia(item.img)" :alt="item.alt" />
 						</div>
 					</div>
 				</div>
 
 				<div v-if="isSelected === 5" class="details-select-solution">
-					<section v-if="solutionIntro" class="section">
-						<div class="content flex-row card-shadow resheni-desktop">
-							<div class="about-content flex-column">
-								<h3>{{ language === 'RU' ? solutionIntro.name : solutionIntro.name_en }}</h3>
-								<p class="text-about-content" style="padding: 1rem 0">
-									{{ language === 'RU' ? solutionIntro.text : solutionIntro.text_en }}
-								</p>
-							</div>
-							<div class="image-content">
-								<img
-									:alt="solutionIntro.file?.[0]?.alt || 'solution'"
-									class="image-world"
-									:src="resolveMedia(solutionIntro.file?.[0]?.file)" />
-							</div>
+					<div v-if="solutionIntro" class="solution-intro">
+						<div class="solution-intro-text">
+							<h3>{{ language === 'RU' ? solutionIntro.name : solutionIntro.name_en }}</h3>
+							<p>{{ language === 'RU' ? solutionIntro.text : solutionIntro.text_en }}</p>
 						</div>
-					</section>
+						<div class="solution-intro-image">
+							<NuxtImg
+								:alt="solutionIntro.file?.[0]?.alt || 'solution'"
+								:src="resolveMedia(solutionIntro.file?.[0]?.file)" />
+						</div>
+					</div>
 
-					<div class="slider-content">
+					<div v-if="(product.Solution || []).length" class="slider-content">
 						<Swiper
 							:modules="swiperModules"
 							:slides-per-view="1.2"
@@ -200,7 +195,7 @@
 							<SwiperSlide v-for="item in product.Solution || []" :key="item.id">
 								<div class="details-select-solution-item flex-column card-shadow">
 									<h4>{{ language === 'RU' ? item.name : item.name_en }}</h4>
-									<img :src="resolveMedia(item.img)" :alt="item.alt" />
+									<NuxtImg :src="resolveMedia(item.img)" :alt="item.alt" />
 									<AppHiddenItem :text="language === 'RU' ? 'ПОДРОБНЕЕ' : 'READ MORE'" />
 								</div>
 							</SwiperSlide>
@@ -699,8 +694,40 @@ onBeforeUnmount(() => {
 	color: #0f172a;
 }
 
-.resheni-desktop {
-	margin: 1em;
+.solution-intro {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 2rem;
+	align-items: center;
+	padding: 2rem;
+	border-radius: 20px;
+	background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+	box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+	margin-bottom: 1.5rem;
+}
+.solution-intro-text h3 {
+	font-weight: 700;
+	font-size: 1.25rem;
+	color: #0f172a;
+	margin: 0 0 0.75rem 0;
+}
+.solution-intro-text p {
+	color: #475569;
+	line-height: 1.6;
+	margin: 0;
+}
+.solution-intro-image {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.solution-intro-image img {
+	width: 100%;
+	max-width: 400px;
+	max-height: 260px;
+	object-fit: contain;
+	border-radius: 14px;
+	filter: drop-shadow(0 8px 20px rgba(15, 23, 42, 0.1));
 }
 .details-select-solution {
 	margin: 2rem 0 1rem 0;
@@ -758,6 +785,46 @@ onBeforeUnmount(() => {
 .main-swiper :deep(.swiper-button-prev svg) {
 	width: 50%;
 	height: 50%;
+}
+
+/* Стрелки и пагинация для слайдеров оборудования и решений */
+.details-select-inventory :deep(.swiper-button-next),
+.details-select-inventory :deep(.swiper-button-prev),
+.details-select-solution :deep(.swiper-button-next),
+.details-select-solution :deep(.swiper-button-prev) {
+	color: #38bdf8;
+	background: rgba(255, 255, 255, 0.95);
+	width: 32px;
+	height: 32px;
+	border-radius: 999px;
+	border: 1px solid rgba(56, 189, 248, 0.25);
+	box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+	transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+}
+.details-select-inventory :deep(.swiper-button-next:hover),
+.details-select-inventory :deep(.swiper-button-prev:hover),
+.details-select-solution :deep(.swiper-button-next:hover),
+.details-select-solution :deep(.swiper-button-prev:hover) {
+	background: #ffffff;
+	transform: scale(1.06);
+	box-shadow: 0 6px 16px rgba(56, 189, 248, 0.18);
+}
+.details-select-inventory :deep(.swiper-button-next::after),
+.details-select-inventory :deep(.swiper-button-prev::after),
+.details-select-solution :deep(.swiper-button-next::after),
+.details-select-solution :deep(.swiper-button-prev::after) {
+	font-size: 11px;
+	font-weight: 600;
+}
+.details-select-inventory :deep(.swiper-pagination),
+.details-select-solution :deep(.swiper-pagination) {
+	position: relative;
+	margin-top: 1.25rem;
+	bottom: auto;
+}
+.details-select-inventory :deep(.swiper-pagination-bullet-active),
+.details-select-solution :deep(.swiper-pagination-bullet-active) {
+	background: #38bdf8;
 }
 
 @media (max-width: 1220px) {
@@ -874,6 +941,14 @@ onBeforeUnmount(() => {
 	.details-select-packet-item img {
 		max-width: 7rem;
 		width: 100%;
+	}
+	.solution-intro {
+		grid-template-columns: 1fr;
+		padding: 1.25rem;
+		gap: 1.25rem;
+	}
+	.solution-intro-image {
+		display: none;
 	}
 	.details-select-solution {
 		margin: 2rem 0.5rem 0 0.5rem;

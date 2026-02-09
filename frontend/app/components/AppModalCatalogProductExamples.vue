@@ -13,8 +13,7 @@
 					:key="item.id"
 					class="details-select-products-item card-shadow">
 					<h4>{{ language === 'RU' ? item.name : item.name_en }}</h4>
-					<img :src="resolveMedia(item.img)" :alt="item.alt" />
-					<AppHiddenItem :text="language === 'RU' ? 'ПОДРОБНЕЕ' : 'READ MORE'" />
+					<NuxtImg :src="resolveMedia(item.img)" :alt="item.alt" />
 				</div>
 			</div>
 		</div>
@@ -55,7 +54,7 @@ const resolveMedia = (src: unknown) => {
 	background: rgba(15, 23, 42, 0.45);
 	backdrop-filter: blur(6px);
 	display: flex;
-	align-items: flex-start;
+	align-items: center;
 	justify-content: center;
 	overflow-y: auto;
 	overflow-x: hidden;
