@@ -99,10 +99,18 @@
 
 					<div class="info-block">
 						<p>{{ language === 'RU' ? 'Рекомендуемая ширина шва' : 'Recommended seam width' }}</p>
-						<p>{{ language === 'RU' ? 'для форматов до F100 — 15мм' : 'for formats up to F100 — 15mm' }}</p>
-						<p>{{ language === 'RU' ? 'с F100 до F220 — 20мм' : 'from F100 to F220 — 20mm' }}</p>
-						<p>{{ language === 'RU' ? 'с F220 до F280 — 25мм' : 'from F220 to F280 — 25mm' }}</p>
-						<p>{{ language === 'RU' ? 'с F280 и больше — 30мм' : 'with F280 and more — 30mm' }}</p>
+						<template v-if="isPlPr">
+							<p>{{ language === 'RU' ? 'для форматов до F100 — 12,5мм' : 'for formats up to F100 — 12.5mm' }}</p>
+							<p>{{ language === 'RU' ? 'с F100 до F220 — 15мм' : 'from F100 to F220 — 15mm' }}</p>
+							<p>{{ language === 'RU' ? 'с F220 до F280 — 20мм' : 'from F220 to F280 — 20mm' }}</p>
+							<p>{{ language === 'RU' ? 'с F280 и больше — 25мм' : 'with F280 and more — 25mm' }}</p>
+						</template>
+						<template v-else>
+							<p>{{ language === 'RU' ? 'для форматов до F100 — 15мм' : 'for formats up to F100 — 15mm' }}</p>
+							<p>{{ language === 'RU' ? 'с F100 до F220 — 20мм' : 'from F100 to F220 — 20mm' }}</p>
+							<p>{{ language === 'RU' ? 'с F220 до F280 — 25мм' : 'from F220 to F280 — 25mm' }}</p>
+							<p>{{ language === 'RU' ? 'с F280 и больше — 30мм' : 'with F280 and more — 30mm' }}</p>
+						</template>
 					</div>
 				</div>
 
@@ -223,12 +231,12 @@ const wPak = ref(100)
 const dPak = ref(50)
 const wSh = ref('20')
 
+// --- Тип шва pl/pr ---
+const isPlPr = computed(() => ['pl', 'pr'].includes(String(checkSeam.value).toLowerCase()))
+
 // --- Опции ширины шва ---
 const seamWidthOptions = computed(() => {
-	const seam = String(checkSeam.value).toLowerCase()
-	const isPlPr = ['pl', 'pr'].includes(seam)
-
-	if (isPlPr) {
+	if (isPlPr.value) {
 		return [
 			{ value: '12.5', labelRu: '12,5', labelEn: '12.5' },
 			{ value: '15', labelRu: '15', labelEn: '15' },
@@ -273,7 +281,7 @@ const goNext = () => {
 
 /* --- Заголовки --- */
 .info-header {
-	padding-top: 1rem;
+	padding-top: 2rem;
 }
 .info-header h2 {
 	margin: 0 0 0.5rem 0;

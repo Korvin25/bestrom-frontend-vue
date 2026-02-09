@@ -4,22 +4,21 @@
 		<section v-if="packets.length > 0" id="packetType" class="section">
 			<h2 class="section-title">{{ language === 'RU' ? 'Тип пакета' : 'Package type' }}</h2>
 
-			<!-- Мобильный слайдер -->
+			<!-- Мобильная сетка -->
 			<div class="packet-mobile">
-				<div class="packet-track">
+				<div class="packet-mobile-grid">
 					<div
 						v-for="packet in activePackets"
 						:key="packet.essid"
 						:class="{ active: checkType === packet.essid }"
-						class="packet-card"
+						class="packet-card packet-card--mobile"
 						@click="selectType(packet.essid)">
 						<NuxtImg
+							class="packet-card-image-mobile"
 							:src="resolveImage(packet.img)"
 							:alt="packet.alt"
 							fit="contain"
-							background="ffffff"
-							width="160"
-							height="120" />
+							background="ffffff" />
 						<p class="packet-card-name">{{ language === 'RU' ? packet.name : packet.name_en }}</p>
 					</div>
 				</div>
@@ -327,6 +326,8 @@ const routerPush = () => {
 	color: #475569;
 	margin: 0.75rem 0 0 0;
 	line-height: 1.3;
+	word-break: break-word;
+	overflow-wrap: break-word;
 }
 
 /* --- Сетка типов швов --- */
@@ -404,22 +405,22 @@ const routerPush = () => {
 	filter: brightness(1.03);
 }
 
-/* --- Мобильный слайдер --- */
-.packet-track {
-	display: flex;
-	gap: 0.75rem;
-	overflow-x: auto;
-	scroll-snap-type: x mandatory;
-	scroll-behavior: smooth;
-	padding: 0.5rem 0 1rem;
-	scrollbar-width: none;
+/* --- Мобильная сетка пакетов --- */
+.packet-mobile-grid {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 0.5rem;
 }
-.packet-track::-webkit-scrollbar {
-	display: none;
+.packet-card--mobile {
+	padding: 0.5rem 0.4rem !important;
+	min-width: 0;
 }
-.packet-track .packet-card {
-	flex: 0 0 60%;
-	scroll-snap-align: center;
+.packet-card-image-mobile {
+	width: 100%;
+	height: auto;
+	max-height: 70px;
+	object-fit: contain;
+	display: block;
 }
 
 /* --- Десктоп / мобайл переключение --- */
@@ -469,8 +470,8 @@ const routerPush = () => {
 	.packet-card-title {
 		font-size: 0.8rem;
 	}
-	.packet-track .packet-card {
-		flex: 0 0 55%;
+	.packet-mobile-grid {
+		gap: 0.5rem;
 	}
 }
 </style>
